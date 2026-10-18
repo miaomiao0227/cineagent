@@ -48,8 +48,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4816,
-      "sha256": "06a5729a4e39734b49e76379aa8801caeb286a98ce12af34bf7f7d67553cae2b"
+      "bytes": 6284,
+      "sha256": "5d53abf6ae42c529a6d5a2dabc803b088c0eb746d2e4e9a9b1f3aec774a0317d"
     },
     {
       "path": "REPRODUCE.md",
@@ -77,7 +77,7 @@
       "sha256": "7b1efb2b33a3de7acd3c502588fa65af748283c5a00533aa34f046d5724c7b6f"
     },
     {
-      "path": "\u914d\u7f6eDeepSeek\u5bc6\u94a5.cmd",
+      "path": "配置DeepSeek密钥.cmd",
       "bytes": 175,
       "sha256": "57624235ca361e5bdc8da303d842c3528f907975ef927fdff2f8ad8afb1d1aa2"
     },
@@ -2000,6 +2000,26 @@
       "path": "eval/archive/agent_natural_v1.initial.json",
       "bytes": 5148,
       "sha256": "86928534d0944d0556aedc9653232dba009b2f2e1b7ae9259c3602024791f0ac"
+    },
+    {
+      "path": "docs/screenshots/01-home.jpg",
+      "bytes": 118178,
+      "sha256": "ccde7fbc688237092c618619d6925fa656e8269753dc7d63a65e9311f8dd5a79"
+    },
+    {
+      "path": "docs/screenshots/02-conversation.jpg",
+      "bytes": 129324,
+      "sha256": "9e8cdf56f5c8b67c7de7539d18c79e2854a51e2024dfc1c43aad08367e7ee003"
+    },
+    {
+      "path": "docs/screenshots/03-multiturn-trace.jpg",
+      "bytes": 209374,
+      "sha256": "d706a7b41be734aa265b81353d87421f5f68e4e1af352272589d941d2910eb4d"
+    },
+    {
+      "path": "docs/screenshots/04-preference-memory.jpg",
+      "bytes": 129206,
+      "sha256": "504763c726143df96b5b771b3504cabd02d7c10d0bc3e8ed4147c3c1b5c33fa7"
     }
   ],
   "secret_matches": 0,
