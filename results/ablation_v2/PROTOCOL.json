@@ -1,0 +1,26 @@
+{
+  "version": "ablation-v2",
+  "seed": 20261018,
+  "scope": "seen validation development only; test not read; no test improvement claim",
+  "grid": {
+    "shrinkage": [
+      0,
+      10,
+      50
+    ],
+    "neighbors": [
+      50,
+      100
+    ]
+  },
+  "fusion": [
+    "ItemCF10n100",
+    "CF_Pop_RRF60",
+    "CF_Pop_RRF60_within_union200"
+  ],
+  "candidate": "all train movies excluding every train-rated item per user",
+  "positive": "rating>=4",
+  "selection": "highest macro NDCG20 on validation; ties Recall20 then method name",
+  "text": "excluded: rating task has no query; fabricating test preference queries would leak labels",
+  "bootstrap": 2000
+}

@@ -1,0 +1,5 @@
+*
+!configs/
+configs/*
+!configs/requirements.lock.txt
+!configs/backend.Dockerfile

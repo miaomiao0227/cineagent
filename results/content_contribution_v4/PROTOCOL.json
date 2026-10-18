@@ -1,0 +1,15 @@
+{
+  "version": "content-contribution-v4",
+  "split": "original validation; development only, no test arrays",
+  "catalogue": "train catalogue minus user all train observed",
+  "profile": "last20 rating>=4 training items by(timestamp,movie_id), equal mean then L2norm",
+  "features": "train-catalogue title + genres repeated3, char_wb3to5,max25000,float32",
+  "methods": [
+    "ItemCF",
+    "TextProfile",
+    "CF_Text_RRF60"
+  ],
+  "rrf": "equal weights, full eligible catalogue rank fusion; no sweep or winner deployment",
+  "bootstrap": 2000,
+  "seed": 20261018
+}

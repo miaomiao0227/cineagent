@@ -1,0 +1,13 @@
+{
+  "scripts\\recdata.py": "e640f9d2235397a16c338af667283d36aae70c8258e005499dffd15e4ec530b9",
+  "scripts\\receval.py": "0d6fb73afad6fb711fff2d99dcab5074718aaee1d75fe0938d991f6c2ac4205a",
+  "scripts\\rectrain.py": "677511acd323d3d61243fb2f505612b603f7de968eb054c0e74855f167f325cf",
+  "EVAL_SPEC.md": "46e26c6163cccbcc1879476fe83b4f60693548c6c120f6ac54da2350e785aacc",
+  "configs\\eval_protocol.json": "b6be9b96a06c922f8a5fde031f8bc3bb0ae02e4d468157a6a30cef36d4a40f22",
+  "artifacts\\rec_v1\\train.npz": "3ab5c86db76f08c797b67830a0969532a227f7cb30d5a83b02b796015b4b1027",
+  "artifacts\\rec_v1\\validation.npz": "6691b161c4018d0229914e8a4abcbc19aa475db868486b698c6b114c66a6dfc5",
+  "artifacts\\rec_v1\\test.npz": "e76b66efdb6bf54c58685d119e51f21b3502d019ae0c072b41c910976ee875b3",
+  "artifacts\\rec_v1\\ranking_pairs.npz": "979aec988a101c03d8d604dd9707f1e531c8467b7889fc300c58da011ae3c0e6",
+  "artifacts\\rec_v1\\vocab.json": "b67181bc0ae7a079408c102843d534b427f02f45f74a7f71bada8ff7ca69de24",
+  "artifacts\\rec_v1\\retrieval_vocab.json": "b67181bc0ae7a079408c102843d534b427f02f45f74a7f71bada8ff7ca69de24"
+}

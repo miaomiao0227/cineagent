@@ -1,0 +1,14 @@
+{
+  "protocol": "rec-v1",
+  "source_sha256": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+  "seed": 20261018,
+  "train_end_exclusive": 975768738,
+  "validation_end_exclusive": 978133414,
+  "counts": {
+    "train": 800164,
+    "validation": 100024,
+    "test": 100021
+  },
+  "positive_rating_min": 4,
+  "rating_scale": "official 1-5; enriched bundle divided by 2 after exact reference match"
+}

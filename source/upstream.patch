@@ -1,0 +1,359 @@
+diff --git a/web_project/backend/app/api/v1/endpoints/health.py b/web_project/backend/app/api/v1/endpoints/health.py
+index 0758084..dc969f1 100644
+--- a/web_project/backend/app/api/v1/endpoints/health.py
++++ b/web_project/backend/app/api/v1/endpoints/health.py
+@@ -26,8 +26,7 @@ async def health_check(db: Session = Depends(get_db)):
+     
+     try:
+         es_client = Elasticsearch(settings.elasticsearch_url)
+-        es_client.ping()
+-        es_status = "healthy"
++        es_status = "healthy" if es_client.ping() else "unhealthy: ping returned false"
+     except Exception as e:
+         es_status = f"unhealthy: {str(e)}"
+ 
+@@ -39,7 +38,7 @@ async def health_check(db: Session = Depends(get_db)):
+         redis_status = f"unhealthy: {str(e)}"
+ 
+     return HealthCheck(
+-        status="healthy" if db_status == "healthy" else "degraded",
++        status="healthy" if all(s == "healthy" for s in (db_status, redis_status, es_status)) else "degraded",
+         version=settings.app_version,
+         database=db_status,
+         redis=redis_status,
+diff --git a/web_project/backend/app/api/v1/endpoints/recommendations.py b/web_project/backend/app/api/v1/endpoints/recommendations.py
+index 93b1ef3..b1f1f75 100644
+--- a/web_project/backend/app/api/v1/endpoints/recommendations.py
++++ b/web_project/backend/app/api/v1/endpoints/recommendations.py
+@@ -72,12 +72,12 @@ async def enrich_user_features(
+     if not features.hist_movie_ids:
+         recent_ratings = (
+             db.query(Rating)
+-            .filter(Rating.user_id == features.user_id)
+-            .order_by(Rating.timestamp.desc())
+-            .limit(50)
++            .filter(Rating.user_id == features.user_id, Rating.rating >= 8)
++            .order_by(Rating.timestamp.desc(), Rating.movie_id.desc())
++            .limit(10)
+             .all()
+         )
+-        feat_dict["hist_movie_ids"] = [r.movie_id for r in recent_ratings]
++        feat_dict["hist_movie_ids"] = [r.movie_id for r in reversed(recent_ratings)]
+     
+     # 如果缺少人口统计信息，则获取
+     if not features.gender:
+@@ -89,6 +89,7 @@ async def enrich_user_features(
+             feat_dict["zip_code"] = user.zip_code
+             feat_dict["preferred_genres"] = user.preferred_genres
+     
++    feat_dict["exclude_movie_ids"] = [mid for (mid,) in db.query(Rating.movie_id).filter(Rating.user_id == features.user_id).all()]
+     return feat_dict
+ 
+ 
+@@ -103,6 +104,7 @@ async def get_item_features(movie_ids: List[int], db: Session) -> dict:
+             "genres_list": m.genres or [],
+             # 物品元数据
+             "isAdult": getattr(m, 'is_adult', False),
++            "startYear": m.year,  # 与正式训练特征名称保持一致
+             "year": m.year,  # 用于年代打散
+         }
+         for m in movies
+@@ -129,7 +131,7 @@ def enrich_with_metadata(
+                 score=item.score,
+                 recall_score=item.recall_score,
+                 recall_type=item.recall_type,
+-                poster_url=f"/api/v1/posters/{movie.movie_id}.png"
++                poster_url=f"/api/posters/{movie.movie_id}.png"
+             ))
+     return enriched
+ 
+diff --git a/web_project/backend/app/main.py b/web_project/backend/app/main.py
+index 24d0ecb..50448b4 100644
+--- a/web_project/backend/app/main.py
++++ b/web_project/backend/app/main.py
+@@ -55,11 +55,44 @@ async def root():
+ 
+ # 在根路径下注册健康检查路由（无前缀）
+ app.include_router(health_router)
++from app.cineagent.api import router as conversation_router, initialize as initialize_conversation
++app.include_router(conversation_router)
++app.on_event('startup')(initialize_conversation)
+ 
+ # 注册 API 路由，使用 /api 前缀
+ app.include_router(api_router, prefix=settings.api_prefix)
+ 
+ 
++
++
++@app.on_event("startup")
++def warm_recommendation_models():
++    """Load local models before serving the first recommendation request."""
++    from app.database import SessionLocal
++    from app.models import Movie
++    from online.pipeline import get_pipeline
++    app.state.recommendation_ready = False
++    try:
++        pipeline = get_pipeline()
++        with SessionLocal() as db:
++            pipeline.set_movie_genre_map(db.query(Movie).all())
++        recall = pipeline.recall_service.resource_manager
++        app.state.recommendation_ready = bool(
++            recall.user_model is not None and recall.item_embedding_matrix is not None
++            and pipeline.is_ranking_ready
++        )
++        logging.info("Local recommendation warmup ready=%s", app.state.recommendation_ready)
++    except Exception:
++        logging.exception("Local recommendation warmup failed")
++
++
++@app.get("/ready")
++def recommendation_readiness():
++    from fastapi.responses import JSONResponse
++    ready = bool(getattr(app.state, "recommendation_ready", False))
++    return JSONResponse(status_code=200 if ready else 503, content={"ready": ready, "model_version": "rec-v1"})
++
++
+ if __name__ == "__main__":
+     import uvicorn
+     uvicorn.run(
+@@ -68,3 +101,5 @@ if __name__ == "__main__":
+         port=8000,
+         reload=True,
+     )
++
++
+diff --git a/web_project/backend/online/pipeline.py b/web_project/backend/online/pipeline.py
+index 86637cd..bbf7ac4 100644
+--- a/web_project/backend/online/pipeline.py
++++ b/web_project/backend/online/pipeline.py
+@@ -283,8 +283,10 @@ class RecommendationPipeline:
+             # 获取冷启动推荐
+             candidates = await self.cold_start_service.recommend(
+                 user_features=user_features,
+-                top_k=config.cold_start_top_k
++                top_k=min(4000, config.cold_start_top_k + len(user_features.get("exclude_movie_ids", [])))
+             )
++            excluded = set(user_features.get("exclude_movie_ids", []))
++            candidates = [c for c in candidates if int(c["movie_id"]) not in excluded][:config.cold_start_top_k]
+             
+             if not candidates:
+                 logger.warning("冷启动返回空候选")
+@@ -347,7 +349,9 @@ class RecommendationPipeline:
+             return []
+         
+         try:
+-            candidates = await self.recall_service.recommend(user_features, top_k=top_k)
++            excluded = set(user_features.get("exclude_movie_ids", []))
++            candidates = await self.recall_service.recommend(user_features, top_k=min(4000, top_k + len(excluded)))
++            candidates = [c for c in candidates if int(c["movie_id"]) not in excluded][:top_k]
+             logger.debug(f"召回返回 {len(candidates)} 个候选")
+             return candidates
+         except Exception as e:
+diff --git a/web_project/backend/online/recall/resource_manager.py b/web_project/backend/online/recall/resource_manager.py
+index 4de5019..847aabd 100644
+--- a/web_project/backend/online/recall/resource_manager.py
++++ b/web_project/backend/online/recall/resource_manager.py
+@@ -155,6 +155,7 @@ class RecallResourceManager:
+ 
+     def set_movie_genre_map(self, movie_db_objects):
+         """从数据库对象填充电影类型映射表"""
++        self._ensure_resources_loaded()
+         genre_le = self.encoders.get("genres")
+         if not genre_le:
+             return
+diff --git a/web_project/backend/online/recall/service.py b/web_project/backend/online/recall/service.py
+index d7615de..39d846f 100644
+--- a/web_project/backend/online/recall/service.py
++++ b/web_project/backend/online/recall/service.py
+@@ -46,9 +46,9 @@ class RecallService:
+         # 初始化召回策略
+         self.strategies: List[RecallStrategy] = [                                    
+             UserPreferenceRecallStrategy(),
+-            # ItemEmbeddingRecallStrategy(),
+-            # GlobalTrendingRecallStrategy(),
+-            # YouTubeDNNRecallStrategy(),
++            ItemEmbeddingRecallStrategy(),
++            GlobalTrendingRecallStrategy(),
++            YouTubeDNNRecallStrategy(),
+         ]
+         
+         self.initialized = True
+diff --git a/web_project/backend/online/recall/youtubednn.py b/web_project/backend/online/recall/youtubednn.py
+index b8d7832..8a3998d 100644
+--- a/web_project/backend/online/recall/youtubednn.py
++++ b/web_project/backend/online/recall/youtubednn.py
+@@ -49,6 +49,8 @@ class YouTubeDNNRecallStrategy(RecallStrategy):
+                     # 确保 mid 与编码器类型兼容
+                     # 如果 classes 是 int 类型，mid 应该是 int
+                     # 如果 classes 是 string 类型，mid 应该是 string
++                    if movie_le.classes_.dtype.kind in ('U', 'S', 'O'):
++                        mid = str(mid)
+                     if mid in movie_le.classes_:
+                          enc = movie_le.transform([mid])[0] + 1
+                          hist_mids_encoded.append(enc)
+diff --git a/web_project/frontend/dockerfile b/web_project/frontend/dockerfile
+index 62ddfd0..0bcff89 100644
+--- a/web_project/frontend/dockerfile
++++ b/web_project/frontend/dockerfile
+@@ -1,7 +1,7 @@
+ # 多阶段构建生产环境
+ 
+ # 构建阶段
+-FROM node:22-alpine as build
++FROM node:22-alpine@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402 AS build
+ 
+ WORKDIR /app
+ 
+@@ -18,7 +18,7 @@ COPY . .
+ RUN npm run build
+ 
+ # 生产阶段
+-FROM nginx:alpine
++FROM nginx:alpine@sha256:892bb2152464f0c5d8972593a5f5afaf8054552580b699d95f8ff4af08c2d33d
+ 
+ # 复制构建文件到 nginx
+ COPY --from=build /app/dist /usr/share/nginx/html
+@@ -30,3 +30,4 @@ EXPOSE 80
+ 
+ CMD ["nginx", "-g", "daemon off;"]
+ 
++
+diff --git a/web_project/frontend/nginx.conf b/web_project/frontend/nginx.conf
+index 3b53438..e38d41f 100644
+--- a/web_project/frontend/nginx.conf
++++ b/web_project/frontend/nginx.conf
+@@ -16,9 +16,15 @@ server {
+         try_files $uri $uri/ /index.html;
+     }
+ 
++    resolver 127.0.0.11 valid=10s ipv6=off;
++    set $movie_backend http://backend:8000;
++
+     # Proxy API requests to backend
+-    location /api {
+-        proxy_pass http://backend:8000;
++    location ^~ /api/ {
++        proxy_pass $movie_backend;
++        proxy_connect_timeout 2s;
++        proxy_read_timeout 45s;
++        proxy_send_timeout 10s;
+         proxy_set_header Host $host;
+         proxy_set_header X-Real-IP $remote_addr;
+         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+@@ -27,7 +33,10 @@ server {
+ 
+     # Health check
+     location /health {
+-        proxy_pass http://backend:8000;
++        proxy_pass $movie_backend;
++        proxy_connect_timeout 2s;
++        proxy_read_timeout 45s;
++        proxy_send_timeout 10s;
+     }
+ 
+     # Cache static assets
+@@ -37,3 +46,4 @@ server {
+     }
+ }
+ 
++
+diff --git a/web_project/frontend/src/components/Header.vue b/web_project/frontend/src/components/Header.vue
+index a278166..21d934a 100644
+--- a/web_project/frontend/src/components/Header.vue
++++ b/web_project/frontend/src/components/Header.vue
+@@ -12,7 +12,7 @@
+           <router-link to="/" class="text-gray-700 hover:text-datawhale-blue transition-colors">
+             Home
+           </router-link>
+-        </nav>
++        <router-link to="/chat" class="text-gray-700 hover:text-datawhale-blue transition-colors">对话选片</router-link></nav>
+       </div>
+ 
+       <!-- 右侧 - 统计信息、搜索、管理员、认证 -->
+@@ -134,3 +134,4 @@ onUnmounted(() => {
+ })
+ </script>
+ 
++
+diff --git a/web_project/frontend/src/router/index.js b/web_project/frontend/src/router/index.js
+index 2706df5..fc8fa64 100644
+--- a/web_project/frontend/src/router/index.js
++++ b/web_project/frontend/src/router/index.js
+@@ -6,6 +6,7 @@ import Profile from '../views/Profile.vue'
+ import AddMovie from '../views/AddMovie.vue'
+ 
+ const routes = [
++  { path: '/chat', name: 'Chat', component: () => import('../views/Chat.vue') },
+   {
+     path: '/',
+     name: 'Home',
+@@ -87,3 +88,4 @@ router.beforeEach((to, from, next) => {
+ 
+ export default router
+ 
++
+diff --git a/web_project/frontend/src/services/api.js b/web_project/frontend/src/services/api.js
+index 260cf71..1f9f78e 100644
+--- a/web_project/frontend/src/services/api.js
++++ b/web_project/frontend/src/services/api.js
+@@ -1,7 +1,7 @@
+ import axios from 'axios'
+ 
+ // API 配置
+-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
++const API_BASE_URL = import.meta.env.VITE_API_URL || ''
+ 
+ const api = axios.create({
+   baseURL: `${API_BASE_URL}/api`,
+diff --git a/web_project/frontend/src/stores/auth.js b/web_project/frontend/src/stores/auth.js
+index ae63401..f26c1cc 100644
+--- a/web_project/frontend/src/stores/auth.js
++++ b/web_project/frontend/src/stores/auth.js
+@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
+ import { ref, computed } from 'vue'
+ import axios from 'axios'
+ 
+-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
++const API_BASE_URL = import.meta.env.VITE_API_URL || ''
+ 
+ export const useAuthStore = defineStore('auth', () => {
+   // 状态 - 从 localStorage 初始化用户
+diff --git a/web_project/frontend/src/views/Auth.vue b/web_project/frontend/src/views/Auth.vue
+index 6e13628..0cf2382 100644
+--- a/web_project/frontend/src/views/Auth.vue
++++ b/web_project/frontend/src/views/Auth.vue
+@@ -176,7 +176,7 @@ import { useRouter } from 'vue-router'
+ import { useAuthStore } from '../stores/auth'
+ import axios from 'axios'
+ 
+-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
++const API_BASE_URL = import.meta.env.VITE_API_URL || ''
+ 
+ const router = useRouter()
+ const authStore = useAuthStore()
+diff --git a/web_project/frontend/src/views/Home.vue b/web_project/frontend/src/views/Home.vue
+index 3c9fc6f..5eb0b59 100644
+--- a/web_project/frontend/src/views/Home.vue
++++ b/web_project/frontend/src/views/Home.vue
+@@ -53,7 +53,7 @@
+     </section>
+ 
+     <!-- 电影行列表 -->
+-    <section class="movie-rows relative z-20 -mt-32">
++    <section class="movie-rows relative z-20 pt-8">
+       <!-- 为你推荐（个性化推荐） -->
+       <MovieRow
+         v-if="authStore.isAuthenticated"
+diff --git a/web_project/frontend/src/views/Profile.vue b/web_project/frontend/src/views/Profile.vue
+index dd959cf..beedfdf 100644
+--- a/web_project/frontend/src/views/Profile.vue
++++ b/web_project/frontend/src/views/Profile.vue
+@@ -261,7 +261,7 @@ import { useRouter } from 'vue-router'
+ import { useAuthStore } from '../stores/auth'
+ import axios from 'axios'
+ 
+-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
++const API_BASE_URL = import.meta.env.VITE_API_URL || ''
+ 
+ const router = useRouter()
+ const authStore = useAuthStore()

@@ -1,0 +1,170 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "path": "/health",
+      "status": 200,
+      "seconds": 0.059,
+      "bytes": 103
+    },
+    {
+      "path": "/api/movies?limit=10",
+      "status": 200,
+      "seconds": 0.051,
+      "bytes": 3023
+    },
+    {
+      "path": "/api/movies/popular?limit=10",
+      "status": 200,
+      "seconds": 0.015,
+      "bytes": 1398
+    },
+    {
+      "path": "/api/movies/1",
+      "status": 200,
+      "seconds": 0.021,
+      "bytes": 396
+    },
+    {
+      "path": "/api/movies/1/crew",
+      "status": 200,
+      "seconds": 0.032,
+      "bytes": 742
+    },
+    {
+      "path": "/api/movies/1/cast",
+      "status": 200,
+      "seconds": 0.028,
+      "bytes": 1086
+    },
+    {
+      "path": "/api/search/movies?q=Toy%20Story&limit=10",
+      "status": 200,
+      "seconds": 0.471,
+      "bytes": 1443
+    },
+    {
+      "path": "/api/posters/1.png",
+      "status": 200,
+      "seconds": 0.029,
+      "bytes": 634096
+    },
+    {
+      "path": "/api/auth/login",
+      "status": 200,
+      "seconds": 0.215,
+      "bytes": 162
+    },
+    {
+      "path": "/api/users/me",
+      "status": 200,
+      "seconds": 0.034,
+      "bytes": 1388
+    },
+    {
+      "path": "/api/recommendations/recommend?top_k=20",
+      "status": 200,
+      "seconds": 5.082,
+      "bytes": 4138
+    },
+    {
+      "path": "/api/posters/318.png",
+      "status": 200,
+      "seconds": 0.03,
+      "bytes": 588032
+    },
+    {
+      "path": "/api/posters/608.png",
+      "status": 200,
+      "seconds": 0.043,
+      "bytes": 895406
+    },
+    {
+      "path": "/api/posters/969.png",
+      "status": 200,
+      "seconds": 0.042,
+      "bytes": 766292
+    },
+    {
+      "path": "/api/recommendations/recommend?top_k=10",
+      "status": 200,
+      "seconds": 0.064,
+      "bytes": 1281
+    },
+    {
+      "path": "/api/recommendations/health",
+      "status": 200,
+      "seconds": 0.012,
+      "bytes": 346
+    }
+  ],
+  "recommendation": {
+    "user_id": 635,
+    "ids": [
+      318,
+      608,
+      969,
+      527,
+      260,
+      2762,
+      1259,
+      2396,
+      1198,
+      593,
+      3683,
+      2997,
+      3408,
+      1617,
+      2858,
+      2028,
+      50,
+      265,
+      1265,
+      356
+    ],
+    "ranking_strategy": "deepfm",
+    "recall_count": 100,
+    "recall_types": {
+      "global_trending": 14,
+      "youtube_dnn": 5,
+      "user_preference": 1
+    },
+    "all_ids_exist": true,
+    "seen_intersection": 0
+  },
+  "cold_start": {
+    "items": 6,
+    "ranking_strategy": "cold_start"
+  },
+  "model_health": {
+    "cold_start": {
+      "available": true,
+      "ready": true,
+      "strategies": [
+        "UCBGenreStrategy",
+        "PreferredGenreStrategy",
+        "PopularRecentStrategy"
+      ],
+      "threshold": 5
+    },
+    "recall": {
+      "available": true,
+      "strategies": 4
+    },
+    "ranking": {
+      "available": true,
+      "ready": true,
+      "strategy": "deepfm"
+    },
+    "reranking": {
+      "available": true,
+      "ready": true,
+      "strategies": [
+        "genre_dispersion",
+        "decade_dispersion"
+      ]
+    }
+  },
+  "credentials_recorded": false,
+  "note": "Functional acceptance only; timings are individual requests, not load-test P50/P95. No feedback writes."
+}

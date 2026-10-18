@@ -1,0 +1,212 @@
+[
+  {
+    "id": "memory-0-0",
+    "remember": "以后记住我不喜欢恐怖电影",
+    "exclude": "Horror",
+    "query": "想看电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-0-1",
+    "remember": "以后记住我不喜欢恐怖电影",
+    "exclude": "Horror",
+    "query": "想看惊悚电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-0-2",
+    "remember": "以后记住我不喜欢恐怖电影",
+    "exclude": "Horror",
+    "query": "想看冒险电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-0-3",
+    "remember": "以后记住我不喜欢恐怖电影",
+    "exclude": "Horror",
+    "query": "想看犯罪电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-0-4",
+    "remember": "以后记住我不喜欢恐怖电影",
+    "exclude": "Horror",
+    "query": "想看动画电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-1-0",
+    "remember": "以后记住我不喜欢喜剧电影",
+    "exclude": "Comedy",
+    "query": "想看电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-1-1",
+    "remember": "以后记住我不喜欢喜剧电影",
+    "exclude": "Comedy",
+    "query": "想看惊悚电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-1-2",
+    "remember": "以后记住我不喜欢喜剧电影",
+    "exclude": "Comedy",
+    "query": "想看冒险电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-1-3",
+    "remember": "以后记住我不喜欢喜剧电影",
+    "exclude": "Comedy",
+    "query": "想看犯罪电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-1-4",
+    "remember": "以后记住我不喜欢喜剧电影",
+    "exclude": "Comedy",
+    "query": "想看动画电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-2-0",
+    "remember": "以后记住我不喜欢动作电影",
+    "exclude": "Action",
+    "query": "想看电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-2-1",
+    "remember": "以后记住我不喜欢动作电影",
+    "exclude": "Action",
+    "query": "想看惊悚电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-2-2",
+    "remember": "以后记住我不喜欢动作电影",
+    "exclude": "Action",
+    "query": "想看冒险电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-2-3",
+    "remember": "以后记住我不喜欢动作电影",
+    "exclude": "Action",
+    "query": "想看犯罪电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-2-4",
+    "remember": "以后记住我不喜欢动作电影",
+    "exclude": "Action",
+    "query": "想看动画电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-3-0",
+    "remember": "以后记住我不喜欢爱情电影",
+    "exclude": "Romance",
+    "query": "想看电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-3-1",
+    "remember": "以后记住我不喜欢爱情电影",
+    "exclude": "Romance",
+    "query": "想看惊悚电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-3-2",
+    "remember": "以后记住我不喜欢爱情电影",
+    "exclude": "Romance",
+    "query": "想看冒险电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-3-3",
+    "remember": "以后记住我不喜欢爱情电影",
+    "exclude": "Romance",
+    "query": "想看犯罪电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-3-4",
+    "remember": "以后记住我不喜欢爱情电影",
+    "exclude": "Romance",
+    "query": "想看动画电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-4-0",
+    "remember": "以后记住我不喜欢剧情电影",
+    "exclude": "Drama",
+    "query": "想看电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-4-1",
+    "remember": "以后记住我不喜欢剧情电影",
+    "exclude": "Drama",
+    "query": "想看惊悚电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-4-2",
+    "remember": "以后记住我不喜欢剧情电影",
+    "exclude": "Drama",
+    "query": "想看冒险电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-4-3",
+    "remember": "以后记住我不喜欢剧情电影",
+    "exclude": "Drama",
+    "query": "想看犯罪电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-4-4",
+    "remember": "以后记住我不喜欢剧情电影",
+    "exclude": "Drama",
+    "query": "想看动画电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-5-0",
+    "remember": "以后记住我不喜欢科幻电影",
+    "exclude": "Sci-Fi",
+    "query": "想看电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-5-1",
+    "remember": "以后记住我不喜欢科幻电影",
+    "exclude": "Sci-Fi",
+    "query": "想看惊悚电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-5-2",
+    "remember": "以后记住我不喜欢科幻电影",
+    "exclude": "Sci-Fi",
+    "query": "想看冒险电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-5-3",
+    "remember": "以后记住我不喜欢科幻电影",
+    "exclude": "Sci-Fi",
+    "query": "想看犯罪电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  },
+  {
+    "id": "memory-5-4",
+    "remember": "以后记住我不喜欢科幻电影",
+    "exclude": "Sci-Fi",
+    "query": "想看动画电影",
+    "source": "authored factorial 6 excluded genres x 5 fixed requests"
+  }
+]

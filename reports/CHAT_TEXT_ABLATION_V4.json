@@ -1,0 +1,2156 @@
+{
+  "scope": "actual ChatEngine text-component ablation on36 saved synthetic nonclarification requests, same guest0/state/query/model; zero text scores before candidate union and fusion; no production changes or externalAPI",
+  "n": 36,
+  "lists_changed": 29,
+  "on_matches_live": 36,
+  "mean_jaccard_at6": 0.8115079365079365,
+  "not_a_relevance_gain": "list changes prove intervention only; human quality review pending",
+  "per_turn": [
+    {
+      "scenario": "E01",
+      "turn": 1,
+      "on_ids": [
+        2997,
+        1197,
+        1259,
+        1265,
+        34,
+        1304
+      ],
+      "off_ids": [
+        1197,
+        2997,
+        1259,
+        1265,
+        1304,
+        34
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E01",
+      "turn": 2,
+      "on_ids": [
+        1259,
+        2791,
+        1288,
+        1077,
+        2863,
+        2080
+      ],
+      "off_ids": [
+        1259,
+        1288,
+        2791,
+        1077,
+        2080,
+        2863
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E03",
+      "turn": 1,
+      "on_ids": [
+        904,
+        913,
+        1732,
+        1269,
+        2076,
+        3044
+      ],
+      "off_ids": [
+        904,
+        913,
+        1732,
+        1269,
+        648,
+        3044
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 55
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E03",
+      "turn": 2,
+      "on_ids": [
+        942,
+        1484,
+        2810
+      ],
+      "off_ids": [
+        942,
+        1484,
+        2810
+      ],
+      "lists_changed": false,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 3
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E05",
+      "turn": 1,
+      "on_ids": [
+        2858,
+        2396,
+        1136,
+        1294,
+        1197,
+        1234
+      ],
+      "off_ids": [
+        2858,
+        2396,
+        1136,
+        1197,
+        1259,
+        1294
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E05",
+      "turn": 2,
+      "on_ids": [
+        2396,
+        1784,
+        2997,
+        1259,
+        1197,
+        34
+      ],
+      "off_ids": [
+        2396,
+        1259,
+        1197,
+        2997,
+        1304,
+        1234
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.5,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E06",
+      "turn": 1,
+      "on_ids": [
+        260,
+        2571,
+        32,
+        1196,
+        1270,
+        924
+      ],
+      "off_ids": [
+        260,
+        2571,
+        1196,
+        1097,
+        924,
+        750
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.5,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E06",
+      "turn": 2,
+      "on_ids": [
+        1196,
+        2571,
+        1097,
+        1210,
+        3175,
+        924
+      ],
+      "off_ids": [
+        1196,
+        2571,
+        1097,
+        924,
+        1270,
+        541
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.5,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E07",
+      "turn": 1,
+      "on_ids": [
+        1617,
+        924,
+        903,
+        904,
+        800,
+        1252
+      ],
+      "off_ids": [
+        1617,
+        924,
+        903,
+        1252,
+        904,
+        800
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E07",
+      "turn": 2,
+      "on_ids": [
+        1252,
+        924,
+        903,
+        904,
+        913,
+        1732
+      ],
+      "off_ids": [
+        924,
+        903,
+        1252,
+        904,
+        800,
+        913
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 76
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 76
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 76
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 76
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 76
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E08",
+      "turn": 1,
+      "on_ids": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        457
+      ],
+      "off_ids": [
+        858,
+        260,
+        1198,
+        2028,
+        2571,
+        1196
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E08",
+      "turn": 2,
+      "on_ids": [
+        2028,
+        260,
+        2571,
+        1196,
+        1197,
+        110
+      ],
+      "off_ids": [
+        260,
+        2028,
+        2571,
+        1196,
+        1197,
+        457
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E09",
+      "turn": 1,
+      "on_ids": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "off_ids": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "lists_changed": false,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E09",
+      "turn": 2,
+      "on_ids": [
+        1259,
+        2791,
+        1288,
+        1077,
+        2863,
+        2080
+      ],
+      "off_ids": [
+        1259,
+        1288,
+        2791,
+        1077,
+        2080,
+        2863
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E10",
+      "turn": 1,
+      "on_ids": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "off_ids": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "lists_changed": false,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E10",
+      "turn": 2,
+      "on_ids": [
+        1077,
+        3702,
+        2662,
+        2527,
+        671,
+        2232
+      ],
+      "off_ids": [
+        1077,
+        3702,
+        2662,
+        2527,
+        2046,
+        671
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 16
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E11",
+      "turn": 1,
+      "on_ids": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "off_ids": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "lists_changed": false,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E11",
+      "turn": 2,
+      "on_ids": [
+        942,
+        1484,
+        2810
+      ],
+      "off_ids": [
+        942,
+        1484,
+        2810
+      ],
+      "lists_changed": false,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 3
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E12",
+      "turn": 1,
+      "on_ids": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "off_ids": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "lists_changed": false,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E12",
+      "turn": 2,
+      "on_ids": [
+        2692,
+        3702,
+        2912,
+        2662,
+        3267,
+        2527
+      ],
+      "off_ids": [
+        2692,
+        3702,
+        2662,
+        2912,
+        2527,
+        3153
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 31
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E13",
+      "turn": 1,
+      "on_ids": [
+        2858,
+        2396,
+        1136,
+        1294,
+        1197,
+        1234
+      ],
+      "off_ids": [
+        2858,
+        2396,
+        1136,
+        1197,
+        1259,
+        1294
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E14",
+      "turn": 1,
+      "on_ids": [
+        260,
+        2571,
+        32,
+        1196,
+        1270,
+        1214
+      ],
+      "off_ids": [
+        260,
+        2571,
+        1196,
+        1097,
+        924,
+        1214
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.5,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E15",
+      "turn": 1,
+      "on_ids": [
+        1617,
+        924,
+        903,
+        904,
+        800,
+        1252
+      ],
+      "off_ids": [
+        1617,
+        924,
+        903,
+        1252,
+        904,
+        800
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E16",
+      "turn": 1,
+      "on_ids": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        457
+      ],
+      "off_ids": [
+        858,
+        260,
+        1198,
+        2028,
+        2571,
+        1196
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E17",
+      "turn": 1,
+      "on_ids": [
+        2858,
+        2396,
+        1136,
+        1294,
+        1197,
+        1234
+      ],
+      "off_ids": [
+        2858,
+        2396,
+        1136,
+        1197,
+        1259,
+        1294
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E17",
+      "turn": 2,
+      "on_ids": [
+        1259,
+        2791,
+        1288,
+        1077,
+        2863,
+        2080
+      ],
+      "off_ids": [
+        1259,
+        1288,
+        2791,
+        1077,
+        2080,
+        2863
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E19",
+      "turn": 1,
+      "on_ids": [
+        1617,
+        924,
+        903,
+        904,
+        800,
+        1252
+      ],
+      "off_ids": [
+        1617,
+        924,
+        903,
+        1252,
+        904,
+        800
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E19",
+      "turn": 2,
+      "on_ids": [
+        942,
+        1484,
+        2810
+      ],
+      "off_ids": [
+        942,
+        1484,
+        2810
+      ],
+      "lists_changed": false,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 3
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 3
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E20",
+      "turn": 1,
+      "on_ids": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        457
+      ],
+      "off_ids": [
+        858,
+        260,
+        1198,
+        2028,
+        2571,
+        1196
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E20",
+      "turn": 2,
+      "on_ids": [
+        2692,
+        3702,
+        2912,
+        2662,
+        3267,
+        2527
+      ],
+      "off_ids": [
+        2692,
+        3702,
+        2662,
+        2912,
+        2527,
+        3153
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 31
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E02",
+      "turn": 1,
+      "on_ids": [
+        1270,
+        1097,
+        1240,
+        541,
+        3175,
+        1653
+      ],
+      "off_ids": [
+        1097,
+        1270,
+        541,
+        1240,
+        3175,
+        1653
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E02",
+      "turn": 2,
+      "on_ids": [
+        1077,
+        3702,
+        2662,
+        2527,
+        671,
+        2232
+      ],
+      "off_ids": [
+        1077,
+        3702,
+        2662,
+        2527,
+        2046,
+        671
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 16
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E04",
+      "turn": 1,
+      "on_ids": [
+        1197,
+        1304,
+        1240,
+        2692,
+        969,
+        2000
+      ],
+      "off_ids": [
+        1197,
+        1304,
+        1240,
+        969,
+        2692,
+        2000
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 1.0,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E04",
+      "turn": 2,
+      "on_ids": [
+        2692,
+        3702,
+        2912,
+        2662,
+        3267,
+        2527
+      ],
+      "off_ids": [
+        2692,
+        3702,
+        2662,
+        2912,
+        2527,
+        3153
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 31
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 31
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E18",
+      "turn": 1,
+      "on_ids": [
+        260,
+        2571,
+        32,
+        1196,
+        1270,
+        924
+      ],
+      "off_ids": [
+        260,
+        2571,
+        1196,
+        1097,
+        924,
+        750
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.5,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 100
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 100
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    },
+    {
+      "scenario": "E18",
+      "turn": 2,
+      "on_ids": [
+        1077,
+        3702,
+        2662,
+        2527,
+        671,
+        2232
+      ],
+      "off_ids": [
+        1077,
+        3702,
+        2662,
+        2527,
+        2046,
+        671
+      ],
+      "lists_changed": true,
+      "jaccard_at6": 0.7142857142857143,
+      "on_matches_live": true,
+      "on_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 16
+        }
+      ],
+      "off_recall": [
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 16
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 0,
+          "skipped": "no_positive_text_similarity"
+        }
+      ],
+      "on_degradation": [],
+      "off_degradation": []
+    }
+  ]
+}

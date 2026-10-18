@@ -1,0 +1,38 @@
+{
+  "protocol": "rec-v1",
+  "split_counts": {
+    "train": 800164,
+    "validation": 100024,
+    "test": 100021
+  },
+  "catalog_items": 3662,
+  "train_users": 5400,
+  "positive_train_interactions": 463017,
+  "ranking_samples": 2652232,
+  "source_counts": {
+    "positive_observed": 463017,
+    "low_rating_observed": 337147,
+    "sampled_unobserved": 1852068
+  },
+  "negative_requested_per_positive": 4,
+  "negative_actual_per_positive": 4.0,
+  "checks": {
+    "train_time_max_lt_boundary": true,
+    "sampled_negatives_exclude_train_observed": true,
+    "history_strictly_earlier_timestamp": true,
+    "no_imdb_aggregate_features": true,
+    "vocab_fit_train_only": true
+  },
+  "vocab_sizes": {
+    "user_id": 5401,
+    "gender": 3,
+    "age": 8,
+    "occupation": 22,
+    "zip_code": 3201,
+    "movie_id": 3663,
+    "genres": 19,
+    "startYear": 82
+  },
+  "history_policy": "positive-only; left-pad zero; max10; equal timestamp events do not see each other",
+  "metadata_policy": "official user/movie metadata; primary genre and title release year; no fabricated adult attribute"
+}

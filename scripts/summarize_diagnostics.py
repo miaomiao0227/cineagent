@@ -1,0 +1,40 @@
+"""Publish diagnosis and natural-language baseline without changing deployed code."""
+import json,hashlib,shutil
+from pathlib import Path
+R=Path(__file__).resolve().parents[1]
+def read(p):return json.loads((R/p).read_text(encoding='utf-8-sig'))
+def write(p,text):(R/p).parent.mkdir(parents=True,exist_ok=True);(R/p).write_text(text,encoding='utf-8')
+x=read('artifacts/diagnostics_v1/SUMMARY.json');natural=read('reports/AGENT_NATURAL_EVAL.json')
+# Correct provenance metadata transparently; questions/oracles and selected IDs stay frozen.
+p=R/'eval/agent_natural_v1.json';old=p.read_bytes();initial=R/'eval/archive/agent_natural_v1.initial.json';initial.parent.mkdir(exist_ok=True)
+if not initial.exists():initial.write_bytes(old)
+fixture=json.loads(old);semantic_before=hashlib.sha256(json.dumps([fixture['tasks'],fixture['predeclared_execution_ids']],ensure_ascii=False,sort_keys=True).encode()).hexdigest()
+fixture['source']='assistant-generated synthetic tasks and oracle labels; not independently human-reviewed; not real users'
+p.write_text(json.dumps(fixture,ensure_ascii=False,indent=2),encoding='utf-8');(R/'eval/agent_natural_v1.sha256').write_text(hashlib.sha256(p.read_bytes()).hexdigest())
+semantic_after=hashlib.sha256(json.dumps([fixture['tasks'],fixture['predeclared_execution_ids']],ensure_ascii=False,sort_keys=True).encode()).hexdigest();assert semantic_before==semantic_after
+natural['provenance']={'task_and_oracle_author':'Codex assistant','independent_human_review':False,'input_snapshot_path':'eval/archive/agent_natural_v1.initial.json','metadata_correction':'Initial source tag human-authored was inaccurate; corrected main fixture provenance only. Questions, oracle values and preselected IDs unchanged.','semantic_payload_sha256':semantic_after,'baseline_input_sha256':hashlib.sha256(initial.read_bytes()).hexdigest(),'corrected_fixture_sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+assert natural['task_sha256']==hashlib.sha256(initial.read_bytes()).hexdigest()
+coverage=[];unrequested=[]
+for row in natural['per_task']:
+ expected=row.get('expected',{});provided={k for c in row.get('model_calls',[]) for t in c['tools'] if t['name']=='recommend_movies' for k in t.get('arguments',{})}
+ coverage.append({'id':row['id'],'required_fields':len(expected),'covered_fields':len(set(expected)&provided),'missing_fields':sorted(set(expected)-provided)})
+ if row['id']=='M03':
+  actual=set(row.get('response',{}).get('constraints',{}).get('exclude_ids',[]));allowed=set(expected.get('exclude_ids',[]));unrequested.append({'id':row['id'],'unrequested_exclude_ids':sorted(actual-allowed),'scope':'posthoc error audit, not an independent new test'})
+natural['expected_parameter_coverage']={'covered':sum(r['covered_fields'] for r in coverage),'required':sum(r['required_fields'] for r in coverage),'per_task':coverage,'note':'Raw field correctness excludes omissions; this extra coverage denominator includes missing fields such as unsupported director exclusion.'};natural['posthoc_error_audit']=unrequested
+write('reports/AGENT_NATURAL_EVAL.json',json.dumps(natural,ensure_ascii=False,indent=2))
+write('reports/AGENT_NATURAL_PROVENANCE.json',json.dumps(natural['provenance'],ensure_ascii=False,indent=2))
+lines=['# 推荐路线诊断与真实Agent评测（2026-10-18）','', '本轮未调整、重训或部署神经模型，只重算折内热门与ItemCF统计，未读取原test.npz；服务parser/prompt/schema保持不变。推荐结论来自训练期滚动验证与已见validation的开发诊断，不能宣称新独立测试提升。自然任务与期望由开发助手合成、未独立人工复核，不是真实用户。','', '## 推荐：训练期滚动窗口','', '| 折 | 训练交互 | 验证交互 | 合格用户 | 热门Recall20 | ItemCF Recall20 | 热门NDCG20 | ItemCF NDCG20 |','|---|---:|---:|---:|---:|---:|---:|---:|']
+for i,f in enumerate(x['rolling'],1):
+ a=f['summary']['Popular'];b=f['summary']['ItemCF'];lines.append(f"| {i} | {f['training_count']} | {f['validation_count']} | {f['eligible_users']} | {a['Recall@20']['mean']:.4f} | {b['Recall@20']['mean']:.4f} | {a['NDCG@20']['mean']:.4f} | {b['NDCG@20']['mean']:.4f} |")
+lines+=['','折1合格101/894、排除793，折2合格382/945、排除563；冷用户占比高，结论仅适用于合格暖历史用户。边界按原训练期时间分位固定，等时间戳不跨界；折内只拟合热门与ItemCF，没有把全训练神经模型用于较早窗口。两折ItemCF Recall20未超过热门、NDCG略高，说明效果随窗口/合格用户群变化，不能预设ItemCF必胜。每折候选/排除用户/未知目标及配对区间在ROLLING_FOLD文件。','', '## 推荐：同候选池拆分召回与排序','',f"原validation合格用户{x['seen_validation']['eligible_users']}/1134，目录3662；该集曾用于checkpoint选择，只用于诊断。",'', '| 候选路线 | 平均候选数 | 候选目标覆盖 | Oracle Recall20上限 | 热门排序NDCG20 | DeepFM排序NDCG20 |','|---|---:|---:|---:|---:|---:|']
+d=x['seen_validation']
+for pool,v in d['pool_summary'].items():
+ a=d['ranking_summary'][pool+'_Popular'];b=d['ranking_summary'][pool+'_DeepFM'];lines.append(f"| {pool} | {v['size']['mean']:.1f} | {v['recall_ceiling']['mean']:.4f} | {v['oracle_Recall@20']['mean']:.4f} | {a['NDCG@20']['mean']:.4f} | {b['NDCG@20']['mean']:.4f} |")
+lines+=['','ActualChatPool通过真正模型调用入口观测到候选；空意图并显式屏蔽非训练目录，不能冒称原首页四通道结果。其候选更多，不拿不同池的最终指标直接归因为排序收益。独立特征表重算预测与实际引擎预测逐项一致，合格用户user_id OOV为0。','', '可支持的诊断：','', '- YT100覆盖仅0.1756，低于同样100候选的热门0.2958与ItemCF0.2704，召回候选限制是重要问题；这不是对训练不足等更底层原因的证明。', '- 同YT100候选，DeepFM相较热门排序NDCG20差值0.00984，配对95%区间[0.00257,0.01710]。因此不能把整条神经路线未胜出简单解释为DeepFM完全无效。', '- 当前真实对话池平均223.4候选，最终混合/多样性Recall20=0.1066、NDCG20=0.1381、类型多样性=0.8230；仍远低于该池Oracle Recall20=0.3497，排序亦有改进空间。以上仅是已见验证集诊断。', '- 源码审查发现：空文本查询的TF-IDF分数全零，却仍会按ID补100个“文本候选”；不能把该通道当作有语义依据的召回。后续应跳过空/全零查询并单独消融。','', '## Agent：自然表达真实模型基线','',f"冻结14个任务，预选7个执行，其余7个明确未执行；实际调用官方模型{natural['summary']['observed_model_calls']}次。任务成功 {natural['summary']['task_successes']}/{natural['summary']['tasks']}，描述性Wilson95% {natural['summary']['wilson95_descriptive']}。7项含同一3轮脚本，存在相关性，不能外推总体准确率。调用实际服务函数，HTTP/鉴权不在本轮覆盖范围。",'', '| 任务 | 结果 | 失败事实/原因 |','|---|---|---|']
+reasons={'N01':'明确类型/90分钟/否定条件正确','N02':'“恐怖的就算了”被规则当成喜欢；模型给出正确否定与90分钟，但合并规则拒绝纠正，回退结果违反条件','N03':'规则把一小时三十分钟覆盖成30；模型首次给90仍被min合并夹回30，之后模型又尝试100分钟，越过原要求','N04':'“以后都别推恐怖”被写成长期喜欢恐怖；模型否定未能修复规则记忆','M01':'标准条件控制组正确','M02':'自然指代被模型定位，但工具schema没有exclude_director_of参数，导演硬约束未落地','M03':'90分钟更新正确，但继承上一轮缺失导演约束；模型还无依据新增6个电影排除项（事后审计）'}
+for row in natural['per_task']:lines.append(f"| {row['id']} | {'通过' if row['task_success'] else '失败'} | {reasons.get(row['id'],'见原记录')} |")
+c=natural['expected_parameter_coverage'];lines+=['',f"原始工具参数中，与oracle有对照的已提供字段25/26正确；这不包含遗漏。额外覆盖审计为{c['covered']}/{c['required']}个期望字段被提供，缺失导演参数不可被25/26掩盖。重复工具调用0次。每条原始工具参数、预解析状态、最终条件、记忆和失败均保留。",'', '本次2/7与旧90条模板通过不能混为一个准确率；新失败说明原模板覆盖不足。当前版本存在否定、复合片长、记忆方向和导演工具表达缺口，不能称自然语言推荐已经稳健。没有修改代码后在同一集合上声称独立提升。','',f"本轮结束总请求{natural['after']['requests_used']}/30，保守费用${natural['after']['conservative_cost_usd']:.6f}；剩余5次请求，不能按剩余金额自动扩大调用次数。",'', '## 下一步应修什么','', '1. 区分规则提案、已确认约束和模型提案的来源/置信度；冲突时澄清或显式纠正，不对全部类型取并集、片长一律取min/max。', '2. 组合中文时长应先归一成完整时长，否定支持后置表达；长期记忆写入同样经过否定/冲突校验。', '3. 增加受验证的导演排除参数或通用约束工具；电影指代与反馈绑定明确电影ID，不自动把所有推荐当作已看过。', '4. 保留本轮为失败回归集，另冻结未参与修复的新表达用于确认；真实扩评需新的明确预算，不重置旧账本。', '5. 推荐侧先在训练期内部做候选融合/空文本通道消融；若要训练神经模型做滚动比较，必须逐折重建词表并重新训练，不能复用看过未来交互的checkpoint。']
+write('reports/DIAGNOSIS_RESULTS.md','\n'.join(lines)+'\n')
+print(json.dumps({'recommendation_report':'reports/DIAGNOSIS_RESULTS.md','natural_success':natural['summary'],'provenance_corrected_without_changing_tasks':semantic_before==semantic_after}))
+
+

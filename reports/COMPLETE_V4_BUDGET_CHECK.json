@@ -1,0 +1,25 @@
+{
+  "checks": [
+    {
+      "case": "batch_attempt_limit",
+      "passed": true,
+      "no_reservation_or_network": true
+    },
+    {
+      "case": "batch_cost_limit",
+      "passed": true,
+      "no_reservation_or_network": true
+    },
+    {
+      "case": "shared240_limit",
+      "passed": true,
+      "no_reservation_or_network": true
+    },
+    {
+      "case": "normal30_limit",
+      "passed": true,
+      "no_reservation_or_network": true
+    }
+  ],
+  "external_calls": 0
+}

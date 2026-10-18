@@ -1,0 +1,823 @@
+{
+  "version": "conversation-v1",
+  "single": [
+    {
+      "id": "single-00-0",
+      "source": "authored template-generated regression",
+      "family": 0,
+      "expected_genre": "Mystery",
+      "message": "想看悬疑电影",
+      "kind": "recommend"
+    },
+    {
+      "id": "single-00-1",
+      "source": "authored template-generated regression",
+      "family": 0,
+      "expected_genre": "Comedy",
+      "message": "想看喜剧电影",
+      "kind": "recommend"
+    },
+    {
+      "id": "single-00-2",
+      "source": "authored template-generated regression",
+      "family": 0,
+      "expected_genre": "Action",
+      "message": "想看动作电影",
+      "kind": "recommend"
+    },
+    {
+      "id": "single-00-3",
+      "source": "authored template-generated regression",
+      "family": 0,
+      "expected_genre": "Sci-Fi",
+      "message": "想看科幻电影",
+      "kind": "recommend"
+    },
+    {
+      "id": "single-00-4",
+      "source": "authored template-generated regression",
+      "family": 0,
+      "expected_genre": "Romance",
+      "message": "想看爱情电影",
+      "kind": "recommend"
+    },
+    {
+      "id": "single-00-5",
+      "source": "authored template-generated regression",
+      "family": 0,
+      "expected_genre": "Drama",
+      "message": "想看剧情电影",
+      "kind": "recommend"
+    },
+    {
+      "id": "single-01-0",
+      "source": "authored template-generated regression",
+      "family": 1,
+      "expected_genre": "Mystery",
+      "message": "想看悬疑电影，不要恐怖片",
+      "kind": "recommend",
+      "exclude": "Horror"
+    },
+    {
+      "id": "single-01-1",
+      "source": "authored template-generated regression",
+      "family": 1,
+      "expected_genre": "Comedy",
+      "message": "想看喜剧电影，不要恐怖片",
+      "kind": "recommend",
+      "exclude": "Horror"
+    },
+    {
+      "id": "single-01-2",
+      "source": "authored template-generated regression",
+      "family": 1,
+      "expected_genre": "Action",
+      "message": "想看动作电影，不要恐怖片",
+      "kind": "recommend",
+      "exclude": "Horror"
+    },
+    {
+      "id": "single-01-3",
+      "source": "authored template-generated regression",
+      "family": 1,
+      "expected_genre": "Sci-Fi",
+      "message": "想看科幻电影，不要恐怖片",
+      "kind": "recommend",
+      "exclude": "Horror"
+    },
+    {
+      "id": "single-01-4",
+      "source": "authored template-generated regression",
+      "family": 1,
+      "expected_genre": "Romance",
+      "message": "想看爱情电影，不要恐怖片",
+      "kind": "recommend",
+      "exclude": "Horror"
+    },
+    {
+      "id": "single-01-5",
+      "source": "authored template-generated regression",
+      "family": 1,
+      "expected_genre": "Drama",
+      "message": "想看剧情电影，不要恐怖片",
+      "kind": "recommend",
+      "exclude": "Horror"
+    },
+    {
+      "id": "single-02-0",
+      "source": "authored template-generated regression",
+      "family": 2,
+      "expected_genre": "Mystery",
+      "message": "想看悬疑电影，最好两小时以内",
+      "kind": "recommend",
+      "max_runtime": 120
+    },
+    {
+      "id": "single-02-1",
+      "source": "authored template-generated regression",
+      "family": 2,
+      "expected_genre": "Comedy",
+      "message": "想看喜剧电影，最好两小时以内",
+      "kind": "recommend",
+      "max_runtime": 120
+    },
+    {
+      "id": "single-02-2",
+      "source": "authored template-generated regression",
+      "family": 2,
+      "expected_genre": "Action",
+      "message": "想看动作电影，最好两小时以内",
+      "kind": "recommend",
+      "max_runtime": 120
+    },
+    {
+      "id": "single-02-3",
+      "source": "authored template-generated regression",
+      "family": 2,
+      "expected_genre": "Sci-Fi",
+      "message": "想看科幻电影，最好两小时以内",
+      "kind": "recommend",
+      "max_runtime": 120
+    },
+    {
+      "id": "single-02-4",
+      "source": "authored template-generated regression",
+      "family": 2,
+      "expected_genre": "Romance",
+      "message": "想看爱情电影，最好两小时以内",
+      "kind": "recommend",
+      "max_runtime": 120
+    },
+    {
+      "id": "single-02-5",
+      "source": "authored template-generated regression",
+      "family": 2,
+      "expected_genre": "Drama",
+      "message": "想看剧情电影，最好两小时以内",
+      "kind": "recommend",
+      "max_runtime": 120
+    },
+    {
+      "id": "single-03-0",
+      "source": "authored template-generated regression",
+      "family": 3,
+      "expected_genre": "Mystery",
+      "message": "想看悬疑电影，不要恐怖片，九十分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 90
+    },
+    {
+      "id": "single-03-1",
+      "source": "authored template-generated regression",
+      "family": 3,
+      "expected_genre": "Comedy",
+      "message": "想看喜剧电影，不要恐怖片，九十分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 90
+    },
+    {
+      "id": "single-03-2",
+      "source": "authored template-generated regression",
+      "family": 3,
+      "expected_genre": "Action",
+      "message": "想看动作电影，不要恐怖片，九十分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 90
+    },
+    {
+      "id": "single-03-3",
+      "source": "authored template-generated regression",
+      "family": 3,
+      "expected_genre": "Sci-Fi",
+      "message": "想看科幻电影，不要恐怖片，九十分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 90
+    },
+    {
+      "id": "single-03-4",
+      "source": "authored template-generated regression",
+      "family": 3,
+      "expected_genre": "Romance",
+      "message": "想看爱情电影，不要恐怖片，九十分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 90
+    },
+    {
+      "id": "single-03-5",
+      "source": "authored template-generated regression",
+      "family": 3,
+      "expected_genre": "Drama",
+      "message": "想看剧情电影，不要恐怖片，九十分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 90
+    },
+    {
+      "id": "single-04-0",
+      "source": "authored template-generated regression",
+      "family": 4,
+      "expected_genre": "Mystery",
+      "message": "想看悬疑电影，不要悬疑电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-04-1",
+      "source": "authored template-generated regression",
+      "family": 4,
+      "expected_genre": "Comedy",
+      "message": "想看喜剧电影，不要喜剧电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-04-2",
+      "source": "authored template-generated regression",
+      "family": 4,
+      "expected_genre": "Action",
+      "message": "想看动作电影，不要动作电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-04-3",
+      "source": "authored template-generated regression",
+      "family": 4,
+      "expected_genre": "Sci-Fi",
+      "message": "想看科幻电影，不要科幻电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-04-4",
+      "source": "authored template-generated regression",
+      "family": 4,
+      "expected_genre": "Romance",
+      "message": "想看爱情电影，不要爱情电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-04-5",
+      "source": "authored template-generated regression",
+      "family": 4,
+      "expected_genre": "Drama",
+      "message": "想看剧情电影，不要剧情电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-05-0",
+      "source": "authored template-generated regression",
+      "family": 5,
+      "expected_genre": "Mystery",
+      "message": "想看悬疑电影，至少三小时，两小时以内",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-05-1",
+      "source": "authored template-generated regression",
+      "family": 5,
+      "expected_genre": "Comedy",
+      "message": "想看喜剧电影，至少三小时，两小时以内",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-05-2",
+      "source": "authored template-generated regression",
+      "family": 5,
+      "expected_genre": "Action",
+      "message": "想看动作电影，至少三小时，两小时以内",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-05-3",
+      "source": "authored template-generated regression",
+      "family": 5,
+      "expected_genre": "Sci-Fi",
+      "message": "想看科幻电影，至少三小时，两小时以内",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-05-4",
+      "source": "authored template-generated regression",
+      "family": 5,
+      "expected_genre": "Romance",
+      "message": "想看爱情电影，至少三小时，两小时以内",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-05-5",
+      "source": "authored template-generated regression",
+      "family": 5,
+      "expected_genre": "Drama",
+      "message": "想看剧情电影，至少三小时，两小时以内",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-06-0",
+      "source": "authored template-generated regression",
+      "family": 6,
+      "expected_genre": "Mystery",
+      "message": "想看节奏快的悬疑电影",
+      "kind": "unsupported"
+    },
+    {
+      "id": "single-06-1",
+      "source": "authored template-generated regression",
+      "family": 6,
+      "expected_genre": "Comedy",
+      "message": "想看节奏快的喜剧电影",
+      "kind": "unsupported"
+    },
+    {
+      "id": "single-06-2",
+      "source": "authored template-generated regression",
+      "family": 6,
+      "expected_genre": "Action",
+      "message": "想看节奏快的动作电影",
+      "kind": "unsupported"
+    },
+    {
+      "id": "single-06-3",
+      "source": "authored template-generated regression",
+      "family": 6,
+      "expected_genre": "Sci-Fi",
+      "message": "想看节奏快的科幻电影",
+      "kind": "unsupported"
+    },
+    {
+      "id": "single-06-4",
+      "source": "authored template-generated regression",
+      "family": 6,
+      "expected_genre": "Romance",
+      "message": "想看节奏快的爱情电影",
+      "kind": "unsupported"
+    },
+    {
+      "id": "single-06-5",
+      "source": "authored template-generated regression",
+      "family": 6,
+      "expected_genre": "Drama",
+      "message": "想看节奏快的剧情电影",
+      "kind": "unsupported"
+    },
+    {
+      "id": "single-07-0",
+      "source": "authored template-generated regression",
+      "family": 7,
+      "expected_genre": "Mystery",
+      "message": "以后记住我喜欢悬疑电影",
+      "kind": "memory"
+    },
+    {
+      "id": "single-07-1",
+      "source": "authored template-generated regression",
+      "family": 7,
+      "expected_genre": "Comedy",
+      "message": "以后记住我喜欢喜剧电影",
+      "kind": "memory"
+    },
+    {
+      "id": "single-07-2",
+      "source": "authored template-generated regression",
+      "family": 7,
+      "expected_genre": "Action",
+      "message": "以后记住我喜欢动作电影",
+      "kind": "memory"
+    },
+    {
+      "id": "single-07-3",
+      "source": "authored template-generated regression",
+      "family": 7,
+      "expected_genre": "Sci-Fi",
+      "message": "以后记住我喜欢科幻电影",
+      "kind": "memory"
+    },
+    {
+      "id": "single-07-4",
+      "source": "authored template-generated regression",
+      "family": 7,
+      "expected_genre": "Romance",
+      "message": "以后记住我喜欢爱情电影",
+      "kind": "memory"
+    },
+    {
+      "id": "single-07-5",
+      "source": "authored template-generated regression",
+      "family": 7,
+      "expected_genre": "Drama",
+      "message": "以后记住我喜欢剧情电影",
+      "kind": "memory"
+    },
+    {
+      "id": "single-08-0",
+      "source": "authored template-generated regression",
+      "family": 8,
+      "expected_genre": "Mystery",
+      "message": "第一部看过了，想看悬疑电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-08-1",
+      "source": "authored template-generated regression",
+      "family": 8,
+      "expected_genre": "Comedy",
+      "message": "第一部看过了，想看喜剧电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-08-2",
+      "source": "authored template-generated regression",
+      "family": 8,
+      "expected_genre": "Action",
+      "message": "第一部看过了，想看动作电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-08-3",
+      "source": "authored template-generated regression",
+      "family": 8,
+      "expected_genre": "Sci-Fi",
+      "message": "第一部看过了，想看科幻电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-08-4",
+      "source": "authored template-generated regression",
+      "family": 8,
+      "expected_genre": "Romance",
+      "message": "第一部看过了，想看爱情电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-08-5",
+      "source": "authored template-generated regression",
+      "family": 8,
+      "expected_genre": "Drama",
+      "message": "第一部看过了，想看剧情电影",
+      "kind": "clarify"
+    },
+    {
+      "id": "single-09-0",
+      "source": "authored template-generated regression",
+      "family": 9,
+      "expected_genre": "Mystery",
+      "message": "想看悬疑电影，不要恐怖片，120分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 120
+    },
+    {
+      "id": "single-09-1",
+      "source": "authored template-generated regression",
+      "family": 9,
+      "expected_genre": "Comedy",
+      "message": "想看喜剧电影，不要恐怖片，120分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 120
+    },
+    {
+      "id": "single-09-2",
+      "source": "authored template-generated regression",
+      "family": 9,
+      "expected_genre": "Action",
+      "message": "想看动作电影，不要恐怖片，120分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 120
+    },
+    {
+      "id": "single-09-3",
+      "source": "authored template-generated regression",
+      "family": 9,
+      "expected_genre": "Sci-Fi",
+      "message": "想看科幻电影，不要恐怖片，120分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 120
+    },
+    {
+      "id": "single-09-4",
+      "source": "authored template-generated regression",
+      "family": 9,
+      "expected_genre": "Romance",
+      "message": "想看爱情电影，不要恐怖片，120分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 120
+    },
+    {
+      "id": "single-09-5",
+      "source": "authored template-generated regression",
+      "family": 9,
+      "expected_genre": "Drama",
+      "message": "想看剧情电影，不要恐怖片，120分钟以内",
+      "kind": "recommend",
+      "exclude": "Horror",
+      "max_runtime": 120
+    }
+  ],
+  "multi": [
+    {
+      "id": "multi-00-0",
+      "source": "authored template-generated regression",
+      "family": 0,
+      "messages": [
+        "想看悬疑电影，不要恐怖片，两小时以内",
+        "第一部看过了，换类似的"
+      ],
+      "genre": "Mystery"
+    },
+    {
+      "id": "multi-00-1",
+      "source": "authored template-generated regression",
+      "family": 0,
+      "messages": [
+        "想看喜剧电影，不要恐怖片，两小时以内",
+        "第一部看过了，换类似的"
+      ],
+      "genre": "Comedy"
+    },
+    {
+      "id": "multi-00-2",
+      "source": "authored template-generated regression",
+      "family": 0,
+      "messages": [
+        "想看动作电影，不要恐怖片，两小时以内",
+        "第一部看过了，换类似的"
+      ],
+      "genre": "Action"
+    },
+    {
+      "id": "multi-00-3",
+      "source": "authored template-generated regression",
+      "family": 0,
+      "messages": [
+        "想看科幻电影，不要恐怖片，两小时以内",
+        "第一部看过了，换类似的"
+      ],
+      "genre": "Sci-Fi"
+    },
+    {
+      "id": "multi-00-4",
+      "source": "authored template-generated regression",
+      "family": 0,
+      "messages": [
+        "想看爱情电影，不要恐怖片，两小时以内",
+        "第一部看过了，换类似的"
+      ],
+      "genre": "Romance"
+    },
+    {
+      "id": "multi-01-0",
+      "source": "authored template-generated regression",
+      "family": 1,
+      "messages": [
+        "想看悬疑电影，不要恐怖片，两小时以内",
+        "第一部看过了，换类似的，但不要同一个导演"
+      ],
+      "genre": "Mystery"
+    },
+    {
+      "id": "multi-01-1",
+      "source": "authored template-generated regression",
+      "family": 1,
+      "messages": [
+        "想看喜剧电影，不要恐怖片，两小时以内",
+        "第一部看过了，换类似的，但不要同一个导演"
+      ],
+      "genre": "Comedy"
+    },
+    {
+      "id": "multi-01-2",
+      "source": "authored template-generated regression",
+      "family": 1,
+      "messages": [
+        "想看动作电影，不要恐怖片，两小时以内",
+        "第一部看过了，换类似的，但不要同一个导演"
+      ],
+      "genre": "Action"
+    },
+    {
+      "id": "multi-01-3",
+      "source": "authored template-generated regression",
+      "family": 1,
+      "messages": [
+        "想看科幻电影，不要恐怖片，两小时以内",
+        "第一部看过了，换类似的，但不要同一个导演"
+      ],
+      "genre": "Sci-Fi"
+    },
+    {
+      "id": "multi-01-4",
+      "source": "authored template-generated regression",
+      "family": 1,
+      "messages": [
+        "想看爱情电影，不要恐怖片，两小时以内",
+        "第一部看过了，换类似的，但不要同一个导演"
+      ],
+      "genre": "Romance"
+    },
+    {
+      "id": "multi-02-0",
+      "source": "authored template-generated regression",
+      "family": 2,
+      "messages": [
+        "想看悬疑电影，不要恐怖片，两小时以内",
+        "以后记住我不喜欢悬疑电影"
+      ],
+      "genre": "Mystery"
+    },
+    {
+      "id": "multi-02-1",
+      "source": "authored template-generated regression",
+      "family": 2,
+      "messages": [
+        "想看喜剧电影，不要恐怖片，两小时以内",
+        "以后记住我不喜欢喜剧电影"
+      ],
+      "genre": "Comedy"
+    },
+    {
+      "id": "multi-02-2",
+      "source": "authored template-generated regression",
+      "family": 2,
+      "messages": [
+        "想看动作电影，不要恐怖片，两小时以内",
+        "以后记住我不喜欢动作电影"
+      ],
+      "genre": "Action"
+    },
+    {
+      "id": "multi-02-3",
+      "source": "authored template-generated regression",
+      "family": 2,
+      "messages": [
+        "想看科幻电影，不要恐怖片，两小时以内",
+        "以后记住我不喜欢科幻电影"
+      ],
+      "genre": "Sci-Fi"
+    },
+    {
+      "id": "multi-02-4",
+      "source": "authored template-generated regression",
+      "family": 2,
+      "messages": [
+        "想看爱情电影，不要恐怖片，两小时以内",
+        "以后记住我不喜欢爱情电影"
+      ],
+      "genre": "Romance"
+    },
+    {
+      "id": "multi-03-0",
+      "source": "authored template-generated regression",
+      "family": 3,
+      "messages": [
+        "想看悬疑电影，不要恐怖片，两小时以内",
+        "其实改成恐怖片"
+      ],
+      "genre": "Mystery"
+    },
+    {
+      "id": "multi-03-1",
+      "source": "authored template-generated regression",
+      "family": 3,
+      "messages": [
+        "想看喜剧电影，不要恐怖片，两小时以内",
+        "其实改成恐怖片"
+      ],
+      "genre": "Comedy"
+    },
+    {
+      "id": "multi-03-2",
+      "source": "authored template-generated regression",
+      "family": 3,
+      "messages": [
+        "想看动作电影，不要恐怖片，两小时以内",
+        "其实改成恐怖片"
+      ],
+      "genre": "Action"
+    },
+    {
+      "id": "multi-03-3",
+      "source": "authored template-generated regression",
+      "family": 3,
+      "messages": [
+        "想看科幻电影，不要恐怖片，两小时以内",
+        "其实改成恐怖片"
+      ],
+      "genre": "Sci-Fi"
+    },
+    {
+      "id": "multi-03-4",
+      "source": "authored template-generated regression",
+      "family": 3,
+      "messages": [
+        "想看爱情电影，不要恐怖片，两小时以内",
+        "其实改成恐怖片"
+      ],
+      "genre": "Romance"
+    },
+    {
+      "id": "multi-04-0",
+      "source": "authored template-generated regression",
+      "family": 4,
+      "messages": [
+        "想看悬疑电影，不要恐怖片，两小时以内",
+        "清空条件，想看悬疑电影"
+      ],
+      "genre": "Mystery"
+    },
+    {
+      "id": "multi-04-1",
+      "source": "authored template-generated regression",
+      "family": 4,
+      "messages": [
+        "想看喜剧电影，不要恐怖片，两小时以内",
+        "清空条件，想看喜剧电影"
+      ],
+      "genre": "Comedy"
+    },
+    {
+      "id": "multi-04-2",
+      "source": "authored template-generated regression",
+      "family": 4,
+      "messages": [
+        "想看动作电影，不要恐怖片，两小时以内",
+        "清空条件，想看动作电影"
+      ],
+      "genre": "Action"
+    },
+    {
+      "id": "multi-04-3",
+      "source": "authored template-generated regression",
+      "family": 4,
+      "messages": [
+        "想看科幻电影，不要恐怖片，两小时以内",
+        "清空条件，想看科幻电影"
+      ],
+      "genre": "Sci-Fi"
+    },
+    {
+      "id": "multi-04-4",
+      "source": "authored template-generated regression",
+      "family": 4,
+      "messages": [
+        "想看爱情电影，不要恐怖片，两小时以内",
+        "清空条件，想看爱情电影"
+      ],
+      "genre": "Romance"
+    },
+    {
+      "id": "multi-05-0",
+      "source": "authored template-generated regression",
+      "family": 5,
+      "messages": [
+        "想看悬疑电影，不要恐怖片，两小时以内",
+        "想看悬疑电影，至少三小时"
+      ],
+      "genre": "Mystery"
+    },
+    {
+      "id": "multi-05-1",
+      "source": "authored template-generated regression",
+      "family": 5,
+      "messages": [
+        "想看喜剧电影，不要恐怖片，两小时以内",
+        "想看喜剧电影，至少三小时"
+      ],
+      "genre": "Comedy"
+    },
+    {
+      "id": "multi-05-2",
+      "source": "authored template-generated regression",
+      "family": 5,
+      "messages": [
+        "想看动作电影，不要恐怖片，两小时以内",
+        "想看动作电影，至少三小时"
+      ],
+      "genre": "Action"
+    },
+    {
+      "id": "multi-05-3",
+      "source": "authored template-generated regression",
+      "family": 5,
+      "messages": [
+        "想看科幻电影，不要恐怖片，两小时以内",
+        "想看科幻电影，至少三小时"
+      ],
+      "genre": "Sci-Fi"
+    },
+    {
+      "id": "multi-05-4",
+      "source": "authored template-generated regression",
+      "family": 5,
+      "messages": [
+        "想看爱情电影，不要恐怖片，两小时以内",
+        "想看爱情电影，至少三小时"
+      ],
+      "genre": "Romance"
+    }
+  ]
+}

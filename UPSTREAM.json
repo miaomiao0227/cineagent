@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/datawhalechina/fun-rec",
+  "commit": "5f7bd84d4403b5f92b6bedbd31e3984ef00a4572",
+  "included_paths": [
+    "web_project/backend",
+    "web_project/frontend",
+    "src/funrec"
+  ],
+  "modifications": "See CONTRIBUTIONS.md and source/upstream.patch",
+  "license_declaration": "CC BY-NC-SA 4.0 in upstream README; no standalone LICENSE in audited checkout"
+}

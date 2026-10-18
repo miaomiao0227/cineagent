@@ -1,0 +1,869 @@
+{
+  "version": "agent-natural-v2",
+  "source": "assistant-generated synthetic scenarios and oracle; not human-reviewed or real user behavior",
+  "freeze_policy": "fixed after repairs before offline/live execution; do not edit code or oracle during batch; retain all failures",
+  "scenarios": [
+    {
+      "id": "S01",
+      "family": "runtime_correction",
+      "turns": [
+        {
+          "message": "今晚选喜剧电影，恐怖的就算了，最多两个小时。",
+          "expected": {
+            "include_genres": [
+              "Comedy"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 120
+          }
+        },
+        {
+          "message": "时长改为九十分钟，其他条件保留。",
+          "expected": {
+            "include_genres": [
+              "Comedy"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "family": "runtime_correction",
+      "turns": [
+        {
+          "message": "今晚选科幻电影，恐怖的就算了，最多两个小时。",
+          "expected": {
+            "include_genres": [
+              "Sci-Fi"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 120
+          }
+        },
+        {
+          "message": "时长改为九十分钟，其他条件保留。",
+          "expected": {
+            "include_genres": [
+              "Sci-Fi"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "family": "runtime_correction",
+      "turns": [
+        {
+          "message": "今晚选悬疑电影，恐怖的就算了，最多两个小时。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 120
+          }
+        },
+        {
+          "message": "时长改为九十分钟，其他条件保留。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "family": "runtime_correction",
+      "turns": [
+        {
+          "message": "今晚选动作电影，恐怖的就算了，最多两个小时。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 120
+          }
+        },
+        {
+          "message": "时长改为九十分钟，其他条件保留。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "family": "runtime_correction",
+      "turns": [
+        {
+          "message": "今晚选剧情电影，恐怖的就算了，最多两个小时。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 120
+          }
+        },
+        {
+          "message": "时长改为九十分钟，其他条件保留。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "family": "runtime_correction",
+      "turns": [
+        {
+          "message": "今晚选爱情电影，恐怖的就算了，最多两个小时。",
+          "expected": {
+            "include_genres": [
+              "Romance"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 120
+          }
+        },
+        {
+          "message": "时长改为九十分钟，其他条件保留。",
+          "expected": {
+            "include_genres": [
+              "Romance"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "S07",
+      "family": "reference_director",
+      "turns": [
+        {
+          "message": "给我推荐喜剧电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Comedy"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          }
+        },
+        {
+          "message": "第一部已经看过，换类似的，导演也别重复。",
+          "expected": {
+            "include_genres": [
+              "Comedy"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "reference_first_turn": true,
+          "different_director": true
+        }
+      ]
+    },
+    {
+      "id": "S08",
+      "family": "reference_director",
+      "turns": [
+        {
+          "message": "给我推荐科幻电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Sci-Fi"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          }
+        },
+        {
+          "message": "排在最前面的那部已经看过，换类似的，导演也别重复。",
+          "expected": {
+            "include_genres": [
+              "Sci-Fi"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "reference_first_turn": true,
+          "different_director": true
+        }
+      ]
+    },
+    {
+      "id": "S09",
+      "family": "reference_director",
+      "turns": [
+        {
+          "message": "给我推荐悬疑电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          }
+        },
+        {
+          "message": "第一位的电影已经看过，换类似的，导演也别重复。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "reference_first_turn": true,
+          "different_director": true
+        }
+      ]
+    },
+    {
+      "id": "S10",
+      "family": "reference_director",
+      "turns": [
+        {
+          "message": "给我推荐动作电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          }
+        },
+        {
+          "message": "第一部已经看过，换类似的，导演也别重复。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "reference_first_turn": true,
+          "different_director": true
+        }
+      ]
+    },
+    {
+      "id": "S11",
+      "family": "reference_director",
+      "turns": [
+        {
+          "message": "给我推荐剧情电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          }
+        },
+        {
+          "message": "排在最前面的那部已经看过，换类似的，导演也别重复。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "reference_first_turn": true,
+          "different_director": true
+        }
+      ]
+    },
+    {
+      "id": "S12",
+      "family": "reference_director",
+      "turns": [
+        {
+          "message": "给我推荐爱情电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Romance"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          }
+        },
+        {
+          "message": "第一位的电影已经看过，换类似的，导演也别重复。",
+          "expected": {
+            "include_genres": [
+              "Romance"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "reference_first_turn": true,
+          "different_director": true
+        }
+      ]
+    },
+    {
+      "id": "S13",
+      "family": "negative_memory",
+      "turns": [
+        {
+          "message": "以后都别推荐恐怖片给我。",
+          "expected": {
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        },
+        {
+          "message": "这次想看喜剧，一个半小时以内。",
+          "expected": {
+            "include_genres": [
+              "Comedy"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S14",
+      "family": "negative_memory",
+      "turns": [
+        {
+          "message": "以后都别推荐恐怖片给我。",
+          "expected": {
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        },
+        {
+          "message": "这次想看科幻，一个半小时以内。",
+          "expected": {
+            "include_genres": [
+              "Sci-Fi"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S15",
+      "family": "negative_memory",
+      "turns": [
+        {
+          "message": "以后都别推荐恐怖片给我。",
+          "expected": {
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        },
+        {
+          "message": "这次想看悬疑，一个半小时以内。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S16",
+      "family": "negative_memory",
+      "turns": [
+        {
+          "message": "以后都别推荐恐怖片给我。",
+          "expected": {
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        },
+        {
+          "message": "这次想看动作，一个半小时以内。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S17",
+      "family": "negative_memory",
+      "turns": [
+        {
+          "message": "以后都别推荐恐怖片给我。",
+          "expected": {
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        },
+        {
+          "message": "这次想看剧情，一个半小时以内。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S18",
+      "family": "negative_memory",
+      "turns": [
+        {
+          "message": "以后都别推荐恐怖片给我。",
+          "expected": {
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        },
+        {
+          "message": "这次想看爱情，一个半小时以内。",
+          "expected": {
+            "include_genres": [
+              "Romance"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          },
+          "memory_expected": {
+            "key": "exclude_genres",
+            "value": "Horror"
+          }
+        }
+      ]
+    },
+    {
+      "id": "S19",
+      "family": "conflict_clarification",
+      "turns": [
+        {
+          "message": "推荐喜剧电影。",
+          "expected": {
+            "include_genres": [
+              "Comedy"
+            ]
+          }
+        },
+        {
+          "message": "不要喜剧。",
+          "expected": {},
+          "expect_clarification": true
+        }
+      ]
+    },
+    {
+      "id": "S20",
+      "family": "conflict_clarification",
+      "turns": [
+        {
+          "message": "推荐科幻电影。",
+          "expected": {
+            "include_genres": [
+              "Sci-Fi"
+            ]
+          }
+        },
+        {
+          "message": "不要科幻。",
+          "expected": {},
+          "expect_clarification": true
+        }
+      ]
+    },
+    {
+      "id": "S21",
+      "family": "conflict_clarification",
+      "turns": [
+        {
+          "message": "推荐悬疑电影。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ]
+          }
+        },
+        {
+          "message": "不要悬疑。",
+          "expected": {},
+          "expect_clarification": true
+        }
+      ]
+    },
+    {
+      "id": "S22",
+      "family": "conflict_clarification",
+      "turns": [
+        {
+          "message": "推荐动作电影。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ]
+          }
+        },
+        {
+          "message": "不要动作。",
+          "expected": {},
+          "expect_clarification": true
+        }
+      ]
+    },
+    {
+      "id": "S23",
+      "family": "conflict_clarification",
+      "turns": [
+        {
+          "message": "推荐剧情电影。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ]
+          }
+        },
+        {
+          "message": "不要剧情。",
+          "expected": {},
+          "expect_clarification": true
+        }
+      ]
+    },
+    {
+      "id": "S24",
+      "family": "conflict_clarification",
+      "turns": [
+        {
+          "message": "推荐爱情电影。",
+          "expected": {
+            "include_genres": [
+              "Romance"
+            ]
+          }
+        },
+        {
+          "message": "不要爱情。",
+          "expected": {},
+          "expect_clarification": true
+        }
+      ]
+    },
+    {
+      "id": "S25",
+      "family": "unverified_attributes",
+      "turns": [
+        {
+          "message": "想看节奏快的喜剧电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Comedy"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "expect_warning": "不能保证"
+        },
+        {
+          "message": "片长限制为一小时三十分钟以内。",
+          "expected": {
+            "include_genres": [
+              "Comedy"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "S26",
+      "family": "unverified_attributes",
+      "turns": [
+        {
+          "message": "想看节奏快的科幻电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Sci-Fi"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "expect_warning": "不能保证"
+        },
+        {
+          "message": "片长限制为一小时三十分钟以内。",
+          "expected": {
+            "include_genres": [
+              "Sci-Fi"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "S27",
+      "family": "unverified_attributes",
+      "turns": [
+        {
+          "message": "想看节奏快的悬疑电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "expect_warning": "不能保证"
+        },
+        {
+          "message": "片长限制为一小时三十分钟以内。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "S28",
+      "family": "unverified_attributes",
+      "turns": [
+        {
+          "message": "想看节奏快的动作电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "expect_warning": "不能保证"
+        },
+        {
+          "message": "片长限制为一小时三十分钟以内。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "S29",
+      "family": "unverified_attributes",
+      "turns": [
+        {
+          "message": "想看节奏快的剧情电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "expect_warning": "不能保证"
+        },
+        {
+          "message": "片长限制为一小时三十分钟以内。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "S30",
+      "family": "unverified_attributes",
+      "turns": [
+        {
+          "message": "想看节奏快的爱情电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Romance"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "expect_warning": "不能保证"
+        },
+        {
+          "message": "片长限制为一小时三十分钟以内。",
+          "expected": {
+            "include_genres": [
+              "Romance"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    }
+  ],
+  "scenario_count": 30,
+  "user_turns": 60,
+  "metrics": "all expected facts, catalogue constraints, memory provenance, no unauthorized extra exclusions, evidence checks; all-turn success per scenario; also report live tool-loop completion separately",
+  "uncertainty": "families/template variants are dependent; descriptive counts only, no claim of 30 independent real users"
+}

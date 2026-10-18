@@ -1,0 +1,6 @@
+{
+  "scope": "isolated transaction rolled back; no user memory changed",
+  "expired_ignored": true,
+  "revoked_ignored": true,
+  "active_loaded": true
+}

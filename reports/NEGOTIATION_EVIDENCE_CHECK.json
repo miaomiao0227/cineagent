@@ -1,0 +1,416 @@
+{
+  "checks": {
+    "empty_result_does_not_relax": true,
+    "suggestions_have_verified_candidates": true,
+    "confirmation_changes_only_requested_runtime": true,
+    "returned_items_pass_catalogue_checks": true,
+    "injected_bad_candidate_rejected_by_validator": true,
+    "invented_exclusion_rejected": true
+  },
+  "first": {
+    "request_id": "c949099f-cfed-4fa0-bd74-e09de979c142",
+    "conversation_id": "fc88e953-56b3-4770-992c-93808fc43593",
+    "turn": 1,
+    "mode": "offline_rules",
+    "items": [],
+    "constraints": {
+      "include_genres": [
+        "Mystery"
+      ],
+      "exclude_genres": [],
+      "exclude_ids": [],
+      "max_runtime": 81
+    },
+    "warnings": [
+      "没有满足全部已知硬约束的电影；请放宽条件。"
+    ],
+    "message": "需要调整或澄清条件后再推荐。",
+    "trace": [
+      {
+        "tool": "filter",
+        "input_count": 3883,
+        "eligible_count": 0,
+        "missing_runtime_excluded": 29,
+        "missing_director_excluded": 0
+      }
+    ],
+    "degradation": [],
+    "eligible_count": 0,
+    "evidence_checks": [],
+    "relaxation_suggestions": [
+      {
+        "label": "将最长片长从 81 调整为 111 分钟",
+        "message": "把最长片长改成111分钟",
+        "eligible_count": 40,
+        "requires_confirmation": true,
+        "change": {
+          "key": "max_runtime",
+          "from": 81,
+          "to": 111
+        }
+      }
+    ],
+    "versions": {
+      "data": "rec-v1",
+      "model": "rec-v1",
+      "prompt": "movie-tools-v3",
+      "agent": "conversation-v3",
+      "content": "content-v1"
+    },
+    "summary": {
+      "version": "structured-v1",
+      "through_turn": 1,
+      "constraints": {
+        "include_genres": [
+          "Mystery"
+        ],
+        "exclude_genres": [],
+        "exclude_ids": [],
+        "max_runtime": 81,
+        "turn_count": 1
+      },
+      "sources": {
+        "include_genres:Mystery": {
+          "turn": 1,
+          "start": 0,
+          "end": 4
+        },
+        "max_runtime": {
+          "turn": 1,
+          "start": 7,
+          "end": 11
+        }
+      },
+      "last_results": []
+    },
+    "history_characters": {
+      "original": 2,
+      "sent": 327
+    },
+    "memory_used": [],
+    "memory_proposals_saved": 0,
+    "elapsed_ms": 22.73
+  },
+  "confirmed": {
+    "request_id": "3d0f02cd-0d9e-4dc2-9045-dca3701a0ad5",
+    "conversation_id": "fc88e953-56b3-4770-992c-93808fc43593",
+    "turn": 2,
+    "mode": "offline_rules",
+    "items": [
+      {
+        "movie_id": 913,
+        "title": "Maltese Falcon, The (1941)",
+        "genres": [
+          "Film-Noir",
+          "Mystery"
+        ],
+        "runtime_minutes": 100,
+        "directors": [
+          "nm0001379"
+        ],
+        "year": "1941",
+        "metadata_status": "identity_verified",
+        "poster_url": "/api/posters/913.png",
+        "score": 0.465149,
+        "reason": "库内类型：Film-Noir、Mystery；片长 100 分钟",
+        "ranking_strategy": "deepfm-rec-v1"
+      },
+      {
+        "movie_id": 3044,
+        "title": "Dead Again (1991)",
+        "genres": [
+          "Mystery",
+          "Romance",
+          "Thriller"
+        ],
+        "runtime_minutes": 107,
+        "directors": [
+          "nm0000110"
+        ],
+        "year": "1991",
+        "metadata_status": "identity_verified",
+        "poster_url": "/api/posters/3044.png",
+        "score": 0.426449,
+        "reason": "库内类型：Mystery、Romance、Thriller；片长 107 分钟",
+        "ranking_strategy": "deepfm-rec-v1"
+      },
+      {
+        "movie_id": 648,
+        "title": "Mission: Impossible (1996)",
+        "genres": [
+          "Action",
+          "Adventure",
+          "Mystery"
+        ],
+        "runtime_minutes": 110,
+        "directors": [
+          "nm0000361"
+        ],
+        "year": "1996",
+        "metadata_status": "identity_verified",
+        "poster_url": "/api/posters/648.png",
+        "score": 0.392119,
+        "reason": "库内类型：Action、Adventure、Mystery；片长 110 分钟",
+        "ranking_strategy": "deepfm-rec-v1"
+      },
+      {
+        "movie_id": 1589,
+        "title": "Cop Land (1997)",
+        "genres": [
+          "Crime",
+          "Drama",
+          "Mystery"
+        ],
+        "runtime_minutes": 105,
+        "directors": [
+          "nm0003506"
+        ],
+        "year": "1997",
+        "metadata_status": "identity_verified",
+        "poster_url": "/api/posters/1589.png",
+        "score": 0.37181,
+        "reason": "库内类型：Crime、Drama、Mystery；片长 105 分钟",
+        "ranking_strategy": "deepfm-rec-v1"
+      },
+      {
+        "movie_id": 1212,
+        "title": "Third Man, The (1949)",
+        "genres": [
+          "Mystery",
+          "Thriller"
+        ],
+        "runtime_minutes": 104,
+        "directors": [
+          "nm0715346"
+        ],
+        "year": "1949",
+        "metadata_status": "identity_verified",
+        "poster_url": "/api/posters/1212.png",
+        "score": 0.390673,
+        "reason": "库内类型：Mystery、Thriller；片长 104 分钟",
+        "ranking_strategy": "deepfm-rec-v1"
+      },
+      {
+        "movie_id": 1805,
+        "title": "Wild Things (1998)",
+        "genres": [
+          "Crime",
+          "Drama",
+          "Mystery",
+          "Thriller"
+        ],
+        "runtime_minutes": 108,
+        "directors": [
+          "nm0573796"
+        ],
+        "year": "1998",
+        "metadata_status": "identity_verified",
+        "poster_url": "/api/posters/1805.png",
+        "score": 0.36354,
+        "reason": "库内类型：Crime、Drama、Mystery、Thriller；片长 108 分钟",
+        "ranking_strategy": "deepfm-rec-v1"
+      }
+    ],
+    "constraints": {
+      "exclude_ids": [],
+      "max_runtime": 111,
+      "exclude_genres": [],
+      "include_genres": [
+        "Mystery"
+      ]
+    },
+    "warnings": [],
+    "message": "已根据库内信息筛选并排序。",
+    "trace": [
+      {
+        "tool": "filter",
+        "input_count": 3883,
+        "eligible_count": 40,
+        "missing_runtime_excluded": 29,
+        "missing_director_excluded": 0
+      },
+      {
+        "dependency": "recall_itemcf",
+        "attempt": 1,
+        "ok": true,
+        "ms": 0.46
+      },
+      {
+        "dependency": "recall_text",
+        "attempt": 1,
+        "ok": true,
+        "ms": 1.92
+      },
+      {
+        "dependency": "cache",
+        "attempt": 1,
+        "ok": true,
+        "ms": 60.5
+      },
+      {
+        "tool": "recall",
+        "channel": "popular",
+        "count": 40
+      },
+      {
+        "tool": "recall",
+        "channel": "itemcf",
+        "count": 40
+      },
+      {
+        "tool": "recall",
+        "channel": "text",
+        "count": 40
+      },
+      {
+        "tool": "rank",
+        "strategy": "deepfm-rec-v1",
+        "count": 40
+      },
+      {
+        "tool": "rerank",
+        "strategy": "genre-diversity-fixed-0.08",
+        "count": 6
+      }
+    ],
+    "degradation": [],
+    "eligible_count": 40,
+    "evidence_checks": [
+      {
+        "movie_id": 913,
+        "passed": true,
+        "evidence_source": "local_catalogue",
+        "checked_fields": [
+          "movie_id",
+          "genres",
+          "runtime_minutes",
+          "directors",
+          "excluded_ids"
+        ]
+      },
+      {
+        "movie_id": 3044,
+        "passed": true,
+        "evidence_source": "local_catalogue",
+        "checked_fields": [
+          "movie_id",
+          "genres",
+          "runtime_minutes",
+          "directors",
+          "excluded_ids"
+        ]
+      },
+      {
+        "movie_id": 648,
+        "passed": true,
+        "evidence_source": "local_catalogue",
+        "checked_fields": [
+          "movie_id",
+          "genres",
+          "runtime_minutes",
+          "directors",
+          "excluded_ids"
+        ]
+      },
+      {
+        "movie_id": 1589,
+        "passed": true,
+        "evidence_source": "local_catalogue",
+        "checked_fields": [
+          "movie_id",
+          "genres",
+          "runtime_minutes",
+          "directors",
+          "excluded_ids"
+        ]
+      },
+      {
+        "movie_id": 1212,
+        "passed": true,
+        "evidence_source": "local_catalogue",
+        "checked_fields": [
+          "movie_id",
+          "genres",
+          "runtime_minutes",
+          "directors",
+          "excluded_ids"
+        ]
+      },
+      {
+        "movie_id": 1805,
+        "passed": true,
+        "evidence_source": "local_catalogue",
+        "checked_fields": [
+          "movie_id",
+          "genres",
+          "runtime_minutes",
+          "directors",
+          "excluded_ids"
+        ]
+      }
+    ],
+    "relaxation_suggestions": [],
+    "versions": {
+      "data": "rec-v1",
+      "model": "rec-v1",
+      "prompt": "movie-tools-v3",
+      "agent": "conversation-v3",
+      "content": "content-v1"
+    },
+    "summary": {
+      "version": "structured-v1",
+      "through_turn": 2,
+      "constraints": {
+        "turn_count": 2,
+        "exclude_ids": [],
+        "max_runtime": 111,
+        "exclude_genres": [],
+        "include_genres": [
+          "Mystery"
+        ]
+      },
+      "sources": {
+        "max_runtime": {
+          "turn": 2,
+          "start": 7,
+          "end": 12
+        },
+        "include_genres:Mystery": {
+          "end": 4,
+          "turn": 1,
+          "start": 0
+        }
+      },
+      "last_results": [
+        913,
+        3044,
+        648,
+        1589,
+        1212,
+        1805
+      ]
+    },
+    "history_characters": {
+      "original": 37,
+      "sent": 380
+    },
+    "memory_used": [],
+    "memory_proposals_saved": 0,
+    "elapsed_ms": 10076.45
+  },
+  "bad_candidate_check": [
+    {
+      "movie_id": 2,
+      "passed": false,
+      "evidence_source": "local_catalogue",
+      "checked_fields": [
+        "movie_id",
+        "genres",
+        "runtime_minutes",
+        "directors",
+        "excluded_ids"
+      ]
+    }
+  ],
+  "scope": "deterministic actual service integration, synthetic identity; no external API; evidence checks verify local fields, not external truth or all natural-language claims"
+}

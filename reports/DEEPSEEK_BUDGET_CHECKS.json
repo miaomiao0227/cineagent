@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "checks": [
+    "disabled_by_default",
+    "nonofficial_endpoint_blocked",
+    "request_cap_blocked",
+    "input_cap_blocked",
+    "timeout_classified_without_network",
+    "timeout_reservation_retained",
+    "credential_not_logged"
+  ],
+  "count": 7,
+  "network_calls": 0,
+  "credentials": "dummy only"
+}

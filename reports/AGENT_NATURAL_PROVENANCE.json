@@ -1,0 +1,9 @@
+{
+  "task_and_oracle_author": "Codex assistant",
+  "independent_human_review": false,
+  "input_snapshot_path": "eval/archive/agent_natural_v1.initial.json",
+  "metadata_correction": "Initial source tag human-authored was inaccurate; corrected main fixture provenance only. Questions, oracle values and preselected IDs unchanged.",
+  "semantic_payload_sha256": "2af35fd1e2368661437709960918f5b9c793c0777449e104644d8defd32f69cc",
+  "baseline_input_sha256": "86928534d0944d0556aedc9653232dba009b2f2e1b7ae9259c3602024791f0ac",
+  "corrected_fixture_sha256": "aacf32a173b000b5e587c3c3e2922f8d88579d3bd5f408856cfd7e5dac8d00c4"
+}

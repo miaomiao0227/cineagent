@@ -1,0 +1,87 @@
+name: cineagent
+services:
+  postgres:
+    image: postgres:15-alpine@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81
+    environment:
+      POSTGRES_USER: cineagent
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?required}
+      POSTGRES_DB: cineagent_db
+    ports: ["127.0.0.1:15432:5432"]
+    volumes: ["postgres_data:/var/lib/postgresql/data"]
+    mem_limit: 768m
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cineagent -d cineagent_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7-alpine@sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499
+    ports: ["127.0.0.1:16379:6379"]
+    volumes: ["redis_data:/data"]
+    command: ["redis-server", "--maxmemory", "256mb", "--maxmemory-policy", "noeviction"]
+    mem_limit: 384m
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.2.0@sha256:5dde04a980faf9105d6380c39469c645579684f1eab571f224989c22253c13e3
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+    ports: ["127.0.0.1:19200:9200"]
+    volumes: ["elasticsearch_data:/usr/share/elasticsearch/data"]
+    mem_limit: 1536m
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:9200/_cluster/health >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+  backend:
+    profiles: ["app"]
+    build:
+      context: ..
+      dockerfile: configs/backend.Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg2://cineagent:${POSTGRES_PASSWORD:?required}@postgres:5432/cineagent_db
+      SECRET_KEY: ${SECRET_KEY:?required}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:?required}
+      REDIS_URL: redis://redis:6379/0
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      FUNREC_RAW_DATA_PATH: /data
+      FUNREC_PROCESSED_DATA_PATH: /artifacts
+      MODEL_DEPLOY_DIR: /artifacts/web_project/deployed_models
+      DATA_DIR: /data
+      POSTER_DIR: /data/image
+    ports: ["127.0.0.1:18000:8000"]
+    volumes:
+      - ../upstream/web_project/backend:/app:ro
+      - ../upstream/src:/workspace/src:ro
+      - ../data/raw:/data:ro
+      - ../artifacts:/artifacts
+      - ../scripts:/checks:ro
+      - ../configs/local-secrets:/run/cineagent-secrets:ro
+      - ../reports:/trial-ledger
+    mem_limit: 3g
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      elasticsearch: {condition: service_healthy}
+  frontend:
+    profiles: ["app"]
+    build:
+      context: ../upstream/web_project/frontend
+      dockerfile: dockerfile
+    ports: ["127.0.0.1:13000:80"]
+    volumes:
+      - ../upstream/web_project/frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    mem_limit: 256m
+    depends_on: [backend]
+volumes:
+  postgres_data:
+  redis_data:
+  elasticsearch_data:
+
+

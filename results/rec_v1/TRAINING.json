@@ -1,0 +1,74 @@
+{
+  "protocol": "rec-v1",
+  "seed": 20261018,
+  "training_config": {
+    "epochs_max": 3,
+    "batch_size": 2048,
+    "embedding_dim": 16,
+    "retrieval_units": [
+      64,
+      32
+    ],
+    "ranking_units": [
+      128,
+      64,
+      32
+    ],
+    "learning_rate": 0.001,
+    "retrieval_negative_sample": 20
+  },
+  "checkpoint_selection": {
+    "retrieval": "validation full-catalogue Recall@20",
+    "ranking": "validation sampled-pair binary crossentropy; no test labels used"
+  },
+  "epochs": {
+    "retrieval": [
+      {
+        "epoch": 1,
+        "loss_diagnostic_only": 2.2518928050994873,
+        "validation_Recall@20": 0.04127110024815022,
+        "validation_users": 492
+      },
+      {
+        "epoch": 2,
+        "loss_diagnostic_only": 2.0850841999053955,
+        "validation_Recall@20": 0.05508054100307613,
+        "validation_users": 492
+      },
+      {
+        "epoch": 3,
+        "loss_diagnostic_only": 2.0297441482543945,
+        "validation_Recall@20": 0.03761768018561544,
+        "validation_users": 492
+      }
+    ],
+    "ranking": [
+      {
+        "epoch": 1,
+        "loss_diagnostic_only": 0.33110469579696655,
+        "validation_sampled_BCE": 0.34601306915283203,
+        "validation_pairs": 74355
+      },
+      {
+        "epoch": 2,
+        "loss_diagnostic_only": 0.28969982266426086,
+        "validation_sampled_BCE": 0.3526054620742798,
+        "validation_pairs": 74355
+      },
+      {
+        "epoch": 3,
+        "loss_diagnostic_only": 0.27495986223220825,
+        "validation_sampled_BCE": 0.36047008633613586,
+        "validation_pairs": 74355
+      }
+    ]
+  },
+  "retrieval_best_epoch": 2,
+  "ranking_best_epoch": 1,
+  "ok": true,
+  "reload_checks": true,
+  "embedding_id_association_verified": true,
+  "seconds": 76.428,
+  "test_used_for_selection": false,
+  "candidate_route": "YouTubeDNN full catalogue; YT100_DeepFM top100 unseen from same catalogue then DeepFM; no diversity reranker in this experiment"
+}

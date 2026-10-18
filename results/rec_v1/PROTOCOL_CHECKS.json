@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "hand_computed_metric_checks": 5,
+  "sampled_history_targets": 256,
+  "checked_history_events": 2370,
+  "temporal_partition_checks": true,
+  "training_label_source_checks": true,
+  "full_negative_membership_check": "performed in recdata prepare using independent numeric pair-key membership"
+}

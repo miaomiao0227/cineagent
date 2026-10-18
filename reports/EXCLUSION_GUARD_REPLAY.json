@@ -1,0 +1,499 @@
+{
+  "scope": "offline exact8 bad raw arguments replay plus explicitly scripted finish, real local engine; not actual API success",
+  "replays_passed": 8,
+  "replays_total": 8,
+  "checks": [
+    {
+      "case": "bool",
+      "passed": true
+    },
+    {
+      "case": "string",
+      "passed": true
+    },
+    {
+      "case": "unknown",
+      "passed": true
+    },
+    {
+      "case": "not_array",
+      "passed": true
+    },
+    {
+      "case": "oversize",
+      "passed": true
+    },
+    {
+      "case": "preserve_authorized_remove_unrequested",
+      "passed": true
+    },
+    {
+      "case": "omission_never_drops_server_exclusion",
+      "passed": true
+    },
+    {
+      "case": "request_scoped_schema_does_not_mutate_global",
+      "passed": true
+    }
+  ],
+  "per_replay": [
+    {
+      "scenario": "S08",
+      "turn": 2,
+      "passed": true,
+      "raw": {
+        "include_genres": [
+          "Sci-Fi"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "similar_to": 260,
+        "exclude_director_of": 260,
+        "exclude_ids": [
+          260,
+          2571,
+          32,
+          1196,
+          1270,
+          924
+        ]
+      },
+      "effective": {
+        "include_genres": [
+          "Sci-Fi"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "similar_to": 260,
+        "exclude_director_of": 260,
+        "exclude_ids": [
+          260
+        ]
+      },
+      "repairs": [
+        {
+          "field": "exclude_ids",
+          "reason": "no_user_feedback_or_explicit_exclusion_source",
+          "rejected_ids": [
+            32,
+            924,
+            1196,
+            1270,
+            2571
+          ],
+          "accepted_ids": [
+            260
+          ]
+        }
+      ],
+      "result_ids": [
+        1196,
+        2571,
+        1097,
+        1210,
+        3175,
+        924
+      ]
+    },
+    {
+      "scenario": "S09",
+      "turn": 2,
+      "passed": true,
+      "raw": {
+        "include_genres": [
+          "Mystery"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "similar_to": 1617,
+        "exclude_director_of": 1617,
+        "exclude_ids": [
+          1617,
+          924,
+          903,
+          904,
+          800,
+          1252
+        ]
+      },
+      "effective": {
+        "include_genres": [
+          "Mystery"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "similar_to": 1617,
+        "exclude_director_of": 1617,
+        "exclude_ids": [
+          1617
+        ]
+      },
+      "repairs": [
+        {
+          "field": "exclude_ids",
+          "reason": "no_user_feedback_or_explicit_exclusion_source",
+          "rejected_ids": [
+            800,
+            903,
+            904,
+            924,
+            1252
+          ],
+          "accepted_ids": [
+            1617
+          ]
+        }
+      ],
+      "result_ids": [
+        1252,
+        924,
+        903,
+        904,
+        913,
+        1732
+      ]
+    },
+    {
+      "scenario": "S10",
+      "turn": 2,
+      "passed": true,
+      "raw": {
+        "include_genres": [
+          "Action"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "similar_to": 858,
+        "exclude_director_of": 858,
+        "exclude_ids": [
+          858,
+          1198,
+          2028,
+          2571,
+          260,
+          457
+        ]
+      },
+      "effective": {
+        "include_genres": [
+          "Action"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "similar_to": 858,
+        "exclude_director_of": 858,
+        "exclude_ids": [
+          858
+        ]
+      },
+      "repairs": [
+        {
+          "field": "exclude_ids",
+          "reason": "no_user_feedback_or_explicit_exclusion_source",
+          "rejected_ids": [
+            260,
+            457,
+            1198,
+            2028,
+            2571
+          ],
+          "accepted_ids": [
+            858
+          ]
+        }
+      ],
+      "result_ids": [
+        2028,
+        260,
+        2571,
+        1196,
+        1197,
+        110
+      ]
+    },
+    {
+      "scenario": "S11",
+      "turn": 2,
+      "passed": true,
+      "raw": {
+        "include_genres": [
+          "Drama"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "similar_to": 318,
+        "exclude_director_of": 318,
+        "exclude_ids": [
+          318,
+          858,
+          527,
+          2858,
+          608,
+          593
+        ]
+      },
+      "effective": {
+        "include_genres": [
+          "Drama"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "similar_to": 318,
+        "exclude_director_of": 318,
+        "exclude_ids": [
+          318
+        ]
+      },
+      "repairs": [
+        {
+          "field": "exclude_ids",
+          "reason": "no_user_feedback_or_explicit_exclusion_source",
+          "rejected_ids": [
+            527,
+            593,
+            608,
+            858,
+            2858
+          ],
+          "accepted_ids": [
+            318
+          ]
+        }
+      ],
+      "result_ids": [
+        858,
+        527,
+        2858,
+        593,
+        608,
+        2028
+      ]
+    },
+    {
+      "scenario": "S27",
+      "turn": 2,
+      "passed": true,
+      "raw": {
+        "include_genres": [
+          "Mystery"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90,
+        "exclude_ids": [
+          1617,
+          924,
+          903,
+          904,
+          800,
+          1252
+        ]
+      },
+      "effective": {
+        "include_genres": [
+          "Mystery"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90,
+        "exclude_ids": []
+      },
+      "repairs": [
+        {
+          "field": "exclude_ids",
+          "reason": "no_user_feedback_or_explicit_exclusion_source",
+          "rejected_ids": [
+            800,
+            903,
+            904,
+            924,
+            1252,
+            1617
+          ],
+          "accepted_ids": []
+        }
+      ],
+      "result_ids": [
+        942,
+        1484,
+        2810
+      ]
+    },
+    {
+      "scenario": "S28",
+      "turn": 2,
+      "passed": true,
+      "raw": {
+        "include_genres": [
+          "Action"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90,
+        "exclude_ids": [
+          858,
+          1198,
+          2028,
+          2571,
+          260,
+          457
+        ]
+      },
+      "effective": {
+        "include_genres": [
+          "Action"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90,
+        "exclude_ids": []
+      },
+      "repairs": [
+        {
+          "field": "exclude_ids",
+          "reason": "no_user_feedback_or_explicit_exclusion_source",
+          "rejected_ids": [
+            260,
+            457,
+            858,
+            1198,
+            2028,
+            2571
+          ],
+          "accepted_ids": []
+        }
+      ],
+      "result_ids": [
+        2692,
+        3702,
+        2912,
+        2662,
+        3267,
+        2527
+      ]
+    },
+    {
+      "scenario": "S29",
+      "turn": 2,
+      "passed": true,
+      "raw": {
+        "include_genres": [
+          "Drama"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90,
+        "exclude_ids": [
+          318,
+          858,
+          527,
+          2858,
+          608,
+          593
+        ]
+      },
+      "effective": {
+        "include_genres": [
+          "Drama"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90,
+        "exclude_ids": []
+      },
+      "repairs": [
+        {
+          "field": "exclude_ids",
+          "reason": "no_user_feedback_or_explicit_exclusion_source",
+          "rejected_ids": [
+            318,
+            527,
+            593,
+            608,
+            858,
+            2858
+          ],
+          "accepted_ids": []
+        }
+      ],
+      "result_ids": [
+        1259,
+        1288,
+        636,
+        1318,
+        2912,
+        1914
+      ]
+    },
+    {
+      "scenario": "S30",
+      "turn": 2,
+      "passed": true,
+      "raw": {
+        "include_genres": [
+          "Romance"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90,
+        "exclude_ids": [
+          2396,
+          912,
+          1197,
+          356,
+          1265,
+          2692
+        ]
+      },
+      "effective": {
+        "include_genres": [
+          "Romance"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90,
+        "exclude_ids": []
+      },
+      "repairs": [
+        {
+          "field": "exclude_ids",
+          "reason": "no_user_feedback_or_explicit_exclusion_source",
+          "rejected_ids": [
+            356,
+            912,
+            1197,
+            1265,
+            2396,
+            2692
+          ],
+          "accepted_ids": []
+        }
+      ],
+      "result_ids": [
+        2692,
+        2080,
+        2502,
+        1137,
+        2081,
+        3307
+      ]
+    }
+  ],
+  "external_calls": 0
+}

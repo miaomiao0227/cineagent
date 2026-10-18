@@ -1,0 +1,7 @@
+{
+  "version": "complete-v4",
+  "recommendation": "same492 eligible validation users; fulltraincatalog-minus-trainseen; train-only title/genre TFIDF fit; profile average last20 training positives only; CF, text-profile, fixedRRF60 CF+text; no test read, no tuning based on results; paired2000bootstrap",
+  "interaction": "frozen20scenarios40turns all retained; five synthetic families; sequential actual browser interactions; human subjective review pending",
+  "latency": "performance.now immediately before message fetch until Vue nextTick after response cards committed; excludes follow-up refresh; failures separately counted; not human thinktime; local browser network",
+  "budget": "remaining<=84 provider attempts of shared240; per-batch conservative<=.10USD and shared<=.50; existing tokens caps unchanged"
+}

@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "version": "complete-v4",
+  "start_attempt": 156,
+  "max_new_attempts": 84,
+  "max_new_cost_usd": 0.1,
+  "approved_by": "direct user reply for20scenarios40turns",
+  "expires_at_unix": 1792337907.5199971,
+  "shared_request_cap": 240,
+  "shared_budget_usd": 0.5,
+  "model": "deepseek-flash",
+  "endpoint": "https://api.deepseek.com",
+  "data": "synthetic movie requests, relevant preferences and local tool results only"
+}

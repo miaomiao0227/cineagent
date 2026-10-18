@@ -1,0 +1,99 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "case": "package_all_file_hashes",
+      "passed": true
+    },
+    {
+      "case": "required_deliverables",
+      "passed": true
+    },
+    {
+      "case": "historical_v3_load_matches_snapshot",
+      "passed": true
+    },
+    {
+      "case": "approved_trial_limits",
+      "passed": true
+    },
+    {
+      "case": "approved_new_campaign_limits",
+      "passed": true
+    },
+    {
+      "case": "natural_fixture_matches_frozen_input",
+      "passed": true
+    },
+    {
+      "case": "historical_v2_source_matches_snapshot",
+      "passed": true
+    },
+    {
+      "case": "v3_frozen_tasks_match_api_run",
+      "passed": true
+    },
+    {
+      "case": "historical_v3_api_matches_snapshot",
+      "passed": true
+    },
+    {
+      "case": "v4_frozen_tasks_match_browser_run",
+      "passed": true
+    },
+    {
+      "case": "v4_browser_run_matches_current_backend",
+      "passed": true
+    },
+    {
+      "case": "v4_browser_run_matches_current_frontend",
+      "passed": true
+    },
+    {
+      "case": "v4_sub_budget_and_attribution",
+      "passed": true
+    },
+    {
+      "case": "temporary_paid_evaluation_window_closed",
+      "passed": true
+    },
+    {
+      "case": "tracked_patch_applies_to_pinned_clean_index",
+      "passed": true
+    },
+    {
+      "case": "real_git_index_unchanged",
+      "passed": true
+    },
+    {
+      "case": "new_files_match_actual_source",
+      "passed": true
+    },
+    {
+      "case": "exported_python_syntax",
+      "passed": true
+    },
+    {
+      "case": "service_dependencies_healthy",
+      "passed": true
+    },
+    {
+      "case": "deployed_models_ready",
+      "passed": true
+    },
+    {
+      "case": "chat_page_available",
+      "passed": true
+    },
+    {
+      "case": "catalogue_preserved_after_pinned_restart",
+      "passed": true
+    },
+    {
+      "case": "offline_chat_after_restart",
+      "passed": true
+    }
+  ],
+  "external_api_requests_made_by_this_check": 0,
+  "note": "Git patch checked against a temporary clean index; original index unchanged. No training or raw-data download."
+}

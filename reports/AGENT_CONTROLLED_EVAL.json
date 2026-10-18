@@ -1,0 +1,2156 @@
+{
+  "protocol": "conversation-v1",
+  "initial_catalogue": 3883,
+  "scope": "offline controlled comparison; same profile/ranker/top6; post-filter candidate changes are the intended intervention",
+  "summary": {
+    "ordinary": {
+      "passed": 0,
+      "total": 42
+    },
+    "condition_driven": {
+      "passed": 42,
+      "total": 42
+    }
+  },
+  "per_task": [
+    {
+      "id": "single-00-0",
+      "task": {
+        "id": "single-00-0",
+        "source": "authored template-generated regression",
+        "family": 0,
+        "expected_genre": "Mystery",
+        "message": "想看悬疑电影",
+        "kind": "recommend"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            1617,
+            924,
+            903,
+            904,
+            800,
+            1252
+          ],
+          "eligible_count": 106,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-00-1",
+      "task": {
+        "id": "single-00-1",
+        "source": "authored template-generated regression",
+        "family": 0,
+        "expected_genre": "Comedy",
+        "message": "想看喜剧电影",
+        "kind": "recommend"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2858,
+            2396,
+            1136,
+            1294,
+            1197,
+            1234
+          ],
+          "eligible_count": 1200,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-00-2",
+      "task": {
+        "id": "single-00-2",
+        "source": "authored template-generated regression",
+        "family": 0,
+        "expected_genre": "Action",
+        "message": "想看动作电影",
+        "kind": "recommend"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            858,
+            1198,
+            2028,
+            2571,
+            260,
+            457
+          ],
+          "eligible_count": 503,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-00-3",
+      "task": {
+        "id": "single-00-3",
+        "source": "authored template-generated regression",
+        "family": 0,
+        "expected_genre": "Sci-Fi",
+        "message": "想看科幻电影",
+        "kind": "recommend"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            260,
+            2571,
+            32,
+            1196,
+            1270,
+            1214
+          ],
+          "eligible_count": 276,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-00-4",
+      "task": {
+        "id": "single-00-4",
+        "source": "authored template-generated regression",
+        "family": 0,
+        "expected_genre": "Romance",
+        "message": "想看爱情电影",
+        "kind": "recommend"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2396,
+            912,
+            1197,
+            356,
+            1265,
+            2692
+          ],
+          "eligible_count": 471,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-00-5",
+      "task": {
+        "id": "single-00-5",
+        "source": "authored template-generated regression",
+        "family": 0,
+        "expected_genre": "Drama",
+        "message": "想看剧情电影",
+        "kind": "recommend"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            318,
+            858,
+            527,
+            2858,
+            608,
+            593
+          ],
+          "eligible_count": 1603,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-01-0",
+      "task": {
+        "id": "single-01-0",
+        "source": "authored template-generated regression",
+        "family": 1,
+        "expected_genre": "Mystery",
+        "message": "想看悬疑电影，不要恐怖片",
+        "kind": "recommend",
+        "exclude": "Horror"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            1617,
+            924,
+            903,
+            904,
+            800,
+            1252
+          ],
+          "eligible_count": 100,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-01-1",
+      "task": {
+        "id": "single-01-1",
+        "source": "authored template-generated regression",
+        "family": 1,
+        "expected_genre": "Comedy",
+        "message": "想看喜剧电影，不要恐怖片",
+        "kind": "recommend",
+        "exclude": "Horror"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2858,
+            2396,
+            1136,
+            1294,
+            1197,
+            1234
+          ],
+          "eligible_count": 1159,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-01-2",
+      "task": {
+        "id": "single-01-2",
+        "source": "authored template-generated regression",
+        "family": 1,
+        "expected_genre": "Action",
+        "message": "想看动作电影，不要恐怖片",
+        "kind": "recommend",
+        "exclude": "Horror"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            858,
+            1198,
+            2028,
+            2571,
+            260,
+            457
+          ],
+          "eligible_count": 478,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-01-3",
+      "task": {
+        "id": "single-01-3",
+        "source": "authored template-generated regression",
+        "family": 1,
+        "expected_genre": "Sci-Fi",
+        "message": "想看科幻电影，不要恐怖片",
+        "kind": "recommend",
+        "exclude": "Horror"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            260,
+            2571,
+            32,
+            1196,
+            1270,
+            924
+          ],
+          "eligible_count": 218,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-01-4",
+      "task": {
+        "id": "single-01-4",
+        "source": "authored template-generated regression",
+        "family": 1,
+        "expected_genre": "Romance",
+        "message": "想看爱情电影，不要恐怖片",
+        "kind": "recommend",
+        "exclude": "Horror"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2396,
+            912,
+            1197,
+            356,
+            1265,
+            2692
+          ],
+          "eligible_count": 468,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-01-5",
+      "task": {
+        "id": "single-01-5",
+        "source": "authored template-generated regression",
+        "family": 1,
+        "expected_genre": "Drama",
+        "message": "想看剧情电影，不要恐怖片",
+        "kind": "recommend",
+        "exclude": "Horror"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            318,
+            858,
+            527,
+            2858,
+            608,
+            593
+          ],
+          "eligible_count": 1591,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-02-0",
+      "task": {
+        "id": "single-02-0",
+        "source": "authored template-generated regression",
+        "family": 2,
+        "expected_genre": "Mystery",
+        "message": "想看悬疑电影，最好两小时以内",
+        "kind": "recommend",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            904,
+            913,
+            1732,
+            1269,
+            2076,
+            3044
+          ],
+          "eligible_count": 58,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-02-1",
+      "task": {
+        "id": "single-02-1",
+        "source": "authored template-generated regression",
+        "family": 2,
+        "expected_genre": "Comedy",
+        "message": "想看喜剧电影，最好两小时以内",
+        "kind": "recommend",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2997,
+            1197,
+            1259,
+            1265,
+            34,
+            1304
+          ],
+          "eligible_count": 759,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-02-2",
+      "task": {
+        "id": "single-02-2",
+        "source": "authored template-generated regression",
+        "family": 2,
+        "expected_genre": "Action",
+        "message": "想看动作电影，最好两小时以内",
+        "kind": "recommend",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            1214,
+            1197,
+            1304,
+            2692,
+            969,
+            1240
+          ],
+          "eligible_count": 262,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-02-3",
+      "task": {
+        "id": "single-02-3",
+        "source": "authored template-generated regression",
+        "family": 2,
+        "expected_genre": "Sci-Fi",
+        "message": "想看科幻电影，最好两小时以内",
+        "kind": "recommend",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            1214,
+            1270,
+            1097,
+            541,
+            1240,
+            3175
+          ],
+          "eligible_count": 161,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-02-4",
+      "task": {
+        "id": "single-02-4",
+        "source": "authored template-generated regression",
+        "family": 2,
+        "expected_genre": "Romance",
+        "message": "想看爱情电影，最好两小时以内",
+        "kind": "recommend",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            912,
+            1265,
+            1197,
+            2692,
+            969,
+            1230
+          ],
+          "eligible_count": 264,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-02-5",
+      "task": {
+        "id": "single-02-5",
+        "source": "authored template-generated regression",
+        "family": 2,
+        "expected_genre": "Drama",
+        "message": "想看剧情电影，最好两小时以内",
+        "kind": "recommend",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            608,
+            912,
+            593,
+            919,
+            1259,
+            1097
+          ],
+          "eligible_count": 638,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-03-0",
+      "task": {
+        "id": "single-03-0",
+        "source": "authored template-generated regression",
+        "family": 3,
+        "expected_genre": "Mystery",
+        "message": "想看悬疑电影，不要恐怖片，九十分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 90
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            942,
+            1484,
+            2810
+          ],
+          "eligible_count": 3,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-03-1",
+      "task": {
+        "id": "single-03-1",
+        "source": "authored template-generated regression",
+        "family": 3,
+        "expected_genre": "Comedy",
+        "message": "想看喜剧电影，不要恐怖片，九十分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 90
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            1259,
+            2791,
+            1288,
+            1077,
+            2863,
+            2080
+          ],
+          "eligible_count": 151,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-03-2",
+      "task": {
+        "id": "single-03-2",
+        "source": "authored template-generated regression",
+        "family": 3,
+        "expected_genre": "Action",
+        "message": "想看动作电影，不要恐怖片，九十分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 90
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2692,
+            3702,
+            2912,
+            2662,
+            3267,
+            2527
+          ],
+          "eligible_count": 31,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-03-3",
+      "task": {
+        "id": "single-03-3",
+        "source": "authored template-generated regression",
+        "family": 3,
+        "expected_genre": "Sci-Fi",
+        "message": "想看科幻电影，不要恐怖片，九十分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 90
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            1077,
+            3702,
+            2662,
+            2527,
+            671,
+            2232
+          ],
+          "eligible_count": 16,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-03-4",
+      "task": {
+        "id": "single-03-4",
+        "source": "authored template-generated regression",
+        "family": 3,
+        "expected_genre": "Romance",
+        "message": "想看爱情电影，不要恐怖片，九十分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 90
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2692,
+            2080,
+            2502,
+            1137,
+            2081,
+            3307
+          ],
+          "eligible_count": 30,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-03-5",
+      "task": {
+        "id": "single-03-5",
+        "source": "authored template-generated regression",
+        "family": 3,
+        "expected_genre": "Drama",
+        "message": "想看剧情电影，不要恐怖片，九十分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 90
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            1259,
+            1288,
+            636,
+            1318,
+            2912,
+            1914
+          ],
+          "eligible_count": 69,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-06-0",
+      "task": {
+        "id": "single-06-0",
+        "source": "authored template-generated regression",
+        "family": 6,
+        "expected_genre": "Mystery",
+        "message": "想看节奏快的悬疑电影",
+        "kind": "unsupported"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            1617,
+            924,
+            903,
+            904,
+            800,
+            1252
+          ],
+          "eligible_count": 106,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-06-1",
+      "task": {
+        "id": "single-06-1",
+        "source": "authored template-generated regression",
+        "family": 6,
+        "expected_genre": "Comedy",
+        "message": "想看节奏快的喜剧电影",
+        "kind": "unsupported"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2858,
+            2396,
+            1136,
+            1294,
+            1197,
+            1234
+          ],
+          "eligible_count": 1200,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-06-2",
+      "task": {
+        "id": "single-06-2",
+        "source": "authored template-generated regression",
+        "family": 6,
+        "expected_genre": "Action",
+        "message": "想看节奏快的动作电影",
+        "kind": "unsupported"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            858,
+            1198,
+            2028,
+            2571,
+            260,
+            457
+          ],
+          "eligible_count": 503,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-06-3",
+      "task": {
+        "id": "single-06-3",
+        "source": "authored template-generated regression",
+        "family": 6,
+        "expected_genre": "Sci-Fi",
+        "message": "想看节奏快的科幻电影",
+        "kind": "unsupported"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            260,
+            2571,
+            32,
+            1196,
+            1270,
+            1214
+          ],
+          "eligible_count": 276,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-06-4",
+      "task": {
+        "id": "single-06-4",
+        "source": "authored template-generated regression",
+        "family": 6,
+        "expected_genre": "Romance",
+        "message": "想看节奏快的爱情电影",
+        "kind": "unsupported"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2396,
+            912,
+            1197,
+            356,
+            1265,
+            2692
+          ],
+          "eligible_count": 471,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-06-5",
+      "task": {
+        "id": "single-06-5",
+        "source": "authored template-generated regression",
+        "family": 6,
+        "expected_genre": "Drama",
+        "message": "想看节奏快的剧情电影",
+        "kind": "unsupported"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            318,
+            858,
+            527,
+            2858,
+            608,
+            593
+          ],
+          "eligible_count": 1603,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-07-0",
+      "task": {
+        "id": "single-07-0",
+        "source": "authored template-generated regression",
+        "family": 7,
+        "expected_genre": "Mystery",
+        "message": "以后记住我喜欢悬疑电影",
+        "kind": "memory"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            1617,
+            924,
+            903,
+            904,
+            800,
+            1252
+          ],
+          "eligible_count": 106,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-07-1",
+      "task": {
+        "id": "single-07-1",
+        "source": "authored template-generated regression",
+        "family": 7,
+        "expected_genre": "Comedy",
+        "message": "以后记住我喜欢喜剧电影",
+        "kind": "memory"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2858,
+            2396,
+            1136,
+            1294,
+            1197,
+            1234
+          ],
+          "eligible_count": 1200,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-07-2",
+      "task": {
+        "id": "single-07-2",
+        "source": "authored template-generated regression",
+        "family": 7,
+        "expected_genre": "Action",
+        "message": "以后记住我喜欢动作电影",
+        "kind": "memory"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            858,
+            1198,
+            2028,
+            2571,
+            260,
+            457
+          ],
+          "eligible_count": 503,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-07-3",
+      "task": {
+        "id": "single-07-3",
+        "source": "authored template-generated regression",
+        "family": 7,
+        "expected_genre": "Sci-Fi",
+        "message": "以后记住我喜欢科幻电影",
+        "kind": "memory"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            260,
+            2571,
+            32,
+            1196,
+            1270,
+            1214
+          ],
+          "eligible_count": 276,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-07-4",
+      "task": {
+        "id": "single-07-4",
+        "source": "authored template-generated regression",
+        "family": 7,
+        "expected_genre": "Romance",
+        "message": "以后记住我喜欢爱情电影",
+        "kind": "memory"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2396,
+            912,
+            1197,
+            356,
+            1265,
+            2692
+          ],
+          "eligible_count": 471,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-07-5",
+      "task": {
+        "id": "single-07-5",
+        "source": "authored template-generated regression",
+        "family": 7,
+        "expected_genre": "Drama",
+        "message": "以后记住我喜欢剧情电影",
+        "kind": "memory"
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            318,
+            858,
+            527,
+            2858,
+            608,
+            593
+          ],
+          "eligible_count": 1603,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-09-0",
+      "task": {
+        "id": "single-09-0",
+        "source": "authored template-generated regression",
+        "family": 9,
+        "expected_genre": "Mystery",
+        "message": "想看悬疑电影，不要恐怖片，120分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            904,
+            913,
+            1732,
+            1269,
+            2076,
+            3044
+          ],
+          "eligible_count": 55,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-09-1",
+      "task": {
+        "id": "single-09-1",
+        "source": "authored template-generated regression",
+        "family": 9,
+        "expected_genre": "Comedy",
+        "message": "想看喜剧电影，不要恐怖片，120分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            2997,
+            1197,
+            1259,
+            1265,
+            34,
+            1304
+          ],
+          "eligible_count": 728,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-09-2",
+      "task": {
+        "id": "single-09-2",
+        "source": "authored template-generated regression",
+        "family": 9,
+        "expected_genre": "Action",
+        "message": "想看动作电影，不要恐怖片，120分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            1197,
+            1304,
+            1240,
+            2692,
+            969,
+            2000
+          ],
+          "eligible_count": 242,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-09-3",
+      "task": {
+        "id": "single-09-3",
+        "source": "authored template-generated regression",
+        "family": 9,
+        "expected_genre": "Sci-Fi",
+        "message": "想看科幻电影，不要恐怖片，120分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            1270,
+            1097,
+            1240,
+            541,
+            3175,
+            1653
+          ],
+          "eligible_count": 118,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-09-4",
+      "task": {
+        "id": "single-09-4",
+        "source": "authored template-generated regression",
+        "family": 9,
+        "expected_genre": "Romance",
+        "message": "想看爱情电影，不要恐怖片，120分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            912,
+            1265,
+            1197,
+            2692,
+            969,
+            1230
+          ],
+          "eligible_count": 262,
+          "degradation": []
+        }
+      }
+    },
+    {
+      "id": "single-09-5",
+      "task": {
+        "id": "single-09-5",
+        "source": "authored template-generated regression",
+        "family": 9,
+        "expected_genre": "Drama",
+        "message": "想看剧情电影，不要恐怖片，120分钟以内",
+        "kind": "recommend",
+        "exclude": "Horror",
+        "max_runtime": 120
+      },
+      "outputs": {
+        "ordinary": {
+          "constraint_satisfied": false,
+          "ids": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ],
+          "eligible_count": 3883,
+          "degradation": []
+        },
+        "condition_driven": {
+          "constraint_satisfied": true,
+          "ids": [
+            608,
+            912,
+            593,
+            919,
+            1259,
+            1097
+          ],
+          "eligible_count": 632,
+          "degradation": []
+        }
+      }
+    }
+  ],
+  "faults": [
+    {
+      "case": "normal",
+      "passed": true,
+      "mode": "offline_rules",
+      "degradation": [],
+      "trace": [
+        {
+          "tool": "filter",
+          "input_count": 3883,
+          "eligible_count": 55,
+          "missing_runtime_excluded": 27,
+          "missing_director_excluded": 0
+        },
+        {
+          "dependency": "recall_itemcf",
+          "attempt": 1,
+          "ok": true,
+          "ms": 0.13
+        },
+        {
+          "dependency": "recall_text",
+          "attempt": 1,
+          "ok": true,
+          "ms": 1.72
+        },
+        {
+          "dependency": "cache",
+          "attempt": 1,
+          "ok": true,
+          "ms": 3.68
+        },
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 55
+        },
+        {
+          "tool": "rank",
+          "strategy": "deepfm-rec-v1",
+          "count": 55
+        },
+        {
+          "tool": "rerank",
+          "strategy": "genre-diversity-fixed-0.08",
+          "count": 6
+        }
+      ],
+      "ms": 23.31
+    },
+    {
+      "case": "itemcf_down",
+      "passed": true,
+      "mode": "offline_rules",
+      "degradation": [
+        "recall_itemcf:ConnectionError"
+      ],
+      "trace": [
+        {
+          "tool": "filter",
+          "input_count": 3883,
+          "eligible_count": 55,
+          "missing_runtime_excluded": 27,
+          "missing_director_excluded": 0
+        },
+        {
+          "dependency": "recall_itemcf",
+          "attempt": 1,
+          "ok": false,
+          "error_type": "ConnectionError",
+          "ms": 0.31
+        },
+        {
+          "dependency": "recall_itemcf",
+          "attempt": 2,
+          "ok": false,
+          "error_type": "ConnectionError",
+          "ms": 0.17
+        },
+        {
+          "dependency": "recall_text",
+          "attempt": 1,
+          "ok": true,
+          "ms": 1.78
+        },
+        {
+          "dependency": "cache",
+          "attempt": 1,
+          "ok": true,
+          "ms": 4.1
+        },
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 55
+        },
+        {
+          "tool": "rank",
+          "strategy": "deepfm-rec-v1",
+          "count": 55
+        },
+        {
+          "tool": "rerank",
+          "strategy": "genre-diversity-fixed-0.08",
+          "count": 6
+        }
+      ],
+      "ms": 67.53
+    },
+    {
+      "case": "text_down",
+      "passed": true,
+      "mode": "offline_rules",
+      "degradation": [
+        "recall_text:ConnectionError"
+      ],
+      "trace": [
+        {
+          "tool": "filter",
+          "input_count": 3883,
+          "eligible_count": 55,
+          "missing_runtime_excluded": 27,
+          "missing_director_excluded": 0
+        },
+        {
+          "dependency": "recall_itemcf",
+          "attempt": 1,
+          "ok": true,
+          "ms": 0.16
+        },
+        {
+          "dependency": "recall_text",
+          "attempt": 1,
+          "ok": false,
+          "error_type": "ConnectionError",
+          "ms": 0.21
+        },
+        {
+          "dependency": "recall_text",
+          "attempt": 2,
+          "ok": false,
+          "error_type": "ConnectionError",
+          "ms": 0.23
+        },
+        {
+          "dependency": "cache",
+          "attempt": 1,
+          "ok": true,
+          "ms": 4.02
+        },
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 55
+        },
+        {
+          "tool": "rank",
+          "strategy": "deepfm-rec-v1",
+          "count": 55
+        },
+        {
+          "tool": "rerank",
+          "strategy": "genre-diversity-fixed-0.08",
+          "count": 6
+        }
+      ],
+      "ms": 61.56
+    },
+    {
+      "case": "cache_down",
+      "passed": true,
+      "mode": "offline_rules",
+      "degradation": [
+        "cache:ConnectionError:local_train_profile"
+      ],
+      "trace": [
+        {
+          "tool": "filter",
+          "input_count": 3883,
+          "eligible_count": 55,
+          "missing_runtime_excluded": 27,
+          "missing_director_excluded": 0
+        },
+        {
+          "dependency": "recall_itemcf",
+          "attempt": 1,
+          "ok": true,
+          "ms": 0.26
+        },
+        {
+          "dependency": "recall_text",
+          "attempt": 1,
+          "ok": true,
+          "ms": 1.55
+        },
+        {
+          "dependency": "cache",
+          "attempt": 1,
+          "ok": false,
+          "error_type": "ConnectionError",
+          "ms": 0.11
+        },
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 55
+        },
+        {
+          "tool": "rank",
+          "strategy": "deepfm-rec-v1",
+          "count": 55
+        },
+        {
+          "tool": "rerank",
+          "strategy": "genre-diversity-fixed-0.08",
+          "count": 6
+        }
+      ],
+      "ms": 17.1
+    },
+    {
+      "case": "ranking_down",
+      "passed": true,
+      "mode": "offline_rules",
+      "degradation": [
+        "ranking:RuntimeError:popular"
+      ],
+      "trace": [
+        {
+          "tool": "filter",
+          "input_count": 3883,
+          "eligible_count": 55,
+          "missing_runtime_excluded": 27,
+          "missing_director_excluded": 0
+        },
+        {
+          "dependency": "recall_itemcf",
+          "attempt": 1,
+          "ok": true,
+          "ms": 0.11
+        },
+        {
+          "dependency": "recall_text",
+          "attempt": 1,
+          "ok": true,
+          "ms": 1.5
+        },
+        {
+          "dependency": "cache",
+          "attempt": 1,
+          "ok": true,
+          "ms": 4.3
+        },
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 55
+        },
+        {
+          "tool": "rank",
+          "strategy": "popular",
+          "count": 55
+        },
+        {
+          "tool": "rerank",
+          "strategy": "genre-diversity-fixed-0.08",
+          "count": 6
+        }
+      ],
+      "ms": 9.45
+    },
+    {
+      "case": "llm_unavailable",
+      "passed": true,
+      "mode": "offline_rules",
+      "degradation": [
+        "llm:ProviderUnavailable:offline_recommendation"
+      ],
+      "trace": [
+        {
+          "dependency": "llm",
+          "attempt": 1,
+          "ok": false,
+          "error_type": "ProviderUnavailable",
+          "ms": 0.1
+        },
+        {
+          "tool": "filter",
+          "input_count": 3883,
+          "eligible_count": 55,
+          "missing_runtime_excluded": 27,
+          "missing_director_excluded": 0
+        },
+        {
+          "dependency": "recall_itemcf",
+          "attempt": 1,
+          "ok": true,
+          "ms": 0.08
+        },
+        {
+          "dependency": "recall_text",
+          "attempt": 1,
+          "ok": true,
+          "ms": 1.61
+        },
+        {
+          "dependency": "cache",
+          "attempt": 1,
+          "ok": true,
+          "ms": 3.37
+        },
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 55
+        },
+        {
+          "tool": "rank",
+          "strategy": "deepfm-rec-v1",
+          "count": 55
+        },
+        {
+          "tool": "rerank",
+          "strategy": "genre-diversity-fixed-0.08",
+          "count": 6
+        }
+      ],
+      "ms": 21.25
+    },
+    {
+      "case": "rate_limit",
+      "passed": true,
+      "mode": "offline_rules",
+      "degradation": [
+        "llm:RateLimited:offline_recommendation"
+      ],
+      "trace": [
+        {
+          "dependency": "llm",
+          "attempt": 1,
+          "ok": false,
+          "error_type": "RateLimited",
+          "ms": 0.13
+        },
+        {
+          "dependency": "llm",
+          "attempt": 2,
+          "ok": false,
+          "error_type": "RateLimited",
+          "ms": 0.15
+        },
+        {
+          "tool": "filter",
+          "input_count": 3883,
+          "eligible_count": 55,
+          "missing_runtime_excluded": 27,
+          "missing_director_excluded": 0
+        },
+        {
+          "dependency": "recall_itemcf",
+          "attempt": 1,
+          "ok": true,
+          "ms": 0.19
+        },
+        {
+          "dependency": "recall_text",
+          "attempt": 1,
+          "ok": true,
+          "ms": 2.23
+        },
+        {
+          "dependency": "cache",
+          "attempt": 1,
+          "ok": true,
+          "ms": 4.24
+        },
+        {
+          "tool": "recall",
+          "channel": "popular",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "itemcf",
+          "count": 55
+        },
+        {
+          "tool": "recall",
+          "channel": "text",
+          "count": 55
+        },
+        {
+          "tool": "rank",
+          "strategy": "deepfm-rec-v1",
+          "count": 55
+        },
+        {
+          "tool": "rerank",
+          "strategy": "genre-diversity-fixed-0.08",
+          "count": 6
+        }
+      ],
+      "ms": 64.7
+    },
+    {
+      "case": "breaker_and_recovery",
+      "passed": true,
+      "attempts": 6,
+      "opened": true,
+      "recovered": true
+    },
+    {
+      "case": "bounded_timeout",
+      "passed": true,
+      "elapsed_ms": 10.27
+    }
+  ],
+  "real_llm_requests": 0
+}

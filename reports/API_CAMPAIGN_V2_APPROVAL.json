@@ -1,0 +1,13 @@
+{
+  "authorized_by": "direct user reply in current conversation",
+  "model": "deepseek-flash",
+  "endpoint": "https://api.deepseek.com",
+  "max_new_attempts": 240,
+  "max_input_tokens": 600000,
+  "max_output_tokens": 120000,
+  "budget_usd": 0.5,
+  "price_input_per_million": 0.3,
+  "price_output_per_million": 1.2,
+  "price_verified_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "old_ledger_preserved": true
+}

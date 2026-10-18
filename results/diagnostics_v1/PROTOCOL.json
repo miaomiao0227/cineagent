@@ -1,0 +1,22 @@
+{
+  "version": "diagnostics-v1",
+  "seed": 20261018,
+  "source_train_sha256": "3ab5c86db76f08c797b67830a0969532a227f7cb30d5a83b02b796015b4b1027",
+  "train_period_only": true,
+  "folds": [
+    {
+      "train_end_exclusive": 974687964,
+      "validation_end_exclusive": 974862369
+    },
+    {
+      "train_end_exclusive": 974862369,
+      "validation_end_exclusive": 975768738
+    }
+  ],
+  "fit": "Popular/ItemCF only, no reused full-train neural checkpoints",
+  "candidate": "fold train catalogue minus all user fold-train observed",
+  "positive_rating_min": 4,
+  "top_k": 20,
+  "pool_k": 100,
+  "diagnostic_neural_section": "original seen validation only, no test data read"
+}

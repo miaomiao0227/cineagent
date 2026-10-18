@@ -1,0 +1,5 @@
+{
+  "purpose": "post-hoc cardinality control, no change to original full-catalogue rank experiment",
+  "control": "CF topN where N equals CF100+Text100 unique union size per user; compare target coverage at equal count",
+  "predeclared_before_control_execution": true
+}

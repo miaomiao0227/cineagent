@@ -1,0 +1,352 @@
+{
+  "version": "exclusion-guard-v3",
+  "source": "assistant-generated synthetic tasks/oracles; not independent human-reviewed; 8 known failure scenarios + 3 newly authored probes",
+  "freeze_policy": "freeze before any V3 API execution; no code/task changes during batch",
+  "scenarios": [
+    {
+      "id": "S08",
+      "family": "reference_director",
+      "turns": [
+        {
+          "message": "给我推荐科幻电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Sci-Fi"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          }
+        },
+        {
+          "message": "排在最前面的那部已经看过，换类似的，导演也别重复。",
+          "expected": {
+            "include_genres": [
+              "Sci-Fi"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "reference_first_turn": true,
+          "different_director": true
+        }
+      ],
+      "evaluation_role": "known_failure_replay"
+    },
+    {
+      "id": "S09",
+      "family": "reference_director",
+      "turns": [
+        {
+          "message": "给我推荐悬疑电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          }
+        },
+        {
+          "message": "第一位的电影已经看过，换类似的，导演也别重复。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "reference_first_turn": true,
+          "different_director": true
+        }
+      ],
+      "evaluation_role": "known_failure_replay"
+    },
+    {
+      "id": "S10",
+      "family": "reference_director",
+      "turns": [
+        {
+          "message": "给我推荐动作电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          }
+        },
+        {
+          "message": "第一部已经看过，换类似的，导演也别重复。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "reference_first_turn": true,
+          "different_director": true
+        }
+      ],
+      "evaluation_role": "known_failure_replay"
+    },
+    {
+      "id": "S11",
+      "family": "reference_director",
+      "turns": [
+        {
+          "message": "给我推荐剧情电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          }
+        },
+        {
+          "message": "排在最前面的那部已经看过，换类似的，导演也别重复。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "reference_first_turn": true,
+          "different_director": true
+        }
+      ],
+      "evaluation_role": "known_failure_replay"
+    },
+    {
+      "id": "S27",
+      "family": "unverified_attributes",
+      "turns": [
+        {
+          "message": "想看节奏快的悬疑电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "expect_warning": "不能保证"
+        },
+        {
+          "message": "片长限制为一小时三十分钟以内。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ],
+      "evaluation_role": "known_failure_replay"
+    },
+    {
+      "id": "S28",
+      "family": "unverified_attributes",
+      "turns": [
+        {
+          "message": "想看节奏快的动作电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "expect_warning": "不能保证"
+        },
+        {
+          "message": "片长限制为一小时三十分钟以内。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ],
+      "evaluation_role": "known_failure_replay"
+    },
+    {
+      "id": "S29",
+      "family": "unverified_attributes",
+      "turns": [
+        {
+          "message": "想看节奏快的剧情电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "expect_warning": "不能保证"
+        },
+        {
+          "message": "片长限制为一小时三十分钟以内。",
+          "expected": {
+            "include_genres": [
+              "Drama"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ],
+      "evaluation_role": "known_failure_replay"
+    },
+    {
+      "id": "S30",
+      "family": "unverified_attributes",
+      "turns": [
+        {
+          "message": "想看节奏快的爱情电影，不要恐怖。",
+          "expected": {
+            "include_genres": [
+              "Romance"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ]
+          },
+          "expect_warning": "不能保证"
+        },
+        {
+          "message": "片长限制为一小时三十分钟以内。",
+          "expected": {
+            "include_genres": [
+              "Romance"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ],
+      "evaluation_role": "known_failure_replay"
+    },
+    {
+      "id": "NEW01",
+      "family": "display_is_not_feedback",
+      "evaluation_role": "new_assistant_authored_probe",
+      "turns": [
+        {
+          "message": "想看喜剧电影，不要恐怖片，两小时以内。",
+          "expected": {
+            "include_genres": [
+              "Comedy"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 120
+          }
+        },
+        {
+          "message": "刚才只是浏览了列表，还没看这些电影。片长改成九十分钟以内。",
+          "expected": {
+            "include_genres": [
+              "Comedy"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "NEW02",
+      "family": "display_is_not_feedback",
+      "evaluation_role": "new_assistant_authored_probe",
+      "turns": [
+        {
+          "message": "想看动作电影，不要恐怖片，两小时以内。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 120
+          }
+        },
+        {
+          "message": "列表里的电影都先保留为候选，把时长改成一小时三十分钟。",
+          "expected": {
+            "include_genres": [
+              "Action"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    },
+    {
+      "id": "NEW03",
+      "family": "display_is_not_feedback",
+      "evaluation_role": "new_assistant_authored_probe",
+      "turns": [
+        {
+          "message": "想看悬疑电影，不要恐怖片，两小时以内。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 120
+          }
+        },
+        {
+          "message": "不要把刚才展示的影片当作已看，片长现在最多九十分钟。",
+          "expected": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "max_runtime": 90
+          }
+        }
+      ]
+    }
+  ],
+  "scenario_count": 11,
+  "user_turns": 22,
+  "budget": "shares existing new240-attempt/.50USD ledger; original67 + this22 =89 user turns; no budget reset",
+  "metrics": "business success and completed live tools reported separately; record raw/effective args and any server repairs"
+}

@@ -1,0 +1,56 @@
+{
+  "scope": "actual cineagent Redis container stop/start only; no unrelated database/container touched",
+  "stopped": true,
+  "restored": true,
+  "rows": [
+    {
+      "phase": "normal_before",
+      "passed": true,
+      "degradation": [],
+      "request_id": "49dfcc13-1523-46dc-bf2b-21e4d4118946",
+      "elapsed_ms": 65.45
+    },
+    {
+      "phase": "redis_stopped",
+      "passed": true,
+      "degradation": [
+        "cache:TimeoutError:local_train_profile"
+      ],
+      "request_id": "71f56da0-d79b-4a71-97dd-c5a2e80947f8",
+      "elapsed_ms": 457.36
+    },
+    {
+      "phase": "redis_stopped",
+      "passed": true,
+      "degradation": [
+        "cache:TimeoutError:local_train_profile"
+      ],
+      "request_id": "5b22a0c8-5790-43d0-b3db-8f2adf4e4480",
+      "elapsed_ms": 448.99
+    },
+    {
+      "phase": "redis_stopped",
+      "passed": true,
+      "degradation": [
+        "cache:TimeoutError:local_train_profile"
+      ],
+      "request_id": "8cdf4a55-e6d2-4ab0-a3bd-071ef1d330de",
+      "elapsed_ms": 432.11
+    },
+    {
+      "phase": "after_cooldown_recovery",
+      "passed": true,
+      "degradation": [],
+      "request_id": "f6d1c1b6-0105-4913-a770-903999dcad58",
+      "elapsed_ms": 39.2
+    }
+  ],
+  "health_after": {
+    "status": "healthy",
+    "version": "0.1.0",
+    "database": "healthy",
+    "redis": "healthy",
+    "elasticsearch": "healthy"
+  },
+  "passed": true
+}

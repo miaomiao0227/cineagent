@@ -1,0 +1,2 @@
+# Preserve audited source/patch bytes across Windows and Linux checkouts.
+* -text

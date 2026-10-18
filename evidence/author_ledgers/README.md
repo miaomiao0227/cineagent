@@ -1,0 +1,1 @@
+Historical author-only API accounting for published measurements. No credentials. Archived away from runtime paths so a new clone cannot silently inherit past usage or an experimental budget. Normal local runtime creates its own reports/DEEPSEEK_TRIAL_LEDGER.json only after explicit local setup and invocation.

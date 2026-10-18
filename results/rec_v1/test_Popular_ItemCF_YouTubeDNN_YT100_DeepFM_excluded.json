@@ -1,0 +1,1759 @@
+[
+  {
+    "user_id": 1,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 45,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 2,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 73,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 3,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 37,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 4,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 18,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 5,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 82,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 6,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 50,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 7,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 26,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 8,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 85,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 9,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 69,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 10,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 305,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 11,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 68,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 12,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 14,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 13,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 40,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 14,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 13,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 15,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 99,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 16,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 13,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 17,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 167,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 18,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 194,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 19,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 143,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 20,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 19,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 21,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 6,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 22,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 119,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 23,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 129,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 24,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 38,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 25,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 6,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 26,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 95,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 28,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 8,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 29,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 40,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 33,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 89,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 35,
+    "reasons": [
+      "no_positive_train_history",
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 36,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 144,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 44,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 31,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 48,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 7,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 49,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 10,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 59,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 63,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 63,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 10,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 65,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 74,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 68,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 20,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 73,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 21,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 74,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 26,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 75,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 23,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 76,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 12,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 78,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 59,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 80,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 1,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 82,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 3,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 85,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 7,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 86,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 18,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 89,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 5,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 90,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 98,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 92,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 79,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 96,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 48,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 97,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 2,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 99,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 43,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 102,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 54,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 104,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 4,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 114,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 11,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 116,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 33,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 117,
+    "reasons": [
+      "no_positive_train_history",
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 119,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 1,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 120,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 10,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 122,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 1,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 123,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 36,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 124,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 11,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 127,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 45,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 131,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 12,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 133,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 4,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 134,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 8,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 137,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 89,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 140,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 30,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 142,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 7,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 146,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 167,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 148,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 174,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 149,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 147,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 150,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 106,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 151,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 231,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 153,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 8,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 157,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 27,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 159,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 23,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 160,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 3,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 162,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 49,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 163,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 5,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 164,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 18,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 166,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 6,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 169,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 15,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 173,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 378,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 175,
+    "reasons": [
+      "no_positive_train_history",
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 180,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 6,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 183,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 60,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 184,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 56,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 188,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 27,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 192,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 23,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 193,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 45,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 195,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 357,
+    "unknown_item_targets": 4
+  },
+  {
+    "user_id": 198,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 7,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 201,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 12,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 204,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 90,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 208,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 66,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 215,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 2,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 218,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 5,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 224,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 28,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 228,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 6,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 229,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 59,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 231,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 69,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 234,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 6,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 235,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 65,
+    "unknown_item_targets": 1
+  },
+  {
+    "user_id": 237,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 32,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 239,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 37,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 242,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 7,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 248,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 4,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 259,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 39,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 264,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 17,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 267,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 7,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 270,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 6,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 271,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 89,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 279,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 6,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 285,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 14,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 293,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 54,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 299,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 25,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 302,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 38,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 303,
+    "reasons": [
+      "no_positive_train_history",
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 306,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 99,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 308,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 125,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 310,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 10,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 311,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 3,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 314,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 27,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 319,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 103,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 321,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 2,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 326,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 35,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 329,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 54,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 330,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 9,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 331,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 267,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 332,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 28,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 333,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 99,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 338,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 103,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 343,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 218,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 349,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 96,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 351,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 2,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 355,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 92,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 356,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 5,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 362,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 11,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 366,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 70,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 368,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 35,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 372,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 73,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 375,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 35,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 376,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 84,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 382,
+    "reasons": [
+      "no_positive_train_history",
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 387,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 3,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 391,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 6,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 392,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 22,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 398,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 157,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 402,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 4,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 403,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 8,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 404,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 16,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 405,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 4,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 408,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 24,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 411,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 180,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 412,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 15,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 419,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 56,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 420,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 6,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 422,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 19,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 424,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 516,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 438,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 99,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 439,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 17,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 442,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 247,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 453,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 23,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 454,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 30,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 462,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 26,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 480,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 3,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 482,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 21,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 487,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 9,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 496,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 62,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 500,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 10,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 507,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 25,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 514,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 13,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 518,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 213,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 519,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 5,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 520,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 7,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 528,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 128,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 529,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 16,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 531,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 306,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 549,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 19,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 582,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 52,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 583,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 50,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 584,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 14,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 587,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 4,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 588,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 113,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 593,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 6,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 595,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 1,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 608,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 5,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 609,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 15,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 611,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 2,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 623,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 47,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 624,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 87,
+    "unknown_item_targets": 1
+  },
+  {
+    "user_id": 626,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 11,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 633,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 8,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 649,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 707,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 862,
+    "reasons": [
+      "no_eligible_catalogue_target"
+    ],
+    "heldout_positive_count": 1,
+    "unknown_item_targets": 1
+  },
+  {
+    "user_id": 1050,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 1160,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 26,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 1265,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 158,
+    "unknown_item_targets": 1
+  },
+  {
+    "user_id": 1287,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 14,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 1651,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 1836,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 2059,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 2330,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 2454,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 2910,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 82,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 2947,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 90,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 2980,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 82,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 3279,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 3453,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 3726,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 4361,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 4467,
+    "reasons": [
+      "no_positive_train_history"
+    ],
+    "heldout_positive_count": 90,
+    "unknown_item_targets": 1
+  },
+  {
+    "user_id": 5118,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 5202,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 5395,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  },
+  {
+    "user_id": 5985,
+    "reasons": [
+      "no_positive_heldout"
+    ],
+    "heldout_positive_count": 0,
+    "unknown_item_targets": 0
+  }
+]

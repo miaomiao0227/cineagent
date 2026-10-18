@@ -1,0 +1,3860 @@
+{
+  "version": "agent-known-failures-repair-live",
+  "scope": "real official provider + actual service-function integration, synthetic guest identities; not HTTP/auth evaluation and not real users",
+  "task_sha256": "86928534d0944d0556aedc9653232dba009b2f2e1b7ae9259c3602024791f0ac",
+  "runtime_source_sha256": {
+    "api.py": "1f5d2c9bd85cdf17fc95269c5502122c2eff7b62bbb0a2f9fc4487b011351365",
+    "engine.py": "2d02db4ee87ecb1abad116c199666837d45b04d422838920a4b6a65d7ce6edd6",
+    "evidence.py": "e78816e918766a929f9f9fcc0780b9f7be29ec77b5d964d5463da0622a5bfe51",
+    "models.py": "268a2122bb87613893df46536231220b3218867ac0c726422782d03603cb34a9",
+    "parser.py": "8d2e5b893722bbe64211950e3b421174fc212114b3827c16b504c7dee2789853",
+    "provider.py": "933657a3e971ad66d5b09067876286797f95a06e8cce1e4495d0ed78c0e4a76e",
+    "reliability.py": "c733123eaf035c7768324995945334ccb890006bd6ec5028e7066fdf195ba447",
+    "__init__.py": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+  },
+  "all_frozen_tasks": 14,
+  "preselected_tasks": 7,
+  "executed_denominator": 7,
+  "not_run_tasks": [
+    {
+      "id": "N05",
+      "reason": "not selected for bounded initial batch"
+    },
+    {
+      "id": "N06",
+      "reason": "not selected for bounded initial batch"
+    },
+    {
+      "id": "N07",
+      "reason": "not selected for bounded initial batch"
+    },
+    {
+      "id": "N08",
+      "reason": "not selected for bounded initial batch"
+    },
+    {
+      "id": "N09",
+      "reason": "not selected for bounded initial batch"
+    },
+    {
+      "id": "N10",
+      "reason": "not selected for bounded initial batch"
+    },
+    {
+      "id": "N11",
+      "reason": "not selected for bounded initial batch"
+    }
+  ],
+  "summary": {
+    "task_successes": 7,
+    "tasks": 7,
+    "wilson95_descriptive": [
+      0.6456695649333253,
+      1.0
+    ],
+    "live_tool_loop_successes": 5,
+    "observed_model_calls": 12,
+    "model_argument_fields_correct": 25,
+    "model_argument_fields_scored": 25,
+    "argument_omissions_not_in_that_field_denominator": true,
+    "repeated_tool_calls": 0,
+    "failure_fact_counts": {}
+  },
+  "before": {
+    "versions": {
+      "data": "rec-v1",
+      "model": "rec-v1",
+      "prompt": "movie-tools-v2",
+      "agent": "conversation-v2",
+      "content": "content-v1"
+    },
+    "provider_configured": true,
+    "requests_used": 25,
+    "request_limit": 30,
+    "conservative_cost_usd": 0.0143067,
+    "budget_usd": 0.1,
+    "content_mode": "title_genre_text_only",
+    "ready": true
+  },
+  "after": {
+    "versions": {
+      "data": "rec-v1",
+      "model": "rec-v1",
+      "prompt": "movie-tools-v2",
+      "agent": "conversation-v2",
+      "content": "content-v1"
+    },
+    "provider_configured": true,
+    "requests_used": 25,
+    "request_limit": 30,
+    "conservative_cost_usd": 0.0143067,
+    "budget_usd": 0.1,
+    "content_mode": "title_genre_text_only",
+    "ready": true
+  },
+  "per_task": [
+    {
+      "id": "N01",
+      "message": "想看科幻电影，片长最多九十分钟，不要恐怖片。",
+      "source": "authored natural-language task",
+      "task_success": true,
+      "live_tool_loop_success": true,
+      "prior_turn_failed": false,
+      "preparsed_state": {
+        "include_genres": [
+          "Sci-Fi"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "exclude_ids": [],
+        "sources": {
+          "include_genres:Sci-Fi": {
+            "turn": 1,
+            "start": 0,
+            "end": 6
+          },
+          "exclude_genres:Horror": {
+            "turn": 1,
+            "start": 16,
+            "end": 21
+          },
+          "max_runtime": {
+            "turn": 1,
+            "start": 11,
+            "end": 15
+          }
+        },
+        "max_runtime": 90
+      },
+      "preparsed_memory": [],
+      "status": "executed",
+      "expected": {
+        "include_genres": [
+          "Sci-Fi"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90
+      },
+      "checks": [
+        {
+          "fact": "include_genres",
+          "expected": [
+            "Sci-Fi"
+          ],
+          "actual": [
+            "Sci-Fi"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "actual": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "max_runtime",
+          "expected": 90,
+          "actual": 90,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1077,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 3702,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2662,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2527,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 671,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2232,
+          "passed": true
+        },
+        {
+          "fact": "nonempty_for_these_catalogue_supported_tasks",
+          "passed": true
+        }
+      ],
+      "response": {
+        "request_id": "185cda13-d0e1-4ba3-af2d-16e18d9ab9cd",
+        "conversation_id": "e052d7c3-f8b7-4ce1-85c7-38868c3acb6d",
+        "turn": 1,
+        "mode": "deepseek_tools",
+        "items": [
+          {
+            "movie_id": 1077,
+            "title": "Sleeper (1973)",
+            "genres": [
+              "Comedy",
+              "Sci-Fi"
+            ],
+            "runtime_minutes": 89,
+            "directors": [
+              "nm0000095"
+            ],
+            "year": "1973",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1077.png",
+            "score": 0.565936,
+            "reason": "库内类型：Comedy、Sci-Fi；片长 89 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 3702,
+            "title": "Mad Max (1979)",
+            "genres": [
+              "Action",
+              "Sci-Fi"
+            ],
+            "runtime_minutes": 88,
+            "directors": [
+              "nm0004306"
+            ],
+            "year": "1979",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/3702.png",
+            "score": 0.44889,
+            "reason": "库内类型：Action、Sci-Fi；片长 88 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2662,
+            "title": "War of the Worlds, The (1953)",
+            "genres": [
+              "Action",
+              "Sci-Fi",
+              "War"
+            ],
+            "runtime_minutes": 87,
+            "directors": [
+              "nm0005738"
+            ],
+            "year": "1953",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2662.png",
+            "score": 0.374561,
+            "reason": "库内类型：Action、Sci-Fi、War；片长 87 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2527,
+            "title": "Westworld (1973)",
+            "genres": [
+              "Action",
+              "Sci-Fi",
+              "Thriller",
+              "Western"
+            ],
+            "runtime_minutes": 88,
+            "directors": [
+              "nm0000341"
+            ],
+            "year": "1973",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2527.png",
+            "score": 0.311837,
+            "reason": "库内类型：Action、Sci-Fi、Thriller、Western；片长 88 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 671,
+            "title": "Mystery Science Theater 3000: The Movie (1996)",
+            "genres": [
+              "Comedy",
+              "Sci-Fi"
+            ],
+            "runtime_minutes": 73,
+            "directors": [
+              "nm0540075"
+            ],
+            "year": "1996",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/671.png",
+            "score": 0.295505,
+            "reason": "库内类型：Comedy、Sci-Fi；片长 73 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2232,
+            "title": "Cube (1997)",
+            "genres": [
+              "Sci-Fi",
+              "Thriller"
+            ],
+            "runtime_minutes": 90,
+            "directors": [
+              "nm0622112"
+            ],
+            "year": "1997",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2232.png",
+            "score": 0.250657,
+            "reason": "库内类型：Sci-Fi、Thriller；片长 90 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          }
+        ],
+        "constraints": {
+          "include_genres": [
+            "Sci-Fi"
+          ],
+          "exclude_genres": [
+            "Horror"
+          ],
+          "exclude_ids": [],
+          "max_runtime": 90
+        },
+        "warnings": [],
+        "message": "已根据库内信息筛选并排序。",
+        "trace": [
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1308.04
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "2a99367c-9133-479a-9b98-293374bc18d0",
+            "step": 1,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "recommend_movies",
+            "arguments": {
+              "include_genres": [
+                "Sci-Fi"
+              ],
+              "exclude_genres": [
+                "Horror"
+              ],
+              "max_runtime": 90
+            },
+            "step": 1,
+            "ok": true
+          },
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 594.98
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "635ef601-37ea-419a-bc3e-f88639146162",
+            "step": 2,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "finish",
+            "arguments": {},
+            "step": 2,
+            "ok": true
+          },
+          {
+            "tool": "filter",
+            "input_count": 3883,
+            "eligible_count": 16,
+            "missing_runtime_excluded": 71,
+            "missing_director_excluded": 0
+          },
+          {
+            "dependency": "recall_itemcf",
+            "attempt": 1,
+            "ok": true,
+            "ms": 0.12
+          },
+          {
+            "dependency": "recall_text",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1.78
+          },
+          {
+            "dependency": "cache",
+            "attempt": 1,
+            "ok": true,
+            "ms": 49.63
+          },
+          {
+            "tool": "recall",
+            "channel": "popular",
+            "count": 16
+          },
+          {
+            "tool": "recall",
+            "channel": "itemcf",
+            "count": 16
+          },
+          {
+            "tool": "recall",
+            "channel": "text",
+            "count": 16
+          },
+          {
+            "tool": "rank",
+            "strategy": "deepfm-rec-v1",
+            "count": 16
+          },
+          {
+            "tool": "rerank",
+            "strategy": "genre-diversity-fixed-0.08",
+            "count": 6
+          }
+        ],
+        "degradation": [],
+        "eligible_count": 16,
+        "evidence_checks": [
+          {
+            "movie_id": 1077,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 3702,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2662,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2527,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 671,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2232,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          }
+        ],
+        "relaxation_suggestions": [],
+        "versions": {
+          "data": "rec-v1",
+          "model": "rec-v1",
+          "prompt": "movie-tools-v2",
+          "agent": "conversation-v2",
+          "content": "content-v1"
+        },
+        "summary": {
+          "version": "structured-v1",
+          "through_turn": 1,
+          "constraints": {
+            "include_genres": [
+              "Sci-Fi"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "exclude_ids": [],
+            "max_runtime": 90,
+            "turn_count": 1
+          },
+          "sources": {
+            "include_genres:Sci-Fi": {
+              "turn": 1,
+              "start": 0,
+              "end": 6
+            },
+            "exclude_genres:Horror": {
+              "turn": 1,
+              "start": 16,
+              "end": 21
+            },
+            "max_runtime": {
+              "turn": 1,
+              "start": 11,
+              "end": 15
+            }
+          },
+          "last_results": [
+            1077,
+            3702,
+            2662,
+            2527,
+            671,
+            2232
+          ]
+        },
+        "history_characters": {
+          "original": 2,
+          "sent": 396
+        },
+        "memory_used": [],
+        "memory_proposals_saved": 0,
+        "elapsed_ms": 9833.93
+      },
+      "active_memories": [],
+      "failure_facts": [],
+      "model_argument_oracle_comparisons": [
+        {
+          "field": "include_genres",
+          "expected": [
+            "Sci-Fi"
+          ],
+          "model_argument": [
+            "Sci-Fi"
+          ],
+          "passed": true
+        },
+        {
+          "field": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "model_argument": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "field": "max_runtime",
+          "expected": 90,
+          "model_argument": 90,
+          "passed": true
+        }
+      ],
+      "model_calls": [
+        {
+          "budget_request_id": "2a99367c-9133-479a-9b98-293374bc18d0",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 1026,
+            "completion_tokens": 84,
+            "total_tokens": 1110,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1026
+          },
+          "tools": [
+            {
+              "name": "recommend_movies",
+              "arguments_raw": "{\"include_genres\": [\"Sci-Fi\"], \"exclude_genres\": [\"Horror\"], \"max_runtime\": 90}",
+              "arguments": {
+                "include_genres": [
+                  "Sci-Fi"
+                ],
+                "exclude_genres": [
+                  "Horror"
+                ],
+                "max_runtime": 90
+              }
+            }
+          ]
+        },
+        {
+          "budget_request_id": "635ef601-37ea-419a-bc3e-f88639146162",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 1885,
+            "completion_tokens": 21,
+            "total_tokens": 1906,
+            "prompt_tokens_details": {
+              "cached_tokens": 896
+            },
+            "prompt_cache_hit_tokens": 896,
+            "prompt_cache_miss_tokens": 989
+          },
+          "tools": [
+            {
+              "name": "finish",
+              "arguments_raw": "{}",
+              "arguments": {}
+            }
+          ]
+        }
+      ],
+      "elapsed_ms": 9844.42
+    },
+    {
+      "id": "N02",
+      "message": "想看喜剧，恐怖的就算了，总时长别超过一个半钟头。",
+      "source": "authored natural-language task",
+      "task_success": true,
+      "live_tool_loop_success": true,
+      "prior_turn_failed": false,
+      "preparsed_state": {
+        "include_genres": [
+          "Comedy"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "exclude_ids": [],
+        "sources": {
+          "include_genres:Comedy": {
+            "turn": 1,
+            "start": 0,
+            "end": 4
+          },
+          "exclude_genres:Horror": {
+            "turn": 1,
+            "start": 5,
+            "end": 11
+          },
+          "max_runtime": {
+            "turn": 1,
+            "start": 18,
+            "end": 23
+          }
+        },
+        "max_runtime": 90
+      },
+      "preparsed_memory": [],
+      "status": "executed",
+      "expected": {
+        "include_genres": [
+          "Comedy"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90
+      },
+      "checks": [
+        {
+          "fact": "include_genres",
+          "expected": [
+            "Comedy"
+          ],
+          "actual": [
+            "Comedy"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "actual": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "max_runtime",
+          "expected": 90,
+          "actual": 90,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1259,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2791,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1288,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1077,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2863,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2080,
+          "passed": true
+        },
+        {
+          "fact": "nonempty_for_these_catalogue_supported_tasks",
+          "passed": true
+        }
+      ],
+      "response": {
+        "request_id": "b495b310-bbce-4666-83ed-450d4d2d5b55",
+        "conversation_id": "a41ba25c-b9cf-4000-95d2-782346c84b90",
+        "turn": 1,
+        "mode": "deepseek_tools",
+        "items": [
+          {
+            "movie_id": 1259,
+            "title": "Stand by Me (1986)",
+            "genres": [
+              "Adventure",
+              "Comedy",
+              "Drama"
+            ],
+            "runtime_minutes": 89,
+            "directors": [
+              "nm0001661"
+            ],
+            "year": "1986",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1259.png",
+            "score": 0.603976,
+            "reason": "库内类型：Adventure、Comedy、Drama；片长 89 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2791,
+            "title": "Airplane! (1980)",
+            "genres": [
+              "Comedy"
+            ],
+            "runtime_minutes": 88,
+            "directors": [
+              "nm0000720",
+              "nm0001878",
+              "nm0958387"
+            ],
+            "year": "1980",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2791.png",
+            "score": 0.565044,
+            "reason": "库内类型：Comedy；片长 88 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1288,
+            "title": "This Is Spinal Tap (1984)",
+            "genres": [
+              "Comedy",
+              "Drama",
+              "Musical"
+            ],
+            "runtime_minutes": 82,
+            "directors": [
+              "nm0001661"
+            ],
+            "year": "1984",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1288.png",
+            "score": 0.541437,
+            "reason": "库内类型：Comedy、Drama、Musical；片长 82 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1077,
+            "title": "Sleeper (1973)",
+            "genres": [
+              "Comedy",
+              "Sci-Fi"
+            ],
+            "runtime_minutes": 89,
+            "directors": [
+              "nm0000095"
+            ],
+            "year": "1973",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1077.png",
+            "score": 0.496907,
+            "reason": "库内类型：Comedy、Sci-Fi；片长 89 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2863,
+            "title": "Hard Day's Night, A (1964)",
+            "genres": [
+              "Comedy",
+              "Musical"
+            ],
+            "runtime_minutes": 87,
+            "directors": [
+              "nm0504513"
+            ],
+            "year": "1964",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2863.png",
+            "score": 0.476795,
+            "reason": "库内类型：Comedy、Musical；片长 87 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2080,
+            "title": "Lady and the Tramp (1955)",
+            "genres": [
+              "Animation",
+              "Children's",
+              "Comedy",
+              "Musical",
+              "Romance"
+            ],
+            "runtime_minutes": 76,
+            "directors": [
+              "nm0314671",
+              "nm0414144",
+              "nm0527217",
+              "nm0194018"
+            ],
+            "year": "1955",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2080.png",
+            "score": 0.439948,
+            "reason": "库内类型：Animation、Children's、Comedy、Musical、Romance；片长 76 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          }
+        ],
+        "constraints": {
+          "include_genres": [
+            "Comedy"
+          ],
+          "exclude_genres": [
+            "Horror"
+          ],
+          "exclude_ids": [],
+          "max_runtime": 90
+        },
+        "warnings": [],
+        "message": "已根据库内信息筛选并排序。",
+        "trace": [
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 851.17
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "bca1022e-1198-44be-b5ff-59ef398ee452",
+            "step": 1,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "recommend_movies",
+            "arguments": {
+              "include_genres": [
+                "Comedy"
+              ],
+              "exclude_genres": [
+                "Horror"
+              ],
+              "max_runtime": 90
+            },
+            "step": 1,
+            "ok": true
+          },
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 910.06
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "b3275d93-4a45-4541-948f-5e5d4c39bf93",
+            "step": 2,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "finish",
+            "arguments": {},
+            "step": 2,
+            "ok": true
+          },
+          {
+            "tool": "filter",
+            "input_count": 3883,
+            "eligible_count": 151,
+            "missing_runtime_excluded": 358,
+            "missing_director_excluded": 0
+          },
+          {
+            "dependency": "recall_itemcf",
+            "attempt": 1,
+            "ok": true,
+            "ms": 0.14
+          },
+          {
+            "dependency": "recall_text",
+            "attempt": 1,
+            "ok": true,
+            "ms": 2.21
+          },
+          {
+            "dependency": "cache",
+            "attempt": 1,
+            "ok": true,
+            "ms": 4.49
+          },
+          {
+            "tool": "recall",
+            "channel": "popular",
+            "count": 100
+          },
+          {
+            "tool": "recall",
+            "channel": "itemcf",
+            "count": 100
+          },
+          {
+            "tool": "recall",
+            "channel": "text",
+            "count": 100
+          },
+          {
+            "tool": "rank",
+            "strategy": "deepfm-rec-v1",
+            "count": 147
+          },
+          {
+            "tool": "rerank",
+            "strategy": "genre-diversity-fixed-0.08",
+            "count": 6
+          }
+        ],
+        "degradation": [],
+        "eligible_count": 151,
+        "evidence_checks": [
+          {
+            "movie_id": 1259,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2791,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 1288,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 1077,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2863,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2080,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          }
+        ],
+        "relaxation_suggestions": [],
+        "versions": {
+          "data": "rec-v1",
+          "model": "rec-v1",
+          "prompt": "movie-tools-v2",
+          "agent": "conversation-v2",
+          "content": "content-v1"
+        },
+        "summary": {
+          "version": "structured-v1",
+          "through_turn": 1,
+          "constraints": {
+            "include_genres": [
+              "Comedy"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "exclude_ids": [],
+            "max_runtime": 90,
+            "turn_count": 1
+          },
+          "sources": {
+            "include_genres:Comedy": {
+              "turn": 1,
+              "start": 0,
+              "end": 4
+            },
+            "exclude_genres:Horror": {
+              "turn": 1,
+              "start": 5,
+              "end": 11
+            },
+            "max_runtime": {
+              "turn": 1,
+              "start": 18,
+              "end": 23
+            }
+          },
+          "last_results": [
+            1259,
+            2791,
+            1288,
+            1077,
+            2863,
+            2080
+          ]
+        },
+        "history_characters": {
+          "original": 2,
+          "sent": 395
+        },
+        "memory_used": [],
+        "memory_proposals_saved": 0,
+        "elapsed_ms": 1791.04
+      },
+      "active_memories": [],
+      "failure_facts": [],
+      "model_argument_oracle_comparisons": [
+        {
+          "field": "include_genres",
+          "expected": [
+            "Comedy"
+          ],
+          "model_argument": [
+            "Comedy"
+          ],
+          "passed": true
+        },
+        {
+          "field": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "model_argument": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "field": "max_runtime",
+          "expected": 90,
+          "model_argument": 90,
+          "passed": true
+        }
+      ],
+      "model_calls": [
+        {
+          "budget_request_id": "bca1022e-1198-44be-b5ff-59ef398ee452",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 1027,
+            "completion_tokens": 84,
+            "total_tokens": 1111,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1027
+          },
+          "tools": [
+            {
+              "name": "recommend_movies",
+              "arguments_raw": "{\"include_genres\": [\"Comedy\"], \"exclude_genres\": [\"Horror\"], \"max_runtime\": 90}",
+              "arguments": {
+                "include_genres": [
+                  "Comedy"
+                ],
+                "exclude_genres": [
+                  "Horror"
+                ],
+                "max_runtime": 90
+              }
+            }
+          ]
+        },
+        {
+          "budget_request_id": "b3275d93-4a45-4541-948f-5e5d4c39bf93",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 1928,
+            "completion_tokens": 21,
+            "total_tokens": 1949,
+            "prompt_tokens_details": {
+              "cached_tokens": 896
+            },
+            "prompt_cache_hit_tokens": 896,
+            "prompt_cache_miss_tokens": 1032
+          },
+          "tools": [
+            {
+              "name": "finish",
+              "arguments_raw": "{}",
+              "arguments": {}
+            }
+          ]
+        }
+      ],
+      "elapsed_ms": 1797.44
+    },
+    {
+      "id": "N03",
+      "message": "找科幻片，一小时三十分钟以内，不要恐怖。",
+      "source": "authored natural-language task",
+      "task_success": true,
+      "live_tool_loop_success": true,
+      "prior_turn_failed": false,
+      "preparsed_state": {
+        "include_genres": [
+          "Sci-Fi"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "exclude_ids": [],
+        "sources": {
+          "include_genres:Sci-Fi": {
+            "turn": 1,
+            "start": 0,
+            "end": 4
+          },
+          "exclude_genres:Horror": {
+            "turn": 1,
+            "start": 15,
+            "end": 19
+          },
+          "max_runtime": {
+            "turn": 1,
+            "start": 5,
+            "end": 12
+          }
+        },
+        "max_runtime": 90
+      },
+      "preparsed_memory": [],
+      "status": "executed",
+      "expected": {
+        "include_genres": [
+          "Sci-Fi"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90
+      },
+      "checks": [
+        {
+          "fact": "include_genres",
+          "expected": [
+            "Sci-Fi"
+          ],
+          "actual": [
+            "Sci-Fi"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "actual": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "max_runtime",
+          "expected": 90,
+          "actual": 90,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1077,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 3702,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2662,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2527,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 671,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2232,
+          "passed": true
+        },
+        {
+          "fact": "nonempty_for_these_catalogue_supported_tasks",
+          "passed": true
+        }
+      ],
+      "response": {
+        "request_id": "03dd8fbc-12db-4111-ba2b-c2ccc50f2750",
+        "conversation_id": "535d3648-def1-4210-a24f-de2d28deb643",
+        "turn": 1,
+        "mode": "deepseek_tools",
+        "items": [
+          {
+            "movie_id": 1077,
+            "title": "Sleeper (1973)",
+            "genres": [
+              "Comedy",
+              "Sci-Fi"
+            ],
+            "runtime_minutes": 89,
+            "directors": [
+              "nm0000095"
+            ],
+            "year": "1973",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1077.png",
+            "score": 0.565936,
+            "reason": "库内类型：Comedy、Sci-Fi；片长 89 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 3702,
+            "title": "Mad Max (1979)",
+            "genres": [
+              "Action",
+              "Sci-Fi"
+            ],
+            "runtime_minutes": 88,
+            "directors": [
+              "nm0004306"
+            ],
+            "year": "1979",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/3702.png",
+            "score": 0.44889,
+            "reason": "库内类型：Action、Sci-Fi；片长 88 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2662,
+            "title": "War of the Worlds, The (1953)",
+            "genres": [
+              "Action",
+              "Sci-Fi",
+              "War"
+            ],
+            "runtime_minutes": 87,
+            "directors": [
+              "nm0005738"
+            ],
+            "year": "1953",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2662.png",
+            "score": 0.374561,
+            "reason": "库内类型：Action、Sci-Fi、War；片长 87 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2527,
+            "title": "Westworld (1973)",
+            "genres": [
+              "Action",
+              "Sci-Fi",
+              "Thriller",
+              "Western"
+            ],
+            "runtime_minutes": 88,
+            "directors": [
+              "nm0000341"
+            ],
+            "year": "1973",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2527.png",
+            "score": 0.311837,
+            "reason": "库内类型：Action、Sci-Fi、Thriller、Western；片长 88 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 671,
+            "title": "Mystery Science Theater 3000: The Movie (1996)",
+            "genres": [
+              "Comedy",
+              "Sci-Fi"
+            ],
+            "runtime_minutes": 73,
+            "directors": [
+              "nm0540075"
+            ],
+            "year": "1996",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/671.png",
+            "score": 0.295505,
+            "reason": "库内类型：Comedy、Sci-Fi；片长 73 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2232,
+            "title": "Cube (1997)",
+            "genres": [
+              "Sci-Fi",
+              "Thriller"
+            ],
+            "runtime_minutes": 90,
+            "directors": [
+              "nm0622112"
+            ],
+            "year": "1997",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2232.png",
+            "score": 0.250657,
+            "reason": "库内类型：Sci-Fi、Thriller；片长 90 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          }
+        ],
+        "constraints": {
+          "include_genres": [
+            "Sci-Fi"
+          ],
+          "exclude_genres": [
+            "Horror"
+          ],
+          "exclude_ids": [],
+          "max_runtime": 90
+        },
+        "warnings": [],
+        "message": "已根据库内信息筛选并排序。",
+        "trace": [
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 796.64
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "8b2a549e-e61e-461b-857b-c97e7c261ae7",
+            "step": 1,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "recommend_movies",
+            "arguments": {
+              "include_genres": [
+                "Sci-Fi"
+              ],
+              "exclude_genres": [
+                "Horror"
+              ],
+              "max_runtime": 90
+            },
+            "step": 1,
+            "ok": true
+          },
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 876.2
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "4a93c063-f1d7-4fc7-bc0f-0af4a2b81cdc",
+            "step": 2,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "finish",
+            "arguments": {},
+            "step": 2,
+            "ok": true
+          },
+          {
+            "tool": "filter",
+            "input_count": 3883,
+            "eligible_count": 16,
+            "missing_runtime_excluded": 71,
+            "missing_director_excluded": 0
+          },
+          {
+            "dependency": "recall_itemcf",
+            "attempt": 1,
+            "ok": true,
+            "ms": 0.09
+          },
+          {
+            "dependency": "recall_text",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1.72
+          },
+          {
+            "dependency": "cache",
+            "attempt": 1,
+            "ok": true,
+            "ms": 3.5
+          },
+          {
+            "tool": "recall",
+            "channel": "popular",
+            "count": 16
+          },
+          {
+            "tool": "recall",
+            "channel": "itemcf",
+            "count": 16
+          },
+          {
+            "tool": "recall",
+            "channel": "text",
+            "count": 16
+          },
+          {
+            "tool": "rank",
+            "strategy": "deepfm-rec-v1",
+            "count": 16
+          },
+          {
+            "tool": "rerank",
+            "strategy": "genre-diversity-fixed-0.08",
+            "count": 6
+          }
+        ],
+        "degradation": [],
+        "eligible_count": 16,
+        "evidence_checks": [
+          {
+            "movie_id": 1077,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 3702,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2662,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2527,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 671,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2232,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          }
+        ],
+        "relaxation_suggestions": [],
+        "versions": {
+          "data": "rec-v1",
+          "model": "rec-v1",
+          "prompt": "movie-tools-v2",
+          "agent": "conversation-v2",
+          "content": "content-v1"
+        },
+        "summary": {
+          "version": "structured-v1",
+          "through_turn": 1,
+          "constraints": {
+            "include_genres": [
+              "Sci-Fi"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "exclude_ids": [],
+            "max_runtime": 90,
+            "turn_count": 1
+          },
+          "sources": {
+            "include_genres:Sci-Fi": {
+              "turn": 1,
+              "start": 0,
+              "end": 4
+            },
+            "exclude_genres:Horror": {
+              "turn": 1,
+              "start": 15,
+              "end": 19
+            },
+            "max_runtime": {
+              "turn": 1,
+              "start": 5,
+              "end": 12
+            }
+          },
+          "last_results": [
+            1077,
+            3702,
+            2662,
+            2527,
+            671,
+            2232
+          ]
+        },
+        "history_characters": {
+          "original": 2,
+          "sent": 395
+        },
+        "memory_used": [],
+        "memory_proposals_saved": 0,
+        "elapsed_ms": 1697.14
+      },
+      "active_memories": [],
+      "failure_facts": [],
+      "model_argument_oracle_comparisons": [
+        {
+          "field": "include_genres",
+          "expected": [
+            "Sci-Fi"
+          ],
+          "model_argument": [
+            "Sci-Fi"
+          ],
+          "passed": true
+        },
+        {
+          "field": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "model_argument": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "field": "max_runtime",
+          "expected": 90,
+          "model_argument": 90,
+          "passed": true
+        }
+      ],
+      "model_calls": [
+        {
+          "budget_request_id": "8b2a549e-e61e-461b-857b-c97e7c261ae7",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 1024,
+            "completion_tokens": 84,
+            "total_tokens": 1108,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1024
+          },
+          "tools": [
+            {
+              "name": "recommend_movies",
+              "arguments_raw": "{\"include_genres\": [\"Sci-Fi\"], \"exclude_genres\": [\"Horror\"], \"max_runtime\": 90}",
+              "arguments": {
+                "include_genres": [
+                  "Sci-Fi"
+                ],
+                "exclude_genres": [
+                  "Horror"
+                ],
+                "max_runtime": 90
+              }
+            }
+          ]
+        },
+        {
+          "budget_request_id": "4a93c063-f1d7-4fc7-bc0f-0af4a2b81cdc",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 1883,
+            "completion_tokens": 21,
+            "total_tokens": 1904,
+            "prompt_tokens_details": {
+              "cached_tokens": 896
+            },
+            "prompt_cache_hit_tokens": 896,
+            "prompt_cache_miss_tokens": 987
+          },
+          "tools": [
+            {
+              "name": "finish",
+              "arguments_raw": "{}",
+              "arguments": {}
+            }
+          ]
+        }
+      ],
+      "elapsed_ms": 1703.33
+    },
+    {
+      "id": "N04",
+      "message": "以后都别给我推恐怖类型的电影。",
+      "source": "authored natural-language task",
+      "task_success": true,
+      "live_tool_loop_success": true,
+      "prior_turn_failed": false,
+      "preparsed_state": {
+        "include_genres": [],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "exclude_ids": [],
+        "sources": {
+          "exclude_genres:Horror": {
+            "turn": 1,
+            "start": 0,
+            "end": 14
+          }
+        }
+      },
+      "preparsed_memory": [
+        {
+          "key": "exclude_genres",
+          "value": "Horror",
+          "source_turn": 1,
+          "start": 0,
+          "end": 14
+        }
+      ],
+      "status": "executed",
+      "expected": {
+        "exclude_genres": [
+          "Horror"
+        ]
+      },
+      "checks": [
+        {
+          "fact": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "actual": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 318,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2762,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 260,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 858,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2396,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1198,
+          "passed": true
+        },
+        {
+          "fact": "nonempty_for_these_catalogue_supported_tasks",
+          "passed": true
+        },
+        {
+          "fact": "long_term_memory_direction_and_source",
+          "passed": true
+        }
+      ],
+      "response": {
+        "request_id": "d10b5e5d-5ad9-4885-bdcf-4b9d2b3f65a8",
+        "conversation_id": "34668ebf-2159-4ab7-8b18-7a9fbbd02ef8",
+        "turn": 1,
+        "mode": "deepseek_tools",
+        "items": [
+          {
+            "movie_id": 318,
+            "title": "Shawshank Redemption, The (1994)",
+            "genres": [
+              "Drama"
+            ],
+            "runtime_minutes": 142,
+            "directors": [
+              "nm0001104"
+            ],
+            "year": "1994",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/318.png",
+            "score": 0.649495,
+            "reason": "库内类型：Drama；片长 142 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2762,
+            "title": "Sixth Sense, The (1999)",
+            "genres": [
+              "Thriller"
+            ],
+            "runtime_minutes": 107,
+            "directors": [
+              "nm0796117"
+            ],
+            "year": "1999",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2762.png",
+            "score": 0.628669,
+            "reason": "库内类型：Thriller；片长 107 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 260,
+            "title": "Star Wars: Episode IV - A New Hope (1977)",
+            "genres": [
+              "Action",
+              "Adventure",
+              "Fantasy",
+              "Sci-Fi"
+            ],
+            "runtime_minutes": 121,
+            "directors": [
+              "nm0000184"
+            ],
+            "year": "1977",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/260.png",
+            "score": 0.615336,
+            "reason": "库内类型：Action、Adventure、Fantasy、Sci-Fi；片长 121 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 858,
+            "title": "Godfather, The (1972)",
+            "genres": [
+              "Action",
+              "Crime",
+              "Drama"
+            ],
+            "runtime_minutes": 175,
+            "directors": [
+              "nm0000338"
+            ],
+            "year": "1972",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/858.png",
+            "score": 0.63536,
+            "reason": "库内类型：Action、Crime、Drama；片长 175 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2396,
+            "title": "Shakespeare in Love (1998)",
+            "genres": [
+              "Comedy",
+              "Romance"
+            ],
+            "runtime_minutes": 123,
+            "directors": [
+              "nm0006960"
+            ],
+            "year": "1998",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2396.png",
+            "score": 0.580522,
+            "reason": "库内类型：Comedy、Romance；片长 123 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1198,
+            "title": "Raiders of the Lost Ark (1981)",
+            "genres": [
+              "Action",
+              "Adventure"
+            ],
+            "runtime_minutes": null,
+            "directors": [],
+            "year": "1981",
+            "metadata_status": "unverified",
+            "poster_url": "/api/posters/1198.png",
+            "score": 0.609137,
+            "reason": "库内类型：Action、Adventure；片长未知",
+            "ranking_strategy": "deepfm-rec-v1"
+          }
+        ],
+        "constraints": {
+          "include_genres": [],
+          "exclude_genres": [
+            "Horror"
+          ],
+          "exclude_ids": []
+        },
+        "warnings": [],
+        "message": "已根据库内信息筛选并排序。",
+        "trace": [
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 785.53
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "1dfc167f-cecf-49ec-8551-b567f55d3920",
+            "step": 1,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "recommend_movies",
+            "arguments": {
+              "exclude_genres": [
+                "Horror"
+              ]
+            },
+            "step": 1,
+            "ok": true
+          },
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 740.06
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "d7ef6ef4-e091-432c-bf6b-242abbdf4075",
+            "step": 2,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "finish",
+            "arguments": {},
+            "step": 2,
+            "ok": true
+          },
+          {
+            "tool": "filter",
+            "input_count": 3883,
+            "eligible_count": 3540,
+            "missing_runtime_excluded": 0,
+            "missing_director_excluded": 0
+          },
+          {
+            "dependency": "recall_itemcf",
+            "attempt": 1,
+            "ok": true,
+            "ms": 0.16
+          },
+          {
+            "dependency": "recall_text",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1.8
+          },
+          {
+            "dependency": "cache",
+            "attempt": 1,
+            "ok": true,
+            "ms": 3.73
+          },
+          {
+            "tool": "recall",
+            "channel": "popular",
+            "count": 100
+          },
+          {
+            "tool": "recall",
+            "channel": "itemcf",
+            "count": 100
+          },
+          {
+            "tool": "recall",
+            "channel": "text",
+            "count": 0,
+            "skipped": "no_positive_text_similarity"
+          },
+          {
+            "tool": "rank",
+            "strategy": "deepfm-rec-v1",
+            "count": 196
+          },
+          {
+            "tool": "rerank",
+            "strategy": "genre-diversity-fixed-0.08",
+            "count": 6
+          }
+        ],
+        "degradation": [],
+        "eligible_count": 3540,
+        "evidence_checks": [
+          {
+            "movie_id": 318,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2762,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 260,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 858,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2396,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 1198,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          }
+        ],
+        "relaxation_suggestions": [],
+        "versions": {
+          "data": "rec-v1",
+          "model": "rec-v1",
+          "prompt": "movie-tools-v2",
+          "agent": "conversation-v2",
+          "content": "content-v1"
+        },
+        "summary": {
+          "version": "structured-v1",
+          "through_turn": 1,
+          "constraints": {
+            "include_genres": [],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "exclude_ids": [],
+            "turn_count": 1
+          },
+          "sources": {
+            "exclude_genres:Horror": {
+              "turn": 1,
+              "start": 0,
+              "end": 14
+            }
+          },
+          "last_results": [
+            318,
+            2762,
+            260,
+            858,
+            2396,
+            1198
+          ]
+        },
+        "history_characters": {
+          "original": 2,
+          "sent": 256
+        },
+        "memory_used": [],
+        "memory_proposals_saved": 1,
+        "elapsed_ms": 1557.49
+      },
+      "active_memories": [
+        {
+          "id": "0797bcf8-8ba4-431a-89c6-d0cc691c78d5",
+          "key": "exclude_genres",
+          "value": "Horror",
+          "scope": "long_term",
+          "source_conversation": "34668ebf-2159-4ab7-8b18-7a9fbbd02ef8",
+          "source_turn": 1,
+          "created_at": "2026-10-18T12:05:43.389530+00:00",
+          "expires_at": null
+        }
+      ],
+      "failure_facts": [],
+      "model_argument_oracle_comparisons": [
+        {
+          "field": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "model_argument": [
+            "Horror"
+          ],
+          "passed": true
+        }
+      ],
+      "model_calls": [
+        {
+          "budget_request_id": "1dfc167f-cecf-49ec-8551-b567f55d3920",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 903,
+            "completion_tokens": 45,
+            "total_tokens": 948,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 903
+          },
+          "tools": [
+            {
+              "name": "recommend_movies",
+              "arguments_raw": "{\"exclude_genres\": [\"Horror\"]}",
+              "arguments": {
+                "exclude_genres": [
+                  "Horror"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "budget_request_id": "d7ef6ef4-e091-432c-bf6b-242abbdf4075",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 1709,
+            "completion_tokens": 21,
+            "total_tokens": 1730,
+            "prompt_tokens_details": {
+              "cached_tokens": 768
+            },
+            "prompt_cache_hit_tokens": 768,
+            "prompt_cache_miss_tokens": 941
+          },
+          "tools": [
+            {
+              "name": "finish",
+              "arguments_raw": "{}",
+              "arguments": {}
+            }
+          ]
+        }
+      ],
+      "elapsed_ms": 1565.99
+    },
+    {
+      "id": "M01",
+      "message": "想看悬疑电影，不要恐怖片，两小时以内。",
+      "source": "authored natural-language task",
+      "task_success": true,
+      "live_tool_loop_success": true,
+      "prior_turn_failed": false,
+      "preparsed_state": {
+        "include_genres": [
+          "Mystery"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "exclude_ids": [],
+        "sources": {
+          "include_genres:Mystery": {
+            "turn": 1,
+            "start": 0,
+            "end": 6
+          },
+          "exclude_genres:Horror": {
+            "turn": 1,
+            "start": 7,
+            "end": 12
+          },
+          "max_runtime": {
+            "turn": 1,
+            "start": 13,
+            "end": 16
+          }
+        },
+        "max_runtime": 120
+      },
+      "preparsed_memory": [],
+      "status": "executed",
+      "expected": {
+        "include_genres": [
+          "Mystery"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 120
+      },
+      "checks": [
+        {
+          "fact": "include_genres",
+          "expected": [
+            "Mystery"
+          ],
+          "actual": [
+            "Mystery"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "actual": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "max_runtime",
+          "expected": 120,
+          "actual": 120,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 904,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 913,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1732,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1269,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2076,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 3044,
+          "passed": true
+        },
+        {
+          "fact": "nonempty_for_these_catalogue_supported_tasks",
+          "passed": true
+        }
+      ],
+      "response": {
+        "request_id": "09c19315-ff37-4ce5-b3eb-56aafe9eb9ad",
+        "conversation_id": "a8d2fefc-e6e9-4390-b049-791fc3192d78",
+        "turn": 1,
+        "mode": "deepseek_tools",
+        "items": [
+          {
+            "movie_id": 904,
+            "title": "Rear Window (1954)",
+            "genres": [
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 112,
+            "directors": [
+              "nm0000033"
+            ],
+            "year": "1954",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/904.png",
+            "score": 0.588816,
+            "reason": "库内类型：Mystery、Thriller；片长 112 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 913,
+            "title": "Maltese Falcon, The (1941)",
+            "genres": [
+              "Film-Noir",
+              "Mystery"
+            ],
+            "runtime_minutes": 100,
+            "directors": [
+              "nm0001379"
+            ],
+            "year": "1941",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/913.png",
+            "score": 0.465149,
+            "reason": "库内类型：Film-Noir、Mystery；片长 100 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1732,
+            "title": "Big Lebowski, The (1998)",
+            "genres": [
+              "Comedy",
+              "Crime",
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 117,
+            "directors": [
+              "nm0001054",
+              "nm0001053"
+            ],
+            "year": "1998",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1732.png",
+            "score": 0.459736,
+            "reason": "库内类型：Comedy、Crime、Mystery、Thriller；片长 117 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1269,
+            "title": "Arsenic and Old Lace (1944)",
+            "genres": [
+              "Comedy",
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 118,
+            "directors": [
+              "nm0001008"
+            ],
+            "year": "1944",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1269.png",
+            "score": 0.448476,
+            "reason": "库内类型：Comedy、Mystery、Thriller；片长 118 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2076,
+            "title": "Blue Velvet (1986)",
+            "genres": [
+              "Drama",
+              "Mystery"
+            ],
+            "runtime_minutes": 120,
+            "directors": [
+              "nm0000186"
+            ],
+            "year": "1986",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2076.png",
+            "score": 0.40923,
+            "reason": "库内类型：Drama、Mystery；片长 120 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 3044,
+            "title": "Dead Again (1991)",
+            "genres": [
+              "Mystery",
+              "Romance",
+              "Thriller"
+            ],
+            "runtime_minutes": 107,
+            "directors": [
+              "nm0000110"
+            ],
+            "year": "1991",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/3044.png",
+            "score": 0.426449,
+            "reason": "库内类型：Mystery、Romance、Thriller；片长 107 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          }
+        ],
+        "constraints": {
+          "include_genres": [
+            "Mystery"
+          ],
+          "exclude_genres": [
+            "Horror"
+          ],
+          "exclude_ids": [],
+          "max_runtime": 120
+        },
+        "warnings": [],
+        "message": "已根据库内信息筛选并排序。",
+        "trace": [
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1196.42
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "6ef44130-130a-4d0c-a1dd-848325477438",
+            "step": 1,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "recommend_movies",
+            "arguments": {
+              "include_genres": [
+                "Mystery"
+              ],
+              "exclude_genres": [
+                "Horror"
+              ],
+              "max_runtime": 120
+            },
+            "step": 1,
+            "ok": true
+          },
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 925.61
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "cb90b23c-6233-4250-a1fd-9319d51b011f",
+            "step": 2,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "finish",
+            "arguments": {},
+            "step": 2,
+            "ok": true
+          },
+          {
+            "tool": "filter",
+            "input_count": 3883,
+            "eligible_count": 55,
+            "missing_runtime_excluded": 27,
+            "missing_director_excluded": 0
+          },
+          {
+            "dependency": "recall_itemcf",
+            "attempt": 1,
+            "ok": true,
+            "ms": 0.1
+          },
+          {
+            "dependency": "recall_text",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1.76
+          },
+          {
+            "dependency": "cache",
+            "attempt": 1,
+            "ok": true,
+            "ms": 3.71
+          },
+          {
+            "tool": "recall",
+            "channel": "popular",
+            "count": 55
+          },
+          {
+            "tool": "recall",
+            "channel": "itemcf",
+            "count": 55
+          },
+          {
+            "tool": "recall",
+            "channel": "text",
+            "count": 55
+          },
+          {
+            "tool": "rank",
+            "strategy": "deepfm-rec-v1",
+            "count": 55
+          },
+          {
+            "tool": "rerank",
+            "strategy": "genre-diversity-fixed-0.08",
+            "count": 6
+          }
+        ],
+        "degradation": [],
+        "eligible_count": 55,
+        "evidence_checks": [
+          {
+            "movie_id": 904,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 913,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 1732,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 1269,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2076,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 3044,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          }
+        ],
+        "relaxation_suggestions": [],
+        "versions": {
+          "data": "rec-v1",
+          "model": "rec-v1",
+          "prompt": "movie-tools-v2",
+          "agent": "conversation-v2",
+          "content": "content-v1"
+        },
+        "summary": {
+          "version": "structured-v1",
+          "through_turn": 1,
+          "constraints": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "exclude_ids": [],
+            "max_runtime": 120,
+            "turn_count": 1
+          },
+          "sources": {
+            "include_genres:Mystery": {
+              "turn": 1,
+              "start": 0,
+              "end": 6
+            },
+            "exclude_genres:Horror": {
+              "turn": 1,
+              "start": 7,
+              "end": 12
+            },
+            "max_runtime": {
+              "turn": 1,
+              "start": 13,
+              "end": 16
+            }
+          },
+          "last_results": [
+            904,
+            913,
+            1732,
+            1269,
+            2076,
+            3044
+          ]
+        },
+        "history_characters": {
+          "original": 2,
+          "sent": 398
+        },
+        "memory_used": [],
+        "memory_proposals_saved": 0,
+        "elapsed_ms": 2150.66
+      },
+      "active_memories": [],
+      "failure_facts": [],
+      "model_argument_oracle_comparisons": [
+        {
+          "field": "include_genres",
+          "expected": [
+            "Mystery"
+          ],
+          "model_argument": [
+            "Mystery"
+          ],
+          "passed": true
+        },
+        {
+          "field": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "model_argument": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "field": "max_runtime",
+          "expected": 120,
+          "model_argument": 120,
+          "passed": true
+        }
+      ],
+      "model_calls": [
+        {
+          "budget_request_id": "6ef44130-130a-4d0c-a1dd-848325477438",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 1027,
+            "completion_tokens": 85,
+            "total_tokens": 1112,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1027
+          },
+          "tools": [
+            {
+              "name": "recommend_movies",
+              "arguments_raw": "{\"include_genres\": [\"Mystery\"], \"exclude_genres\": [\"Horror\"], \"max_runtime\": 120}",
+              "arguments": {
+                "include_genres": [
+                  "Mystery"
+                ],
+                "exclude_genres": [
+                  "Horror"
+                ],
+                "max_runtime": 120
+              }
+            }
+          ]
+        },
+        {
+          "budget_request_id": "cb90b23c-6233-4250-a1fd-9319d51b011f",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 1928,
+            "completion_tokens": 21,
+            "total_tokens": 1949,
+            "prompt_tokens_details": {
+              "cached_tokens": 896
+            },
+            "prompt_cache_hit_tokens": 896,
+            "prompt_cache_miss_tokens": 1032
+          },
+          "tools": [
+            {
+              "name": "finish",
+              "arguments_raw": "{}",
+              "arguments": {}
+            }
+          ]
+        }
+      ],
+      "elapsed_ms": 2156.56
+    },
+    {
+      "id": "M02",
+      "message": "排在最前面的那部已经看了，换一部相似的，导演也别重复。",
+      "source": "authored natural-language task",
+      "task_success": true,
+      "live_tool_loop_success": false,
+      "prior_turn_failed": false,
+      "preparsed_state": {
+        "sources": {
+          "max_runtime": {
+            "end": 16,
+            "turn": 1,
+            "start": 13
+          },
+          "exclude_genres:Horror": {
+            "end": 12,
+            "turn": 1,
+            "start": 7
+          },
+          "include_genres:Mystery": {
+            "end": 6,
+            "turn": 1,
+            "start": 0
+          }
+        },
+        "turn_count": 1,
+        "exclude_ids": [
+          904
+        ],
+        "max_runtime": 120,
+        "last_results": [
+          904,
+          913,
+          1732,
+          1269,
+          2076,
+          3044
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "include_genres": [
+          "Mystery"
+        ],
+        "similar_to": 904,
+        "exclude_director_of": 904
+      },
+      "preparsed_memory": [],
+      "status": "executed",
+      "expected": {
+        "include_genres": [
+          "Mystery"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 120,
+        "similar_to": 904,
+        "exclude_director_of": 904,
+        "exclude_ids": [
+          904
+        ]
+      },
+      "checks": [
+        {
+          "fact": "include_genres",
+          "expected": [
+            "Mystery"
+          ],
+          "actual": [
+            "Mystery"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "actual": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "max_runtime",
+          "expected": 120,
+          "actual": 120,
+          "passed": true
+        },
+        {
+          "fact": "similar_to",
+          "expected": 904,
+          "actual": 904,
+          "passed": true
+        },
+        {
+          "fact": "exclude_director_of",
+          "expected": 904,
+          "actual": 904,
+          "passed": true
+        },
+        {
+          "fact": "exclude_ids",
+          "expected": [
+            904
+          ],
+          "actual": [
+            904
+          ],
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1732,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 913,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 3044,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1269,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1212,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2076,
+          "passed": true
+        },
+        {
+          "fact": "nonempty_for_these_catalogue_supported_tasks",
+          "passed": true
+        }
+      ],
+      "response": {
+        "request_id": "51fa9dac-eaa9-46ad-83f2-4802f624eab7",
+        "conversation_id": "a8d2fefc-e6e9-4390-b049-791fc3192d78",
+        "turn": 2,
+        "mode": "offline_rules",
+        "items": [
+          {
+            "movie_id": 1732,
+            "title": "Big Lebowski, The (1998)",
+            "genres": [
+              "Comedy",
+              "Crime",
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 117,
+            "directors": [
+              "nm0001054",
+              "nm0001053"
+            ],
+            "year": "1998",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1732.png",
+            "score": 0.480578,
+            "reason": "库内类型：Comedy、Crime、Mystery、Thriller；片长 117 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 913,
+            "title": "Maltese Falcon, The (1941)",
+            "genres": [
+              "Film-Noir",
+              "Mystery"
+            ],
+            "runtime_minutes": 100,
+            "directors": [
+              "nm0001379"
+            ],
+            "year": "1941",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/913.png",
+            "score": 0.444535,
+            "reason": "库内类型：Film-Noir、Mystery；片长 100 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 3044,
+            "title": "Dead Again (1991)",
+            "genres": [
+              "Mystery",
+              "Romance",
+              "Thriller"
+            ],
+            "runtime_minutes": 107,
+            "directors": [
+              "nm0000110"
+            ],
+            "year": "1991",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/3044.png",
+            "score": 0.448296,
+            "reason": "库内类型：Mystery、Romance、Thriller；片长 107 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1269,
+            "title": "Arsenic and Old Lace (1944)",
+            "genres": [
+              "Comedy",
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 118,
+            "directors": [
+              "nm0001008"
+            ],
+            "year": "1944",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1269.png",
+            "score": 0.470825,
+            "reason": "库内类型：Comedy、Mystery、Thriller；片长 118 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1212,
+            "title": "Third Man, The (1949)",
+            "genres": [
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 104,
+            "directors": [
+              "nm0715346"
+            ],
+            "year": "1949",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1212.png",
+            "score": 0.415398,
+            "reason": "库内类型：Mystery、Thriller；片长 104 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2076,
+            "title": "Blue Velvet (1986)",
+            "genres": [
+              "Drama",
+              "Mystery"
+            ],
+            "runtime_minutes": 120,
+            "directors": [
+              "nm0000186"
+            ],
+            "year": "1986",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2076.png",
+            "score": 0.377373,
+            "reason": "库内类型：Drama、Mystery；片长 120 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          }
+        ],
+        "constraints": {
+          "exclude_ids": [
+            904
+          ],
+          "max_runtime": 120,
+          "exclude_genres": [
+            "Horror"
+          ],
+          "include_genres": [
+            "Mystery"
+          ],
+          "similar_to": 904,
+          "exclude_director_of": 904
+        },
+        "warnings": [],
+        "message": "已根据库内信息筛选并排序。",
+        "trace": [
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 820.36
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "32755076-2b63-4723-8290-ffe18a393fea",
+            "step": 1,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "filter",
+            "input_count": 3883,
+            "eligible_count": 48,
+            "missing_runtime_excluded": 27,
+            "missing_director_excluded": 0
+          },
+          {
+            "dependency": "recall_itemcf",
+            "attempt": 1,
+            "ok": true,
+            "ms": 0.12
+          },
+          {
+            "dependency": "recall_text",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1.48
+          },
+          {
+            "dependency": "cache",
+            "attempt": 1,
+            "ok": true,
+            "ms": 3.71
+          },
+          {
+            "tool": "recall",
+            "channel": "popular",
+            "count": 48
+          },
+          {
+            "tool": "recall",
+            "channel": "itemcf",
+            "count": 48
+          },
+          {
+            "tool": "recall",
+            "channel": "text",
+            "count": 48
+          },
+          {
+            "tool": "rank",
+            "strategy": "deepfm-rec-v1",
+            "count": 48
+          },
+          {
+            "tool": "rerank",
+            "strategy": "genre-diversity-fixed-0.08",
+            "count": 6
+          }
+        ],
+        "degradation": [
+          "llm:ValueError:offline_recommendation"
+        ],
+        "eligible_count": 48,
+        "evidence_checks": [
+          {
+            "movie_id": 1732,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 913,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 3044,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 1269,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 1212,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2076,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          }
+        ],
+        "relaxation_suggestions": [],
+        "versions": {
+          "data": "rec-v1",
+          "model": "rec-v1",
+          "prompt": "movie-tools-v2",
+          "agent": "conversation-v2",
+          "content": "content-v1"
+        },
+        "summary": {
+          "version": "structured-v1",
+          "through_turn": 2,
+          "constraints": {
+            "turn_count": 2,
+            "exclude_ids": [
+              904
+            ],
+            "max_runtime": 120,
+            "exclude_genres": [
+              "Horror"
+            ],
+            "include_genres": [
+              "Mystery"
+            ],
+            "similar_to": 904,
+            "exclude_director_of": 904
+          },
+          "sources": {
+            "max_runtime": {
+              "end": 16,
+              "turn": 1,
+              "start": 13
+            },
+            "exclude_genres:Horror": {
+              "end": 12,
+              "turn": 1,
+              "start": 7
+            },
+            "include_genres:Mystery": {
+              "end": 6,
+              "turn": 1,
+              "start": 0
+            }
+          },
+          "last_results": [
+            1732,
+            913,
+            3044,
+            1269,
+            1212,
+            2076
+          ]
+        },
+        "history_characters": {
+          "original": 44,
+          "sent": 539
+        },
+        "memory_used": [],
+        "memory_proposals_saved": 0,
+        "elapsed_ms": 847.32
+      },
+      "active_memories": [],
+      "failure_facts": [],
+      "model_argument_oracle_comparisons": [
+        {
+          "field": "include_genres",
+          "expected": [
+            "Mystery"
+          ],
+          "model_argument": [
+            "Mystery"
+          ],
+          "passed": true
+        },
+        {
+          "field": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "model_argument": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "field": "max_runtime",
+          "expected": 120,
+          "model_argument": 120,
+          "passed": true
+        },
+        {
+          "field": "similar_to",
+          "expected": 904,
+          "model_argument": 904,
+          "passed": true
+        },
+        {
+          "field": "exclude_director_of",
+          "expected": 904,
+          "model_argument": 904,
+          "passed": true
+        },
+        {
+          "field": "exclude_ids",
+          "expected": [
+            904
+          ],
+          "model_argument": [
+            904,
+            913,
+            1732,
+            1269,
+            2076,
+            3044
+          ],
+          "passed": true
+        }
+      ],
+      "model_calls": [
+        {
+          "budget_request_id": "32755076-2b63-4723-8290-ffe18a393fea",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 1156,
+            "completion_tokens": 162,
+            "total_tokens": 1318,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1156
+          },
+          "tools": [
+            {
+              "name": "recommend_movies",
+              "arguments_raw": "{\"include_genres\": [\"Mystery\"], \"exclude_genres\": [\"Horror\"], \"max_runtime\": 120, \"similar_to\": 904, \"exclude_director_of\": 904, \"exclude_ids\": [904, 913, 1732, 1269, 2076, 3044]}",
+              "arguments": {
+                "include_genres": [
+                  "Mystery"
+                ],
+                "exclude_genres": [
+                  "Horror"
+                ],
+                "max_runtime": 120,
+                "similar_to": 904,
+                "exclude_director_of": 904,
+                "exclude_ids": [
+                  904,
+                  913,
+                  1732,
+                  1269,
+                  2076,
+                  3044
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "elapsed_ms": 856.1
+    },
+    {
+      "id": "M03",
+      "message": "把刚才的两小时改成九十分钟，其他排除条件都留着。",
+      "source": "authored natural-language task",
+      "task_success": true,
+      "live_tool_loop_success": false,
+      "prior_turn_failed": false,
+      "preparsed_state": {
+        "sources": {
+          "max_runtime": {
+            "turn": 3,
+            "start": 9,
+            "end": 13
+          },
+          "exclude_genres:Horror": {
+            "end": 12,
+            "turn": 1,
+            "start": 7
+          },
+          "include_genres:Mystery": {
+            "end": 6,
+            "turn": 1,
+            "start": 0
+          }
+        },
+        "similar_to": 904,
+        "turn_count": 2,
+        "exclude_ids": [
+          904
+        ],
+        "max_runtime": 90,
+        "last_results": [
+          1732,
+          913,
+          3044,
+          1269,
+          1212,
+          2076
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "include_genres": [
+          "Mystery"
+        ],
+        "exclude_director_of": 904
+      },
+      "preparsed_memory": [],
+      "status": "executed",
+      "expected": {
+        "include_genres": [
+          "Mystery"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "max_runtime": 90,
+        "similar_to": 904,
+        "exclude_director_of": 904,
+        "exclude_ids": [
+          904
+        ]
+      },
+      "checks": [
+        {
+          "fact": "include_genres",
+          "expected": [
+            "Mystery"
+          ],
+          "actual": [
+            "Mystery"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "actual": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "fact": "max_runtime",
+          "expected": 90,
+          "actual": 90,
+          "passed": true
+        },
+        {
+          "fact": "similar_to",
+          "expected": 904,
+          "actual": 904,
+          "passed": true
+        },
+        {
+          "fact": "exclude_director_of",
+          "expected": 904,
+          "actual": 904,
+          "passed": true
+        },
+        {
+          "fact": "exclude_ids",
+          "expected": [
+            904
+          ],
+          "actual": [
+            904
+          ],
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 942,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 1484,
+          "passed": true
+        },
+        {
+          "fact": "returned_movie_constraints",
+          "movie_id": 2810,
+          "passed": true
+        },
+        {
+          "fact": "nonempty_for_these_catalogue_supported_tasks",
+          "passed": true
+        }
+      ],
+      "response": {
+        "request_id": "ed544a9a-f5ee-4032-a4f0-708e61178f89",
+        "conversation_id": "a8d2fefc-e6e9-4390-b049-791fc3192d78",
+        "turn": 3,
+        "mode": "offline_rules",
+        "items": [
+          {
+            "movie_id": 942,
+            "title": "Laura (1944)",
+            "genres": [
+              "Crime",
+              "Film-Noir",
+              "Mystery"
+            ],
+            "runtime_minutes": 88,
+            "directors": [
+              "nm0695937",
+              "nm0541149"
+            ],
+            "year": "1944",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/942.png",
+            "score": 0.23753,
+            "reason": "库内类型：Crime、Film-Noir、Mystery；片长 88 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1484,
+            "title": "Daytrippers, The (1996)",
+            "genres": [
+              "Mystery"
+            ],
+            "runtime_minutes": 87,
+            "directors": [
+              "nm0609549"
+            ],
+            "year": "1996",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1484.png",
+            "score": 0.218619,
+            "reason": "库内类型：Mystery；片长 87 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2810,
+            "title": "Perfect Blue (1997)",
+            "genres": [
+              "Animation",
+              "Mystery"
+            ],
+            "runtime_minutes": 82,
+            "directors": [
+              "nm0464804"
+            ],
+            "year": "1997",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2810.png",
+            "score": 0.132759,
+            "reason": "库内类型：Animation、Mystery；片长 82 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          }
+        ],
+        "constraints": {
+          "similar_to": 904,
+          "exclude_ids": [
+            904
+          ],
+          "max_runtime": 90,
+          "exclude_genres": [
+            "Horror"
+          ],
+          "include_genres": [
+            "Mystery"
+          ],
+          "exclude_director_of": 904
+        },
+        "warnings": [],
+        "message": "已根据库内信息筛选并排序。",
+        "trace": [
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1607.64
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "91f7bbc1-a51e-4894-9a90-c50b72d63100",
+            "step": 1,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "filter",
+            "input_count": 3883,
+            "eligible_count": 3,
+            "missing_runtime_excluded": 27,
+            "missing_director_excluded": 0
+          },
+          {
+            "dependency": "recall_itemcf",
+            "attempt": 1,
+            "ok": true,
+            "ms": 0.11
+          },
+          {
+            "dependency": "recall_text",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1.26
+          },
+          {
+            "dependency": "cache",
+            "attempt": 1,
+            "ok": true,
+            "ms": 4.14
+          },
+          {
+            "tool": "recall",
+            "channel": "popular",
+            "count": 3
+          },
+          {
+            "tool": "recall",
+            "channel": "itemcf",
+            "count": 3
+          },
+          {
+            "tool": "recall",
+            "channel": "text",
+            "count": 3
+          },
+          {
+            "tool": "rank",
+            "strategy": "deepfm-rec-v1",
+            "count": 3
+          },
+          {
+            "tool": "rerank",
+            "strategy": "genre-diversity-fixed-0.08",
+            "count": 3
+          }
+        ],
+        "degradation": [
+          "llm:ValueError:offline_recommendation"
+        ],
+        "eligible_count": 3,
+        "evidence_checks": [
+          {
+            "movie_id": 942,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 1484,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          },
+          {
+            "movie_id": 2810,
+            "passed": true,
+            "evidence_source": "local_catalogue",
+            "checked_fields": [
+              "movie_id",
+              "genres",
+              "runtime_minutes",
+              "directors",
+              "excluded_ids"
+            ]
+          }
+        ],
+        "relaxation_suggestions": [],
+        "versions": {
+          "data": "rec-v1",
+          "model": "rec-v1",
+          "prompt": "movie-tools-v2",
+          "agent": "conversation-v2",
+          "content": "content-v1"
+        },
+        "summary": {
+          "version": "structured-v1",
+          "through_turn": 3,
+          "constraints": {
+            "similar_to": 904,
+            "turn_count": 3,
+            "exclude_ids": [
+              904
+            ],
+            "max_runtime": 90,
+            "exclude_genres": [
+              "Horror"
+            ],
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_director_of": 904
+          },
+          "sources": {
+            "max_runtime": {
+              "turn": 3,
+              "start": 9,
+              "end": 13
+            },
+            "exclude_genres:Horror": {
+              "end": 12,
+              "turn": 1,
+              "start": 7
+            },
+            "include_genres:Mystery": {
+              "end": 6,
+              "turn": 1,
+              "start": 0
+            }
+          },
+          "last_results": [
+            942,
+            1484,
+            2810
+          ]
+        },
+        "history_characters": {
+          "original": 96,
+          "sent": 590
+        },
+        "memory_used": [],
+        "memory_proposals_saved": 0,
+        "elapsed_ms": 1634.48
+      },
+      "active_memories": [],
+      "failure_facts": [],
+      "model_argument_oracle_comparisons": [
+        {
+          "field": "include_genres",
+          "expected": [
+            "Mystery"
+          ],
+          "model_argument": [
+            "Mystery"
+          ],
+          "passed": true
+        },
+        {
+          "field": "exclude_genres",
+          "expected": [
+            "Horror"
+          ],
+          "model_argument": [
+            "Horror"
+          ],
+          "passed": true
+        },
+        {
+          "field": "max_runtime",
+          "expected": 90,
+          "model_argument": 90,
+          "passed": true
+        },
+        {
+          "field": "similar_to",
+          "expected": 904,
+          "model_argument": 904,
+          "passed": true
+        },
+        {
+          "field": "exclude_director_of",
+          "expected": 904,
+          "model_argument": 904,
+          "passed": true
+        },
+        {
+          "field": "exclude_ids",
+          "expected": [
+            904
+          ],
+          "model_argument": [
+            904,
+            1732
+          ],
+          "passed": true
+        }
+      ],
+      "model_calls": [
+        {
+          "budget_request_id": "91f7bbc1-a51e-4894-9a90-c50b72d63100",
+          "model": "deepseek-flash",
+          "usage": {
+            "prompt_tokens": 1183,
+            "completion_tokens": 147,
+            "total_tokens": 1330,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1183
+          },
+          "tools": [
+            {
+              "name": "recommend_movies",
+              "arguments_raw": "{\"similar_to\": 904, \"exclude_ids\": [904, 1732], \"max_runtime\": 90, \"include_genres\": [\"Mystery\"], \"exclude_genres\": [\"Horror\"], \"exclude_director_of\": 904}",
+              "arguments": {
+                "similar_to": 904,
+                "exclude_ids": [
+                  904,
+                  1732
+                ],
+                "max_runtime": 90,
+                "include_genres": [
+                  "Mystery"
+                ],
+                "exclude_genres": [
+                  "Horror"
+                ],
+                "exclude_director_of": 904
+              }
+            }
+          ]
+        }
+      ],
+      "elapsed_ms": 1644.28
+    }
+  ],
+  "interpretation": "Do not combine with old90 rule-template pass rate; count all failed natural tasks. Multi-turn cascade is labelled. Post-fix replay of known development tasks; NOT independent heldout gain. Original baseline preserved."
+}

@@ -1,0 +1,380 @@
+{
+  "scope": "read-only audit of originalV4, no rerun or newAPI",
+  "timer_start": "performance.now immediately before request(/message) invokes fetch",
+  "timer_end": "after response.json, ranked cards inserted and await Vue nextTick, before preference refresh; DOM update commit, not physical screen paint",
+  "includes": [
+    "HTTP request and response JSON",
+    "both completed nonstreaming official model requests per LLM turn",
+    "local tools/ranking/DB handler",
+    "Vue result DOM update"
+  ],
+  "excludes": [
+    "physical screen paint",
+    "subsequent preference/status refresh",
+    "user think time",
+    "3 missing first-attempt UI timer observations"
+  ],
+  "llm_turns": 36,
+  "clarification_cases": [
+    {
+      "scenario": "E13",
+      "turn": 2,
+      "provider_attempts": 0
+    },
+    {
+      "scenario": "E14",
+      "turn": 2,
+      "provider_attempts": 0
+    },
+    {
+      "scenario": "E15",
+      "turn": 2,
+      "provider_attempts": 0
+    },
+    {
+      "scenario": "E16",
+      "turn": 2,
+      "provider_attempts": 0
+    }
+  ],
+  "provider_calls": 72,
+  "all_turns_enclose_provider_time": true,
+  "provider_ms": {
+    "n": 72,
+    "mean": 909.9277777777778,
+    "p95": 1334.6215000000007,
+    "min": 575.15,
+    "max": 1830.83
+  },
+  "provider_sum_ms": {
+    "n": 36,
+    "mean": 1819.8555555555556,
+    "p95": 2287.8875,
+    "min": 1255.78,
+    "max": 2637.33
+  },
+  "server_ms": {
+    "n": 36,
+    "mean": 1915.2072222222223,
+    "p95": 2383.42,
+    "min": 1331.56,
+    "max": 2790.65
+  },
+  "browser_ms": {
+    "n": 36,
+    "mean": 1946.0027777777777,
+    "p95": 2414.3,
+    "min": 1357.2,
+    "max": 2825.7
+  },
+  "output_tokens_per_provider_call": {
+    "n": 72,
+    "mean": 48.416666666666664,
+    "p95": 102.10000000000011,
+    "min": 21,
+    "max": 128
+  },
+  "prompt_cache": {
+    "calls_with_hits": 39,
+    "calls": 72,
+    "hit_tokens": 43264,
+    "all_input_tokens": 108194,
+    "hit_token_fraction": 0.3998742998687543
+  },
+  "settings": {
+    "thinking": "disabled",
+    "stream": false,
+    "max_tokens_per_model_call": 512,
+    "output": "short structured tool arguments + finish, not long recommendation prose"
+  },
+  "per_turn": [
+    {
+      "request_id": "49dd6c48-89f2-422e-87a7-f3f084042d47",
+      "calls": 2,
+      "provider_sum_ms": 2637.33,
+      "server_ms": 2790.65,
+      "browser_ms": 2825.7,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "be3cee0d-f06b-4d0a-a464-08c0d359686f",
+      "calls": 2,
+      "provider_sum_ms": 1965.39,
+      "server_ms": 2060.91,
+      "browser_ms": 2085.4,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "b7437848-e517-4c59-a917-6dabdf3485c5",
+      "calls": 2,
+      "provider_sum_ms": 2143.51,
+      "server_ms": 2225.3,
+      "browser_ms": 2252.5,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "5628c674-7541-41b4-884d-45a10f5848c4",
+      "calls": 2,
+      "provider_sum_ms": 1832.49,
+      "server_ms": 2064.67,
+      "browser_ms": 2136.6,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "abab2b14-56a0-428f-b5aa-ead06f46e7c0",
+      "calls": 2,
+      "provider_sum_ms": 1676.35,
+      "server_ms": 1771.46,
+      "browser_ms": 1795.9,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "52cb402c-161b-4c78-914a-72a859aa15c3",
+      "calls": 2,
+      "provider_sum_ms": 2260.37,
+      "server_ms": 2358.66,
+      "browser_ms": 2391.5,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "1e984b3e-9440-474b-ae22-220df3ac5963",
+      "calls": 2,
+      "provider_sum_ms": 1941.1999999999998,
+      "server_ms": 2044.65,
+      "browser_ms": 2067.6,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "b96b9780-251e-491b-bbbe-ed19c53c5850",
+      "calls": 2,
+      "provider_sum_ms": 1799.2800000000002,
+      "server_ms": 1884.12,
+      "browser_ms": 1903.5,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "55c2d268-c48f-4635-bba3-6ed928f148b6",
+      "calls": 2,
+      "provider_sum_ms": 1635.2,
+      "server_ms": 1713.55,
+      "browser_ms": 1746.7,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "7f991a5f-a103-450e-9a20-2353ff40fc30",
+      "calls": 2,
+      "provider_sum_ms": 2172.59,
+      "server_ms": 2243.2,
+      "browser_ms": 2286.5,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "f644e741-34c1-450e-afee-a55d2d0b53c6",
+      "calls": 2,
+      "provider_sum_ms": 2370.44,
+      "server_ms": 2457.7,
+      "browser_ms": 2482.7,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "4e56970a-bb43-4c6e-a92f-2c50c4b5d392",
+      "calls": 2,
+      "provider_sum_ms": 1824.96,
+      "server_ms": 1917.73,
+      "browser_ms": 1935.8,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "3714f556-88b8-4ba6-a7f7-20700f8cea1d",
+      "calls": 2,
+      "provider_sum_ms": 1449.13,
+      "server_ms": 1531.31,
+      "browser_ms": 1566,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "8c21b3a0-20e0-4440-90c3-e81c23cc0083",
+      "calls": 2,
+      "provider_sum_ms": 1437.01,
+      "server_ms": 1517.75,
+      "browser_ms": 1542.6,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "06a75593-724c-4762-a4d2-3fa8fd11bba0",
+      "calls": 2,
+      "provider_sum_ms": 1514.83,
+      "server_ms": 1600.95,
+      "browser_ms": 1622.6,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "3f62d864-9736-479d-8f24-a4ea0ad4f6db",
+      "calls": 2,
+      "provider_sum_ms": 1428.49,
+      "server_ms": 1526.07,
+      "browser_ms": 1556.1,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "666ba912-e0d7-4c14-9c02-530ec0ec1c22",
+      "calls": 2,
+      "provider_sum_ms": 1628.06,
+      "server_ms": 1710.38,
+      "browser_ms": 1752.7,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "1a0fe7e1-7726-4d5e-928b-2aa1f0a0d276",
+      "calls": 2,
+      "provider_sum_ms": 1882.87,
+      "server_ms": 1960.88,
+      "browser_ms": 1982.3,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "40cfa065-3061-465b-930b-f865065a7120",
+      "calls": 2,
+      "provider_sum_ms": 1255.78,
+      "server_ms": 1331.56,
+      "browser_ms": 1357.2,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "8fbf6868-e6b0-4f5d-92b8-d56003f43cbf",
+      "calls": 2,
+      "provider_sum_ms": 1719.56,
+      "server_ms": 1813.32,
+      "browser_ms": 1835,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "ce268043-b466-4640-9cc3-2cbb2118f315",
+      "calls": 2,
+      "provider_sum_ms": 1402.13,
+      "server_ms": 1492.61,
+      "browser_ms": 1512.2,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "070b79f2-6bf9-4a5e-b5d0-2f82cac1accc",
+      "calls": 2,
+      "provider_sum_ms": 1682.97,
+      "server_ms": 1761.53,
+      "browser_ms": 1781.6,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "03f921b2-12c2-4a01-a008-faf0c30b58ba",
+      "calls": 2,
+      "provider_sum_ms": 2041.81,
+      "server_ms": 2117.35,
+      "browser_ms": 2135.6,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "cdaa51c7-1a66-4040-a72a-abe25dd2db21",
+      "calls": 2,
+      "provider_sum_ms": 1701.21,
+      "server_ms": 1782.93,
+      "browser_ms": 1801,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "30695a8c-216b-479d-81a4-d1ae2fff115c",
+      "calls": 2,
+      "provider_sum_ms": 1834.33,
+      "server_ms": 1939.56,
+      "browser_ms": 2014.2,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "aec1be89-4176-4d4f-8b25-6ef759fa0378",
+      "calls": 2,
+      "provider_sum_ms": 1879.35,
+      "server_ms": 2059.13,
+      "browser_ms": 2083.6,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "58f5b13a-da55-48de-aadb-eca1ecd12fa9",
+      "calls": 2,
+      "provider_sum_ms": 1791.63,
+      "server_ms": 1905.81,
+      "browser_ms": 1931.7,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "aa801832-4813-4969-815f-86856f1051da",
+      "calls": 2,
+      "provider_sum_ms": 1802.36,
+      "server_ms": 1878.02,
+      "browser_ms": 1901.9,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "1ccffce8-cbe0-49af-9c7f-178213413a09",
+      "calls": 2,
+      "provider_sum_ms": 1568.5500000000002,
+      "server_ms": 1654.36,
+      "browser_ms": 1675.9,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "c45b55ff-a71f-4145-a3b7-be8aa50c5a33",
+      "calls": 2,
+      "provider_sum_ms": 1802.48,
+      "server_ms": 1878.76,
+      "browser_ms": 1897.1,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "f6b6f5e8-cfc7-4452-ae7f-d292bceab02e",
+      "calls": 2,
+      "provider_sum_ms": 2009.6,
+      "server_ms": 2091.4,
+      "browser_ms": 2111.4,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "52b00186-d32d-4a5c-819e-4b8f05f19823",
+      "calls": 2,
+      "provider_sum_ms": 1898.95,
+      "server_ms": 1985.83,
+      "browser_ms": 2039,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "dc5226c1-9eff-4145-a917-f017103b5806",
+      "calls": 2,
+      "provider_sum_ms": 1841.14,
+      "server_ms": 1958.27,
+      "browser_ms": 2009.4,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "b8ba928a-a8fa-4c68-bf8d-fa4ebc869742",
+      "calls": 2,
+      "provider_sum_ms": 1989.1100000000001,
+      "server_ms": 2065.41,
+      "browser_ms": 2084,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "c019c5eb-59c5-4254-b7af-f09f6f3c0660",
+      "calls": 2,
+      "provider_sum_ms": 1903.8200000000002,
+      "server_ms": 1984.61,
+      "browser_ms": 2039.2,
+      "encloses_provider": true
+    },
+    {
+      "request_id": "0c7a40ae-45f5-4935-8ecc-7f87e6d1482c",
+      "calls": 2,
+      "provider_sum_ms": 1790.52,
+      "server_ms": 1867.06,
+      "browser_ms": 1913.4,
+      "encloses_provider": true
+    }
+  ]
+}

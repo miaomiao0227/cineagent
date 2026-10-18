@@ -1,0 +1,972 @@
+{
+  "scope": "three conversational HTTP requests, not statistical LLM capability evaluation",
+  "rows": [
+    {
+      "case": 1,
+      "source": "authored synthetic live smoke",
+      "message": "想看悬疑电影，不要恐怖片，两小时以内。",
+      "passed": true,
+      "response": {
+        "request_id": "d99f1ed6-e3a1-4fc4-8f41-71e6da036a1a",
+        "conversation_id": "de0a8a94-0e8b-4748-b363-57d6959a118f",
+        "turn": 1,
+        "mode": "deepseek_tools",
+        "items": [
+          {
+            "movie_id": 904,
+            "title": "Rear Window (1954)",
+            "genres": [
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 112,
+            "directors": [
+              "nm0000033"
+            ],
+            "year": "1954",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/904.png",
+            "score": 0.588816,
+            "reason": "库内类型：Mystery、Thriller；片长 112 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 913,
+            "title": "Maltese Falcon, The (1941)",
+            "genres": [
+              "Film-Noir",
+              "Mystery"
+            ],
+            "runtime_minutes": 100,
+            "directors": [
+              "nm0001379"
+            ],
+            "year": "1941",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/913.png",
+            "score": 0.465149,
+            "reason": "库内类型：Film-Noir、Mystery；片长 100 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1732,
+            "title": "Big Lebowski, The (1998)",
+            "genres": [
+              "Comedy",
+              "Crime",
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 117,
+            "directors": [
+              "nm0001054",
+              "nm0001053"
+            ],
+            "year": "1998",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1732.png",
+            "score": 0.459736,
+            "reason": "库内类型：Comedy、Crime、Mystery、Thriller；片长 117 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1269,
+            "title": "Arsenic and Old Lace (1944)",
+            "genres": [
+              "Comedy",
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 118,
+            "directors": [
+              "nm0001008"
+            ],
+            "year": "1944",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1269.png",
+            "score": 0.448476,
+            "reason": "库内类型：Comedy、Mystery、Thriller；片长 118 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 2076,
+            "title": "Blue Velvet (1986)",
+            "genres": [
+              "Drama",
+              "Mystery"
+            ],
+            "runtime_minutes": 120,
+            "directors": [
+              "nm0000186"
+            ],
+            "year": "1986",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/2076.png",
+            "score": 0.40923,
+            "reason": "库内类型：Drama、Mystery；片长 120 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 3044,
+            "title": "Dead Again (1991)",
+            "genres": [
+              "Mystery",
+              "Romance",
+              "Thriller"
+            ],
+            "runtime_minutes": 107,
+            "directors": [
+              "nm0000110"
+            ],
+            "year": "1991",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/3044.png",
+            "score": 0.426449,
+            "reason": "库内类型：Mystery、Romance、Thriller；片长 107 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          }
+        ],
+        "constraints": {
+          "include_genres": [
+            "Mystery"
+          ],
+          "exclude_genres": [
+            "Horror"
+          ],
+          "exclude_ids": [],
+          "max_runtime": 120
+        },
+        "warnings": [],
+        "message": "已根据库内信息筛选并排序。",
+        "trace": [
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1007.55
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "028a2f08-b00e-4b70-b234-d85769470ae9",
+            "step": 1,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "recommend_movies",
+            "arguments": {
+              "include_genres": [
+                "Mystery"
+              ],
+              "exclude_genres": [
+                "Horror"
+              ],
+              "max_runtime": 120
+            },
+            "step": 1,
+            "ok": true
+          },
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 961.78
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "eb1debc1-59a0-4cd5-879e-2a2fc41be604",
+            "step": 2,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "finish",
+            "arguments": {},
+            "step": 2,
+            "ok": true
+          },
+          {
+            "tool": "filter",
+            "input_count": 3883,
+            "eligible_count": 55,
+            "missing_runtime_excluded": 27,
+            "missing_director_excluded": 0
+          },
+          {
+            "dependency": "recall_itemcf",
+            "attempt": 1,
+            "ok": true,
+            "ms": 0.15
+          },
+          {
+            "dependency": "recall_text",
+            "attempt": 1,
+            "ok": true,
+            "ms": 16.77
+          },
+          {
+            "dependency": "cache",
+            "attempt": 1,
+            "ok": true,
+            "ms": 13.42
+          },
+          {
+            "tool": "recall",
+            "channel": "popular",
+            "count": 55
+          },
+          {
+            "tool": "recall",
+            "channel": "itemcf",
+            "count": 55
+          },
+          {
+            "tool": "recall",
+            "channel": "text",
+            "count": 55
+          },
+          {
+            "tool": "rank",
+            "strategy": "deepfm-rec-v1",
+            "count": 55
+          },
+          {
+            "tool": "rerank",
+            "strategy": "genre-diversity-fixed-0.08",
+            "count": 6
+          }
+        ],
+        "degradation": [],
+        "eligible_count": 55,
+        "versions": {
+          "data": "rec-v1",
+          "model": "rec-v1",
+          "prompt": "movie-tools-v1",
+          "agent": "conversation-v1",
+          "content": "content-v1"
+        },
+        "summary": {
+          "version": "structured-v1",
+          "through_turn": 1,
+          "constraints": {
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_genres": [
+              "Horror"
+            ],
+            "exclude_ids": [],
+            "max_runtime": 120,
+            "turn_count": 1
+          },
+          "sources": {
+            "include_genres:Mystery": {
+              "turn": 1,
+              "start": 0,
+              "end": 6
+            },
+            "exclude_genres:Horror": {
+              "turn": 1,
+              "start": 7,
+              "end": 12
+            },
+            "max_runtime": {
+              "turn": 1,
+              "start": 13,
+              "end": 16
+            }
+          },
+          "last_results": [
+            904,
+            913,
+            1732,
+            1269,
+            2076,
+            3044
+          ]
+        },
+        "history_characters": {
+          "original": 2,
+          "sent": 398
+        },
+        "memory_used": [],
+        "memory_proposals_saved": 0,
+        "elapsed_ms": 2095.0
+      }
+    },
+    {
+      "case": 2,
+      "source": "authored synthetic live smoke",
+      "message": "第一部看过了，换类似的，但不要同一个导演。",
+      "passed": true,
+      "response": {
+        "request_id": "8ea1bead-e0e0-4ecb-900b-e6d6336ef8de",
+        "conversation_id": "de0a8a94-0e8b-4748-b363-57d6959a118f",
+        "turn": 2,
+        "mode": "deepseek_tools",
+        "items": [
+          {
+            "movie_id": 1212,
+            "title": "Third Man, The (1949)",
+            "genres": [
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 104,
+            "directors": [
+              "nm0715346"
+            ],
+            "year": "1949",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1212.png",
+            "score": 0.415398,
+            "reason": "库内类型：Mystery、Thriller；片长 104 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 648,
+            "title": "Mission: Impossible (1996)",
+            "genres": [
+              "Action",
+              "Adventure",
+              "Mystery"
+            ],
+            "runtime_minutes": 110,
+            "directors": [
+              "nm0000361"
+            ],
+            "year": "1996",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/648.png",
+            "score": 0.369431,
+            "reason": "库内类型：Action、Adventure、Mystery；片长 110 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1805,
+            "title": "Wild Things (1998)",
+            "genres": [
+              "Crime",
+              "Drama",
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 108,
+            "directors": [
+              "nm0573796"
+            ],
+            "year": "1998",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1805.png",
+            "score": 0.385811,
+            "reason": "库内类型：Crime、Drama、Mystery、Thriller；片长 108 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1284,
+            "title": "Big Sleep, The (1946)",
+            "genres": [
+              "Film-Noir",
+              "Mystery"
+            ],
+            "runtime_minutes": 114,
+            "directors": [
+              "nm0001328"
+            ],
+            "year": "1946",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1284.png",
+            "score": 0.342489,
+            "reason": "库内类型：Film-Noir、Mystery；片长 114 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 3730,
+            "title": "Conversation, The (1974)",
+            "genres": [
+              "Drama",
+              "Mystery"
+            ],
+            "runtime_minutes": 113,
+            "directors": [
+              "nm0000338"
+            ],
+            "year": "1974",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/3730.png",
+            "score": 0.345981,
+            "reason": "库内类型：Drama、Mystery；片长 113 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 164,
+            "title": "Devil in a Blue Dress (1995)",
+            "genres": [
+              "Crime",
+              "Film-Noir",
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 102,
+            "directors": [
+              "nm0002083"
+            ],
+            "year": "1995",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/164.png",
+            "score": 0.350733,
+            "reason": "库内类型：Crime、Film-Noir、Mystery、Thriller；片长 102 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          }
+        ],
+        "constraints": {
+          "exclude_ids": [
+            904,
+            913,
+            1269,
+            1732,
+            2076,
+            3044
+          ],
+          "max_runtime": 120,
+          "exclude_genres": [
+            "Horror"
+          ],
+          "include_genres": [
+            "Mystery"
+          ],
+          "similar_to": 904,
+          "exclude_director_of": 904
+        },
+        "warnings": [],
+        "message": "已根据库内信息筛选并排序。",
+        "trace": [
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1020.01
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "1de5b16b-56eb-4c65-9e9d-e965f7525557",
+            "step": 1,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "recommend_movies",
+            "arguments": {
+              "include_genres": [
+                "Mystery"
+              ],
+              "exclude_genres": [
+                "Horror"
+              ],
+              "max_runtime": 120,
+              "similar_to": 904,
+              "exclude_ids": [
+                904,
+                913,
+                1732,
+                1269,
+                2076,
+                3044
+              ]
+            },
+            "step": 1,
+            "ok": true
+          },
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 689.04
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "6d5768be-4406-4ea1-af14-2bb39ac9f0aa",
+            "step": 2,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "finish",
+            "arguments": {},
+            "step": 2,
+            "ok": true
+          },
+          {
+            "tool": "filter",
+            "input_count": 3883,
+            "eligible_count": 43,
+            "missing_runtime_excluded": 27,
+            "missing_director_excluded": 0
+          },
+          {
+            "dependency": "recall_itemcf",
+            "attempt": 1,
+            "ok": true,
+            "ms": 0.19
+          },
+          {
+            "dependency": "recall_text",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1.72
+          },
+          {
+            "dependency": "cache",
+            "attempt": 1,
+            "ok": true,
+            "ms": 5.22
+          },
+          {
+            "tool": "recall",
+            "channel": "popular",
+            "count": 43
+          },
+          {
+            "tool": "recall",
+            "channel": "itemcf",
+            "count": 43
+          },
+          {
+            "tool": "recall",
+            "channel": "text",
+            "count": 43
+          },
+          {
+            "tool": "rank",
+            "strategy": "deepfm-rec-v1",
+            "count": 43
+          },
+          {
+            "tool": "rerank",
+            "strategy": "genre-diversity-fixed-0.08",
+            "count": 6
+          }
+        ],
+        "degradation": [],
+        "eligible_count": 43,
+        "versions": {
+          "data": "rec-v1",
+          "model": "rec-v1",
+          "prompt": "movie-tools-v1",
+          "agent": "conversation-v1",
+          "content": "content-v1"
+        },
+        "summary": {
+          "version": "structured-v1",
+          "through_turn": 2,
+          "constraints": {
+            "turn_count": 2,
+            "exclude_ids": [
+              904,
+              913,
+              1269,
+              1732,
+              2076,
+              3044
+            ],
+            "max_runtime": 120,
+            "exclude_genres": [
+              "Horror"
+            ],
+            "include_genres": [
+              "Mystery"
+            ],
+            "similar_to": 904,
+            "exclude_director_of": 904
+          },
+          "sources": {
+            "max_runtime": {
+              "end": 16,
+              "turn": 1,
+              "start": 13
+            },
+            "exclude_genres:Horror": {
+              "end": 12,
+              "turn": 1,
+              "start": 7
+            },
+            "include_genres:Mystery": {
+              "end": 6,
+              "turn": 1,
+              "start": 0
+            }
+          },
+          "last_results": [
+            1212,
+            648,
+            1805,
+            1284,
+            3730,
+            164
+          ]
+        },
+        "history_characters": {
+          "original": 44,
+          "sent": 539
+        },
+        "memory_used": [],
+        "memory_proposals_saved": 0,
+        "elapsed_ms": 1739.05
+      }
+    },
+    {
+      "case": 3,
+      "source": "authored synthetic live smoke",
+      "message": "以后记住我不喜欢恐怖片。",
+      "passed": true,
+      "response": {
+        "request_id": "7cd517d3-a149-4cd9-bdd0-c3effb252d63",
+        "conversation_id": "de0a8a94-0e8b-4748-b363-57d6959a118f",
+        "turn": 3,
+        "mode": "deepseek_tools",
+        "items": [
+          {
+            "movie_id": 1212,
+            "title": "Third Man, The (1949)",
+            "genres": [
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 104,
+            "directors": [
+              "nm0715346"
+            ],
+            "year": "1949",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1212.png",
+            "score": 0.415398,
+            "reason": "库内类型：Mystery、Thriller；片长 104 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 648,
+            "title": "Mission: Impossible (1996)",
+            "genres": [
+              "Action",
+              "Adventure",
+              "Mystery"
+            ],
+            "runtime_minutes": 110,
+            "directors": [
+              "nm0000361"
+            ],
+            "year": "1996",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/648.png",
+            "score": 0.369431,
+            "reason": "库内类型：Action、Adventure、Mystery；片长 110 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1805,
+            "title": "Wild Things (1998)",
+            "genres": [
+              "Crime",
+              "Drama",
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 108,
+            "directors": [
+              "nm0573796"
+            ],
+            "year": "1998",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1805.png",
+            "score": 0.385811,
+            "reason": "库内类型：Crime、Drama、Mystery、Thriller；片长 108 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 1284,
+            "title": "Big Sleep, The (1946)",
+            "genres": [
+              "Film-Noir",
+              "Mystery"
+            ],
+            "runtime_minutes": 114,
+            "directors": [
+              "nm0001328"
+            ],
+            "year": "1946",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/1284.png",
+            "score": 0.342489,
+            "reason": "库内类型：Film-Noir、Mystery；片长 114 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 3730,
+            "title": "Conversation, The (1974)",
+            "genres": [
+              "Drama",
+              "Mystery"
+            ],
+            "runtime_minutes": 113,
+            "directors": [
+              "nm0000338"
+            ],
+            "year": "1974",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/3730.png",
+            "score": 0.345981,
+            "reason": "库内类型：Drama、Mystery；片长 113 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          },
+          {
+            "movie_id": 164,
+            "title": "Devil in a Blue Dress (1995)",
+            "genres": [
+              "Crime",
+              "Film-Noir",
+              "Mystery",
+              "Thriller"
+            ],
+            "runtime_minutes": 102,
+            "directors": [
+              "nm0002083"
+            ],
+            "year": "1995",
+            "metadata_status": "identity_verified",
+            "poster_url": "/api/posters/164.png",
+            "score": 0.350733,
+            "reason": "库内类型：Crime、Film-Noir、Mystery、Thriller；片长 102 分钟",
+            "ranking_strategy": "deepfm-rec-v1"
+          }
+        ],
+        "constraints": {
+          "similar_to": 904,
+          "exclude_ids": [
+            904,
+            913,
+            1269,
+            1732,
+            2076,
+            3044
+          ],
+          "max_runtime": 120,
+          "exclude_genres": [
+            "Horror"
+          ],
+          "include_genres": [
+            "Mystery"
+          ],
+          "exclude_director_of": 904
+        },
+        "warnings": [],
+        "message": "已根据库内信息筛选并排序。",
+        "trace": [
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 858.78
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "5a89daf1-ba4b-4961-a259-c08bdc14859b",
+            "step": 1,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "recommend_movies",
+            "arguments": {
+              "similar_to": 904,
+              "include_genres": [
+                "Mystery"
+              ],
+              "exclude_genres": [
+                "Horror"
+              ],
+              "max_runtime": 120,
+              "exclude_ids": [
+                904,
+                913,
+                1269,
+                1732,
+                2076,
+                3044
+              ]
+            },
+            "step": 1,
+            "ok": true
+          },
+          {
+            "dependency": "llm",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1028.38
+          },
+          {
+            "tool": "llm",
+            "provider_request_id": "dd13ffa9-ffd1-4cdf-b91e-6b7eebdacf05",
+            "step": 2,
+            "tool_count": 1,
+            "model": "deepseek-flash"
+          },
+          {
+            "tool": "finish",
+            "arguments": {},
+            "step": 2,
+            "ok": true
+          },
+          {
+            "tool": "filter",
+            "input_count": 3883,
+            "eligible_count": 43,
+            "missing_runtime_excluded": 27,
+            "missing_director_excluded": 0
+          },
+          {
+            "dependency": "recall_itemcf",
+            "attempt": 1,
+            "ok": true,
+            "ms": 0.33
+          },
+          {
+            "dependency": "recall_text",
+            "attempt": 1,
+            "ok": true,
+            "ms": 1.29
+          },
+          {
+            "dependency": "cache",
+            "attempt": 1,
+            "ok": true,
+            "ms": 4.94
+          },
+          {
+            "tool": "recall",
+            "channel": "popular",
+            "count": 43
+          },
+          {
+            "tool": "recall",
+            "channel": "itemcf",
+            "count": 43
+          },
+          {
+            "tool": "recall",
+            "channel": "text",
+            "count": 43
+          },
+          {
+            "tool": "rank",
+            "strategy": "deepfm-rec-v1",
+            "count": 43
+          },
+          {
+            "tool": "rerank",
+            "strategy": "genre-diversity-fixed-0.08",
+            "count": 6
+          }
+        ],
+        "degradation": [],
+        "eligible_count": 43,
+        "versions": {
+          "data": "rec-v1",
+          "model": "rec-v1",
+          "prompt": "movie-tools-v1",
+          "agent": "conversation-v1",
+          "content": "content-v1"
+        },
+        "summary": {
+          "version": "structured-v1",
+          "through_turn": 3,
+          "constraints": {
+            "similar_to": 904,
+            "turn_count": 3,
+            "exclude_ids": [
+              904,
+              913,
+              1269,
+              1732,
+              2076,
+              3044
+            ],
+            "max_runtime": 120,
+            "exclude_genres": [
+              "Horror"
+            ],
+            "include_genres": [
+              "Mystery"
+            ],
+            "exclude_director_of": 904
+          },
+          "sources": {
+            "max_runtime": {
+              "end": 16,
+              "turn": 1,
+              "start": 13
+            },
+            "exclude_genres:Horror": {
+              "turn": 3,
+              "start": 0,
+              "end": 11
+            },
+            "include_genres:Mystery": {
+              "end": 6,
+              "turn": 1,
+              "start": 0
+            }
+          },
+          "last_results": [
+            1212,
+            648,
+            1805,
+            1284,
+            3730,
+            164
+          ]
+        },
+        "history_characters": {
+          "original": 90,
+          "sent": 614
+        },
+        "memory_used": [],
+        "memory_proposals_saved": 1,
+        "elapsed_ms": 1916.48
+      }
+    }
+  ],
+  "passed": 3,
+  "total": 3,
+  "before": {
+    "versions": {
+      "data": "rec-v1",
+      "model": "rec-v1",
+      "prompt": "movie-tools-v1",
+      "agent": "conversation-v1",
+      "content": "content-v1"
+    },
+    "provider_configured": true,
+    "requests_used": 3,
+    "request_limit": 30,
+    "conservative_cost_usd": 0.0008343,
+    "budget_usd": 0.1,
+    "content_mode": "title_genre_text_only",
+    "ready": true
+  },
+  "after": {
+    "versions": {
+      "data": "rec-v1",
+      "model": "rec-v1",
+      "prompt": "movie-tools-v1",
+      "agent": "conversation-v1",
+      "content": "content-v1"
+    },
+    "provider_configured": true,
+    "requests_used": 9,
+    "request_limit": 30,
+    "conservative_cost_usd": 0.0041652,
+    "budget_usd": 0.1,
+    "content_mode": "title_genre_text_only",
+    "ready": true
+  }
+}

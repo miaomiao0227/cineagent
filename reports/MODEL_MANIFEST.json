@@ -1,0 +1,104 @@
+{
+  "model_version": "rec-v1",
+  "upstream_commit": "5f7bd84d4403b5f92b6bedbd31e3984ef00a4572",
+  "training": {
+    "protocol": "rec-v1",
+    "seed": 20261018,
+    "training_config": {
+      "epochs_max": 3,
+      "batch_size": 2048,
+      "embedding_dim": 16,
+      "retrieval_units": [
+        64,
+        32
+      ],
+      "ranking_units": [
+        128,
+        64,
+        32
+      ],
+      "learning_rate": 0.001,
+      "retrieval_negative_sample": 20
+    },
+    "checkpoint_selection": {
+      "retrieval": "validation full-catalogue Recall@20",
+      "ranking": "validation sampled-pair binary crossentropy; no test labels used"
+    },
+    "epochs": {
+      "retrieval": [
+        {
+          "epoch": 1,
+          "loss_diagnostic_only": 2.2518928050994873,
+          "validation_Recall@20": 0.04127110024815022,
+          "validation_users": 492
+        },
+        {
+          "epoch": 2,
+          "loss_diagnostic_only": 2.0850841999053955,
+          "validation_Recall@20": 0.05508054100307613,
+          "validation_users": 492
+        },
+        {
+          "epoch": 3,
+          "loss_diagnostic_only": 2.0297441482543945,
+          "validation_Recall@20": 0.03761768018561544,
+          "validation_users": 492
+        }
+      ],
+      "ranking": [
+        {
+          "epoch": 1,
+          "loss_diagnostic_only": 0.33110469579696655,
+          "validation_sampled_BCE": 0.34601306915283203,
+          "validation_pairs": 74355
+        },
+        {
+          "epoch": 2,
+          "loss_diagnostic_only": 0.28969982266426086,
+          "validation_sampled_BCE": 0.3526054620742798,
+          "validation_pairs": 74355
+        },
+        {
+          "epoch": 3,
+          "loss_diagnostic_only": 0.27495986223220825,
+          "validation_sampled_BCE": 0.36047008633613586,
+          "validation_pairs": 74355
+        }
+      ]
+    },
+    "retrieval_best_epoch": 2,
+    "ranking_best_epoch": 1,
+    "ok": true,
+    "reload_checks": true,
+    "embedding_id_association_verified": true,
+    "seconds": 76.428,
+    "test_used_for_selection": false,
+    "candidate_route": "YouTubeDNN full catalogue; YT100_DeepFM top100 unseen from same catalogue then DeepFM; no diversity reranker in this experiment"
+  },
+  "protocol_sha256": "b6be9b96a06c922f8a5fde031f8bc3bb0ae02e4d468157a6a30cef36d4a40f22",
+  "source_sha256": "a6898adb50b9ca05aa231689da44c217cb524e7ebd39d264c56e2832f2c54e20",
+  "runtime_lock_sha256": "1b24b200e8511f347612379439947a4c829a7debef727653e427c1ec9b1c78d6",
+  "model_files": {
+    "models\\item_model\\fingerprint.pb": "e8d1f158c08df93495b40f6416704b24084a108b8c2c2839410d3073d267fbbd",
+    "models\\item_model\\keras_metadata.pb": "33e7b036ad34d4f36dd8a8fcc2336815517592f2b1e9bf441bbb94214eea1391",
+    "models\\item_model\\saved_model.pb": "8f481094df2533df46b6c795a0b3cb55db4eb6ec94bc55228f0f7060e0e311f6",
+    "models\\item_model\\variables\\variables.data-00000-of-00001": "9bb4746cf7a4d698433ca928309c554dde763004d4ad14f9800fab9193e25809",
+    "models\\item_model\\variables\\variables.index": "525d24dbafd1760d7dc8d691574036b61550f25ef7c40cdd28958f4465503599",
+    "models\\ranking_model\\fingerprint.pb": "f69a497a658ee9532a3a4dfe6b31fb828d6e651724b2e411be840e9ee17248bf",
+    "models\\ranking_model\\keras_metadata.pb": "8d49a11385c39ee5aa1edd8575ecbd880e7d8b77ebf0c10b62e64a9e0c4a5300",
+    "models\\ranking_model\\saved_model.pb": "c177f9e179526ffb873854cc7bcee35623a4c340b8ee534a5d22804e2e0628bb",
+    "models\\ranking_model\\variables\\variables.data-00000-of-00001": "2dc4a5aec71012493ed8fcab8c1de1be81f9f9ccf3785ed66d30d20e74f69c3b",
+    "models\\ranking_model\\variables\\variables.index": "4c6826f518a598ce340b1fda8ed05ce11b193b4f5f3aaaa795f84c806a2e6755",
+    "models\\user_model\\fingerprint.pb": "ae2dfdb3e8c844b589ac832cad6a2ecc3fa88a9eddd8dd816594ae82583c4cf9",
+    "models\\user_model\\keras_metadata.pb": "f98c6f8bff9e4e8db0f0f190b4f556fc3db27b35b294d7e4f0de7fafe66b52c8",
+    "models\\user_model\\saved_model.pb": "f83f3cc9e4cffc8099dbba56e8db8ce5fb4409be5d3c1c6cfe1bb53446a0ec5d",
+    "models\\user_model\\variables\\variables.data-00000-of-00001": "fa2527405701c354e52980d7caa7297e8fefa842a8e50b5f4096572b42fd4f15",
+    "models\\user_model\\variables\\variables.index": "a96d3cacf1578cb1cfce8bf0ceba0a5dff3444f9f95b0d11d3d83a2f0a9f45f6"
+  },
+  "training_code": {
+    "recdata.py": "e640f9d2235397a16c338af667283d36aae70c8258e005499dffd15e4ec530b9",
+    "receval.py": "0d6fb73afad6fb711fff2d99dcab5074718aaee1d75fe0938d991f6c2ac4205a",
+    "rectrain.py": "677511acd323d3d61243fb2f505612b603f7de968eb054c0e74855f167f325cf"
+  },
+  "metadata_identity_reference_used_only_for_online_attributes": "696d65a3dfceac7c45750ad32df2c259311949efec81f0f144fdfb91ebc9e436"
+}

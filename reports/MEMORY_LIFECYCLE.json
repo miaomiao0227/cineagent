@@ -1,0 +1,35 @@
+{
+  "scope": "synthetic offline lifecycle extension; zero LLM calls",
+  "checks": [
+    {
+      "case": "explicit_correction_revokes_opposite",
+      "passed": true
+    },
+    {
+      "case": "deleted_borrowed_memory_not_stuck_in_session",
+      "passed": true,
+      "before": {
+        "include_genres": [
+          "Thriller"
+        ],
+        "exclude_genres": [
+          "Horror"
+        ],
+        "exclude_ids": []
+      },
+      "after": {
+        "exclude_ids": [],
+        "exclude_genres": [],
+        "include_genres": [
+          "Thriller"
+        ]
+      }
+    },
+    {
+      "case": "explicit_session_constraint_retained",
+      "passed": true
+    }
+  ],
+  "passed": 3,
+  "total": 3
+}

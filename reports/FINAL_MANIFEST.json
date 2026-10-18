@@ -1,0 +1,167 @@
+{
+  "created_at": "2026-10-18T22:24:24.264285+08:00",
+  "version": "text-v4",
+  "upstream_commit": "5f7bd84d4403b5f92b6bedbd31e3984ef00a4572",
+  "upstream_patch_sha256": "c0aa9dc8ba832d915df21ae6f63ccea438aaf195c02a557b01a06c9006fe3f02",
+  "runtime_source_sha256": {
+    "upstream/web_project/backend/app/cineagent/__init__.py": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+    "upstream/web_project/backend/app/cineagent/api.py": "f7f9e32c2009cc1fb3bde5c23d5b208acbb2de8e0158d66b7fdc5489cb1328a3",
+    "upstream/web_project/backend/app/cineagent/engine.py": "2d02db4ee87ecb1abad116c199666837d45b04d422838920a4b6a65d7ce6edd6",
+    "upstream/web_project/backend/app/cineagent/evidence.py": "e78816e918766a929f9f9fcc0780b9f7be29ec77b5d964d5463da0622a5bfe51",
+    "upstream/web_project/backend/app/cineagent/models.py": "268a2122bb87613893df46536231220b3218867ac0c726422782d03603cb34a9",
+    "upstream/web_project/backend/app/cineagent/parser.py": "8d2e5b893722bbe64211950e3b421174fc212114b3827c16b504c7dee2789853",
+    "upstream/web_project/backend/app/cineagent/provider.py": "edd6b562215bca4b8e0d46a4051445df04f5b0efbdefba72051ca8544c602492",
+    "upstream/web_project/backend/app/cineagent/reliability.py": "c733123eaf035c7768324995945334ccb890006bd6ec5028e7066fdf195ba447",
+    "upstream/web_project/frontend/src/views/Chat.vue": "11fdf6ec598c4aa3119015113d47b3b2176fca25c9ee6977338ce5d63a44bc13"
+  },
+  "protocol_sha256": {
+    "configs/eval_protocol.json": "b6be9b96a06c922f8a5fde031f8bc3bb0ae02e4d468157a6a30cef36d4a40f22",
+    "eval/agent_tasks.json": "c38b011c3cc09127c7df09aaff305d8884443f5e4f0b547445147fd951b5cb8b",
+    "eval/memory_tasks.json": "a48488b11586b1065718da67af2134c349d63fbd1802478831ed1cc51f1a7465",
+    "eval/compression_live_task.json": "8267b484553305bb3bcdf78e332bf9c568d4b07341ea8fd9c81d47d005cafe8c",
+    "eval/agent_exclusion_v3.json": "b2b7fa93fce1f355dda987f2cccb341fe7788f835e01025e8232626241f92249",
+    "eval/complete_v4.json": "845fb9e6a7b40d444098f604744f2d6098fa374d373e0700a2d552a6fd8f424b",
+    "eval/COMPLETE_V4_SPEC.json": "7d86e190eb780867e2a8f8451c53a94b59263e054c184a392f864e72c1c2062c",
+    "EVAL_SPEC.md": "104368bb4aa2de133cf2aac1edd8d26189c91f7af248dd56a832cbee0df0d501"
+  },
+  "data_and_models_reference": {
+    "DATA_DOWNLOAD.json": "be4caf7fab9c0b1722d854da98599614139fd8b0727b5f16f086fee2ea8e7198",
+    "MODEL_MANIFEST.json": "fe1d2919c332abb7ae6aee2fe4f8573bce72feb68634495a8d01c3f45d63a8ce",
+    "REC_RUN_MANIFEST.json": "41747d40b5aa51b336d05b1c7b268b5f8f5ad558c6512eb6e3307059d074c2c8"
+  },
+  "prompt_version": "movie-tools-v3; source api.py hash above",
+  "evaluation_summary": {
+    "warm_eligible_users": 990,
+    "cold_eligible_users": 751,
+    "offline_single": {
+      "passed": 60,
+      "total": 60,
+      "wilson_95": [
+        0.9398281478579132,
+        0.9999999999999999
+      ]
+    },
+    "offline_multi": {
+      "passed": 30,
+      "total": 30,
+      "wilson_95": [
+        0.8864866068260369,
+        1.0
+      ]
+    },
+    "load": [
+      {
+        "clients": 1,
+        "attempts": 600,
+        "successes": 600,
+        "failures": 0,
+        "p50_ms": 60.790499999999994,
+        "p95_ms": 92.71605,
+        "realized_rps": 5.0
+      },
+      {
+        "clients": 5,
+        "attempts": 600,
+        "successes": 600,
+        "failures": 0,
+        "p50_ms": 130.83800000000002,
+        "p95_ms": 187.79124999999996,
+        "realized_rps": 5.0
+      }
+    ],
+    "api_requests": 25,
+    "conservative_api_cost_usd": 0.014306699999999999,
+    "new_campaign": {
+      "attempts": 228,
+      "conservative_cost_usd": 0.1139481,
+      "max_attempts": 240,
+      "budget_usd": 0.5
+    },
+    "natural_v2": {
+      "scenarios": 30,
+      "scenarios_all_turns_passed": 30,
+      "turns": 60,
+      "turns_passed": 60,
+      "live_tool_loop_turns": 46,
+      "clarification_turns": 6,
+      "observed_successful_provider_calls": 100,
+      "families": {
+        "conflict_clarification": {
+          "turns": 12,
+          "passed": 12
+        },
+        "negative_memory": {
+          "turns": 12,
+          "passed": 12
+        },
+        "reference_director": {
+          "turns": 12,
+          "passed": 12
+        },
+        "runtime_correction": {
+          "turns": 12,
+          "passed": 12
+        },
+        "unverified_attributes": {
+          "turns": 12,
+          "passed": 12
+        }
+      },
+      "failure_counts": {}
+    },
+    "exclusion_v3": {
+      "scenarios": 11,
+      "scenarios_all_turns_passed": 11,
+      "turns": 22,
+      "turns_passed": 22,
+      "live_tool_loop_turns": 22,
+      "clarification_turns": 0,
+      "observed_successful_provider_calls": 44,
+      "families": {
+        "display_is_not_feedback": {
+          "turns": 6,
+          "passed": 6
+        },
+        "reference_director": {
+          "turns": 8,
+          "passed": 8
+        },
+        "unverified_attributes": {
+          "turns": 8,
+          "passed": 8
+        }
+      },
+      "failure_counts": {}
+    },
+    "complete_v4": {
+      "frozen_scenarios": 20,
+      "frozen_user_turns": 40,
+      "ui_attempt_observations": 43,
+      "first_attempt_scenarios_success": 17,
+      "eventual_scenarios_success": 20,
+      "rendered_user_turns": 40,
+      "business_passed_rendered": 40,
+      "live_loop_completed": 36,
+      "clarification_turns": 4,
+      "ui_observation_failures": 3,
+      "initial_unsubmitted_turns": 3,
+      "degraded_turns": 0,
+      "provider_attempts": 72,
+      "provider_failed_attempts": 0,
+      "cost_all_attempts_usd": 0.036641399999999984,
+      "input_tokens": 108194,
+      "output_tokens": 3486,
+      "per_rendered_user_turn_cost_usd": 0.0009160349999999996,
+      "offline_business_pass": 40,
+      "same_movie_lists_vs_offline": 40,
+      "failure_facts": {}
+    }
+  },
+  "limitations": [
+    "V4 synthetic sequential browser tasks; first3 UI observations failed and recovered; human subjective review pending",
+    "text only; no image arm",
+    "authored/synthetic dialogues",
+    "human review pending",
+    "no production security acceptance"
+  ]
+}

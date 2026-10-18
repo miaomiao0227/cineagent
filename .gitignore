@@ -1,0 +1,18 @@
+# Local credentials and generated runtime inputs
+.env
+**/.env
+**/.env.*
+!**/.env.example
+configs/local-secrets/
+/data/
+/artifacts/
+**/__pycache__/
+*.pyc
+**/node_modules/
+**/.venv/
+**/venv/
+**/dist/
+**/.DS_Store
+*.log
+*PARTIAL*.json
+reports/BACKEND_IMAGE_ID.txt
