@@ -1,6 +1,20 @@
 # CineAgent
 
-融合个性化推荐与偏好记忆的对话式电影推荐系统。
+**融合个性化推荐与偏好记忆的对话式电影推荐系统**
+
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](REPRODUCE.md)
+[![FastAPI](https://img.shields.io/badge/FastAPI-在线服务-009688?logo=fastapi&logoColor=white)](ARCHITECTURE.md)
+[![Vue](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)](#页面效果)
+[![License](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey)](LICENSE.md)
+
+> 本项目对应简历中「CineAgent」一栏，含 **4 条推荐路线评测、40 轮合成对话验收（36 轮调用 LLM、4 轮规则澄清）与 9 项模拟故障检查**，另完成 Redis 实际中断与恢复验证。
+
+[页面效果](#页面效果) · [评测结果](#实测结果与口径) · [快速运行](#运行) · [个人贡献](CONTRIBUTIONS.md) · [评测协议](EVAL_SPEC.md)
+
+| 推荐链路 | 对话能力 | 工程保障 |
+|---|---|---|
+| 多路召回 → DeepFM 排序 → 多样性重排 | 有界工具调用、多轮约束、偏好记忆 | 超时重试、熔断降级、幂等与可追溯评测 |
+
 
 > **本项目基于 [Datawhale FunRec](https://github.com/datawhalechina/fun-rec) 增量开发。** 固定上游 commit：`5f7bd84d4403b5f92b6bedbd31e3984ef00a4572`。复用推荐模型构建器、原召回/排序/冷启动及前后端骨架，在此基础上完成运行修复、数据协议、对话 Agent、偏好记忆、可靠性与评测。详见 [个人贡献](CONTRIBUTIONS.md)、[来源说明](UPSTREAM_NOTICE.md) 和 [许可](LICENSE.md)。
 
@@ -16,7 +30,7 @@
 
 ## 页面效果
 
-以下为本机真实运行截图，使用合成电影需求；对话页面选择**离线规则模式**，本次截图未调用付费 API。截图中的耗时仅为本次演示观测，不替代上方评测。侧栏调用/费用为历史试跑累计值。
+以下为本机真实运行截图，使用合成电影需求；对话页面选择**离线规则模式**，本次截图未调用付费 API。截图中的耗时仅为本次演示观测，不替代下方评测。侧栏调用/费用为历史试跑累计值。
 
 ### 普通首页推荐
 
