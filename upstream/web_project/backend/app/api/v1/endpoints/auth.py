@@ -14,7 +14,7 @@ router = APIRouter()
 
 
 @router.post("/auth/signup", response_model=UserProfile, status_code=status.HTTP_201_CREATED, tags=["auth"])
-async def signup(user_data: UserSignup, db: Session = Depends(get_db)):
+def signup(user_data: UserSignup, db: Session = Depends(get_db)):
     """注册新用户"""
     
     # 检查邮箱是否已存在
@@ -42,14 +42,18 @@ async def signup(user_data: UserSignup, db: Session = Depends(get_db)):
     )
     
     db.add(db_user)
-    db.commit()
+    from sqlalchemy.exc import IntegrityError
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback();raise HTTPException(409,'邮箱已注册')
     db.refresh(db_user)
     
     return UserProfile.model_validate(db_user)
 
 
 @router.post("/auth/login", response_model=Token, tags=["auth"])
-async def login(credentials: UserLogin, db: Session = Depends(get_db)):
+def login(credentials: UserLogin, db: Session = Depends(get_db)):
     """用户登录并获取访问令牌"""
     
     # 根据邮箱查找用户

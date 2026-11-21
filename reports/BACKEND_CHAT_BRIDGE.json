@@ -1,0 +1,7 @@
+{
+  "chat_feedback_saved_to_online_behavior": true,
+  "duplicate_feedback_idempotent": true,
+  "homepage_endpoint_excludes_chat_seen": true,
+  "natural_seen_uses_same_service": true,
+  "paid_calls": 0
+}

@@ -1,0 +1,8 @@
+{
+  "real_redis_concurrent_requests": 8,
+  "mock_compute_count": 1,
+  "bounded_wait": true,
+  "foreign_lock_preserved": true,
+  "expired_lock_recovery": true,
+  "own_lock_released": true
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "stage": "behavior_v1",
+    "failed_check": "rating_clear",
+    "cause": "SQLAlchemy identity map returned old value after upsert",
+    "repair": "populate_existing on returning rows",
+    "retested": true
+  },
+  {
+    "stage": "pytest_first",
+    "failed_check": "request_id",
+    "cause": "test treated case-insensitive HTTP header as case-sensitive dict key",
+    "repair": "normalize response header keys",
+    "retested": true
+  },
+  {
+    "stage": "isolated_ci_first",
+    "failed_check": "profile_online_ratings",
+    "cause": "synthetic test user lacked email required by profile schema",
+    "repair": "provide explicit synthetic fixture email",
+    "retested": true
+  },
+  {
+    "stage": "concurrent_profile_review",
+    "failed_check": "potential stale ORM identity",
+    "cause": "authentication may load user before a concurrent preference commit",
+    "repair": "refresh User from DB after reading behavior version; regression test added",
+    "retested": true
+  }
+]

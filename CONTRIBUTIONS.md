@@ -27,3 +27,7 @@
 
 ## V4个人增量
 新增内容画像/固定融合/等候选预算消融与实际ChatEngine文本开关；浏览器发送到DOM渲染计时，服务端parse/context/tools分段和token统计；临时范围JWT访客、共享额度下0.10美元子预算与关闭门禁；40轮真实页面验收、43条尝试保留和持久请求/费用核对；可填写的20项人工评议。推荐模型与数据复用边界不变。
+
+
+## 2026-11 后端业务增量
+独立在线行为/版本表、事务和并发幂等、推荐与详情版本缓存、Celery和PG待派发任务/租约恢复、Alembic、请求观测、pytest/隔离CI、片单与任务页面。详见 BACKEND_ARCHITECTURE.md、BACKEND_RUNBOOK.md 和 reports/BACKEND_ACCEPTANCE.md。原推荐模型和页面骨架继续复用FunRec，不把整个底座宣称为自研。

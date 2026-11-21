@@ -1,0 +1,9037 @@
+{
+  "protocol": "BACKEND_EVAL_SPEC.md v1",
+  "users": 1,
+  "queries": 20,
+  "warmup_excluded": 20,
+  "summary": [
+    {
+      "arm": "cold_c1",
+      "attempts": 100,
+      "successes": 100,
+      "p50_ms": 30.22,
+      "p95_ms": 32.76,
+      "throughput_rps": 32.52,
+      "wall_seconds": 3.08
+    },
+    {
+      "arm": "warm_c1",
+      "attempts": 100,
+      "successes": 100,
+      "p50_ms": 4.0,
+      "p95_ms": 4.97,
+      "throughput_rps": 245.03,
+      "wall_seconds": 0.41
+    },
+    {
+      "arm": "warm_c8",
+      "attempts": 400,
+      "successes": 400,
+      "p50_ms": 29.18,
+      "p95_ms": 34.62,
+      "throughput_rps": 268.73,
+      "wall_seconds": 1.49
+    }
+  ],
+  "attempts": [
+    {
+      "arm": "cold_c1",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 30.987209000159055
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 30.004051001014886
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 30.18929800236947
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 29.53940999941551
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 32.16922899810015
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 30.322261998662725
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 30.047501000808552
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 29.745145999186207
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 31.27825599949574
+    },
+    {
+      "arm": "cold_c1",
+      "query": "War",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 29.30998199735768
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 30.513436999171972
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 29.260166000312893
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 31.417631998920115
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 31.425392000528518
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 29.78224000253249
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 36.66097399764112
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 32.820378997712396
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 30.03194999837433
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 30.884858999343123
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 30.043414000829216
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 30.41935500004911
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 32.75547299926984
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 35.10348499912652
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 36.53838800164522
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 32.306101002177456
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 30.821989003015915
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 29.802453002048424
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 29.954300000099465
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 30.60661500057904
+    },
+    {
+      "arm": "cold_c1",
+      "query": "War",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 29.813763001584448
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 30.982112999481615
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 30.3286489979655
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 29.807152997818775
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 31.875771001068642
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 31.279528000595747
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 29.988405000040075
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 29.915934999735327
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 30.61419599907822
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 29.234092999104178
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 29.13102000093204
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 30.501451998134144
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 29.965950998303015
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 29.906294999818783
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 30.78688400273677
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 31.22831400105497
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 30.901911999535514
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 29.35546099979547
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 33.18249299991294
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 32.437655001558596
+    },
+    {
+      "arm": "cold_c1",
+      "query": "War",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 29.753738999716006
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 28.723889001412317
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 28.774252998118754
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 30.709256996487966
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 31.065725001099054
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 29.521014999772888
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 30.51170000253478
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 30.569692997232778
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 30.25414399962756
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 29.512845001590904
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 29.373245997703634
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 30.75518799960264
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 29.105994002748048
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 29.79681599754258
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 31.625173000065843
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 29.749407000053907
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 30.958911000197986
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 30.22397700260626
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 29.16516799814417
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 29.059914999379544
+    },
+    {
+      "arm": "cold_c1",
+      "query": "War",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 30.339732998982072
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 31.051408001076197
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 29.454257997713285
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 30.692270000145072
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 30.364940997969825
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 28.963916000066092
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 29.230201998871053
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 29.63788499982911
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 29.571142000349937
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 29.64995599904796
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 30.34257599938428
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 29.421164002997102
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 32.7623000011954
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 28.789578002033522
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 30.301609996968182
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 30.58325500023784
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 28.645976999541745
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 31.022667997604003
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 31.869769001787063
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 30.34568200018839
+    },
+    {
+      "arm": "cold_c1",
+      "query": "War",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 30.55467000012868
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 29.475806000846205
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 29.824463999830186
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 29.776636001770385
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 30.691738000314217
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 29.292803999851458
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 29.762412003037753
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 29.545681998570217
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 31.544826000754256
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 28.644685000472236
+    },
+    {
+      "arm": "cold_c1",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "miss",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 29.195243998401565
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 4.966000000422355
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 4.270153000106802
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 3.724111997144064
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 5.12661900211242
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 3.9889799991215114
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 4.143738999118796
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 4.375945998617681
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 3.927677997126011
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 3.4238199987157714
+    },
+    {
+      "arm": "warm_c1",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 4.00161400102661
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 3.5388919968681876
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 4.116046999115497
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 4.098845001863083
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 3.5550510001485236
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 3.485648998321267
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 3.7250059976940975
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 4.9205960021936335
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 4.0791860010358505
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 3.563309997844044
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 3.1652929974370636
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 4.438206000486389
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 4.7501649969490245
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 3.5950509991380386
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 3.3064989984268323
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 4.228406996844569
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 3.9861589975771494
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 3.7320430019462947
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 3.2919600016612094
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 3.7676379979529884
+    },
+    {
+      "arm": "warm_c1",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 5.351959000108764
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 4.826673000934534
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 4.391662998386892
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 5.035693000536412
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 3.91189000220038
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 3.2846100002643652
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 3.9224350002768915
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 4.6251300009316765
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 4.138562002481194
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 3.6243360009393655
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 3.3064790004573297
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 4.510107999522006
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 3.8041900006646756
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 3.282611996837659
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 3.9275000017369166
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 3.864496997266542
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 4.708101998403436
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 4.065278000780381
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 3.559622997272527
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 3.4692660010477994
+    },
+    {
+      "arm": "warm_c1",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 4.258762997778831
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 3.4693380002863705
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 3.8627639987680595
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 3.6552080018736888
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 3.843987000436755
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 4.427323998243082
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 4.462744000193197
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 4.3219590006629005
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 4.067331999976886
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 3.9062690011633094
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 3.21928900302737
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 4.394408002553973
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 3.8033239979995415
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 4.33772299948032
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 3.8327949987433385
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 3.48998800109257
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 3.561936002370203
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 4.499255999689922
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 4.27515699993819
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 4.087401997821871
+    },
+    {
+      "arm": "warm_c1",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 3.5040689981542528
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 4.160839998803567
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 4.413497998029925
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 3.778583999519469
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 3.996278999693459
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 4.093725001439452
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 4.116733001865214
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 6.491715997981373
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 4.553465998469619
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 5.029473999456968
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 4.189398998278193
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 4.236042997945333
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 4.828381002880633
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 4.518657999142306
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 3.9276500028790906
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 3.5231010006100405
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 4.70945500273956
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 4.715857998235151
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 4.046591999212978
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 3.294494999863673
+    },
+    {
+      "arm": "warm_c1",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 4.935945999022806
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 4.365148000943009
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 3.7593970009766053
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 3.750343999854522
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 4.926342000544537
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 3.893592998792883
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 3.654251999250846
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 3.3095389990194235
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 4.630316001566825
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 3.7092450002091937
+    },
+    {
+      "arm": "warm_c1",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 3.7124900009075645
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 14.45902900013607
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 26.462878999154782
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 29.490755001461366
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 42.59375999754411
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 34.5212479987822
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 41.97525800191215
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 33.90202800073894
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 40.39726499831886
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 35.63900399967679
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 33.36394500001916
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 30.50609799902304
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 36.385109000548255
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 35.791502999927616
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 33.720234998327214
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 33.937758998945355
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 33.28817700094078
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 33.268683997448534
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 33.058133001759415
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 32.23811800125986
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 28.823492000810802
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 31.531777000054717
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 32.01566400093725
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 31.897232998744585
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 33.1639729993185
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 32.534109999687644
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 29.906836000009207
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 30.053563001274597
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 28.885476000141352
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 28.93811600006302
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 32.83670499877189
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 34.24851000090712
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 28.293961000599666
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 32.39623799890978
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 30.629557997599477
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 30.44792600121582
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 32.14746099911281
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 31.34214800229529
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 30.10691199961002
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 27.87508199980948
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 29.424786000163294
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 28.957785998500185
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 31.950814001902472
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 32.004778000555234
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 31.167761000688188
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 30.675329002406215
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 29.26637700147694
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 29.226676997495815
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 28.237601000000723
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 29.649480002262862
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 33.48850099791889
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 32.91705299852765
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 31.862907999311574
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 29.727952998655383
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 30.980420000560116
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 30.380481002794113
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 29.574820000561886
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 30.556993999198312
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 31.307869001466315
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 30.459915000392357
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 27.756166997278342
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 30.3853129989875
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 29.578200999822002
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 29.18119600144564
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 27.682468000421068
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 29.491143999621272
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 29.883175000577467
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 29.680041996471118
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 30.581312003050698
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 27.877730997715844
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 30.765901999984635
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 30.285304001154145
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 29.425701999571174
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 27.703351002855925
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 29.495759998098947
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 28.84345500206109
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 30.234068999561714
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 30.47984499789891
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 25.806158999330364
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 27.19603500008816
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 25.37622499949066
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 26.544917000137502
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 30.795499002124416
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 30.844695000268985
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 33.01181200004066
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 31.554777997371275
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 31.576247998600593
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 30.131325002002995
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 29.696353998588165
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 29.28758500274853
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 27.144960000441642
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 36.87958500086097
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 32.237426999927266
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 29.47828000105801
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 28.958406001038384
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 32.06634000162012
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 28.65483500136179
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 27.48292400065111
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 33.348589997331146
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 27.68596700116177
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 27.666440000757575
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 31.579900001815986
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 29.505965001590084
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 29.03159500056063
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 29.08260999902268
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 28.317005999269895
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 25.02631199968164
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 29.961282001750078
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 31.823564997466747
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 27.12298700134852
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 28.037164996931097
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 25.52556200316758
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 24.627463997603627
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 24.590438002633164
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 28.866101998573868
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 29.89982299914118
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 30.055540999455843
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 27.17912099979003
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 29.133984000509372
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 27.577904002100695
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 28.053301000909414
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 27.635637001367286
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 26.942254000459798
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 29.99794999777805
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 29.71420600079
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 27.714200001355493
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 28.175460000056773
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 28.48606999759795
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 28.76749399729306
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 27.67213399783941
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 28.484687998570735
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 27.939946001424687
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 28.01637000084156
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 28.255450997676235
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 27.462299000035273
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 27.351983000698965
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 22.316023001621943
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 24.01506599926506
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 28.3307829995465
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 29.948942999908468
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 28.250536000996362
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 26.804526001797058
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 27.092487001937116
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 25.86296899971785
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 27.18814299805672
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 27.816861002065707
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 26.587110998661956
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 29.02586499840254
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 28.245135999895865
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 28.288149998843437
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 30.757410000660457
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 25.182503999531036
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 28.7116520012205
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 26.915013000689214
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 27.214385001570918
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 29.936719001852907
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 26.67385600216221
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 26.606469000398647
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 25.962761999835493
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 28.538034999655792
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 27.946756999881472
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 27.11526200073422
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 30.758406999666477
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 29.689373997825896
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 30.384688998310594
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 28.392402000463335
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 26.77398599917069
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 27.41363600216573
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 25.33528300045873
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 27.512002001458313
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 27.174689999810653
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 30.699047001689905
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 29.922878002253128
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 29.91465699960827
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 27.71715599737945
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 26.51635399888619
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 28.550350998557406
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 28.63852199880057
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 26.42564699999639
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 28.686771998764016
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 26.96533899870701
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 28.456558000470977
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 25.259212001401465
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 27.07160100180772
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 27.213233002839843
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 26.870068999414798
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 27.846246000990504
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 29.883139999583364
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 30.018223998922622
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 28.016145999572473
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 26.4003269985551
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 26.503493998461636
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 25.503950000711484
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 25.660092000180157
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 26.507597998715937
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 24.390292001044145
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 32.38734000115073
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 28.376393998769345
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 34.2365870019421
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 27.617749998171348
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 27.653485998598626
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 26.512596999964444
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 21.756222999101738
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 30.906937001418555
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 33.49126700049965
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 31.442000003153225
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 35.55758199945558
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 33.978423998632934
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 32.48810000150115
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 30.509120999340666
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 25.119670001004124
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 30.35187600107747
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 29.61767300075735
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 31.204488001094433
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 29.613499998959014
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 27.88818900080514
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 26.941493000776973
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 28.07407699947362
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 25.072227999771712
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 26.268269000865985
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 33.94412000125158
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 29.58321899859584
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 29.618241998832673
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 31.584727999870665
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 31.648683001549216
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 31.59708300154307
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 22.81956899969373
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 16.753121999499854
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 28.444704999856185
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 30.889658999512903
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 31.785813000169583
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 29.732435999903828
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 28.291918002651073
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 28.736394000588916
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 28.23588800310972
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 26.49024600032135
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 27.949068000452826
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 26.639394000085304
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 28.21623900308623
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 25.792577001993777
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 27.976613000646466
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 26.81775699966238
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 26.851258000533562
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 27.135235999594443
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 29.63418600120349
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 31.626815998606617
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 32.911089998378884
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 29.476593001163565
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 30.351173001690768
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 28.623731999687152
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 27.686946999892825
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 26.817967001989018
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 29.580664999230066
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 32.42179700100678
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 33.203505001438316
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 27.803094999399036
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 31.769023000379093
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 27.04305900260806
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 31.2874160008505
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 29.89553900260944
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 21.915100998739945
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 28.270987000723835
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 27.578486999118468
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 29.026866002823226
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 28.11994500007131
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 28.108659000281477
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 27.883151000423823
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 28.642551998927956
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 27.565439999307273
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 27.029416000004858
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 26.30990099714836
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 31.28461499727564
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 30.602813996665645
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 31.155582000792492
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 26.363690998550737
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 24.592870999185834
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 34.624997002538294
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 32.64662400033558
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 32.209676999627845
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 31.075808001332916
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 31.451942999410676
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 30.13067299980321
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 27.827776997582987
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 28.212580997205805
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 33.024919001036324
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 47.250411997083575
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 47.27472000013222
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 45.24794700046186
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 44.853704999695765
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 42.37081500104978
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 43.28625600101077
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 42.58077999838861
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 33.76584100260516
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 30.881271999533055
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 33.695399997668574
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 28.04281600037939
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 32.32549399763229
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 31.248046001564944
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 30.766397001571022
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 29.12554800059297
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 22.31651300098747
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 32.73976600030437
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 30.613355000241427
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 30.606415999500314
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 30.27030500015826
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 27.93761299835751
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 23.027978000754956
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 28.676346999418456
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 26.853038001718232
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 27.1446590013511
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 31.000563998532016
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 27.673663000314264
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 29.389606999757234
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 30.99850999933551
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 28.660916999797337
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 28.18763899995247
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 28.206344999489374
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 31.568924998282455
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 35.516646999894874
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 29.860651997296372
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 31.625422001525294
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 28.788389998226194
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 30.10991799965268
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 28.226368998730322
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 29.584373001853237
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 34.645323001313955
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 36.09685900300974
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 35.9782859995903
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 35.28499999811174
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 33.832958000857616
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 33.320008998998674
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 34.45590100091067
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 33.914804000232834
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 28.62505699886242
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 33.73375500086695
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 32.675790000212146
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 31.72510700096609
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 32.607278000796214
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 26.827868998225313
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 30.79396500106668
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 30.333278002217412
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 29.61139800027013
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 32.56457300085458
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 25.085458997637033
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 27.53069900063565
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 26.2151429997175
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 28.298058998188935
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 27.897553001821507
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 23.88445099859382
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 24.55679400009103
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 28.614185001060832
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 29.396630998235196
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 27.5194960013323
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 26.24551199915004
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 26.166952000494348
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 27.3433299989847
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 27.436937001766637
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 30.623012000432936
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 29.334185001061996
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 26.998402001481736
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 28.450282999983756
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 29.5898180011136
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 28.584807998413453
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 26.398615998914465
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 26.619026000844315
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 29.731577000347897
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 32.73560500019812
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 28.948261999175884
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 30.32530299969949
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 30.37527899869019
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 30.26426399810589
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 28.405195000232197
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 30.909452001651516
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 31.05936300198664
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 32.547432001592824
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 28.705079999781447
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 31.95875700112083
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 32.398576997366035
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 31.210438999551116
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 31.749638998007867
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 29.999010999745224
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Mystery",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1617,
+        924
+      ],
+      "ms": 30.291065999335842
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Comedy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2858,
+        2762,
+        2396,
+        858,
+        318,
+        260
+      ],
+      "ms": 31.935436996718636
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Drama",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        858,
+        2762,
+        527,
+        2858,
+        608
+      ],
+      "ms": 28.85367799899541
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Sci-Fi",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2571,
+        858,
+        1196,
+        2762
+      ],
+      "ms": 26.61687100044219
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Adventure",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1198,
+        260,
+        318,
+        1259,
+        2762,
+        1196
+      ],
+      "ms": 25.683399999252288
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Crime",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        50,
+        608,
+        318,
+        296,
+        260
+      ],
+      "ms": 28.113708998716902
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Romance",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2396,
+        318,
+        912,
+        2762,
+        260,
+        858
+      ],
+      "ms": 27.29015500153764
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Thriller",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        2762,
+        608,
+        593,
+        50,
+        2571,
+        318
+      ],
+      "ms": 25.174226000672206
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Animation",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        858,
+        260,
+        1,
+        1198
+      ],
+      "ms": 25.84154999931343
+    },
+    {
+      "arm": "warm_c8",
+      "query": "War",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        527,
+        2762,
+        260,
+        2028,
+        318,
+        1294
+      ],
+      "ms": 27.468812000734033
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Western",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        3671,
+        260,
+        858,
+        1198
+      ],
+      "ms": 29.2705699976068
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Fantasy",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        260,
+        318,
+        2762,
+        2797,
+        858,
+        1097
+      ],
+      "ms": 29.23401400039438
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Children",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        919,
+        2762,
+        34,
+        858,
+        260
+      ],
+      "ms": 28.833637999923667
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Documentary",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 28.018824999890057
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Musical",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        919,
+        858,
+        260,
+        2396
+      ],
+      "ms": 27.030565001041396
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Action",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        858,
+        1198,
+        2028,
+        2571,
+        260,
+        318
+      ],
+      "ms": 27.65428000202519
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Film-Noir",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        1617,
+        318,
+        260,
+        858,
+        2762,
+        541
+      ],
+      "ms": 22.049823000998003
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Horror",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        1214,
+        2396
+      ],
+      "ms": 18.133425000996795
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Suspense",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        50,
+        318,
+        2762,
+        260,
+        858,
+        2396
+      ],
+      "ms": 17.217941996932495
+    },
+    {
+      "arm": "warm_c8",
+      "query": "Family",
+      "status": 200,
+      "cache_status": "hit",
+      "items": [
+        318,
+        2762,
+        260,
+        858,
+        2396,
+        1198
+      ],
+      "ms": 17.385486000421224
+    }
+  ]
+}

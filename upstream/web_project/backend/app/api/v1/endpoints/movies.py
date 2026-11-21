@@ -85,32 +85,17 @@ async def create_movie(
         is_adult=0
     )
     
-    db.add(new_movie)
-    db.commit()
-    db.refresh(new_movie)
-    
-    # 将电影索引到 Elasticsearch 以支持搜索
+    from app.behavior.models import MovieVersion
+    from app.jobs.models import Job
+    import uuid
     try:
-        movie_doc = {
-            "movie_id": new_movie.movie_id,
-            "title": new_movie.title,
-            "year": new_movie.year,
-            "genres": new_movie.genres or [],
-            "description": new_movie.description,
-            "imdb_id": new_movie.imdb_id,
-            "avg_rating": new_movie.avg_rating,
-            "imdb_rating": new_movie.imdb_rating,
-            "rating_count": new_movie.rating_count,
-            "imdb_votes": new_movie.imdb_votes,
-            "runtime_minutes": new_movie.runtime_minutes,
-            "title_type": new_movie.title_type
-        }
-        es_service.index_movie(movie_doc)
-        print(f"✓ 已在 Elasticsearch 中索引电影: {new_movie.title} (ID: {new_movie.movie_id})")
-    except Exception as e:
-        print(f"⚠ 警告: 无法将电影索引到 Elasticsearch: {e}")
-        # 不终止请求 - 电影已创建成功
-    
+        db.add(new_movie);db.flush()
+        db.add(MovieVersion(movie_id=new_movie.movie_id,version=1))
+        db.add(Job(owner_id=current_admin.user_id,request_key=uuid.uuid4(),payload={'movie_ids':[new_movie.movie_id]},state='queued',attempts=0))
+        db.commit();db.refresh(new_movie)
+    except Exception:
+        db.rollback();raise
+
     # 保存海报（如果上传了）
     if poster:
         try:
@@ -235,31 +220,14 @@ async def get_popular_movies(
 
 
 @router.get("/movies/{movie_id}", response_model=MovieDetail, tags=["movies"])
-async def get_movie(
+def get_movie(
     movie_id: int,
     db: Session = Depends(get_db)
 ):
     """获取指定电影的详细信息"""
     
-    movie = db.query(Movie).filter(Movie.movie_id == movie_id).first()
-    
-    if not movie:
-        raise HTTPException(status_code=404, detail=f"Movie {movie_id} not found")
-    
-    return MovieDetail(
-        movie_id=movie.movie_id,
-        imdb_id=movie.imdb_id,
-        title=movie.title,
-        year=movie.year,
-        genres=movie.genres or [],
-        description=movie.description,
-        avg_rating=movie.avg_rating,
-        rating_count=movie.rating_count,
-        imdb_rating=movie.imdb_rating,
-        imdb_votes=movie.imdb_votes,
-        runtime_minutes=movie.runtime_minutes,
-        title_type=movie.title_type,
-    )
+    from app.behavior.catalogue import detail
+    return detail(db,movie_id)
 
 
 @router.get("/movies/{movie_id}/cast", response_model=MovieCast, tags=["movies"])

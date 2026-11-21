@@ -1,0 +1,23 @@
+{
+  "create": true,
+  "idempotent_repeat": true,
+  "concurrent_repeat": true,
+  "concurrent_fields_preserved": true,
+  "owner_isolation": true,
+  "read_behavior": true,
+  "legacy_rating_write": true,
+  "legacy_rating_clear": true,
+  "watched_recommendation_exclusion": true,
+  "cache_miss_then_hit": true,
+  "cache_same_items": true,
+  "behavior_version_cache_invalidation": true,
+  "cache_owner_isolation": true,
+  "redis_failure_fallback": true,
+  "rating_validation": true,
+  "null_flag_rejected": true,
+  "unknown_movie": true,
+  "owner_spoof_rejected": true,
+  "pagination_bound": true,
+  "rating_clear": true,
+  "offline_ratings_unchanged": true
+}

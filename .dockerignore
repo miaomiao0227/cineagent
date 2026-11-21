@@ -3,3 +3,5 @@
 configs/*
 !configs/requirements.lock.txt
 !configs/backend.Dockerfile
+!configs/backend-extra.in
+!configs/backend-extra.lock.txt

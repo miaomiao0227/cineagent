@@ -50,10 +50,20 @@ class DeepSeekTrial:
         # UTF-8 bytes plus framing allowance exceed normal tokenization for these bounded text prompts.
         reserve_in=len(raw)+128*(len(messages)+1);reserve_out=max_tokens
         rid=str(uuid.uuid4());limits=cfg['approved_trial']
+        daily_path=self.config.with_name('daily_usage.json')
+        daily=None
+        if not self.approved_campaign and self.ledger.name=='DEEPSEEK_DAILY_LEDGER.json':
+            daily=json.loads(daily_path.read_text(encoding='utf-8'))
+            if not daily.get('enabled'):raise ProviderError('daily_disabled')
+            limits=daily
+
         if self.approved_campaign:
             if self.ledger.name!='DEEPSEEK_NATURAL_V2_LEDGER.json':raise ProviderError('invalid_campaign_ledger')
             limits={'max_requests_including_retries':240,'max_input_tokens':600000,'max_output_tokens':120000,'budget_usd':.50}
         caps=(240,600000,120000,.50) if self.approved_campaign else (30,150000,30000,.10)
+        if daily is not None:
+            caps=(int(limits['max_requests_including_retries']),int(limits['max_input_tokens']),int(limits['max_output_tokens']),float(limits['budget_usd']))
+            if not 0<caps[0]<=5000 or not 0<caps[3]<=5:raise ProviderError('daily_approval_limit')
         with file_lock(self.ledger.with_suffix('.lock')):
             log=self._read();attempts=log['attempts']
             if self.budget_window:

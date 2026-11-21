@@ -1,7 +1,7 @@
 """API 请求/响应的 Pydantic 数据模式定义"""
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel, Field, ConfigDict, field_validator
 from datetime import datetime
 
 
@@ -72,6 +72,12 @@ class UserBase(BaseModel):
 
 
 class UserSignup(BaseModel):
+    @field_validator('password')
+    @classmethod
+    def password_bytes(cls,value):
+        if len(value.encode('utf-8'))>72:raise ValueError('密码编码长度不能超过72字节')
+        return value
+
     """用户注册模式"""
     email: str = Field(..., description="邮箱地址")
     password: str = Field(..., min_length=6, description="密码")
@@ -133,6 +139,7 @@ class UserProfile(BaseModel):
 
 
 class UserUpdate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
     """用户资料更新模式（邮箱/用户名不可修改）"""
     gender: Optional[str] = Field(None, max_length=1)
     age: Optional[str] = None

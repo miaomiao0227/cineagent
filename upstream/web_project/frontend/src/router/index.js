@@ -6,6 +6,8 @@ import Profile from '../views/Profile.vue'
 import AddMovie from '../views/AddMovie.vue'
 
 const routes = [
+  {path:'/library',component:()=>import('../views/Library.vue'),meta:{requiresAuth:true}},
+  {path:'/admin/jobs',component:()=>import('../views/Jobs.vue'),meta:{requiresAuth:true,requiresAdmin:true}},
   { path: '/chat', name: 'Chat', component: () => import('../views/Chat.vue') },
   {
     path: '/',

@@ -5,14 +5,20 @@ $dockerExe = Join-Path $env:LOCALAPPDATA "Programs\DockerDesktop\resources\bin\d
 if (!(Test-Path -LiteralPath $dockerExe)) { $dockerExe = "docker" }
 $composeArgs = @("compose", "--env-file", (Join-Path $projectRoot "configs\.env"), "-f", (Join-Path $projectRoot "configs\compose.yaml"))
 if ($Action -eq "build") {
+ & $dockerExe build -t cineagent-base:local -f (Join-Path $projectRoot "configs/backend.Dockerfile") $projectRoot
+ if($LASTEXITCODE -ne 0){throw "Base image build failed"}
  & $dockerExe @composeArgs --profile app build
  if($LASTEXITCODE -ne 0){throw 'Image build failed'}
- $imageId=& $dockerExe image inspect cineagent-backend --format '{{.Id}}'
+ $imageId=& $dockerExe image inspect cineagent-runtime:local --format '{{.Id}}'
  if($LASTEXITCODE -ne 0){throw 'Backend image lookup failed'}
  Set-Content -LiteralPath (Join-Path $projectRoot 'reports\BACKEND_IMAGE_ID.txt') -Value $imageId -Encoding ascii
 }
 elseif ($Action -eq "smoke") { & $dockerExe @composeArgs run --rm -T --no-deps backend python /checks/runtime_smoke.py }
 elseif ($Action -eq "up") {
+ & $dockerExe @composeArgs up -d --wait postgres redis elasticsearch
+ if($LASTEXITCODE -ne 0){throw 'Infrastructure health check failed'}
+ & $dockerExe @composeArgs run --rm -T --no-deps backend alembic upgrade head
+ if($LASTEXITCODE -ne 0){throw 'Database migration failed; application not started'}
  & $dockerExe @composeArgs --profile app up -d
  if ($LASTEXITCODE -ne 0) {throw 'Application startup failed'}
  $ready=$false
@@ -23,7 +29,7 @@ elseif ($Action -eq "up") {
  if(!$ready){throw 'Model warmup did not become ready. Inspect cineagent-backend-1 logs.'}
  Write-Host 'Ready: http://127.0.0.1:13000/chat'
 }
-elseif ($Action -eq "stop") { & $dockerExe @composeArgs --profile app stop backend frontend }
+elseif ($Action -eq "stop") { & $dockerExe @composeArgs --profile app stop backend frontend worker dispatcher }
 else { & $dockerExe @composeArgs --profile app ps }
 if ($LASTEXITCODE -ne 0) { throw "Docker command failed: $LASTEXITCODE" }
 

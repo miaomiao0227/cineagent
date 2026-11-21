@@ -1,0 +1,8 @@
+{
+  "isolated_schema": true,
+  "separate_redis_db": 3,
+  "separate_es_index": true,
+  "double_migration": true,
+  "suite_passed": true,
+  "github_cloud_run": false
+}

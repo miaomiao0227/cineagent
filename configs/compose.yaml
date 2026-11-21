@@ -1,6 +1,7 @@
 name: cineagent
 services:
   postgres:
+    restart: unless-stopped
     image: postgres:15-alpine@sha256:f7d23353e1b15400d22ebe31189f4d314b87a4c129cc400c8c2d8d4ca127bf81
     environment:
       POSTGRES_USER: cineagent
@@ -15,6 +16,7 @@ services:
       timeout: 3s
       retries: 20
   redis:
+    restart: unless-stopped
     image: redis:7-alpine@sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499
     ports: ["127.0.0.1:16379:6379"]
     volumes: ["redis_data:/data"]
@@ -26,6 +28,7 @@ services:
       timeout: 3s
       retries: 20
   elasticsearch:
+    restart: unless-stopped
     image: docker.elastic.co/elasticsearch/elasticsearch:9.2.0@sha256:5dde04a980faf9105d6380c39469c645579684f1eab571f224989c22253c13e3
     environment:
       discovery.type: single-node
@@ -40,14 +43,18 @@ services:
       timeout: 5s
       retries: 30
   backend:
+    restart: unless-stopped
     profiles: ["app"]
     build:
       context: ..
-      dockerfile: configs/backend.Dockerfile
+      dockerfile: configs/backend.runtime.Dockerfile
+    image: cineagent-runtime:local
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]
     environment:
       DATABASE_URL: postgresql+psycopg2://cineagent:${POSTGRES_PASSWORD:?required}@postgres:5432/cineagent_db
       SECRET_KEY: ${SECRET_KEY:?required}
       DEMO_PASSWORD: ${DEMO_PASSWORD:?required}
+      DEBUG: "false"
       REDIS_URL: redis://redis:6379/0
       ELASTICSEARCH_URL: http://elasticsearch:9200
       FUNREC_RAW_DATA_PATH: /data
@@ -69,7 +76,41 @@ services:
       postgres: {condition: service_healthy}
       redis: {condition: service_healthy}
       elasticsearch: {condition: service_healthy}
+  worker:
+    restart: unless-stopped
+    profiles: ["app"]
+    image: cineagent-runtime:local
+    command: ["celery", "-A", "app.jobs.tasks:celery_app", "worker", "--loglevel=INFO", "--concurrency=1", "--prefetch-multiplier=1", "-Q", "cineagent-jobs"]
+    environment:
+      DATABASE_URL: postgresql+psycopg2://cineagent:${POSTGRES_PASSWORD:?required}@postgres:5432/cineagent_db
+      REDIS_URL: redis://redis:6379/0
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      SECRET_KEY: ${SECRET_KEY:?required}
+    volumes:
+      - ../upstream/web_project/backend:/app:ro
+      - ../scripts:/checks:ro
+      - ../reports:/trial-ledger
+    mem_limit: 512m
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+  dispatcher:
+    restart: unless-stopped
+    profiles: ["app"]
+    image: cineagent-runtime:local
+    command: ["python", "-m", "app.jobs.dispatcher"]
+    environment:
+      DATABASE_URL: postgresql+psycopg2://cineagent:${POSTGRES_PASSWORD:?required}@postgres:5432/cineagent_db
+      REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${SECRET_KEY:?required}
+    volumes:
+      - ../upstream/web_project/backend:/app:ro
+    mem_limit: 192m
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
   frontend:
+    restart: unless-stopped
     profiles: ["app"]
     build:
       context: ../upstream/web_project/frontend

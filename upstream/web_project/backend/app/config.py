@@ -10,13 +10,17 @@ class Settings(BaseSettings):
     # 应用配置
     app_name: str = "FunRec Movie Recommender"
     app_version: str = "0.1.0"
-    debug: bool = True
+    debug: bool = False
+    cors_allowed_origins: List[str] = ["http://127.0.0.1:13000", "http://localhost:13000"]
     
     # 数据库配置
     database_url: str = "postgresql://funrec:funrec123@localhost:5432/funrec_db"
     
     # Redis 配置
     redis_url: str = "redis://localhost:6379/0"
+    job_broker_db: int = 2
+    job_queue: str = "cineagent-jobs"
+    movie_index_name: str = "movies"
     redis_ttl: int = 600  # 缓存过期时间：10分钟
     
     # Elasticsearch 配置

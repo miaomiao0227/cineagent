@@ -27,7 +27,7 @@ app = FastAPI(
 # CORS 中间件
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 生产环境请适当配置
+    allow_origins=settings.cors_allowed_origins,  # 生产环境请适当配置
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -103,3 +103,13 @@ if __name__ == "__main__":
     )
 
 
+
+from app.behavior.api import router as behavior_router
+app.include_router(behavior_router)
+
+from app.jobs.api import router as jobs_router
+app.include_router(jobs_router)
+
+from app.observability import install as install_observability, router as metrics_router
+install_observability(app)
+app.include_router(metrics_router)

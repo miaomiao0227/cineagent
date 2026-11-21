@@ -89,6 +89,7 @@
                 />
               </div>
 
+              <MovieBehavior :movie-id="movie.movie_id" :revision="behaviorRevision" />
               <!-- 操作按钮 -->
               <div class="flex space-x-4">
                 <button
@@ -203,6 +204,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { movieApi, getPosterUrl } from '../services/api'
 import { useAuthStore } from '../stores/auth'
 import StarRating from '../components/StarRating.vue'
+import MovieBehavior from '../components/MovieBehavior.vue'
+const behaviorRevision = ref(0)
 
 const route = useRoute()
 const router = useRouter()
@@ -236,17 +239,9 @@ const goBack = () => {
   }
 }
 
-const handleRated = (rating) => {
-  console.log(`Movie rated: ${rating}/5`)
-  // 可选：刷新电影数据以显示更新后的平均评分
-  fetchMovieDetails()
-}
-
-const handleRemoved = () => {
-  console.log('Rating removed')
-  // 可选：刷新电影数据
-  fetchMovieDetails()
-}
+// Online ratings do not mutate the frozen catalogue aggregates.
+const handleRated = () => { behaviorRevision.value++ }
+const handleRemoved = () => { behaviorRevision.value++ }
 
 const fetchMovieDetails = async () => {
   const movieId = route.params.id

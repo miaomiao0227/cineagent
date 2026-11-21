@@ -49,6 +49,13 @@ class MovieEngine:
     def recommend(self,uid,state,text_query='',preferences=(),top_k=6,faults=()):
         self.load();start=time.perf_counter();trace=[];degraded=[];warnings=[];uid=int(uid or 0)
         exclude=set(state.get('exclude_ids',[]))|self.seen.get(uid,set())
+        if uid:
+            from app.database import SessionLocal
+            from app.behavior.models import Behavior
+            from sqlalchemy import select
+            with SessionLocal() as db:
+                exclude.update(db.scalars(select(Behavior.movie_id).where(Behavior.user_id==uid,Behavior.seen.is_(True))).all())
+
         director_seed=state.get('exclude_director_of');bad_directors=set()
         if director_seed:
             bad_directors=set(self.movies.get(director_seed,{}).get('directors',[]))

@@ -1,26 +1,493 @@
+diff --git a/web_project/backend/app/api/v1/endpoints/auth.py b/web_project/backend/app/api/v1/endpoints/auth.py
+index 6a7dcea..20c6ca1 100644
+--- a/web_project/backend/app/api/v1/endpoints/auth.py
++++ b/web_project/backend/app/api/v1/endpoints/auth.py
+@@ -14,7 +14,7 @@ router = APIRouter()
+ 
+ 
+ @router.post("/auth/signup", response_model=UserProfile, status_code=status.HTTP_201_CREATED, tags=["auth"])
+-async def signup(user_data: UserSignup, db: Session = Depends(get_db)):
++def signup(user_data: UserSignup, db: Session = Depends(get_db)):
+     """注册新用户"""
+     
+     # 检查邮箱是否已存在
+@@ -42,14 +42,18 @@ async def signup(user_data: UserSignup, db: Session = Depends(get_db)):
+     )
+     
+     db.add(db_user)
+-    db.commit()
++    from sqlalchemy.exc import IntegrityError
++    try:
++        db.commit()
++    except IntegrityError:
++        db.rollback();raise HTTPException(409,'邮箱已注册')
+     db.refresh(db_user)
+     
+     return UserProfile.model_validate(db_user)
+ 
+ 
+ @router.post("/auth/login", response_model=Token, tags=["auth"])
+-async def login(credentials: UserLogin, db: Session = Depends(get_db)):
++def login(credentials: UserLogin, db: Session = Depends(get_db)):
+     """用户登录并获取访问令牌"""
+     
+     # 根据邮箱查找用户
 diff --git a/web_project/backend/app/api/v1/endpoints/health.py b/web_project/backend/app/api/v1/endpoints/health.py
-index 0758084..dc969f1 100644
+index 0758084..0d9895d 100644
 --- a/web_project/backend/app/api/v1/endpoints/health.py
 +++ b/web_project/backend/app/api/v1/endpoints/health.py
-@@ -26,8 +26,7 @@ async def health_check(db: Session = Depends(get_db)):
-     
+@@ -1,48 +1,24 @@
+-"""健康检查"""
+-
+-from fastapi import APIRouter, Depends
+-from sqlalchemy.orm import Session
++"""Bounded dependency health checks without connection details in responses."""
++from fastapi import APIRouter,Depends
+ from sqlalchemy import text
+-from elasticsearch import Elasticsearch
+-from redis import Redis
+-
+ from app.api.deps import get_db
+ from app.schemas import HealthCheck
+ from app.config import settings
+-
+-router = APIRouter()
+-
+-
+-@router.get("/health", response_model=HealthCheck, tags=["health"])
+-async def health_check(db: Session = Depends(get_db)):
+-    """健康检查 - 用于监控服务状态"""
+-    
++router=APIRouter()
++@router.get('/health',response_model=HealthCheck,tags=['health'])
++def health_check(db=Depends(get_db)):
++    status={}
++    try:db.execute(text('SELECT 1'));status['database']='healthy'
++    except Exception:status['database']='unhealthy'
++    from redis import Redis
++    from redis.retry import Retry
++    from redis.backoff import NoBackoff
      try:
-         es_client = Elasticsearch(settings.elasticsearch_url)
+-        db.execute(text("SELECT 1"))
+-        db_status = "healthy"
+-    except Exception as e:
+-        db_status = f"unhealthy: {str(e)}"
+-
+-    
++        with Redis.from_url(settings.redis_url,socket_connect_timeout=.3,socket_timeout=.3,retry=Retry(NoBackoff(),0)) as r:r.ping()
++        status['redis']='healthy'
++    except Exception:status['redis']='unhealthy'
++    from elasticsearch import Elasticsearch
+     try:
+-        es_client = Elasticsearch(settings.elasticsearch_url)
 -        es_client.ping()
 -        es_status = "healthy"
-+        es_status = "healthy" if es_client.ping() else "unhealthy: ping returned false"
-     except Exception as e:
-         es_status = f"unhealthy: {str(e)}"
- 
-@@ -39,7 +38,7 @@ async def health_check(db: Session = Depends(get_db)):
-         redis_status = f"unhealthy: {str(e)}"
- 
-     return HealthCheck(
+-    except Exception as e:
+-        es_status = f"unhealthy: {str(e)}"
+-
+-    try:
+-        redis_client = Redis.from_url(settings.redis_url)
+-        redis_client.ping()
+-        redis_status = "healthy"
+-    except Exception as e:
+-        redis_status = f"unhealthy: {str(e)}"
+-
+-    return HealthCheck(
 -        status="healthy" if db_status == "healthy" else "degraded",
-+        status="healthy" if all(s == "healthy" for s in (db_status, redis_status, es_status)) else "degraded",
-         version=settings.app_version,
-         database=db_status,
-         redis=redis_status,
+-        version=settings.app_version,
+-        database=db_status,
+-        redis=redis_status,
+-        elasticsearch=es_status,
+-    )
+-
++        with Elasticsearch(settings.elasticsearch_url,request_timeout=.5,max_retries=0) as es:status['elasticsearch']='healthy' if es.ping() else 'unhealthy'
++    except Exception:status['elasticsearch']='unhealthy'
++    return HealthCheck(status='healthy' if all(x=='healthy' for x in status.values()) else 'degraded',version=settings.app_version,**status)
+diff --git a/web_project/backend/app/api/v1/endpoints/movies.py b/web_project/backend/app/api/v1/endpoints/movies.py
+index 4fb4842..fc82d13 100644
+--- a/web_project/backend/app/api/v1/endpoints/movies.py
++++ b/web_project/backend/app/api/v1/endpoints/movies.py
+@@ -85,32 +85,17 @@ async def create_movie(
+         is_adult=0
+     )
+     
+-    db.add(new_movie)
+-    db.commit()
+-    db.refresh(new_movie)
+-    
+-    # 将电影索引到 Elasticsearch 以支持搜索
++    from app.behavior.models import MovieVersion
++    from app.jobs.models import Job
++    import uuid
+     try:
+-        movie_doc = {
+-            "movie_id": new_movie.movie_id,
+-            "title": new_movie.title,
+-            "year": new_movie.year,
+-            "genres": new_movie.genres or [],
+-            "description": new_movie.description,
+-            "imdb_id": new_movie.imdb_id,
+-            "avg_rating": new_movie.avg_rating,
+-            "imdb_rating": new_movie.imdb_rating,
+-            "rating_count": new_movie.rating_count,
+-            "imdb_votes": new_movie.imdb_votes,
+-            "runtime_minutes": new_movie.runtime_minutes,
+-            "title_type": new_movie.title_type
+-        }
+-        es_service.index_movie(movie_doc)
+-        print(f"✓ 已在 Elasticsearch 中索引电影: {new_movie.title} (ID: {new_movie.movie_id})")
+-    except Exception as e:
+-        print(f"⚠ 警告: 无法将电影索引到 Elasticsearch: {e}")
+-        # 不终止请求 - 电影已创建成功
+-    
++        db.add(new_movie);db.flush()
++        db.add(MovieVersion(movie_id=new_movie.movie_id,version=1))
++        db.add(Job(owner_id=current_admin.user_id,request_key=uuid.uuid4(),payload={'movie_ids':[new_movie.movie_id]},state='queued',attempts=0))
++        db.commit();db.refresh(new_movie)
++    except Exception:
++        db.rollback();raise
++
+     # 保存海报（如果上传了）
+     if poster:
+         try:
+@@ -235,31 +220,14 @@ async def get_popular_movies(
+ 
+ 
+ @router.get("/movies/{movie_id}", response_model=MovieDetail, tags=["movies"])
+-async def get_movie(
++def get_movie(
+     movie_id: int,
+     db: Session = Depends(get_db)
+ ):
+     """获取指定电影的详细信息"""
+     
+-    movie = db.query(Movie).filter(Movie.movie_id == movie_id).first()
+-    
+-    if not movie:
+-        raise HTTPException(status_code=404, detail=f"Movie {movie_id} not found")
+-    
+-    return MovieDetail(
+-        movie_id=movie.movie_id,
+-        imdb_id=movie.imdb_id,
+-        title=movie.title,
+-        year=movie.year,
+-        genres=movie.genres or [],
+-        description=movie.description,
+-        avg_rating=movie.avg_rating,
+-        rating_count=movie.rating_count,
+-        imdb_rating=movie.imdb_rating,
+-        imdb_votes=movie.imdb_votes,
+-        runtime_minutes=movie.runtime_minutes,
+-        title_type=movie.title_type,
+-    )
++    from app.behavior.catalogue import detail
++    return detail(db,movie_id)
+ 
+ 
+ @router.get("/movies/{movie_id}/cast", response_model=MovieCast, tags=["movies"])
+diff --git a/web_project/backend/app/api/v1/endpoints/ratings.py b/web_project/backend/app/api/v1/endpoints/ratings.py
+index cfd70b5..1e5accf 100644
+--- a/web_project/backend/app/api/v1/endpoints/ratings.py
++++ b/web_project/backend/app/api/v1/endpoints/ratings.py
+@@ -1,278 +1,25 @@
+-"""评分"""
+-
+-from fastapi import APIRouter, Depends, HTTPException, status
++"""Online ratings compatibility API; never writes frozen MovieLens training rows."""
++import time
++from fastapi import APIRouter,Depends,HTTPException
+ from sqlalchemy.orm import Session
+-from sqlalchemy import func
+-from datetime import datetime
+-
+ from app.api.deps import get_db
+ from app.core.auth import get_current_active_user
+-from app.models import Rating, Movie, User
+ from app.schemas import RatingCreate
+-from pydantic import BaseModel
+-from app.config import settings
+-from app.services.elasticsearch_service import es_service
+-import redis
+-
+-# 导入 UCB 类型统计更新器（用于冷启动）
+-from online.cold_start.ucb_genre import update_ucb_genre_stats
+-
+-# 初始化 Redis 客户端（全局或按请求？）
+-# 创建全局客户端或使用依赖注入更佳。
+-# 为简单起见，这里创建连接池或客户端。
+-try:
+-    redis_client = redis.Redis.from_url(settings.redis_url, decode_responses=True)
+-except Exception:
+-    redis_client = None
+-
+-router = APIRouter()
+-
+-
+-class RatingResponse(BaseModel):
+-    """评分响应模式"""
+-    user_id: int
+-    movie_id: int
+-    rating: int
+-    timestamp: int
+-
+-
+-class UserRatingResponse(BaseModel):
+-    """用户对特定电影的评分"""
+-    rating: int | None = None
+-    has_rated: bool = False
+-
+-
+-@router.post("/ratings", response_model=RatingResponse, status_code=status.HTTP_201_CREATED, tags=["ratings"])
+-async def create_or_update_rating(
+-    rating_data: RatingCreate,
+-    current_user: User = Depends(get_current_active_user),
+-    db: Session = Depends(get_db)
+-):
+-    """创建或更新电影评分（需要认证）"""
+-    
+-    # 检查电影是否存在
+-    movie = db.query(Movie).filter(Movie.movie_id == rating_data.movie_id).first()
+-    if not movie:
+-        raise HTTPException(
+-            status_code=status.HTTP_404_NOT_FOUND,
+-            detail="电影不存在"
+-        )
+-    
+-    # 检查评分是否已存在
+-    existing_rating = db.query(Rating).filter(
+-        Rating.user_id == current_user.user_id,
+-        Rating.movie_id == rating_data.movie_id
+-    ).first()
+-    
+-    timestamp = int(datetime.now().timestamp())
+-    
+-    if existing_rating:
+-        # 更新已存在的评分
+-        old_rating = existing_rating.rating
+-        existing_rating.rating = rating_data.rating
+-        existing_rating.timestamp = timestamp
+-        db.commit()
+-        db.refresh(existing_rating)
+-        
+-        # 更新电影的平均评分
+-        _update_movie_rating(db, rating_data.movie_id)
+-        
+-        # 更新 Elasticsearch
+-        _update_movie_es(db, rating_data.movie_id)
+-        
+-        # 更新 Redis 历史（即使已存在，也表示新的交互）
+-        # 通常只在新交互时添加到历史。
+-        # 但如果用户重新评分，可能表示感兴趣。
+-        # 为了获取"最近"上下文，将其添加到历史中。
+-        _update_user_history_redis(db, current_user.user_id, rating_data.movie_id)
+-        
+-        # 更新 UCB 类型统计（用于冷启动的探索/利用）
+-        if movie.genres:
+-            update_ucb_genre_stats(
+-                user_id=current_user.user_id,
+-                movie_genres=movie.genres,
+-                rating=rating_data.rating,
+-                redis_client=redis_client
+-            )
+-        
+-        return RatingResponse(
+-            user_id=existing_rating.user_id,
+-            movie_id=existing_rating.movie_id,
+-            rating=existing_rating.rating,
+-            timestamp=existing_rating.timestamp
+-        )
+-    else:
+-        # 创建新评分
+-        new_rating = Rating(
+-            user_id=current_user.user_id,
+-            movie_id=rating_data.movie_id,
+-            rating=rating_data.rating,
+-            timestamp=timestamp
+-        )
+-        db.add(new_rating)
+-        db.commit()
+-        db.refresh(new_rating)
+-        
+-        # 更新电影的平均评分和评分数
+-        _update_movie_rating(db, rating_data.movie_id)
+-        
+-        # 更新 Elasticsearch
+-        _update_movie_es(db, rating_data.movie_id)
+-        
+-        # 更新 Redis 历史
+-        _update_user_history_redis(db, current_user.user_id, rating_data.movie_id)
+-        
+-        # 更新 UCB 类型统计（用于冷启动的探索/利用）
+-        if movie.genres:
+-            update_ucb_genre_stats(
+-                user_id=current_user.user_id,
+-                movie_genres=movie.genres,
+-                rating=rating_data.rating,
+-                redis_client=redis_client
+-            )
+-        
+-        return RatingResponse(
+-            user_id=new_rating.user_id,
+-            movie_id=new_rating.movie_id,
+-            rating=new_rating.rating,
+-            timestamp=new_rating.timestamp
+-        )
+-
+-
+-@router.get("/ratings/movie/{movie_id}", response_model=UserRatingResponse, tags=["ratings"])
+-async def get_user_rating(
+-    movie_id: int,
+-    current_user: User = Depends(get_current_active_user),
+-    db: Session = Depends(get_db)
+-):
+-    """获取当前用户对指定电影的评分"""
+-    
+-    rating = db.query(Rating).filter(
+-        Rating.user_id == current_user.user_id,
+-        Rating.movie_id == movie_id
+-    ).first()
+-    
+-    if rating:
+-        return UserRatingResponse(
+-            rating=rating.rating,
+-            has_rated=True
+-        )
+-    else:
+-        return UserRatingResponse(
+-            rating=None,
+-            has_rated=False
+-        )
+-
+-
+-@router.delete("/ratings/movie/{movie_id}", status_code=status.HTTP_204_NO_CONTENT, tags=["ratings"])
+-async def delete_rating(
+-    movie_id: int,
+-    current_user: User = Depends(get_current_active_user),
+-    db: Session = Depends(get_db)
+-):
+-    """删除用户对电影的评分"""
+-    
+-    rating = db.query(Rating).filter(
+-        Rating.user_id == current_user.user_id,
+-        Rating.movie_id == movie_id
+-    ).first()
+-    
+-    if not rating:
+-        raise HTTPException(
+-            status_code=status.HTTP_404_NOT_FOUND,
+-            detail="评分不存在"
+-        )
+-    
+-    db.delete(rating)
+-    db.commit()
+-    
+-    # 更新电影的平均评分
+-    _update_movie_rating(db, movie_id)
+-    
+-    # 更新 Elasticsearch
+-    _update_movie_es(db, movie_id)
+-    
+-    # 从 Redis 历史中移除？
+-    # 不知道值的情况下比较复杂。
+-    # 暂时跳过移除。历史表示"观看过"，删除评分不代表"未观看"。
+-    
+-    return None
+-
+-
+-def _update_movie_rating(db: Session, movie_id: int):
+-    """辅助函数：更新电影的平均评分和评分数"""
+-    
+-    result = db.query(
+-        func.avg(Rating.rating).label('avg'),
+-        func.count(Rating.rating).label('count')
+-    ).filter(Rating.movie_id == movie_id).first()
+-    
+-    movie = db.query(Movie).filter(Movie.movie_id == movie_id).first()
+-    if movie:
+-        movie.avg_rating = float(result.avg) if result.avg else None
+-        movie.rating_count = result.count or 0
+-        db.commit()
+-
+-def _update_movie_es(db: Session, movie_id: int):
+-    """辅助函数：将电影更新推送到 Elasticsearch"""
+-    if not es_service:
+-        return
+-        
+-    movie = db.query(Movie).filter(Movie.movie_id == movie_id).first()
+-    if movie:
+-        es_service.update_movie(movie.movie_id, {
+-            "avg_rating": movie.avg_rating,
+-            "rating_count": movie.rating_count,
+-            "title": movie.title,  # 以防万一
+-            "year": movie.year
+-        })
+-
+-def _update_user_history_redis(db: Session, user_id: int, movie_id: int):
+-    """辅助函数：将电影添加到 Redis 中的用户历史并更新偏好"""
+-    if not redis_client:
+-        return
+-        
++from app.behavior.models import Behavior
++from app.behavior.service import update
++router=APIRouter()
++@router.post('/ratings',status_code=201,tags=['ratings'])
++def rate(body:RatingCreate,user=Depends(get_current_active_user),db:Session=Depends(get_db)):
+     try:
+-        # 1. 更新历史
+-        history_key = f"user:{user_id}:history"
+-        redis_client.rpush(history_key, movie_id)
+-        
+-        # 2. 更新偏好（在线更新）
+-        # 从数据库获取最近10条评分以准确重新计算热门类型
+-        recent_ratings = (
+-            db.query(Rating.movie_id)
+-            .filter(Rating.user_id == user_id)
+-            .order_by(Rating.timestamp.desc())
+-            .limit(10)
+-            .all()
+-        )
+-        
+-        if not recent_ratings:
+-            return
+-            
+-        recent_mids = [r.movie_id for r in recent_ratings]
+-        
+-        # 获取这些电影的类型
+-        movies = db.query(Movie.genres).filter(Movie.movie_id.in_(recent_mids)).all()
+-        
+-        all_genres = []
+-        for m in movies:
+-            if m.genres:
+-                all_genres.extend(m.genres)
+-                
+-        if all_genres:
+-            from collections import Counter
+-            counts = Counter(all_genres)
+-            # 取最常见的前1个类型
+-            top_1 = [g for g, c in counts.most_common(1)]
+-            
+-            # 更新 Redis
+-            profile_key = f"user:{user_id}:profile"
+-            redis_client.hset(profile_key, "frequent_genres", ",".join(top_1))
+-                
+-    except Exception as e:
+-        print(f"更新 Redis history/preferences 时出错: {e}")
+-                
+-    except Exception as e:
+-        print(f"更新 Redis history/preferences 时出错: {e}")
+-
++        r=update(db,user.user_id,body.movie_id,{'rating':body.rating});db.commit()
++        return dict(user_id=user.user_id,movie_id=body.movie_id,rating=r['rating'],timestamp=int(time.time()))
++    except Exception:db.rollback();raise
++@router.get('/ratings/movie/{movie_id}',tags=['ratings'])
++def read(movie_id:int,user=Depends(get_current_active_user),db:Session=Depends(get_db)):
++    r=db.get(Behavior,(user.user_id,movie_id))
++    return dict(rating=r.rating if r else None,has_rated=bool(r and r.rating is not None))
++@router.delete('/ratings/movie/{movie_id}',tags=['ratings'])
++def remove(movie_id:int,user=Depends(get_current_active_user),db:Session=Depends(get_db)):
++    try:
++        update(db,user.user_id,movie_id,{'rating':None});db.commit();return {'message':'评分已删除'}
++    except Exception:db.rollback();raise
 diff --git a/web_project/backend/app/api/v1/endpoints/recommendations.py b/web_project/backend/app/api/v1/endpoints/recommendations.py
 index 93b1ef3..b1f1f75 100644
 --- a/web_project/backend/app/api/v1/endpoints/recommendations.py
@@ -67,10 +534,253 @@ index 93b1ef3..b1f1f75 100644
              ))
      return enriched
  
+diff --git a/web_project/backend/app/api/v1/endpoints/users.py b/web_project/backend/app/api/v1/endpoints/users.py
+index 6ffa7a0..8a47018 100644
+--- a/web_project/backend/app/api/v1/endpoints/users.py
++++ b/web_project/backend/app/api/v1/endpoints/users.py
+@@ -1,134 +1,31 @@
+-"""用户资料"""
+-
+-from fastapi import APIRouter, Depends, HTTPException, status
+-from sqlalchemy.orm import Session, joinedload
+-from sqlalchemy import desc
+-import logging
+-
+-import redis
+-from app.config import settings
++"""Signed-in profile based on isolated online interactions."""
++from collections import Counter
++from fastapi import APIRouter,Depends
++from sqlalchemy import select
++from sqlalchemy.dialects.postgresql import insert
+ from app.api.deps import get_db
+ from app.core.auth import get_current_active_user
+-from app.models import User, Rating, Movie
+-from app.schemas import UserProfile, UserUpdate, RecentRating
+-
+-logger = logging.getLogger(__name__)
+-
+-# 初始化 Redis 连接
+-try:
+-    redis_client = redis.Redis.from_url(settings.redis_url, decode_responses=True)
+-except Exception as e:
+-    logger.warning(f"连接 Redis 失败: {e}")
+-    redis_client = None
+-
+-router = APIRouter()
+-
+-
+-@router.get("/users/me", response_model=UserProfile, tags=["users"])
+-async def get_current_user_profile(
+-    current_user: User = Depends(get_current_active_user),
+-    db: Session = Depends(get_db)
+-):
+-    """获取当前用户资料，包含偏好和历史记录"""
+-    
+-    logger.info(f"获取用户 {current_user.user_id} 的资料")
+-
+-    # 1. 获取最近评分（最近10条）
+-    recent_ratings_db = db.query(Rating).options(
+-        joinedload(Rating.movie)
+-    ).filter(
+-        Rating.user_id == current_user.user_id
+-    ).order_by(desc(Rating.timestamp)).limit(10).all()
+-    
+-    logger.info(f"找到 {len(recent_ratings_db)} 条最近评分")
+-
+-    recent_ratings = []
+-    for r in recent_ratings_db:
+-        if r.movie:
+-            recent_ratings.append(RecentRating(
+-                movie_id=r.movie_id,
+-                title=r.movie.title,
+-                genres=r.movie.genres or [],
+-                rating=r.rating,
+-                timestamp=r.timestamp
+-            ))            
+-            
+-    # 2. 获取热门电影类型（从评分历史计算，仅存储在 Redis）
+-    frequent_genres = []
+-    
+-    if redis_client:
+-        try:
+-            profile_key = f"user:{current_user.user_id}:profile"
+-            cached_genres = redis_client.hget(profile_key, "frequent_genres")
+-            if cached_genres:
+-                frequent_genres = cached_genres.split(",")
+-                logger.info(f"从 Redis 加载热门电影类型: {frequent_genres}")
+-            else:
+-                logger.info("Redis 中没有热门电影类型")
+-        except Exception as e:
+-            logger.warning(f"获取热门电影类型时 Redis 出错: {e}")
+-    
+-    # 构建用户资料响应
+-    profile = UserProfile.model_validate(current_user)
+-    profile.recent_ratings = recent_ratings
+-    profile.frequent_genres = frequent_genres
+-    
+-    return profile
+-
+-
+-@router.put("/users/me", response_model=UserProfile, tags=["users"])
+-async def update_user_profile(
+-    user_update: UserUpdate,
+-    current_user: User = Depends(get_current_active_user),
+-    db: Session = Depends(get_db)
+-):
+-    """更新当前用户资料（邮箱/用户名不可修改）
+-    
+-    注意: preferred_genres 是用户声明的偏好（用于冷启动）。
+-    这与 frequent_genres 不同，后者是根据评分历史计算得出的。
+-    """
+-    
+-    # 更新字段（包括用于冷启动的 preferred_genres）
+-    update_data = user_update.model_dump(exclude_unset=True)
+-    for field, value in update_data.items():
+-        setattr(current_user, field, value)
+-    
+-    db.commit()
+-    db.refresh(current_user)
+-    
+-    # 返回包含计算字段的完整资料
+-    # 获取最近评分
+-    recent_ratings_db = db.query(Rating).options(
+-        joinedload(Rating.movie)
+-    ).filter(
+-        Rating.user_id == current_user.user_id
+-    ).order_by(desc(Rating.timestamp)).limit(10).all()
+-    
+-    recent_ratings = []
+-    for r in recent_ratings_db:
+-        if r.movie:
+-            recent_ratings.append(RecentRating(
+-                movie_id=r.movie_id,
+-                title=r.movie.title,
+-                genres=r.movie.genres or [],
+-                rating=r.rating,
+-                timestamp=r.timestamp
+-            ))
+-    
+-    # 从 Redis 获取热门电影类型
+-    frequent_genres = []
+-    if redis_client:
+-        try:
+-            profile_key = f"user:{current_user.user_id}:profile"
+-            cached_genres = redis_client.hget(profile_key, "frequent_genres")
+-            if cached_genres:
+-                frequent_genres = cached_genres.split(",")
+-        except Exception as e:
+-            logger.warning(f"获取热门电影类型时 Redis 出错: {e}")
+-    
+-    profile = UserProfile.model_validate(current_user)
+-    profile.recent_ratings = recent_ratings
+-    profile.frequent_genres = frequent_genres
+-    
+-    return profile
+-
++from app.models import Movie
++from app.behavior.models import Behavior,BehaviorVersion
++from app.schemas import UserProfile,UserUpdate,RecentRating
++router=APIRouter()
++def profile(db,user):
++    rows=db.execute(select(Behavior,Movie).join(Movie,Behavior.movie_id==Movie.movie_id).where(Behavior.user_id==user.user_id,Behavior.rating.is_not(None)).order_by(Behavior.updated_at.desc(),Behavior.movie_id.desc()).limit(100)).all()
++    result=UserProfile.model_validate(user)
++    result.recent_ratings=[RecentRating(movie_id=r.movie_id,title=m.title,genres=m.genres or [],rating=r.rating,timestamp=int(r.updated_at.timestamp())) for r,m in rows[:10]]
++    genres=Counter(g for r,m in rows if r.rating>=8 for g in (m.genres or []));result.frequent_genres=[g for g,n in genres.most_common(5)]
++    return result
++@router.get('/users/me',response_model=UserProfile,tags=['users'])
++def get_current_user_profile(user=Depends(get_current_active_user),db=Depends(get_db)):return profile(db,user)
++@router.put('/users/me',response_model=UserProfile,tags=['users'])
++def update_user_profile(body:UserUpdate,user=Depends(get_current_active_user),db=Depends(get_db)):
++    try:
++        db.execute(insert(BehaviorVersion).values(user_id=user.user_id,version=0).on_conflict_do_nothing())
++        version=db.scalar(select(BehaviorVersion).where(BehaviorVersion.user_id==user.user_id).with_for_update())
++        changes=body.model_dump(exclude_unset=True)
++        if 'preferred_genres' in changes and changes['preferred_genres'] is None:changes['preferred_genres']=[]
++        if any(getattr(user,k)!=v for k,v in changes.items()):
++            for k,v in changes.items():setattr(user,k,v)
++            version.version+=1
++        db.commit();return profile(db,user)
++    except Exception:db.rollback();raise
+diff --git a/web_project/backend/app/config.py b/web_project/backend/app/config.py
+index 01cb8c6..bf1ec2a 100644
+--- a/web_project/backend/app/config.py
++++ b/web_project/backend/app/config.py
+@@ -10,13 +10,17 @@ class Settings(BaseSettings):
+     # 应用配置
+     app_name: str = "FunRec Movie Recommender"
+     app_version: str = "0.1.0"
+-    debug: bool = True
++    debug: bool = False
++    cors_allowed_origins: List[str] = ["http://127.0.0.1:13000", "http://localhost:13000"]
+     
+     # 数据库配置
+     database_url: str = "postgresql://funrec:funrec123@localhost:5432/funrec_db"
+     
+     # Redis 配置
+     redis_url: str = "redis://localhost:6379/0"
++    job_broker_db: int = 2
++    job_queue: str = "cineagent-jobs"
++    movie_index_name: str = "movies"
+     redis_ttl: int = 600  # 缓存过期时间：10分钟
+     
+     # Elasticsearch 配置
+diff --git a/web_project/backend/app/core/auth.py b/web_project/backend/app/core/auth.py
+index 199a08f..38e1b6b 100644
+--- a/web_project/backend/app/core/auth.py
++++ b/web_project/backend/app/core/auth.py
+@@ -11,7 +11,7 @@ from app.models import User
+ security = HTTPBearer()
+ 
+ 
+-async def get_current_user(
++def get_current_user(
+     credentials: HTTPAuthorizationCredentials = Depends(security),
+     db: Session = Depends(get_db)
+ ) -> User:
+@@ -61,14 +61,14 @@ async def get_current_user(
+     return user
+ 
+ 
+-async def get_current_active_user(
++def get_current_active_user(
+     current_user: User = Depends(get_current_user)
+ ) -> User:
+     """确保用户处于激活状态"""
+     return current_user
+ 
+ 
+-async def get_current_admin_user(
++def get_current_admin_user(
+     current_user: User = Depends(get_current_active_user)
+ ) -> User:
+     """获取当前管理员用户（需要超级用户权限）"""
+diff --git a/web_project/backend/app/database.py b/web_project/backend/app/database.py
+index dd022e3..dde8279 100644
+--- a/web_project/backend/app/database.py
++++ b/web_project/backend/app/database.py
+@@ -11,6 +11,8 @@ engine = create_engine(
+     pool_pre_ping=True,
+     pool_size=10,
+     max_overflow=20,
++    pool_timeout=3,
++    connect_args={"connect_timeout": 3},
+ )
+ 
+ # 创建会话工厂
 diff --git a/web_project/backend/app/main.py b/web_project/backend/app/main.py
-index 24d0ecb..50448b4 100644
+index 24d0ecb..ee6aaae 100644
 --- a/web_project/backend/app/main.py
 +++ b/web_project/backend/app/main.py
+@@ -27,7 +27,7 @@ app = FastAPI(
+ # CORS 中间件
+ app.add_middleware(
+     CORSMiddleware,
+-    allow_origins=["*"],  # 生产环境请适当配置
++    allow_origins=settings.cors_allowed_origins,  # 生产环境请适当配置
+     allow_credentials=True,
+     allow_methods=["*"],
+     allow_headers=["*"],
 @@ -55,11 +55,44 @@ async def root():
  
  # 在根路径下注册健康检查路由（无前缀）
@@ -116,12 +826,56 @@ index 24d0ecb..50448b4 100644
  if __name__ == "__main__":
      import uvicorn
      uvicorn.run(
-@@ -68,3 +101,5 @@ if __name__ == "__main__":
+@@ -68,3 +101,15 @@ if __name__ == "__main__":
          port=8000,
          reload=True,
      )
 +
 +
++
++from app.behavior.api import router as behavior_router
++app.include_router(behavior_router)
++
++from app.jobs.api import router as jobs_router
++app.include_router(jobs_router)
++
++from app.observability import install as install_observability, router as metrics_router
++install_observability(app)
++app.include_router(metrics_router)
+diff --git a/web_project/backend/app/schemas.py b/web_project/backend/app/schemas.py
+index dca55d5..df6e392 100644
+--- a/web_project/backend/app/schemas.py
++++ b/web_project/backend/app/schemas.py
+@@ -1,7 +1,7 @@
+ """API 请求/响应的 Pydantic 数据模式定义"""
+ 
+ from typing import List, Optional
+-from pydantic import BaseModel, Field, ConfigDict
++from pydantic import BaseModel, Field, ConfigDict, field_validator
+ from datetime import datetime
+ 
+ 
+@@ -72,6 +72,12 @@ class UserBase(BaseModel):
+ 
+ 
+ class UserSignup(BaseModel):
++    @field_validator('password')
++    @classmethod
++    def password_bytes(cls,value):
++        if len(value.encode('utf-8'))>72:raise ValueError('密码编码长度不能超过72字节')
++        return value
++
+     """用户注册模式"""
+     email: str = Field(..., description="邮箱地址")
+     password: str = Field(..., min_length=6, description="密码")
+@@ -133,6 +139,7 @@ class UserProfile(BaseModel):
+ 
+ 
+ class UserUpdate(BaseModel):
++    model_config = ConfigDict(extra="forbid")
+     """用户资料更新模式（邮箱/用户名不可修改）"""
+     gender: Optional[str] = Field(None, max_length=1)
+     age: Optional[str] = None
 diff --git a/web_project/backend/online/pipeline.py b/web_project/backend/online/pipeline.py
 index 86637cd..bbf7ac4 100644
 --- a/web_project/backend/online/pipeline.py
@@ -258,7 +1012,7 @@ index 3b53438..e38d41f 100644
  
 +
 diff --git a/web_project/frontend/src/components/Header.vue b/web_project/frontend/src/components/Header.vue
-index a278166..21d934a 100644
+index a278166..1e936ff 100644
 --- a/web_project/frontend/src/components/Header.vue
 +++ b/web_project/frontend/src/components/Header.vue
 @@ -12,7 +12,7 @@
@@ -266,7 +1020,7 @@ index a278166..21d934a 100644
              Home
            </router-link>
 -        </nav>
-+        <router-link to="/chat" class="text-gray-700 hover:text-datawhale-blue transition-colors">对话选片</router-link></nav>
++        <router-link to="/chat" class="text-gray-700 hover:text-datawhale-blue transition-colors">对话选片</router-link><router-link v-if="authStore.isAuthenticated" to="/library" class="text-gray-700">我的片单</router-link><router-link v-if="authStore.isAdmin" to="/admin/jobs" class="text-gray-700">任务管理</router-link></nav>
        </div>
  
        <!-- 右侧 - 统计信息、搜索、管理员、认证 -->
@@ -276,24 +1030,26 @@ index a278166..21d934a 100644
  
 +
 diff --git a/web_project/frontend/src/router/index.js b/web_project/frontend/src/router/index.js
-index 2706df5..fc8fa64 100644
+index 2706df5..da2e012 100644
 --- a/web_project/frontend/src/router/index.js
 +++ b/web_project/frontend/src/router/index.js
-@@ -6,6 +6,7 @@ import Profile from '../views/Profile.vue'
+@@ -6,6 +6,9 @@ import Profile from '../views/Profile.vue'
  import AddMovie from '../views/AddMovie.vue'
  
  const routes = [
++  {path:'/library',component:()=>import('../views/Library.vue'),meta:{requiresAuth:true}},
++  {path:'/admin/jobs',component:()=>import('../views/Jobs.vue'),meta:{requiresAuth:true,requiresAdmin:true}},
 +  { path: '/chat', name: 'Chat', component: () => import('../views/Chat.vue') },
    {
      path: '/',
      name: 'Home',
-@@ -87,3 +88,4 @@ router.beforeEach((to, from, next) => {
+@@ -87,3 +90,4 @@ router.beforeEach((to, from, next) => {
  
  export default router
  
 +
 diff --git a/web_project/frontend/src/services/api.js b/web_project/frontend/src/services/api.js
-index 260cf71..1f9f78e 100644
+index 260cf71..1de8864 100644
 --- a/web_project/frontend/src/services/api.js
 +++ b/web_project/frontend/src/services/api.js
 @@ -1,7 +1,7 @@
@@ -305,6 +1061,28 @@ index 260cf71..1f9f78e 100644
  
  const api = axios.create({
    baseURL: `${API_BASE_URL}/api`,
+@@ -66,17 +66,10 @@ export const movieApi = {
+   // 获取个性化推荐（完整流程：召回 → 排序）
+   getRecommendations(userId, topK = 20) {
+     const token = localStorage.getItem('token')
+-    return api.post('/recommendations/recommend', 
+-      { user_id: userId },
+-      { 
+-        headers: { 'Authorization': `Bearer ${token}` },
+-        params: { top_k: topK }
+-      }
+-    ).then(response => {
+-      // 从响应中提取 items 数组以保持向后兼容
+-      // 响应格式: { items: [...], recall_count, ranking_strategy }
+-      return { ...response, data: response.data.items }
+-    })
++    return api.get('/me/recommendations', {
++      headers: {'Authorization': `Bearer ${token}`},
++      params: {limit: Math.min(20, topK)}
++    }).then(response => ({...response, data: response.data.items}))
+   },
+ 
+   // 管理员：创建电影（可选上传海报）
 diff --git a/web_project/frontend/src/stores/auth.js b/web_project/frontend/src/stores/auth.js
 index ae63401..f26c1cc 100644
 --- a/web_project/frontend/src/stores/auth.js
@@ -344,6 +1122,48 @@ index 3c9fc6f..5eb0b59 100644
        <!-- 为你推荐（个性化推荐） -->
        <MovieRow
          v-if="authStore.isAuthenticated"
+diff --git a/web_project/frontend/src/views/MovieDetail.vue b/web_project/frontend/src/views/MovieDetail.vue
+index e1571a7..90c4d9c 100644
+--- a/web_project/frontend/src/views/MovieDetail.vue
++++ b/web_project/frontend/src/views/MovieDetail.vue
+@@ -89,6 +89,7 @@
+                 />
+               </div>
+ 
++              <MovieBehavior :movie-id="movie.movie_id" :revision="behaviorRevision" />
+               <!-- 操作按钮 -->
+               <div class="flex space-x-4">
+                 <button
+@@ -203,6 +204,8 @@ import { useRoute, useRouter } from 'vue-router'
+ import { movieApi, getPosterUrl } from '../services/api'
+ import { useAuthStore } from '../stores/auth'
+ import StarRating from '../components/StarRating.vue'
++import MovieBehavior from '../components/MovieBehavior.vue'
++const behaviorRevision = ref(0)
+ 
+ const route = useRoute()
+ const router = useRouter()
+@@ -236,17 +239,9 @@ const goBack = () => {
+   }
+ }
+ 
+-const handleRated = (rating) => {
+-  console.log(`Movie rated: ${rating}/5`)
+-  // 可选：刷新电影数据以显示更新后的平均评分
+-  fetchMovieDetails()
+-}
+-
+-const handleRemoved = () => {
+-  console.log('Rating removed')
+-  // 可选：刷新电影数据
+-  fetchMovieDetails()
+-}
++// Online ratings do not mutate the frozen catalogue aggregates.
++const handleRated = () => { behaviorRevision.value++ }
++const handleRemoved = () => { behaviorRevision.value++ }
+ 
+ const fetchMovieDetails = async () => {
+   const movieId = route.params.id
 diff --git a/web_project/frontend/src/views/Profile.vue b/web_project/frontend/src/views/Profile.vue
 index dd959cf..beedfdf 100644
 --- a/web_project/frontend/src/views/Profile.vue
@@ -357,3 +1177,1572 @@ index dd959cf..beedfdf 100644
  
  const router = useRouter()
  const authStore = useAuthStore()
+diff --git a/web_project/backend/alembic.ini b/web_project/backend/alembic.ini
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/alembic.ini
+@@ -0,0 +1,3 @@
++[alembic]
++script_location = %(here)s/migrations
++prepend_sys_path = .
+diff --git a/web_project/backend/app/ci_app.py b/web_project/backend/app/ci_app.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/ci_app.py
+@@ -0,0 +1,16 @@
++"""Minimal CI API: synthetic DB fixtures, no datasets, weights or external LLM."""
++from fastapi import FastAPI
++from app.behavior.api import router as behaviors
++from app.jobs.api import router as jobs
++from app.api.v1.endpoints.ratings import router as ratings
++from app.behavior.catalogue import detail
++from app.api.deps import get_db
++from fastapi import Depends
++from app.observability import router as metrics,install
++app=FastAPI();app.include_router(behaviors);app.include_router(jobs);app.include_router(ratings,prefix='/api');app.include_router(metrics);install(app)
++
++@app.get('/api/movies/{movie_id}')
++def movie(movie_id:int,db=Depends(get_db)):return detail(db,movie_id)
++
++from app.api.v1.endpoints.users import router as users_router
++app.include_router(users_router,prefix="/api")
+diff --git a/web_project/backend/app/observability.py b/web_project/backend/app/observability.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/observability.py
+@@ -0,0 +1,32 @@
++import json,logging,re,time,uuid,threading,math
++from collections import defaultdict,deque
++from fastapi import Depends,APIRouter
++from app.core.auth import get_current_admin_user
++logger=logging.getLogger('cineagent.requests');lock=threading.Lock();metrics=defaultdict(lambda:{'count':0,'errors':0,'elapsed_ms':deque(maxlen=2000)})
++def install(app):
++    from starlette.exceptions import HTTPException
++    from fastapi.responses import JSONResponse
++    @app.exception_handler(HTTPException)
++    async def http_error(request,exc):
++        rid=getattr(request.state,'request_id','')
++        return JSONResponse(status_code=exc.status_code,content={'detail':exc.detail,'error':{'code':'http_'+str(exc.status_code),'request_id':rid}},headers=exc.headers)
++
++    @app.middleware('http')
++    async def request_trace(request,call_next):
++        incoming=request.headers.get('X-Request-ID','')
++        rid=incoming if re.fullmatch(r'[A-Za-z0-9_-]{1,64}',incoming) else str(uuid.uuid4())
++        request.state.request_id=rid;started=time.perf_counter();status=500
++        try:
++            response=await call_next(request);status=response.status_code;response.headers['X-Request-ID']=rid;return response
++        finally:
++            elapsed=round((time.perf_counter()-started)*1000,2);route=getattr(request.scope.get('route'),'path','unmatched')
++            # Route templates only: never tokens, body, query string or account details.
++            logger.info(json.dumps({'request_id':rid,'route':route,'method':request.method,'status':status,'elapsed_ms':elapsed}))
++            with lock:
++                item=metrics[(request.method,route)];item['count']+=1;item['errors']+=int(status>=500);item['elapsed_ms'].append(elapsed)
++
++router=APIRouter()
++@router.get('/api/admin/metrics')
++def snapshot(user=Depends(get_current_admin_user)):
++    with lock:
++        return {'scope':'current_process','routes':[{'method':key[0],'route':key[1],'count':v['count'],'server_errors':v['errors'],'recent_samples':len(v['elapsed_ms']),'p95_ms':sorted(v['elapsed_ms'])[max(0,math.ceil(.95*len(v['elapsed_ms']))-1)] if v['elapsed_ms'] else 0} for key,v in metrics.items()]}
+diff --git a/web_project/backend/migrations/env.py b/web_project/backend/migrations/env.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/migrations/env.py
+@@ -0,0 +1,9 @@
++from alembic import context
++from app.database import engine,Base
++from app import models
++from app.behavior.models import Behavior,BehaviorVersion
++from app.jobs.models import Job
++if context.is_offline_mode():raise RuntimeError('Use online migrations with explicit DB target')
++with engine.connect() as connection:
++    context.configure(connection=connection,target_metadata=Base.metadata)
++    with context.begin_transaction():context.run_migrations()
+diff --git a/web_project/backend/tests/conftest.py b/web_project/backend/tests/conftest.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/tests/conftest.py
+@@ -0,0 +1,30 @@
++import os,json,uuid,urllib.request,urllib.error
++import pytest
++from sqlalchemy import delete,select
++from app.database import SessionLocal
++from app.models import User,Movie
++from app.behavior.models import Behavior,BehaviorVersion
++from app.jobs.models import Job
++from app.core.security import create_access_token
++BASE=os.getenv('BACKEND_TEST_URL','http://127.0.0.1:8000')
++def http(path,method='GET',body=None,token=None,headers=None):
++    h={'Content-Type':'application/json',**(headers or {})}
++    if token:h['Authorization']='Bearer '+token
++    q=urllib.request.Request(BASE+path,method=method,data=json.dumps(body).encode() if body is not None else None,headers=h)
++    try:
++        with urllib.request.urlopen(q,timeout=30) as r:return r.status,json.load(r),{k.lower():v for k,v in r.headers.items()}
++    except urllib.error.HTTPError as e:
++        try:data=json.load(e)
++        except Exception:data={}
++        return e.code,data,{k.lower():v for k,v in e.headers.items()}
++@pytest.fixture
++def actors():
++    ids=[]
++    with SessionLocal.begin() as db:
++        movies=list(db.scalars(select(Movie.movie_id).order_by(Movie.movie_id).limit(3)))
++        for admin in [0,1,1]:
++            name='backend_pytest_'+uuid.uuid4().hex
++            u=User(username=name,email=name+'@example.com',is_active=1,is_superuser=admin);db.add(u);db.flush();ids.append(u.user_id)
++    yield {'ids':ids,'tokens':[create_access_token({'sub':str(i)}) for i in ids],'movies':movies}
++    with SessionLocal.begin() as db:
++        db.execute(delete(Job).where(Job.owner_id.in_(ids)));db.execute(delete(Behavior).where(Behavior.user_id.in_(ids)));db.execute(delete(BehaviorVersion).where(BehaviorVersion.user_id.in_(ids)));db.execute(delete(User).where(User.user_id.in_(ids)))
+diff --git a/web_project/backend/tests/test_backend.py b/web_project/backend/tests/test_backend.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/tests/test_backend.py
+@@ -0,0 +1,179 @@
++import uuid,time
++from concurrent.futures import ThreadPoolExecutor
++import pytest
++from sqlalchemy import select,func
++from conftest import http
++from app.database import SessionLocal
++from app.models import Rating
++
++def test_behavior_concurrency_and_isolation(actors):
++    token=actors['tokens'][0];movie=actors['movies'][0];path=f'/api/me/movies/{movie}/behavior'
++    with SessionLocal() as db:before=db.scalar(select(func.count()).select_from(Rating))
++    with ThreadPoolExecutor(8) as pool:results=list(pool.map(lambda _:http(path,'PUT',{'favorite':True},token),range(16)))
++    assert all(c==200 for c,d,h in results)
++    assert {d['behavior_version'] for c,d,h in results}=={1}
++    assert http('/api/me/behaviors',token=actors['tokens'][1])[1]['total']==0
++    with SessionLocal() as db:assert db.scalar(select(func.count()).select_from(Rating))==before
++@pytest.mark.parametrize('body',[{}, {'rating':11},{'rating':0},{'seen':None},{'favorite':None},{'owner_id':1},{'rating':'bad'}])
++def test_behavior_invalid(actors,body):
++    assert http(f"/api/me/movies/{actors['movies'][0]}/behavior",'PUT',body,actors['tokens'][0])[0]==422
++@pytest.mark.parametrize('path',['/api/me/behaviors?page=0','/api/me/behaviors?page_size=101','/api/me/recommendations?limit=21','/api/me/recommendations?q='+'a'*201])
++def test_bounds(actors,path):assert http(path,token=actors['tokens'][0])[0]==422
++@pytest.mark.parametrize('path',['/api/me/behaviors','/api/admin/jobs','/api/admin/metrics'])
++def test_requires_auth(path):assert http(path)[0] in (401,403)
++def test_admin_permissions(actors):
++    assert http('/api/admin/jobs',token=actors['tokens'][0])[0]==403
++    assert http('/api/admin/metrics',token=actors['tokens'][0])[0]==403
++
++def test_job_real_roundtrip_and_idempotency(actors):
++    token=actors['tokens'][1];body={'request_id':str(uuid.uuid4()),'movie_ids':actors['movies'][:2]}
++    c,a,h=http('/api/admin/jobs','POST',body,token);assert c==202
++    c,b,h=http('/api/admin/jobs','POST',body,token);assert a['id']==b['id']
++    assert http('/api/admin/jobs/'+a['id'],token=actors['tokens'][2])[0]==404
++    assert http('/api/admin/jobs','POST',{**body,'movie_ids':actors['movies'][2:]},token)[0]==409
++    deadline=time.monotonic()+30
++    while time.monotonic()<deadline:
++        c,result,h=http('/api/admin/jobs/'+a['id'],token=token)
++        if result['state'] in ('succeeded','failed'):break
++        time.sleep(.5)
++    assert result['state']=='succeeded',result
++    assert result['result']['indexed_count']==2
++    from elasticsearch import Elasticsearch
++    from app.config import settings
++    from app.models import Movie
++    with Elasticsearch(settings.elasticsearch_url) as es,SessionLocal() as db:
++        for mid in body['movie_ids']:
++            doc=es.get(index=settings.movie_index_name,id=str(mid))['_source']
++            assert doc['movie_id']==mid and doc['title']==db.get(Movie,mid).title
++
++    from app.jobs.tasks import refresh_index
++    refresh_index.run(a['id'])
++    assert http('/api/admin/jobs/'+a['id'],token=token)[1]['attempts']==1
++@pytest.mark.parametrize('ids',[[],[2147483647],list(range(1,102))])
++def test_invalid_job(actors,ids):assert http('/api/admin/jobs','POST',{'request_id':str(uuid.uuid4()),'movie_ids':ids},actors['tokens'][1])[0]==422
++
++def test_request_id(actors):
++    c,d,h=http('/api/me/behaviors',token=actors['tokens'][0],headers={'X-Request-ID':'backend-test-123'})
++    assert c==200 and h['x-request-id']=='backend-test-123'
++    c,d,h=http('/api/admin/metrics',token=actors['tokens'][1]);assert c==200 and d['scope']=='current_process'
++
++def test_catalogue_cache_and_rollback(actors):
++    from app.behavior.catalogue import detail,change_description
++    from app.behavior.recommendations import cache
++    from app.behavior.models import MovieVersion
++    from app.models import Movie
++    movie=actors['movies'][0]
++    with SessionLocal() as db:
++        old=db.get(Movie,movie).description
++        detail(db,movie)
++        # Roll back an admin edit: both description and cache version must roll back.
++        change_description(db,movie,'pytest rollback-only description');db.rollback()
++    with SessionLocal() as db:assert detail(db,movie).description==old
++
++def test_job_finite_retry_and_lease(actors,monkeypatch):
++    from datetime import datetime,timedelta,timezone
++    from app.jobs.models import Job
++    from app.jobs import tasks
++    job_id=uuid.uuid4()
++    with SessionLocal.begin() as db:db.add(Job(id=job_id,owner_id=actors['ids'][1],request_key=uuid.uuid4(),payload={'movie_ids':actors['movies'][:1]},state='dispatched',next_run=datetime.now(timezone.utc)+timedelta(days=1)))
++    def unavailable(ids):raise ConnectionError('synthetic dependency outage')
++    monkeypatch.setattr(tasks,'index_movies',unavailable)
++    for n in range(3):
++        tasks.refresh_index.run(str(job_id))
++        with SessionLocal.begin() as db:
++            j=db.get(Job,job_id);assert j.attempts==n+1
++            assert j.state==('failed' if n==2 else 'queued')
++            if n<2:j.state='dispatched';j.next_run=datetime.now(timezone.utc)+timedelta(days=1)
++    tasks.refresh_index.run(str(job_id))
++    with SessionLocal() as db:assert db.get(Job,job_id).attempts==3
++
++def test_movie_update_invalidates_cache(actors):
++    from app.models import Movie
++    from app.behavior.models import MovieVersion
++    from app.behavior.catalogue import detail
++    from app.behavior.recommendations import cache
++    from sqlalchemy import delete
++    mid=1900000000+int(uuid.uuid4().hex[:6],16)
++    try:
++        with SessionLocal.begin() as db:db.add(Movie(movie_id=mid,title='Synthetic cache test movie',genres=[],description='before'))
++        assert http('/api/movies/'+str(mid))[1]['description']=='before'
++        c,d,h=http('/api/admin/jobs/movies/'+str(mid)+'/description','PATCH',{'description':'after'},actors['tokens'][1]);assert c==200
++        assert http('/api/movies/'+str(mid))[1]['description']=='after'
++        assert http('/api/admin/jobs/movies/'+str(mid)+'/description','PATCH',{'description':'forbidden'},actors['tokens'][0])[0]==403
++    finally:
++        with SessionLocal.begin() as db:db.execute(delete(MovieVersion).where(MovieVersion.movie_id==mid));db.execute(delete(Movie).where(Movie.movie_id==mid))
++        keys=list(cache.scan_iter(match=f'ca:movie:v1:{mid}:*'))
++        if keys:cache.delete(*keys)
++
++def test_profile_online_ratings_and_preference_version(actors):
++    token=actors['tokens'][0];movie=actors['movies'][0]
++    c,r,h=http('/api/ratings','POST',{'movie_id':movie,'rating':8},token);assert c==201
++    c,p,h=http('/api/users/me',token=token);assert c==200 and p['recent_ratings'][0]['movie_id']==movie and p['recent_ratings'][0]['rating']==8
++    from app.behavior.models import BehaviorVersion
++    with SessionLocal() as db:before=db.get(BehaviorVersion,actors['ids'][0]).version
++    assert http('/api/users/me','PUT',{'preferred_genres':['Drama']},token)[0]==200
++    with SessionLocal() as db:assert db.get(BehaviorVersion,actors['ids'][0]).version==before+1
++    assert http('/api/users/me','PUT',{'is_superuser':1},token)[0]==422
++
++def test_detail_cache_query_count(actors):
++    from app.behavior.catalogue import detail
++    from app.behavior.models import MovieVersion
++    from app.behavior.recommendations import cache
++    from app.database import engine
++    from sqlalchemy import event
++    mid=actors['movies'][1]
++    with SessionLocal() as db:
++        v=db.get(MovieVersion,mid);version=v.version if v else 0
++    key=f'ca:movie:v1:{mid}:{version}';cache.delete(key);count=[0]
++    def record(*args):count[0]+=1
++    event.listen(engine,'before_cursor_execute',record)
++    try:
++        with SessionLocal() as db:detail(db,mid)
++        cold=count[0];count[0]=0
++        with SessionLocal() as db:detail(db,mid)
++        warm=count[0]
++    finally:event.remove(engine,'before_cursor_execute',record)
++    assert cold==2 and warm==1,(cold,warm)
++
++def test_behavior_rollback_atomicity(actors):
++    from app.behavior.service import update
++    from app.behavior.models import Behavior,BehaviorVersion
++    uid=actors['ids'][0];mid=actors['movies'][0]
++    with SessionLocal() as db:
++        update(db,uid,mid,{'favorite':True});db.rollback()
++    with SessionLocal() as db:
++        assert db.get(Behavior,(uid,mid)) is None
++        assert db.get(BehaviorVersion,uid) is None
++
++def test_job_concurrent_idempotency(actors):
++    token=actors['tokens'][1];body={'request_id':str(uuid.uuid4()),'movie_ids':actors['movies'][:1]}
++    with ThreadPoolExecutor(6) as pool:results=list(pool.map(lambda _:http('/api/admin/jobs','POST',body,token),range(12)))
++    assert all(c==202 for c,d,h in results)
++    assert len({d['id'] for c,d,h in results})==1
++    deadline=time.monotonic()+30
++    while time.monotonic()<deadline:
++        d=http('/api/admin/jobs/'+results[0][1]['id'],token=token)[1]
++        if d['state'] in ('succeeded','failed'):break
++        time.sleep(.3)
++    assert d['state']=='succeeded' and d['attempts']==1
++
++def test_preference_refresh_after_concurrent_commit(actors):
++    from app.models import User
++    from app.behavior.recommendations import current_preferences
++    uid=actors['ids'][0]
++    with SessionLocal() as first:
++        cached_user=first.get(User,uid)
++        with SessionLocal.begin() as other:other.get(User,uid).preferred_genres=['Mystery']
++        assert current_preferences(first,uid)==[{'key':'include_genres','value':'Mystery'}]
++
++@pytest.mark.parametrize('expired',[False,True])
++def test_invalid_or_expired_token(actors,expired):
++    from app.core.security import create_access_token
++    from datetime import timedelta
++    token=create_access_token({'sub':str(actors['ids'][0])},timedelta(seconds=-1)) if expired else 'invalid.jwt.value'
++    assert http('/api/me/behaviors',token=token)[0]==401
++
++def test_inactive_account(actors):
++    from app.models import User
++    with SessionLocal.begin() as db:db.get(User,actors['ids'][0]).is_active=0
++    assert http('/api/me/behaviors',token=actors['tokens'][0])[0]==403
+diff --git a/web_project/backend/migrations/versions/0001_online_backend.py b/web_project/backend/migrations/versions/0001_online_backend.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/migrations/versions/0001_online_backend.py
+@@ -0,0 +1,12 @@
++"""Adopt additive online tables; do not alter original recommendation tables."""
++from alembic import op
++from app.behavior.models import Behavior,BehaviorVersion,MovieVersion
++from app.jobs.models import Job
++revision='0001_online_backend'
++down_revision=None
++branch_labels=None
++depends_on=None
++def upgrade():
++    for table in [BehaviorVersion.__table__,Behavior.__table__,MovieVersion.__table__,Job.__table__]:table.create(op.get_bind(),checkfirst=True)
++def downgrade():
++    raise RuntimeError('Destructive downgrade intentionally requires an explicit data preservation plan')
+diff --git a/web_project/backend/app/behavior/api.py b/web_project/backend/app/behavior/api.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/behavior/api.py
+@@ -0,0 +1,45 @@
++from fastapi import APIRouter,Depends,Query,HTTPException
++from pydantic import BaseModel,Field,ConfigDict
++from sqlalchemy import select,func
++from app.api.deps import get_db
++from app.core.auth import get_current_active_user
++from .models import Behavior
++from .service import update,serialize
++router=APIRouter(prefix='/api/me',tags=['user-behaviors'])
++class Change(BaseModel):
++    model_config=ConfigDict(extra='forbid')
++    favorite:bool|None=None
++    seen:bool|None=None
++    rating:int|None=Field(default=None,ge=1,le=10)
++@router.put('/movies/{movie_id}/behavior')
++def mutate(movie_id:int,body:Change,user=Depends(get_current_active_user),db=Depends(get_db)):
++    changes=body.model_dump(exclude_unset=True)
++    if not changes or any(changes.get(k) is None for k in ('favorite','seen') if k in changes):raise HTTPException(422,'请提供有效的行为字段')
++    try:
++        result=update(db,user.user_id,movie_id,changes)
++        db.commit()
++        return result
++    except Exception:
++        db.rollback();raise
++@router.get('/behaviors')
++def listing(page:int=Query(1,ge=1),page_size:int=Query(20,ge=1,le=100),kind:str=Query('all',pattern='^(all|favorite|seen|rated)$'),user=Depends(get_current_active_user),db=Depends(get_db)):
++    filters=[Behavior.user_id==user.user_id]
++    if kind=='favorite':filters.append(Behavior.favorite.is_(True))
++    if kind=='seen':filters.append(Behavior.seen.is_(True))
++    if kind=='rated':filters.append(Behavior.rating.is_not(None))
++    from app.models import Movie
++    rows=db.execute(select(Behavior,Movie.title).join(Movie,Movie.movie_id==Behavior.movie_id).where(*filters).order_by(Behavior.updated_at.desc(),Behavior.movie_id.desc()).offset((page-1)*page_size).limit(page_size)).all()
++    total=db.scalar(select(func.count()).select_from(Behavior).where(*filters))
++    return dict(items=[{**serialize(r),"title":title} for r,title in rows],total=total,page=page,page_size=page_size)
++
++@router.get('/movies/{movie_id}/behavior')
++def detail(movie_id:int,user=Depends(get_current_active_user),db=Depends(get_db)):
++    from app.models import Movie
++    if db.get(Movie,movie_id) is None:raise HTTPException(404,'电影不存在')
++    row=db.get(Behavior,(user.user_id,movie_id))
++    return serialize(row) if row else dict(movie_id=movie_id,favorite=False,seen=False,rating=None,updated_at=None)
++
++@router.get('/recommendations')
++def personal_recommendations(limit:int=Query(6,ge=1,le=20),q:str=Query('',max_length=200),user=Depends(get_current_active_user),db=Depends(get_db)):
++    from .recommendations import recommendations
++    return recommendations(db,user.user_id,limit,q)
+diff --git a/web_project/backend/app/behavior/catalogue.py b/web_project/backend/app/behavior/catalogue.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/behavior/catalogue.py
+@@ -0,0 +1,41 @@
++import json
++from fastapi import HTTPException
++from sqlalchemy import select
++from sqlalchemy.dialects.postgresql import insert
++from app.models import Movie
++from app.schemas import MovieDetail
++from .models import MovieVersion
++from .recommendations import cache
++import redis
++
++def detail(db,movie_id,client=None):
++    client=cache if client is None else client
++    version=db.scalar(select(MovieVersion.version).where(MovieVersion.movie_id==movie_id)) or 0
++    key=f'ca:movie:v1:{movie_id}:{version}'
++    try:
++        raw=client.get(key)
++        if raw:
++            value=json.loads(raw)
++            if value.get('not_found'):raise HTTPException(404,'电影不存在')
++            return MovieDetail.model_validate(value)
++    except (redis.RedisError,ValueError,TypeError):pass
++    movie=db.get(Movie,movie_id)
++    if movie is None:
++        try:client.setex(key,15,json.dumps({'not_found':True}))
++        except redis.RedisError:pass
++        raise HTTPException(404,'电影不存在')
++    data={k:getattr(movie,k) for k in MovieDetail.model_fields if hasattr(movie,k)}
++    data['genres']=movie.genres or []
++    value=MovieDetail.model_validate(data)
++    try:client.setex(key,300,value.model_dump_json())
++    except redis.RedisError:pass
++    return value
++
++def change_description(db,movie_id,description):
++    movie=db.scalar(select(Movie).where(Movie.movie_id==movie_id).with_for_update())
++    if movie is None:raise HTTPException(404,'电影不存在')
++    db.execute(insert(MovieVersion).values(movie_id=movie_id,version=0).on_conflict_do_nothing())
++    version=db.scalar(select(MovieVersion).where(MovieVersion.movie_id==movie_id).with_for_update())
++    if movie.description!=description:movie.description=description;version.version+=1
++    db.flush()
++    return {'movie_id':movie_id,'version':version.version}
+diff --git a/web_project/backend/app/behavior/models.py b/web_project/backend/app/behavior/models.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/behavior/models.py
+@@ -0,0 +1,20 @@
++from sqlalchemy import Column,Integer,Boolean,DateTime,ForeignKey,CheckConstraint,Index,func
++from app.database import Base
++class Behavior(Base):
++    __tablename__='online_behaviors'
++    user_id=Column(Integer,ForeignKey('users.user_id'),primary_key=True)
++    movie_id=Column(Integer,ForeignKey('movies.movie_id'),primary_key=True)
++    favorite=Column(Boolean,nullable=False,server_default='false')
++    seen=Column(Boolean,nullable=False,server_default='false')
++    rating=Column(Integer,nullable=True)
++    updated_at=Column(DateTime(timezone=True),nullable=False,server_default=func.now())
++    __table_args__=(CheckConstraint('rating IS NULL OR rating BETWEEN 1 AND 10',name='ck_online_rating'),Index('ix_online_user_updated','user_id','updated_at','movie_id'))
++class BehaviorVersion(Base):
++    __tablename__='online_behavior_versions'
++    user_id=Column(Integer,ForeignKey('users.user_id'),primary_key=True)
++    version=Column(Integer,nullable=False,server_default='0')
++
++class MovieVersion(Base):
++    __tablename__='movie_cache_versions'
++    movie_id=Column(Integer,ForeignKey('movies.movie_id'),primary_key=True)
++    version=Column(Integer,nullable=False,server_default='0')
+diff --git a/web_project/backend/app/behavior/recommendations.py b/web_project/backend/app/behavior/recommendations.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/behavior/recommendations.py
+@@ -0,0 +1,65 @@
++"""Owner/version-scoped result cache. PostgreSQL is authoritative."""
++import hashlib,json,logging,time,uuid
++from fastapi import HTTPException
++import redis
++from redis.retry import Retry
++from redis.backoff import NoBackoff
++from sqlalchemy import select
++from app.config import settings
++from .models import BehaviorVersion,Behavior
++logger=logging.getLogger(__name__)
++cache=redis.Redis.from_url(settings.redis_url,socket_connect_timeout=.15,socket_timeout=.15,retry=Retry(NoBackoff(),0))
++MODEL_VERSION='rec-v1:conversation-v4:behavior-v2'
++def current_preferences(db,uid):
++    from app.models import User
++    # Refresh ORM identity loaded by authentication before reading versioned inputs.
++    user=db.scalar(select(User).where(User.user_id==uid).execution_options(populate_existing=True))
++    return [{'key':'include_genres','value':g} for g in (user.preferred_genres or [])] if user else []
++
++def recommendations(db,uid,limit=6,query='',cache_client=None):
++    client=cache if cache_client is None else cache_client
++    version=db.scalar(select(BehaviorVersion.version).where(BehaviorVersion.user_id==uid)) or 0
++    payload=json.dumps([uid,version,MODEL_VERSION,limit,query],ensure_ascii=False,separators=(',',':'))
++    key='ca:recommendations:v1:'+str(uid)+':'+hashlib.sha256(payload.encode()).hexdigest()
++    try:
++        raw=client.get(key)
++        if raw:
++            result=json.loads(raw)
++            if result.get('behavior_version')!=version or not isinstance(result.get('items'),list):raise ValueError('invalid_cache')
++            return {**result,'cache_status':'hit'}
++    except (redis.RedisError,ValueError,TypeError):
++        logger.warning('recommendation_cache_read_unavailable',extra={'user_id':uid})
++    lock_key=key+':lock';lock_token=uuid.uuid4().hex;locked=False
++    try:
++        locked=bool(client.set(lock_key,lock_token,nx=True,ex=15))
++        if not locked:
++            deadline=time.monotonic()+.6
++            while time.monotonic()<deadline:
++                time.sleep(.03)
++                raw=client.get(key)
++                if raw:
++                    value=json.loads(raw)
++                    if value.get('behavior_version')==version and isinstance(value.get('items'),list):
++                        return {**value,'cache_status':'coalesced'}
++            raise HTTPException(503,'推荐正在生成，请稍后重试',headers={'Retry-After':'1'})
++    except (redis.RedisError,ValueError,TypeError):
++        logger.warning('recommendation_cache_lock_unavailable',extra={'user_id':uid})
++    try:
++        from app.cineagent.engine import engine
++        # Online favorites/positive ratings are a bounded content seed, not training labels.
++        seed=db.scalar(select(Behavior.movie_id).where(Behavior.user_id==uid,(Behavior.favorite.is_(True)) | (Behavior.rating>=8)).order_by(Behavior.updated_at.desc(),Behavior.movie_id.desc()).limit(1))
++        state={'similar_to':seed} if seed is not None else {}
++        preferences=current_preferences(db,uid)
++        result=engine.recommend(uid,state,query,preferences=preferences,top_k=limit)
++        result={**result,'behavior_version':version,'model_version':MODEL_VERSION}
++        status='miss'
++        if not result.get('degradation'):
++            try:client.setex(key,120,json.dumps(result,ensure_ascii=False))
++            except redis.RedisError:status='unavailable'
++        return {**result,'cache_status':status}
++    finally:
++        if locked:
++            try:
++                client.eval("if redis.call('get',KEYS[1])==ARGV[1] then return redis.call('del',KEYS[1]) else return 0 end",1,lock_key,lock_token)
++            except redis.RedisError:
++                logger.warning('recommendation_cache_lock_release_failed')
+diff --git a/web_project/backend/app/behavior/service.py b/web_project/backend/app/behavior/service.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/behavior/service.py
+@@ -0,0 +1,24 @@
++from sqlalchemy import select,func
++from sqlalchemy.dialects.postgresql import insert
++from fastapi import HTTPException
++from app.models import Movie
++from .models import Behavior,BehaviorVersion
++
++def serialize(row):
++    return dict(movie_id=row.movie_id,favorite=row.favorite,seen=row.seen,rating=row.rating,updated_at=row.updated_at.isoformat())
++
++def update(db,user_id,movie_id,changes):
++    if not db.scalar(select(Movie.movie_id).where(Movie.movie_id==movie_id)):
++        raise HTTPException(404,'电影不存在')
++    # Serialize mutations for the same owner across workers, inside the DB transaction.
++    db.execute(insert(BehaviorVersion).values(user_id=user_id,version=0).on_conflict_do_nothing())
++    version=db.scalar(select(BehaviorVersion).where(BehaviorVersion.user_id==user_id).with_for_update())
++    old=db.get(Behavior,(user_id,movie_id))
++    if old and all(getattr(old,k)==v for k,v in changes.items()):
++        result=serialize(old);result['behavior_version']=version.version;return result
++    stmt=insert(Behavior).values(user_id=user_id,movie_id=movie_id,**changes)
++    row=db.execute(stmt.on_conflict_do_update(index_elements=['user_id','movie_id'],set_={**changes,'updated_at':func.now()}).returning(Behavior),execution_options={'populate_existing':True}).scalar_one()
++    version.version+=1
++    db.flush()
++    result=serialize(row);result['behavior_version']=version.version
++    return result
+diff --git a/web_project/backend/app/behavior/__init__.py b/web_project/backend/app/behavior/__init__.py
+new file mode 100644
+diff --git a/web_project/backend/app/cineagent/api.py b/web_project/backend/app/cineagent/api.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/cineagent/api.py
+@@ -0,0 +1,317 @@
++"""Owned conversations, bounded tool loop, provenance and atomic idempotent writes."""
++import hashlib,json,re,threading,time,uuid
++from datetime import datetime,timezone,timedelta
++from pathlib import Path
++from typing import Literal
++from fastapi import APIRouter,Depends,HTTPException
++from fastapi.security import HTTPBearer,HTTPAuthorizationCredentials
++from pydantic import BaseModel,Field,ConfigDict
++from sqlalchemy import select
++from app.database import SessionLocal,Base,engine as db_engine
++from app.models import User
++from app.core.security import create_access_token,decode_access_token
++from .evidence import negotiate,verify_results
++from .models import Conversation,Turn,Preference,PreferenceAudit,Feedback,RequestRecord
++from .parser import parse,compress,GENRES
++from .engine import engine
++from .provider import DeepSeekTrial,ProviderError,BudgetExceeded
++from .reliability import RateLimited,ProviderUnavailable
++
++router=APIRouter(prefix='/api/chat',tags=['conversation'])
++security=HTTPBearer();locks=[threading.Lock() for _ in range(64)]
++VERSION={'data':'rec-v1','model':'rec-v1','prompt':'movie-tools-v3','agent':'conversation-v4','content':'content-v1'}
++
++def initialize():
++    Base.metadata.create_all(bind=db_engine,tables=[Conversation.__table__,Turn.__table__,Preference.__table__,PreferenceAudit.__table__,Feedback.__table__,RequestRecord.__table__]);engine.load()
++
++class Identity(tuple):
++    def __new__(cls,who,uid,evaluation=False):
++        obj=super().__new__(cls,(who,uid));obj.evaluation=evaluation;return obj
++
++def evaluation_config():
++    try:cfg=json.loads(Path('/run/cineagent-secrets/evaluation_v4.json').read_text())
++    except Exception:raise HTTPException(403,'本机评测窗口未开启')
++    if not cfg.get('enabled') or time.time()>cfg.get('expires_at_unix',0):raise HTTPException(403,'本机评测窗口已关闭')
++    return cfg
++
++def owner(credentials:HTTPAuthorizationCredentials=Depends(security)):
++    p=decode_access_token(credentials.credentials)
++    if not p:raise HTTPException(401,'登录或访客凭证已失效')
++    if p.get('kind')=='cineagent_guest':
++        try:value=str(uuid.UUID(p['sub']))
++        except Exception:raise HTTPException(401,'访客凭证无效')
++        evaluation=p.get('evaluation_batch')=='complete-v4'
++        if evaluation:evaluation_config()
++        return Identity('guest:'+value,0,evaluation)
++    try:uid=int(p['sub'])
++    except Exception:raise HTTPException(401,'凭证无效')
++    with SessionLocal() as db:
++        u=db.get(User,uid)
++        if not u or not u.is_active:raise HTTPException(401,'用户无效')
++    return 'user:'+str(uid),uid
++
++class ChatInput(BaseModel):
++    model_config=ConfigDict(extra='forbid')
++    request_id:uuid.UUID
++    conversation_id:uuid.UUID|None=None
++    message:str=Field(min_length=1,max_length=4000)
++    mode:Literal['offline','deepseek']='offline'
++    use_memory:bool=True
++    compress_history:bool=True
++
++class FeedbackInput(BaseModel):
++    model_config=ConfigDict(extra='forbid')
++    request_id:uuid.UUID
++    conversation_id:uuid.UUID
++    movie_id:int
++    kind:Literal['seen','dislike']
++
++@router.post('/guest')
++def guest():
++    return {'access_token':create_access_token({'sub':str(uuid.uuid4()),'kind':'cineagent_guest'},timedelta(days=7)),'expires_in_days':7}
++
++@router.post('/evaluation-guest')
++def evaluation_guest():
++    evaluation_config()
++    return {'access_token':create_access_token({'sub':str(uuid.uuid4()),'kind':'cineagent_guest','evaluation_batch':'complete-v4'},timedelta(hours=2)),'evaluation_batch':'complete-v4'}
++
++@router.get('/status')
++def status():
++    return {'versions':VERSION,'provider_configured':Path('/run/cineagent-secrets/deepseek.json').exists(),'content_mode':'title_genre_text_only','ready':engine.ready}
++
++
++def prefs(db,who):
++    now=datetime.now(timezone.utc)
++    return [p for p in db.scalars(select(Preference).where(Preference.owner==who,Preference.status=='active')).all() if p.expires_at is None or p.expires_at>now]
++
++def serialized(p):
++    return {'id':p.id,'key':p.key,'value':p.value,'scope':p.scope,'source_conversation':p.source_conversation,'source_turn':p.source_turn,'created_at':p.created_at.isoformat(),'expires_at':p.expires_at.isoformat() if p.expires_at else None}
++
++@router.get('/preferences')
++def list_prefs(identity=Depends(owner)):
++    with SessionLocal() as db:return {'items':[serialized(p) for p in prefs(db,identity[0])]}
++
++@router.delete('/preferences/{preference_id}')
++def delete_pref(preference_id:uuid.UUID,identity=Depends(owner)):
++    with SessionLocal.begin() as db:
++        p=db.get(Preference,str(preference_id))
++        if p is None or p.owner!=identity[0]:raise HTTPException(404,'偏好不存在')
++        db.add(PreferenceAudit(id=str(uuid.uuid4()),owner=identity[0],preference_id=p.id,action='delete',request_id=str(uuid.uuid4())))
++        db.delete(p)
++    return {'deleted':True}
++
++@router.post('/preferences/{preference_id}/revoke')
++def revoke_pref(preference_id:uuid.UUID,identity=Depends(owner)):
++    with SessionLocal.begin() as db:
++        p=db.get(Preference,str(preference_id))
++        if p is None or p.owner!=identity[0]:raise HTTPException(404,'偏好不存在')
++        p.status='revoked';db.add(PreferenceAudit(id=str(uuid.uuid4()),owner=identity[0],preference_id=p.id,action='revoke',request_id=str(uuid.uuid4())))
++    return {'revoked':True}
++
++def validated_constraints(args,current):
++    allowed={'include_genres','exclude_genres','max_runtime','min_runtime','exclude_ids','similar_to','exclude_director_of'}
++    if not isinstance(args,dict) or set(args)-allowed:raise ValueError('invalid_tool_keys')
++    updated=json.loads(json.dumps(current))
++    for key in ['include_genres','exclude_genres']:
++        if key in args:
++            val=args[key]
++            if not isinstance(val,list) or len(val)>18 or any(x not in set(GENRES.values()) for x in val):raise ValueError('invalid_genre')
++            # Preserve deterministic explicit constraints if the model drops one.
++            updated[key]=sorted(set(updated.get(key,[]))|set(val))
++    for key in ['max_runtime','min_runtime']:
++        if key in args and args[key] is not None:
++            val=args[key]
++            if type(val) is not int or not 1<=val<=600:raise ValueError('invalid_runtime')
++            updated[key]=min(val,updated[key]) if key=='max_runtime' and key in updated else max(val,updated[key]) if key=='min_runtime' and key in updated else val
++    if args.get('similar_to') is not None:
++        if type(args['similar_to']) is not int or args['similar_to'] not in engine.movies:raise ValueError('unknown_seed')
++        updated['similar_to']=args['similar_to']
++    if args.get('exclude_director_of') is not None:
++        val=args['exclude_director_of']
++        if type(val) is not int or val not in engine.movies:raise ValueError('unknown_director_seed')
++        if val!=current.get('exclude_director_of'):raise ValueError('unsupported_director_exclusion')
++        updated['exclude_director_of']=val
++    if 'exclude_ids' in args:
++        if not isinstance(args['exclude_ids'],list) or len(args['exclude_ids'])>100 or any(type(i) is not int or i not in engine.movies for i in args['exclude_ids']):raise ValueError('invalid_exclusions')
++        if set(args['exclude_ids'])-set(current.get('exclude_ids',[])):raise ValueError('unsupported_exclusions')
++        updated['exclude_ids']=sorted(set(updated.get('exclude_ids',[]))|set(args['exclude_ids']))
++    if set(updated.get('include_genres',[]))&set(updated.get('exclude_genres',[])):raise ValueError('conflicting_genres')
++    if updated.get('min_runtime',0)>updated.get('max_runtime',100000):raise ValueError('conflicting_runtime')
++    return updated
++
++def project_tool_constraints(args,authoritative):
++    """Drop only known IDs without user provenance; strict validation still runs.
++    Showing a recommendation is not evidence that the user has seen/disliked it.
++    This projection never expands the server-owned exclusion set.
++    """
++    if not isinstance(args,dict):raise ValueError('invalid_tool_keys')
++    effective=json.loads(json.dumps(args));repairs=[]
++    if 'exclude_ids' in args:
++        proposed=args['exclude_ids']
++        if not isinstance(proposed,list) or len(proposed)>100 or any(type(i) is not int or i not in engine.movies for i in proposed):raise ValueError('invalid_exclusions')
++        allowed=set(authoritative.get('exclude_ids',[]));removed=sorted(set(proposed)-allowed)
++        effective['exclude_ids']=sorted(set(proposed)&allowed)
++        if removed:repairs.append({'field':'exclude_ids','reason':'no_user_feedback_or_explicit_exclusion_source','rejected_ids':removed,'accepted_ids':effective['exclude_ids']})
++    return effective,repairs
++
++def scoped_tools(authoritative):
++    schemas=json.loads(json.dumps(TOOLS))
++    prop=schemas[0]['function']['parameters']['properties']['exclude_ids']
++    allowed=sorted(set(authoritative.get('exclude_ids',[])))
++    prop['description']='Only repeat IDs in context.state.exclude_ids. Previously displayed last_results are NOT watched or disliked.'
++    if allowed:prop['items']['enum']=allowed
++    else:prop['maxItems']=0
++    return schemas
++
++GENRE_SCHEMA={'type':'array','items':{'type':'string','enum':sorted(set(GENRES.values()))}}
++TOOLS=[{'type':'function','function':{'name':'recommend_movies','description':'Recall, filter, score with local recommendation model and diversify real catalogue movies. Supply explicit constraints; unknown attributes require clarification.','parameters':{'type':'object','properties':{'include_genres':GENRE_SCHEMA,'exclude_genres':GENRE_SCHEMA,'max_runtime':{'type':'integer'},'min_runtime':{'type':'integer'},'similar_to':{'type':'integer'},'exclude_director_of':{'type':'integer'},'exclude_ids':{'type':'array','items':{'type':'integer'}}},'additionalProperties':False}}},
++{'type':'function','function':{'name':'movie_details','description':'Inspect up to five known movie IDs.','parameters':{'type':'object','properties':{'movie_ids':{'type':'array','items':{'type':'integer'}}},'required':['movie_ids'],'additionalProperties':False}}},
++{'type':'function','function':{'name':'finish','description':'Finish after recommend_movies has returned. The server renders the authoritative ranked results.','parameters':{'type':'object','properties':{},'additionalProperties':False}}}]
++
++def run_tools(uid,state,query,preferences,mode,history,faults=(),evaluation=False,request_id=None):
++    trace=[];degradation=[];result=None;mode_used='offline_rules';current=state
++    def recommend():return engine.recommend(uid,current,query,preferences,faults=faults)
++    if mode=='deepseek':
++        if evaluation:
++            cfg=evaluation_config()
++            client=DeepSeekTrial('/run/cineagent-secrets/deepseek.json','/trial-ledger/DEEPSEEK_NATURAL_V2_LEDGER.json',approved_campaign=True,budget_window=cfg,parent_request_id=request_id)
++        else:client=DeepSeekTrial('/run/cineagent-secrets/deepseek.json','/trial-ledger/DEEPSEEK_DAILY_LEDGER.json')
++        messages=[{'role':'system','content':'You are a movie tool agent. Call recommend_movies first or inspect movie_details if needed; call finish after receiving recommendations. At most 2 model turns and 6 tool calls. Never invent attributes or movie IDs. Preserve supplied hard constraints. Do not invent exclusions or relax runtime. last_results means displayed, never seen/disliked. The server owns exclude_ids; omit this argument or copy only state.exclude_ids exactly. Include exclude_director_of when supplied in state. Runtime is minutes. Unknown pace/emotion cannot be guaranteed. The server renders ranked items; do not produce recommendation prose. Context: '+json.dumps({'state':state,'preferences':preferences,'history':history},ensure_ascii=False)},{'role':'user','content':query}]
++        used=0;previous=set()
++        try:
++            for step in range(2):
++                def invoke():
++                    if 'llm' in faults:raise ProviderUnavailable('injected_unavailable')
++                    if 'rate_limit' in faults:raise RateLimited('injected_rate_limit')
++                    try:return client.chat(messages,scoped_tools(state),max_tokens=512,trial_authorized=True)
++                    except ProviderError as exc:
++                        if str(exc)=='http_429':raise RateLimited('http_429')
++                        raise
++                response,rid=engine.resilience.call('llm',invoke,timeout=10,attempts=2,trace=trace)
++                message=response['choices'][0]['message'];calls=message.get('tool_calls') or []
++                trace.append({'tool':'llm','provider_request_id':rid,'step':step+1,'tool_count':len(calls),'model':response.get('model'),'usage':response.get('usage')})
++                if not calls:raise ValueError('missing_tool_call')
++                messages.append({'role':'assistant','content':message.get('content'),'tool_calls':calls})
++                finished=False
++                for call in calls:
++                    used+=1
++                    if used>6:raise ValueError('tool_limit')
++                    name=call['function']['name'];args=json.loads(call['function']['arguments']);signature=json.dumps([name,args],sort_keys=True)
++                    if signature in previous:raise ValueError('duplicate_tool_call')
++                    previous.add(signature)
++                    if name=='recommend_movies':
++                        effective,repairs=project_tool_constraints(args,state)
++                        current=validated_constraints(effective,current)
++                        if repairs:trace.append({'tool':'constraint_guard','arguments_original':args,'arguments_effective':effective,'repairs':repairs,'ok':True})
++                        result=recommend();output={'items':result['items'][:6],'eligible_count':result['eligible_count'],'warnings':result['warnings'],'constraint_repairs':repairs}
++                    elif name=='movie_details':
++                        ids=args.get('movie_ids')
++                        if set(args)!={'movie_ids'} or not isinstance(ids,list) or len(ids)>5 or any(type(i) is not int or i not in engine.movies for i in ids):raise ValueError('invalid_details_ids')
++                        output={'items':engine.details(ids)}
++                    elif name=='finish' and result is not None and args=={}:finished=True;output={'finished':True}
++                    else:raise ValueError('invalid_tool_order_or_name')
++                    trace.append({'tool':name,'arguments':effective if name=='recommend_movies' else args,'step':step+1,'ok':True})
++                    messages.append({'role':'tool','tool_call_id':call['id'],'content':json.dumps(output,ensure_ascii=False)})
++                if finished:break
++            if result is None:raise ValueError('no_recommendation_tool')
++            mode_used='deepseek_tools'
++        except Exception as exc:
++            degradation.append('llm:'+type(exc).__name__+':offline_recommendation')
++            # Preserve already validated constraints, execute the ordinary local engine.
++            result=recommend()
++    else:result=recommend()
++    result['trace']=trace+result['trace'];result['degradation']=degradation+result['degradation'];return result,current,mode_used
++
++@router.post('/message')
++def message(body:ChatInput,identity=Depends(owner)):
++    who,uid=identity;request_id=str(body.request_id);payload=body.model_dump(mode='json');digest=hashlib.sha256(json.dumps(payload,sort_keys=True).encode()).hexdigest();started=time.perf_counter()
++    lock=locks[int(hashlib.sha256(who.encode()).hexdigest(),16)%len(locks)]
++    with lock,SessionLocal.begin() as db:
++        old=db.scalar(select(RequestRecord).where(RequestRecord.owner==who,RequestRecord.request_id==request_id))
++        if old:
++            if old.body_sha256!=digest:raise HTTPException(409,'请求 ID 已用于不同内容')
++            return old.response
++        if not body.message.strip():raise HTTPException(422,'消息不能为空')
++        cid=str(body.conversation_id) if body.conversation_id else str(uuid.uuid4());conv=db.get(Conversation,cid)
++        if body.conversation_id and (not conv or conv.owner!=who):raise HTTPException(404,'会话不存在')
++        if conv is None:conv=Conversation(id=cid,owner=who,state={});db.add(conv)
++        oldstate=conv.state or {};turnno=int(oldstate.get('turn_count',0))+1
++        if turnno>100:raise HTTPException(422,'会话达到 100 轮，请新建会话')
++        parse_start=time.perf_counter()
++        parsed=parse(body.message,oldstate,turnno);state=parsed['state'];state.pop('summary',None)
++        parse_ms=(time.perf_counter()-parse_start)*1000
++        context_start=time.perf_counter()
++        session_exclusions=list(state.get('exclude_genres',[]))
++        active=prefs(db,who) if body.use_memory else []
++        feedback_ids=[r.movie_id for r in db.scalars(select(Feedback).where(Feedback.owner==who)).all()]
++        state['exclude_ids']=sorted(set(state.get('exclude_ids',[]))|set(feedback_ids))
++        memory=[{'key':p.key,'value':p.value,'source_turn':p.source_turn,'source_conversation':p.source_conversation} for p in active]
++        for pref in active:
++            if pref.key=='exclude_genres' and pref.value not in state.get('include_genres',[]):
++                state.setdefault('exclude_genres',[])
++                if pref.value not in state['exclude_genres']:state['exclude_genres'].append(pref.value)
++        history_rows=db.scalars(select(Turn).where(Turn.conversation_id==cid,Turn.owner==who).order_by(Turn.number)).all()
++        original=[{'turn':t.number,'text':t.text} for t in history_rows]
++        history={'recent':original[-4:],'summary':compress(state,turnno-1)} if body.compress_history else {'original':original}
++        context_ms=(time.perf_counter()-context_start)*1000;tools_start=time.perf_counter()
++        if parsed['needs_clarification']:
++            result={'items':[],'trace':[],'degradation':[],'warnings':[],'eligible_count':0,'needs_clarification':True};mode_used='clarification'
++        else:result,state,mode_used=run_tools(uid,state,body.message,memory,body.mode,history,evaluation=getattr(identity,'evaluation',False),request_id=request_id)
++        tools_ms=(time.perf_counter()-tools_start)*1000
++        if parsed['needs_clarification']:parsed['memory_proposals']=[]
++        evidence=verify_results(engine,uid,state,result['items'])
++        failed_evidence={c['movie_id'] for c in evidence if not c['passed']}
++        if failed_evidence:
++            result['items']=[m for m in result['items'] if m['movie_id'] not in failed_evidence]
++            result['warnings'].append('部分候选未通过库内属性复核，已移除。')
++        suggestions=negotiate(engine,uid,state) if not result['items'] and not parsed['needs_clarification'] else []
++        for proposal in parsed['memory_proposals']:
++            # Only explicit long-term markers create memory. Correction revokes opposite facts.
++            if re.search(r'纠正|改成|改为|其实',body.message):
++                for p in active:
++                    if p.value==proposal['value'] and p.key!=proposal['key']:p.status='revoked';db.add(PreferenceAudit(id=str(uuid.uuid4()),owner=who,preference_id=p.id,action='correct',request_id=request_id))
++            if any(p.key==proposal['key'] and p.value==proposal['value'] for p in active):continue
++            p=Preference(id=str(uuid.uuid4()),owner=who,key=proposal['key'],value=proposal['value'],source_conversation=cid,source_turn=turnno,scope='long_term');db.add(p)
++        if parsed['feedback']:
++            f=parsed['feedback']
++            if uid and f['kind']=='seen':
++                from app.behavior.service import update as update_behavior
++                update_behavior(db,uid,f['movie_id'],{'seen':True})
++            result['trace'].append({'tool':'record_feedback','arguments':f,'idempotency_key':request_id});db.add(Feedback(id=str(uuid.uuid4()),owner=who,request_id=request_id,movie_id=f['movie_id'],kind=f['kind'],source_conversation=cid,source_turn=turnno))
++        effective_constraints={k:v for k,v in state.items() if k not in ('sources','last_results','turn_count')}
++        borrowed={p.value for p in active if p.key=='exclude_genres' and p.value not in session_exclusions}
++        state['exclude_genres']=[g for g in state.get('exclude_genres',[]) if g not in borrowed]
++        state['last_results']=[i['movie_id'] for i in result['items']];state['turn_count']=turnno;conv.state=state
++        db.add(Turn(id=str(uuid.uuid4()),conversation_id=cid,owner=who,number=turnno,text=body.message))
++        warnings=sorted(set(parsed['warnings']+result['warnings']))
++        usage=[t.get('usage') or {} for t in result['trace'] if t.get('tool')=='llm']
++        input_tokens=sum(x.get('prompt_tokens',0) for x in usage);output_tokens=sum(x.get('completion_tokens',0) for x in usage)
++        response={'request_id':request_id,'conversation_id':cid,'turn':turnno,'mode':mode_used,'items':result['items'],'constraints':effective_constraints,'warnings':warnings,'message':'已根据库内信息筛选并排序。' if result['items'] else '需要调整或澄清条件后再推荐。','trace':result['trace'],'degradation':result['degradation'],'eligible_count':result['eligible_count'],'evidence_checks':evidence,'relaxation_suggestions':suggestions,'versions':VERSION,'summary':compress(state,turnno),'history_characters':{'original':len(json.dumps(original,ensure_ascii=False)),'sent':len(json.dumps(history,ensure_ascii=False))},'memory_used':memory,'memory_proposals_saved':len(parsed['memory_proposals']),'timings_ms':{'parse':round(parse_ms,2),'context':round(context_ms,2),'tools':round(tools_ms,2)},'token_usage':{'input':input_tokens,'output':output_tokens,'conservative_successful_calls_usd':round(input_tokens*.30/1e6+output_tokens*1.20/1e6,8),'scope':'successful model responses only; failed attempts accounted in persistent ledger'},'elapsed_ms':round((time.perf_counter()-started)*1000,2)}
++        db.add(RequestRecord(id=str(uuid.uuid4()),owner=who,request_id=request_id,body_sha256=digest,response=response));return response
++
++@router.post('/feedback')
++def feedback(body:FeedbackInput,identity=Depends(owner)):
++    who=identity[0];cid=str(body.conversation_id);rid=str(body.request_id)
++    with locks[int(hashlib.sha256(who.encode()).hexdigest(),16)%len(locks)],SessionLocal.begin() as db:
++        conv=db.get(Conversation,cid)
++        if not conv or conv.owner!=who:raise HTTPException(404,'会话不存在')
++        if body.movie_id not in (conv.state or {}).get('last_results',[]):raise HTTPException(422,'只能反馈当前推荐中的电影')
++        old=db.scalar(select(Feedback).where(Feedback.owner==who,Feedback.request_id==rid,Feedback.movie_id==body.movie_id,Feedback.kind==body.kind))
++        if not old:db.add(Feedback(id=str(uuid.uuid4()),owner=who,request_id=rid,movie_id=body.movie_id,kind=body.kind,source_conversation=cid,source_turn=conv.state.get('turn_count')))
++        if identity[1] and body.kind=='seen':
++            from app.behavior.service import update as update_behavior
++            update_behavior(db,identity[1],body.movie_id,{'seen':True})
++    return {'saved':True,'replayed':old is not None}
++
++@router.delete('/conversations/{cid}')
++def delete_conversation(cid:uuid.UUID,identity=Depends(owner)):
++    with SessionLocal.begin() as db:
++        conv=db.get(Conversation,str(cid))
++        if not conv or conv.owner!=identity[0]:raise HTTPException(404,'会话不存在')
++        db.query(Turn).filter(Turn.conversation_id==str(cid),Turn.owner==identity[0]).delete()
++        db.query(RequestRecord).filter(RequestRecord.owner==identity[0],RequestRecord.response['conversation_id'].astext==str(cid)).delete(synchronize_session=False)
++        db.delete(conv)
++    return {'deleted':True}
++
++
++
+diff --git a/web_project/backend/app/cineagent/engine.py b/web_project/backend/app/cineagent/engine.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/cineagent/engine.py
+@@ -0,0 +1,150 @@
++"""Small content/CF adapter over rec-v1 artifacts and the existing DeepFM model."""
++import json,time,threading
++from pathlib import Path
++import numpy as np
++from scipy import sparse
++from sklearn.feature_extraction.text import TfidfVectorizer
++from sqlalchemy import text
++from app.database import SessionLocal
++from app.models import Movie,TitleCrew
++from .reliability import Resilience
++
++class MovieEngine:
++    def __init__(self):
++        self.lock=threading.Lock();self.ready=False;self.resilience=Resilience();self.rank_lock=threading.Lock()
++    def load(self):
++        if self.ready:return
++        with self.lock:
++            if self.ready:return
++            path=Path('/artifacts/rec_v1');self.meta=json.loads((path/'metadata.json').read_text())
++            self.tab=dict(np.load(path/'feature_tables.npz',allow_pickle=False))
++            train=dict(np.load(path/'train.npz',allow_pickle=False));mask=train['rating']>=4
++            self.ids=np.array(sorted(m['movie_id'] for m in self.meta['movies']),dtype=int);self.lookup={int(m):i for i,m in enumerate(self.ids)}
++            uid=train['user_id'][mask];mi=np.array([self.lookup[int(m)] for m in train['movie_id'][mask]])
++            self.X=sparse.csr_matrix((np.ones(len(uid)),(uid,mi)),shape=(int(train['user_id'].max())+1,len(self.ids)),dtype=np.float32)
++            self.pop=np.asarray(self.X.sum(axis=0)).ravel();self.pop=self.pop/max(1,float(self.pop.max()))
++            norm=np.sqrt(np.asarray(self.X.multiply(self.X).sum(axis=0))).ravel();norm[norm==0]=1
++            binary=self.X.multiply(1/norm).tocsr();self.cf=(binary.T@binary).tocsr();counts=(self.X.T@self.X).tocsr();counts.data=counts.data/(counts.data+10);self.cf=self.cf.multiply(counts).tocsr();self.cf.setdiag(0);self.cf.eliminate_zeros()
++            for i in range(self.cf.shape[0]):
++                a,b=self.cf.indptr[i:i+2]
++                if b-a>100:
++                    vals=self.cf.data[a:b];keep=np.lexsort((self.cf.indices[a:b],-vals))[:100];remove=np.ones(b-a,bool);remove[keep]=False;vals[remove]=0
++            self.cf.eliminate_zeros()
++            self.seen={}
++            for u,m in zip(train['user_id'],train['movie_id']):self.seen.setdefault(int(u),set()).add(int(m))
++            self.movies={int(m['movie_id']):{'movie_id':int(m['movie_id']),'title':m['title'],'genres':m['genres'],'runtime_minutes':None,'directors':[],'year':m.get('startYear'),'metadata_status':'unverified'} for m in self.meta['movies']}
++            with SessionLocal() as db:
++                quality={int(r.movie_id):r.status for r in db.execute(text('SELECT movie_id,status FROM movie_metadata_quality'))}
++                for m,crew in db.query(Movie,TitleCrew).outerjoin(TitleCrew,Movie.imdb_id==TitleCrew.tconst).all():
++                    if m.movie_id in self.movies:self.movies[m.movie_id].update(runtime_minutes=m.runtime_minutes,directors=(crew.directors or []) if crew and quality.get(m.movie_id)=='identity_verified' else [],metadata_status=quality.get(m.movie_id,'unverified'))
++            docs=[' '.join([self.movies[int(i)]['title']]+self.movies[int(i)]['genres']*3) for i in self.ids]
++            self.vectorizer=TfidfVectorizer(analyzer='char_wb',ngram_range=(3,5),max_features=25000,dtype=np.float32)
++            self.text=self.vectorizer.fit_transform(docs).tocsr()
++            out=Path('/artifacts/content_v1');out.mkdir(exist_ok=True)
++            sparse.save_npz(out/'title_genre_tfidf.npz',self.text)
++            (out/'index.json').write_text(json.dumps({'version':'content-v1','source':'official MovieLens titles and genres only','movie_ids':self.ids.tolist(),'vocabulary':{k:int(v) for k,v in self.vectorizer.vocabulary_.items()},'idf':self.vectorizer.idf_.tolist(),'images_used':False}),encoding='utf-8')
++            self.ready=True
++    def details(self,ids):
++        self.load();return [dict(self.movies[i],poster_url=f'/api/posters/{i}.png') for i in ids if i in self.movies]
++    def recommend(self,uid,state,text_query='',preferences=(),top_k=6,faults=()):
++        self.load();start=time.perf_counter();trace=[];degraded=[];warnings=[];uid=int(uid or 0)
++        exclude=set(state.get('exclude_ids',[]))|self.seen.get(uid,set())
++        if uid:
++            from app.database import SessionLocal
++            from app.behavior.models import Behavior
++            from sqlalchemy import select
++            with SessionLocal() as db:
++                exclude.update(db.scalars(select(Behavior.movie_id).where(Behavior.user_id==uid,Behavior.seen.is_(True))).all())
++
++        director_seed=state.get('exclude_director_of');bad_directors=set()
++        if director_seed:
++            bad_directors=set(self.movies.get(director_seed,{}).get('directors',[]))
++            if not bad_directors:return {'items':[],'warnings':['上一部电影缺少已核验导演，无法保证排除同一导演，请调整条件。'],'trace':[],'degradation':[],'eligible_count':0,'needs_clarification':True}
++        missing_runtime=missing_director=0;eligible=[]
++        for mid in self.ids:
++            mid=int(mid);m=self.movies[mid];g=set(m['genres'])
++            if mid in exclude or not set(state.get('include_genres',[]))<=g or set(state.get('exclude_genres',[]))&g:continue
++            runtime=m['runtime_minutes']
++            if 'max_runtime' in state or 'min_runtime' in state:
++                if runtime is None:missing_runtime+=1;continue
++                if runtime>state.get('max_runtime',100000) or runtime<state.get('min_runtime',0):continue
++            if bad_directors:
++                if not m['directors']:missing_director+=1;continue
++                if bad_directors&set(m['directors']):continue
++            eligible.append(self.lookup[mid])
++        trace.append({'tool':'filter','input_count':len(self.ids),'eligible_count':len(eligible),'missing_runtime_excluded':missing_runtime,'missing_director_excluded':missing_director})
++        if not eligible:return {'items':[],'warnings':['没有满足全部已知硬约束的电影；请放宽条件。'],'trace':trace,'degradation':degraded,'eligible_count':0}
++        idx=np.array(eligible);channels={'popular':self.pop};cfscore=np.zeros(len(self.ids),dtype=np.float32)
++        if 0<uid<self.X.shape[0]:cfscore=np.asarray((self.X[uid]@self.cf).toarray()).ravel()
++        def channel(name,fn):
++            def run():
++                if name in faults:raise ConnectionError('injected')
++                return fn()
++            try:channels[name]=self.resilience.call('recall_'+name,run,timeout=.4,trace=trace)
++            except Exception as exc:degraded.append('recall_'+name+':'+type(exc).__name__)
++        channel('itemcf',lambda:cfscore)
++        def content():
++            seed=state.get('similar_to')
++            if seed in self.lookup:return np.asarray((self.text@self.text[self.lookup[seed]].T).toarray()).ravel()
++            query=' '.join(state.get('include_genres',[]))+' '+text_query
++            return np.asarray((self.text@self.vectorizer.transform([query]).T).toarray()).ravel()
++        channel('text',content)
++        def cached():
++            if 'cache' in faults:raise ConnectionError('injected')
++            import redis
++            from redis.retry import Retry
++            from redis.backoff import NoBackoff
++            cache=redis.Redis(host='redis',port=6379,socket_connect_timeout=.15,socket_timeout=.15,retry=Retry(NoBackoff(),0))
++            key='ca:profile:rec-v1:'+str(uid)
++            raw=cache.get(key)
++            if raw is not None:
++                value=json.loads(raw)
++                if value.get('version')!='rec-v1' or not isinstance(value.get('indices'),list) or any(type(i) is not int or not 0<=i<len(self.ids) for i in value['indices']):raise ValueError('invalid_cached_profile')
++                return value['indices']
++            indices=self.X[uid].indices.tolist() if 0<uid<self.X.shape[0] else []
++            cache.setex(key,3600,json.dumps({'version':'rec-v1','indices':indices}))
++            return indices
++        try:
++            profile_indices=self.resilience.call('cache',cached,timeout=.4,attempts=1,trace=trace)
++            if 'itemcf' in channels:
++                row=sparse.csr_matrix((np.ones(len(profile_indices),dtype=np.float32),([0]*len(profile_indices),profile_indices)),shape=(1,len(self.ids)))
++                channels['itemcf']=np.asarray((row@self.cf).toarray()).ravel()
++        except Exception as exc:degraded.append('cache:'+type(exc).__name__+':local_train_profile')
++        candidates=set()
++        for name,scores in channels.items():
++            if name=='text' and not np.any(scores[idx]>0):
++                trace.append({'tool':'recall','channel':name,'count':0,'skipped':'no_positive_text_similarity'});continue
++            order=idx[np.lexsort((self.ids[idx],-scores[idx]))[:100]];candidates.update(order.tolist())
++            trace.append({'tool':'recall','channel':name,'count':len(order)})
++        arr=np.array(sorted(candidates));mids=self.ids[arr];base=self.pop[arr].astype(float);ranker='popular'
++        try:
++            if 'ranking' in faults:raise RuntimeError('injected')
++            from online.ranking.resource_manager import RankingResourceManager
++            manager=RankingResourceManager();manager._ensure_resources_loaded()
++            if manager.ranking_model is None:raise RuntimeError('model_unavailable')
++            user=uid if 0<=uid<len(self.tab['user_user_id']) else 0
++            features={k:np.full(len(mids),self.tab['user_'+k][user],dtype='int32') for k in ['user_id','gender','age','occupation','zip_code']}
++            features.update({k:self.tab['item_'+k][mids] for k in ['movie_id','genres','startYear']})
++            with self.rank_lock:base=np.asarray(manager.ranking_model(features,training=False)).ravel().astype(float)
++            ranker='deepfm-rec-v1'
++        except Exception as exc:degraded.append('ranking:'+type(exc).__name__+':popular')
++        def normalize(x):return x/(max(float(np.max(x)),1e-8))
++        score=.75*base+.10*normalize(channels.get('itemcf',self.pop)[arr])+.15*normalize(channels.get('text',self.pop)[arr])
++        for pref in preferences:
++            if pref['key']=='include_genres':score+=np.array([.12 if pref['value'] in self.movies[int(m)]['genres'] else 0 for m in mids])
++        # Greedy genre diversity with explicit fixed penalty, no test-based tuning.
++        remaining=list(range(len(mids)));selected=[]
++        while remaining and len(selected)<top_k:
++            def objective(i):
++                g=set(self.movies[int(mids[i])]['genres']);sim=max((len(g&set(self.movies[int(mids[j])]['genres']))/max(1,len(g|set(self.movies[int(mids[j])]['genres']))) for j in selected),default=0)
++                return (score[i]-.08*sim,-int(mids[i]))
++            winner=max(remaining,key=objective);selected.append(winner);remaining.remove(winner)
++        items=[]
++        for i in selected:
++            item=self.details([int(mids[i])])[0];item.update(score=round(float(score[i]),6),reason='库内类型：'+'、'.join(item['genres'])+('；片长 '+str(item['runtime_minutes'])+' 分钟' if item['runtime_minutes'] else '；片长未知'),ranking_strategy=ranker);items.append(item)
++        trace.extend([{'tool':'rank','strategy':ranker,'count':len(mids)},{'tool':'rerank','strategy':'genre-diversity-fixed-0.08','count':len(items)}])
++        return {'items':items,'warnings':warnings,'trace':trace,'degradation':degraded,'eligible_count':len(eligible),'elapsed_ms':round((time.perf_counter()-start)*1000,2),'missing_runtime_excluded':missing_runtime,'missing_director_excluded':missing_director}
++
++engine=MovieEngine()
++
++
+diff --git a/web_project/backend/app/cineagent/evidence.py b/web_project/backend/app/cineagent/evidence.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/cineagent/evidence.py
+@@ -0,0 +1,31 @@
++"""Evidence checks and opt-in constraint negotiation, without external calls."""
++def matches(movie,state,excluded,movies):
++    if movie['movie_id'] in excluded:return False
++    genres=set(movie['genres'])
++    if not set(state.get('include_genres',[]))<=genres or genres&set(state.get('exclude_genres',[])):return False
++    if 'max_runtime' in state or 'min_runtime' in state:
++        runtime=movie.get('runtime_minutes')
++        if runtime is None or not state.get('min_runtime',0)<=runtime<=state.get('max_runtime',100000):return False
++    seed=state.get('exclude_director_of')
++    if seed:
++        directors=set(movies.get(seed,{}).get('directors',[]));actual=set(movie.get('directors',[]))
++        if not directors or not actual or directors&actual:return False
++    return True
++
++def negotiate(engine,uid,state):
++    excluded=set(state.get('exclude_ids',[]))|engine.seen.get(int(uid or 0),set());suggestions=[]
++    options=[]
++    if 'max_runtime' in state:options.append(('max_runtime',state['max_runtime']+30,f"将最长片长从 {state['max_runtime']} 调整为 {state['max_runtime']+30} 分钟",f"把最长片长改成{state['max_runtime']+30}分钟"))
++    if state.get('exclude_director_of'):options.append(('exclude_director_of',None,'取消导演排除限制','取消导演限制'))
++    for key,value,label,message in options:
++        alternative=dict(state)
++        if value is None:alternative.pop(key,None)
++        else:alternative[key]=value
++        count=sum(matches(m,alternative,excluded,engine.movies) for m in engine.movies.values())
++        if count:suggestions.append({'label':label,'message':message,'eligible_count':count,'requires_confirmation':True,'change':{'key':key,'from':state.get(key),'to':value}})
++    return suggestions
++
++def verify_results(engine,uid,state,items):
++    excluded=set(state.get('exclude_ids',[]))|engine.seen.get(int(uid or 0),set())
++    checks=[{'movie_id':item['movie_id'],'passed':item['movie_id'] in engine.movies and matches(engine.movies[item['movie_id']],state,excluded,engine.movies),'evidence_source':'local_catalogue','checked_fields':['movie_id','genres','runtime_minutes','directors','excluded_ids']} for item in items]
++    return checks
+diff --git a/web_project/backend/app/cineagent/models.py b/web_project/backend/app/cineagent/models.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/cineagent/models.py
+@@ -0,0 +1,26 @@
++from datetime import datetime,timezone
++from sqlalchemy import Column,String,Integer,DateTime,Text,UniqueConstraint
++from sqlalchemy.dialects.postgresql import JSONB
++from app.database import Base
++now=lambda:datetime.now(timezone.utc)
++class Conversation(Base):
++    __tablename__='ca_conversations'
++    id=Column(String(36),primary_key=True);owner=Column(String(100),index=True,nullable=False);state=Column(JSONB,default=dict,nullable=False);created_at=Column(DateTime(timezone=True),default=now)
++class Turn(Base):
++    __tablename__='ca_turns'
++    id=Column(String(36),primary_key=True);conversation_id=Column(String(36),index=True,nullable=False);owner=Column(String(100),index=True,nullable=False);number=Column(Integer,nullable=False);text=Column(Text,nullable=False);created_at=Column(DateTime(timezone=True),default=now)
++    __table_args__=(UniqueConstraint('conversation_id','number'),)
++class Preference(Base):
++    __tablename__='ca_preferences'
++    id=Column(String(36),primary_key=True);owner=Column(String(100),index=True,nullable=False);key=Column(String(40),nullable=False);value=Column(JSONB,nullable=False);source_conversation=Column(String(36));source_turn=Column(Integer);scope=Column(String(30),default='long_term');created_at=Column(DateTime(timezone=True),default=now);expires_at=Column(DateTime(timezone=True),nullable=True);status=Column(String(20),default='active')
++class PreferenceAudit(Base):
++    __tablename__='ca_preference_audit'
++    id=Column(String(36),primary_key=True);owner=Column(String(100),index=True,nullable=False);preference_id=Column(String(36));action=Column(String(30));request_id=Column(String(36));created_at=Column(DateTime(timezone=True),default=now)
++class Feedback(Base):
++    __tablename__='ca_feedback'
++    id=Column(String(36),primary_key=True);owner=Column(String(100),index=True,nullable=False);request_id=Column(String(36),nullable=False);movie_id=Column(Integer,nullable=False);kind=Column(String(20),nullable=False);source_conversation=Column(String(36));source_turn=Column(Integer);created_at=Column(DateTime(timezone=True),default=now)
++    __table_args__=(UniqueConstraint('owner','request_id','movie_id','kind'),)
++class RequestRecord(Base):
++    __tablename__='ca_requests'
++    id=Column(String(36),primary_key=True);owner=Column(String(100),index=True,nullable=False);request_id=Column(String(36),nullable=False);body_sha256=Column(String(64),nullable=False);response=Column(JSONB,nullable=False);created_at=Column(DateTime(timezone=True),default=now)
++    __table_args__=(UniqueConstraint('owner','request_id'),)
+diff --git a/web_project/backend/app/cineagent/parser.py b/web_project/backend/app/cineagent/parser.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/cineagent/parser.py
+@@ -0,0 +1,74 @@
++"""Deterministic offline parser. This is not an LLM or validated ReAct agent."""
++import re
++from copy import deepcopy
++GENRES={'悬疑':'Mystery','恐怖':'Horror','惊悚':'Thriller','喜剧':'Comedy','动作':'Action','爱情':'Romance','科幻':'Sci-Fi','剧情':'Drama','动画':'Animation','犯罪':'Crime','冒险':'Adventure','战争':'War','纪录':'Documentary','儿童':'Children\'s','奇幻':'Fantasy','西部':'Western','音乐':'Musical','黑色电影':'Film-Noir'}
++for _g in tuple(GENRES.values()): GENRES[_g.lower()]=_g
++NUM={'一':1,'两':2,'二':2,'三':3,'四':4,'五':5,'六':6,'七':7,'八':8,'九':9,'十':10}
++def number(s):
++    if s.isdigit(): return int(s)
++    if s in NUM:return NUM[s]
++    if '十' in s:
++        a,b=s.split('十',1);return NUM.get(a,1)*10+NUM.get(b,0)
++    return None
++
++def parse(text, previous=None, turn=1):
++    if not isinstance(text,str) or not text.strip():raise ValueError('message must not be empty')
++    if len(text)>4000:raise ValueError('message exceeds 4000 characters')
++    state=deepcopy(previous or {})
++    for key in ('include_genres','exclude_genres','exclude_ids'): state.setdefault(key,[])
++    state.setdefault('sources',{})
++    updates={};warnings=[];memory=[]
++    if re.search(r'重新开始|清空条件|reset constraints',text,re.I):
++        state={'include_genres':[],'exclude_genres':[],'exclude_ids':[],'sources':{}}
++    if '取消时长限制' in text:
++        state.pop('max_runtime',None);state.pop('min_runtime',None)
++    if '取消导演限制' in text:state.pop('exclude_director_of',None)
++    # Clauses keep negation local; a later positive clause must not inherit it.
++    for match in re.finditer(r'[^，,。；;！!？?]+',text):
++        clause=match.group(); low=clause.lower()
++        negative=bool(re.search(r'不要|不看|别|不推荐|不喜欢|排除|避免|算了|without|exclude|not\s',low))
++        found=sorted({v for k,v in GENRES.items() if k in low})
++        for genre in found:
++            key='exclude_genres' if negative else 'include_genres'
++            other='include_genres' if negative else 'exclude_genres'
++            # Explicit correction supersedes prior constraints; otherwise report conflict.
++            if genre in state[other]:
++                if re.search(r'改成|改为|其实|纠正|现在|取消',clause):state[other].remove(genre)
++                else:warnings.append('类型条件冲突：'+genre)
++            if genre not in state[key]:state[key].append(genre)
++            updates[key]=state[key]
++            state['sources'][key+':'+genre]={'turn':turn,'start':match.start(),'end':match.end()}
++            if re.search(r'记住|以后|长期|一直',clause):memory.append({'key':key,'value':genre,'source_turn':turn,'start':match.start(),'end':match.end()})
++    # Consume a composite duration once; corrections use the final complete mention.
++    duration = r'([\d一二两三四五六七八九十]+)(?:个)?\s*(小时|钟头|分钟|分)(?:\s*([\d一二两三四五六七八九十]+)\s*(?:分钟|分))?|([\d一二两三四五六七八九十]+)(?:个)?半(?:小时|钟头)|半(?:小时|钟头)'
++    for runtime in re.finditer(duration,text):
++        if runtime.group(4): value=number(runtime.group(4))*60+30
++        elif runtime.group(1):
++            value=number(runtime.group(1))*(60 if runtime.group(2) in ('小时','钟头') else 1)
++            if runtime.group(3): value+=number(runtime.group(3))
++        else:value=30
++        prefix=re.split(r'[，,。；;]',text[:runtime.start()])[-1]
++        suffix=re.split(r'[，,。；;]',text[runtime.end():])[0]
++        lower=bool(re.search(r'至少|不少于|长于',prefix) or ('以上' in suffix))
++        key='min_runtime' if lower else 'max_runtime'
++        state[key]=value;updates[key]=value;state['sources'][key]={'turn':turn,'start':runtime.start(),'end':runtime.end()}
++    if state.get('min_runtime',0)>state.get('max_runtime',100000):warnings.append('片长上下限冲突')
++    if re.search(r'节奏快|烧脑|温暖|治愈',text):warnings.append('库内没有经过验证的节奏或情绪标签，不能保证此条件')
++    reference=re.search(r'第([\d一二两三四五六七八九十]+)[部个]',text)
++    if reference is None and re.search(r'最前面|排在首位|第一位|首部',text):reference=re.search(r'(一)', '一')
++    action=None
++    if reference and re.search(r'看过|换|类似|导演',text):
++        n=number(reference.group(1));last=state.get('last_results',[])
++        if n and n<=len(last):
++            mid=last[n-1];state['similar_to']=mid;updates['similar_to']=mid
++            if re.search(r'看过|换',text):
++                if mid not in state['exclude_ids']:state['exclude_ids'].append(mid)
++            if '看过' in text:action={'movie_id':mid,'kind':'seen'}
++            if re.search(r'不要.*导演|不同.*导演|不.*同.*导演|导演.*别.*重复|导演.*不.*重复',text):state['exclude_director_of']=mid
++        else:warnings.append('无法定位上一轮电影，请先获取推荐或指定有效序号')
++    return {'mode':'offline_rules','state':state,'updates':updates,'memory_proposals':memory,'feedback':action,'warnings':sorted(set(warnings)),'needs_clarification':any('冲突' in x or '无法定位' in x for x in warnings)}
++
++def compress(state,turn_count):
++    """Structured state retains source offsets; originals stay in the turn table."""
++    return {'version':'structured-v1','through_turn':turn_count,'constraints':{k:v for k,v in state.items() if k not in ('last_results','sources')},'sources':deepcopy(state.get('sources',{})),'last_results':state.get('last_results',[])}
++
+diff --git a/web_project/backend/app/cineagent/provider.py b/web_project/backend/app/cineagent/provider.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/cineagent/provider.py
+@@ -0,0 +1,102 @@
++"""Official-only DeepSeek client with persistent, conservative trial reservations.
++No credentials/prompts/responses are written to the accounting ledger.
++Unknown/failed request usage retains its entire reservation (fail closed).
++"""
++import json, os, time, uuid, urllib.request, urllib.error
++from pathlib import Path
++from contextlib import contextmanager
++
++class BudgetExceeded(RuntimeError):pass
++class ProviderError(RuntimeError):pass
++
++@contextmanager
++def file_lock(path):
++    path.parent.mkdir(parents=True,exist_ok=True)
++    with open(path,'a+b') as f:
++        if f.tell()==0:f.write(b'0');f.flush()
++        f.seek(0)
++        if os.name=='nt':
++            import msvcrt
++            msvcrt.locking(f.fileno(),msvcrt.LK_NBLCK,1)
++        else:
++            import fcntl
++            fcntl.flock(f,fcntl.LOCK_EX|fcntl.LOCK_NB)
++        try:yield
++        finally:
++            f.seek(0)
++            if os.name=='nt':msvcrt.locking(f.fileno(),msvcrt.LK_UNLCK,1)
++            else:fcntl.flock(f,fcntl.LOCK_UN)
++
++class NoRedirect(urllib.request.HTTPRedirectHandler):
++    def redirect_request(self,*args,**kwargs):return None
++
++class DeepSeekTrial:
++    def __init__(self,config,ledger,approved_campaign=False,budget_window=None,parent_request_id=None):
++        self.config=Path(config);self.ledger=Path(ledger);self.approved_campaign=approved_campaign;self.budget_window=budget_window;self.parent_request_id=parent_request_id
++    def _read(self):
++        return json.loads(self.ledger.read_text(encoding='utf-8')) if self.ledger.exists() else {'version':'trial-v1','attempts':[]}
++    def _write(self,data):
++        self.ledger.parent.mkdir(parents=True,exist_ok=True)
++        tmp=self.ledger.with_suffix('.tmp')
++        tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2),encoding='utf-8');os.replace(tmp,self.ledger)
++    def chat(self,messages,tools=None,max_tokens=512,trial_authorized=False):
++        cfg=json.loads(self.config.read_text(encoding='utf-8-sig'))
++        if not trial_authorized and not cfg.get('enabled',False):raise ProviderError('provider_disabled')
++        if cfg.get('base_url')!='https://api.deepseek.com' or cfg.get('model')!='deepseek-flash':raise ProviderError('unapproved_provider_or_model')
++        if not 1<=max_tokens<=1024:raise ValueError('output_limit_out_of_range')
++        payload={'model':'deepseek-flash','messages':messages,'max_tokens':max_tokens,'thinking':{'type':'disabled'},'temperature':0,'stream':False}
++        if tools:payload['tools']=tools;payload['tool_choice']='auto'
++        raw=json.dumps(payload,ensure_ascii=False).encode('utf-8')
++        # UTF-8 bytes plus framing allowance exceed normal tokenization for these bounded text prompts.
++        reserve_in=len(raw)+128*(len(messages)+1);reserve_out=max_tokens
++        rid=str(uuid.uuid4());limits=cfg['approved_trial']
++        daily_path=self.config.with_name('daily_usage.json')
++        daily=None
++        if not self.approved_campaign and self.ledger.name=='DEEPSEEK_DAILY_LEDGER.json':
++            daily=json.loads(daily_path.read_text(encoding='utf-8'))
++            if not daily.get('enabled'):raise ProviderError('daily_disabled')
++            limits=daily
++
++        if self.approved_campaign:
++            if self.ledger.name!='DEEPSEEK_NATURAL_V2_LEDGER.json':raise ProviderError('invalid_campaign_ledger')
++            limits={'max_requests_including_retries':240,'max_input_tokens':600000,'max_output_tokens':120000,'budget_usd':.50}
++        caps=(240,600000,120000,.50) if self.approved_campaign else (30,150000,30000,.10)
++        if daily is not None:
++            caps=(int(limits['max_requests_including_retries']),int(limits['max_input_tokens']),int(limits['max_output_tokens']),float(limits['budget_usd']))
++            if not 0<caps[0]<=5000 or not 0<caps[3]<=5:raise ProviderError('daily_approval_limit')
++        with file_lock(self.ledger.with_suffix('.lock')):
++            log=self._read();attempts=log['attempts']
++            if self.budget_window:
++                w=self.budget_window;subset=attempts[w['start_attempt']:]
++                if len(subset)>=w['max_new_attempts']:raise BudgetExceeded('batch_request_limit')
++                window_cost=sum(x['accounted_input_tokens']*.30/1e6+x['accounted_output_tokens']*1.20/1e6 for x in subset)
++                if window_cost+reserve_in*.30/1e6+reserve_out*1.20/1e6>w['max_new_cost_usd']:raise BudgetExceeded('batch_cost_limit')
++            total_in=sum(x['accounted_input_tokens'] for x in attempts);total_out=sum(x['accounted_output_tokens'] for x in attempts)
++            if len(attempts)>=min(caps[0],limits['max_requests_including_retries']):raise BudgetExceeded('request_limit')
++            if total_in+reserve_in>min(caps[1],limits['max_input_tokens']):raise BudgetExceeded('input_limit')
++            if total_out+reserve_out>min(caps[2],limits['max_output_tokens']):raise BudgetExceeded('output_limit')
++            cost=(total_in+reserve_in)*.30/1e6+(total_out+reserve_out)*1.20/1e6
++            if cost>min(caps[3],limits['budget_usd']):raise BudgetExceeded('cost_limit')
++            entry={'request_id':rid,'status':'reserved','accounted_input_tokens':reserve_in,'accounted_output_tokens':reserve_out,'created_at_unix':time.time()};entry['parent_request_id']=self.parent_request_id;attempts.append(entry);self._write(log)
++        started=time.monotonic();result=None;status='failed_unknown_usage';error=None
++        try:
++            req=urllib.request.Request('https://api.deepseek.com/chat/completions',data=raw,headers={'Authorization':'Bearer '+cfg['api_key'],'Content-Type':'application/json'},method='POST')
++            with urllib.request.build_opener(NoRedirect()).open(req,timeout=8) as response:
++                body=response.read(1024*1024+1)
++                if len(body)>1024*1024:raise ProviderError('response_too_large')
++                result=json.loads(body)
++            usage=result.get('usage',{});pi=usage.get('prompt_tokens');po=usage.get('completion_tokens')
++            if not isinstance(pi,int) or not isinstance(po,int) or pi<0 or po<0:raise ProviderError('invalid_usage')
++            if pi>reserve_in or po>reserve_out:raise ProviderError('usage_exceeded_reservation')
++            status='ok'
++        except urllib.error.HTTPError as exc:error='http_'+str(exc.code)
++        except Exception as exc:error=type(exc).__name__
++        finally:
++            with file_lock(self.ledger.with_suffix('.lock')):
++                log=self._read();entry=next(x for x in log['attempts'] if x['request_id']==rid)
++                entry.update(status=status,elapsed_ms=round((time.monotonic()-started)*1000,2),error_type=error)
++                if status=='ok':entry.update(accounted_input_tokens=pi,accounted_output_tokens=po,model_returned=result.get('model'),provider_request_id=result.get('id'))
++                self._write(log)
++        if status!='ok':raise ProviderError(error or 'provider_failed')
++        return result,rid
++
+diff --git a/web_project/backend/app/cineagent/reliability.py b/web_project/backend/app/cineagent/reliability.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/cineagent/reliability.py
+@@ -0,0 +1,46 @@
++"""Bounded dependency calls with finite retries and a single half-open probe."""
++import time,threading,concurrent.futures,random
++from collections import Counter
++class RateLimited(Exception):pass
++class ProviderUnavailable(Exception):pass
++class CircuitOpen(Exception):pass
++class DependencyBusy(Exception):pass
++class Resilience:
++    def __init__(self,clock=time.monotonic,workers=4):
++        self.clock=clock;self.lock=threading.Lock();self.states={};self.pool=concurrent.futures.ThreadPoolExecutor(max_workers=workers,thread_name_prefix='cine-dep');self.slots=threading.BoundedSemaphore(workers*2)
++    def state(self,name):
++        with self.lock:return dict(self.states.get(name,{'failures':0,'opened':None,'probe':False}))
++    def call(self,name,fn,timeout=.5,attempts=2,threshold=3,cooldown=5,trace=None,sleep=time.sleep):
++        trace=trace if trace is not None else []
++        with self.lock:
++            s=self.states.setdefault(name,{'failures':0,'opened':None,'probe':False})
++            if s['opened'] is not None:
++                if self.clock()-s['opened']<cooldown or s['probe']:raise CircuitOpen(name)
++                s['probe']=True
++        last=None
++        for i in range(attempts):
++            started=self.clock();future=None
++            try:
++                if not self.slots.acquire(blocking=False):raise DependencyBusy(name)
++                def job():
++                    try:return fn()
++                    finally:self.slots.release()
++                try:future=self.pool.submit(job)
++                except Exception:self.slots.release();raise
++                result=future.result(timeout=timeout)
++                with self.lock:self.states[name]={'failures':0,'opened':None,'probe':False}
++                trace.append({'dependency':name,'attempt':i+1,'ok':True,'ms':round((self.clock()-started)*1000,2)})
++                return result
++            except Exception as e:
++                last=e
++                if future is not None and future.cancel():self.slots.release()
++                trace.append({'dependency':name,'attempt':i+1,'ok':False,'error_type':type(e).__name__,'ms':round((self.clock()-started)*1000,2)})
++                retry=isinstance(e,(TimeoutError,RateLimited,ConnectionError,OSError)) and not isinstance(e,ProviderUnavailable)
++                if i+1>=attempts or not retry:break
++                sleep(.04*(2**i))
++        with self.lock:
++            s=self.states[name];s['failures']+=1;s['probe']=False
++            if s['failures']>=threshold:s['opened']=self.clock()
++        raise last
++    def reset(self):
++        with self.lock:self.states.clear()
+diff --git a/web_project/backend/app/cineagent/__init__.py b/web_project/backend/app/cineagent/__init__.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/cineagent/__init__.py
+@@ -0,0 +1 @@
++
+diff --git a/web_project/backend/app/jobs/api.py b/web_project/backend/app/jobs/api.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/jobs/api.py
+@@ -0,0 +1,44 @@
++import uuid
++from fastapi import APIRouter,Depends,HTTPException,Query
++from pydantic import BaseModel,Field,ConfigDict
++from sqlalchemy import select
++from sqlalchemy.dialects.postgresql import insert
++from app.api.deps import get_db
++from app.core.auth import get_current_admin_user
++from app.models import Movie
++from .models import Job
++router=APIRouter(prefix='/api/admin/jobs',tags=['background-jobs'])
++class CreateJob(BaseModel):
++    model_config=ConfigDict(extra='forbid')
++    request_id:uuid.UUID
++    movie_ids:list[int]=Field(min_length=1,max_length=100)
++def serialize(j):
++    return dict(id=str(j.id),state=j.state,attempts=j.attempts,movie_ids=j.payload['movie_ids'],result=j.result,error_class=j.error_class,created_at=j.created_at.isoformat(),updated_at=j.updated_at.isoformat())
++@router.post('',status_code=202)
++def create(body:CreateJob,user=Depends(get_current_admin_user),db=Depends(get_db)):
++    payload={'movie_ids':sorted(set(body.movie_ids))}
++    found=set(db.scalars(select(Movie.movie_id).where(Movie.movie_id.in_(payload['movie_ids']))))
++    if found!=set(payload['movie_ids']):raise HTTPException(422,'部分电影不存在')
++    stmt=insert(Job).values(id=uuid.uuid4(),owner_id=user.user_id,request_key=body.request_id,payload=payload,state='queued',attempts=0).on_conflict_do_nothing(index_elements=['owner_id','request_key'])
++    db.execute(stmt)
++    job=db.scalar(select(Job).where(Job.owner_id==user.user_id,Job.request_key==body.request_id))
++    if job.payload!=payload:db.rollback();raise HTTPException(409,'请求ID已用于其他任务')
++    result=serialize(job);db.commit();return result
++@router.get('')
++def listing(page:int=Query(1,ge=1),page_size:int=Query(20,ge=1,le=100),user=Depends(get_current_admin_user),db=Depends(get_db)):
++    rows=db.scalars(select(Job).where(Job.owner_id==user.user_id).order_by(Job.created_at.desc(),Job.id).offset((page-1)*page_size).limit(page_size)).all()
++    return {'items':[serialize(j) for j in rows],'page':page,'page_size':page_size}
++@router.get('/{job_id}')
++def detail(job_id:uuid.UUID,user=Depends(get_current_admin_user),db=Depends(get_db)):
++    job=db.scalar(select(Job).where(Job.id==job_id,Job.owner_id==user.user_id))
++    if job is None:raise HTTPException(404,'任务不存在')
++    return serialize(job)
++
++class DescriptionChange(BaseModel):
++    model_config=ConfigDict(extra='forbid')
++    description:str=Field(max_length=12000)
++@router.patch('/movies/{movie_id}/description')
++def metadata(movie_id:int,body:DescriptionChange,user=Depends(get_current_admin_user),db=Depends(get_db)):
++    from app.behavior.catalogue import change_description
++    try:result=change_description(db,movie_id,body.description);db.commit();return result
++    except Exception:db.rollback();raise
+diff --git a/web_project/backend/app/jobs/dispatcher.py b/web_project/backend/app/jobs/dispatcher.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/jobs/dispatcher.py
+@@ -0,0 +1,21 @@
++"""DB outbox publisher: retries publishing and recovers expired execution leases."""
++import time,logging
++from datetime import timedelta
++from sqlalchemy import select,or_,and_
++from app.database import SessionLocal
++from .models import Job
++from .tasks import celery_app,now
++from app.config import settings
++logging.basicConfig(level=logging.INFO)
++def tick():
++    with SessionLocal.begin() as db:
++        jobs=db.scalars(select(Job).where(or_(and_(Job.state.in_(['queued','dispatched']),Job.next_run<=now()),and_(Job.state=='running',Job.lease_until<=now()))).order_by(Job.next_run).with_for_update(skip_locked=True).limit(10)).all()
++        for j in jobs:
++            if j.attempts>=3:j.state='failed';j.error_class='AttemptLimit';continue
++            celery_app.send_task('cineagent.refresh_index',args=[str(j.id)],task_id=str(j.id),queue=settings.job_queue,retry=False)
++            j.state='dispatched';j.next_run=now()+timedelta(seconds=30);j.updated_at=now()
++if __name__=='__main__':
++    while True:
++        try:tick()
++        except Exception as e:logging.warning('job_dispatch_failed:%s',type(e).__name__)
++        time.sleep(2)
+diff --git a/web_project/backend/app/jobs/models.py b/web_project/backend/app/jobs/models.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/jobs/models.py
+@@ -0,0 +1,20 @@
++import uuid
++from sqlalchemy import Column,String,Integer,DateTime,ForeignKey,UniqueConstraint,func
++from sqlalchemy.dialects.postgresql import UUID,JSONB
++from app.database import Base
++class Job(Base):
++    __tablename__='background_jobs'
++    id=Column(UUID(as_uuid=True),primary_key=True,default=uuid.uuid4)
++    owner_id=Column(Integer,ForeignKey('users.user_id'),nullable=False)
++    request_key=Column(UUID(as_uuid=True),nullable=False)
++    payload=Column(JSONB,nullable=False)
++    state=Column(String(20),nullable=False,default='queued',index=True)
++    attempts=Column(Integer,nullable=False,default=0)
++    claim=Column(String(36))
++    next_run=Column(DateTime(timezone=True),nullable=False,server_default=func.now(),index=True)
++    lease_until=Column(DateTime(timezone=True))
++    created_at=Column(DateTime(timezone=True),nullable=False,server_default=func.now())
++    updated_at=Column(DateTime(timezone=True),nullable=False,server_default=func.now())
++    result=Column(JSONB)
++    error_class=Column(String(100))
++    __table_args__=(UniqueConstraint('owner_id','request_key',name='uq_job_owner_request'),)
+diff --git a/web_project/backend/app/jobs/tasks.py b/web_project/backend/app/jobs/tasks.py
+new file mode 100644
+--- /dev/null
++++ b/web_project/backend/app/jobs/tasks.py
+@@ -0,0 +1,40 @@
++import uuid,logging
++from datetime import datetime,timedelta,timezone
++from celery import Celery
++from sqlalchemy import select,update
++from app.config import settings
++from app.database import SessionLocal
++from app.models import Movie
++from .models import Job
++logger=logging.getLogger(__name__)
++celery_app=Celery('cineagent',broker=settings.redis_url.rsplit('/',1)[0]+'/'+str(settings.job_broker_db))
++celery_app.conf.update(task_default_queue=settings.job_queue,task_acks_late=True,task_reject_on_worker_lost=True,worker_prefetch_multiplier=1,broker_connection_retry_on_startup=True,broker_connection_timeout=3,broker_transport_options={'visibility_timeout':30,'socket_connect_timeout':3,'socket_timeout':3},task_soft_time_limit=45,task_time_limit=55,task_ignore_result=True,accept_content=['json'],task_serializer='json')
++def now():return datetime.now(timezone.utc)
++def index_movies(movie_ids):
++    from elasticsearch import Elasticsearch
++    from elasticsearch.helpers import bulk
++    with SessionLocal() as db:
++        rows=db.scalars(select(Movie).where(Movie.movie_id.in_(movie_ids))).all()
++        if len(rows)!=len(movie_ids):raise ValueError('movie_deleted')
++        docs=[{'_index':settings.movie_index_name,'_id':str(m.movie_id),'_source':{k:getattr(m,k) for k in ['movie_id','title','year','genres','description','imdb_id','avg_rating','imdb_rating','rating_count','imdb_votes','runtime_minutes','title_type']}} for m in rows]
++    with Elasticsearch(settings.elasticsearch_url,request_timeout=5,max_retries=0) as client:
++        succeeded,_=bulk(client,docs,refresh='wait_for',raise_on_error=True,max_retries=0)
++    return {'indexed_count':succeeded,'index':settings.movie_index_name}
++@celery_app.task(name='cineagent.refresh_index')
++def refresh_index(job_id):
++    token=str(uuid.uuid4())
++    with SessionLocal.begin() as db:
++        j=db.scalar(select(Job).where(Job.id==uuid.UUID(job_id)).with_for_update())
++        if j is None or j.state in ('succeeded','failed'):return
++        if j.state=='running' and j.lease_until and j.lease_until>now():return
++        if j.state=='queued' and j.next_run>now():return
++        if j.attempts>=3:j.state='failed';j.error_class='AttemptLimit';return
++        j.state='running';j.attempts+=1;j.claim=token;j.lease_until=now()+timedelta(seconds=75);j.updated_at=now();ids=j.payload['movie_ids'];attempt=j.attempts
++    try:result=index_movies(ids);error=None
++    except Exception as exc:result=None;error=type(exc).__name__;logger.warning('index_job_failed',extra={'job_id':job_id,'attempt':attempt,'error_class':error})
++    with SessionLocal.begin() as db:
++        j=db.scalar(select(Job).where(Job.id==uuid.UUID(job_id)).with_for_update())
++        if j is None or j.claim!=token:return
++        j.lease_until=None;j.updated_at=now();j.result=result;j.error_class=error
++        if error:j.state='failed' if attempt>=3 else 'queued';j.next_run=now()+timedelta(seconds=2**attempt)
++        else:j.state='succeeded'
+diff --git a/web_project/backend/app/jobs/__init__.py b/web_project/backend/app/jobs/__init__.py
+new file mode 100644
+diff --git a/web_project/frontend/src/components/MovieBehavior.vue b/web_project/frontend/src/components/MovieBehavior.vue
+new file mode 100644
+--- /dev/null
++++ b/web_project/frontend/src/components/MovieBehavior.vue
+@@ -0,0 +1,12 @@
++<template><section class="my-4 p-4 border rounded-lg" aria-label="我的观影记录"><h3 class="font-semibold mb-3">我的观影记录</h3><p v-if="!auth.isAuthenticated">登录后可收藏和记录看过的电影。</p><div v-else class="flex gap-3 flex-wrap"><button :disabled="busy" class="px-4 py-2 border rounded" :aria-pressed="state.favorite" @click="save({favorite:!state.favorite})">{{state.favorite?'★ 已收藏':'☆ 收藏'}}</button><button :disabled="busy" class="px-4 py-2 border rounded" :aria-pressed="state.seen" @click="save({seen:!state.seen})">{{state.seen?'✓ 已看过':'标记看过'}}</button><p role="status">{{message}}</p></div><p v-if="error" role="alert" class="text-red-600">{{error}}</p><p class="text-sm text-gray-500 mt-2">看过的电影将从登录后的对话推荐中排除。</p><div v-if="auth.isAuthenticated" class="mt-4"><h4 class="font-semibold">根据你的观影记录推荐</h4><ul><li v-for="movie in suggestions" :key="movie.movie_id"><a class="text-blue-700 underline" :href="'/movie/'+movie.movie_id">{{movie.title}}</a></li></ul><p v-if="recommendationError" role="status">{{recommendationError}}</p></div></section></template>
++<script setup>
++import {ref,watch} from 'vue'
++import {useAuthStore} from '../stores/auth'
++const props=defineProps({movieId:{type:Number,required:true},revision:{type:Number,default:0}}),auth=useAuthStore(),state=ref({favorite:false,seen:false}),busy=ref(false),message=ref(''),error=ref('')
++const suggestions=ref([]),recommendationError=ref('')
++let generation=0
++async function refreshRecommendations(id){try{const r=await fetch('/api/me/recommendations?limit=4',{headers:{Authorization:'Bearer '+auth.token}});if(!r.ok)throw new Error();const data=await r.json();if(id===generation){suggestions.value=data.items;recommendationError.value=''}}catch{if(id===generation)recommendationError.value='推荐暂时不可用，请稍后重试。'}}
++async function request(method,body){const r=await fetch('/api/me/movies/'+props.movieId+'/behavior',{method,headers:{'Content-Type':'application/json',Authorization:'Bearer '+auth.token},body:body?JSON.stringify(body):undefined});const d=await r.json();if(!r.ok)throw new Error(typeof d.detail==='string'?d.detail:'操作失败，请重试');return d}
++watch(()=>[props.movieId,auth.isAuthenticated,props.revision],async()=>{const id=++generation;error.value='';message.value='';state.value={favorite:false,seen:false};suggestions.value=[];if(!auth.isAuthenticated)return;busy.value=true;try{const d=await request('GET');if(id===generation){state.value=d;await refreshRecommendations(id)}}catch(e){if(id===generation)error.value=e.message}finally{if(id===generation)busy.value=false}},{immediate:true})
++async function save(change){if(busy.value)return;const id=generation;busy.value=true;error.value='';try{const d=await request('PUT',change);if(id===generation){state.value=d;message.value='已保存';await refreshRecommendations(id)}}catch(e){if(id===generation)error.value=e.message}finally{busy.value=false}}
++</script>
+diff --git a/web_project/frontend/src/views/Chat.vue b/web_project/frontend/src/views/Chat.vue
+new file mode 100644
+--- /dev/null
++++ b/web_project/frontend/src/views/Chat.vue
+@@ -0,0 +1,46 @@
++<template>
++  <main class="chat-shell">
++    <section class="chat-intro"><div><span class="eyebrow">CINEAGENT · 你的选片助手</span><h1>把想看的电影，说具体一点。</h1><p>真实片库 · 模型排序 · 可追溯的偏好记忆</p></div><a href="/" class="home-link">返回首页推荐 ↗</a></section>
++    <div class="workspace">
++      <section class="conversation">
++        <div class="toolbar"><label>推荐方式 <select v-model="mode"><option value="offline">本地推荐</option><option value="deepseek" :disabled="!status.provider_configured">智能对话</option></select></label><button @click="newConversation" :disabled="busy">新建会话</button></div>
++        <div class="notice">标题与类型文本召回；海报关联与使用许可尚未完成核验，本页使用文字卡片。<span v-if="mode==='deepseek'">本轮将发送需求、相关偏好摘要和必要工具结果到 DeepSeek 官方接口。</span></div>
++        <div v-if="!turns.length" class="empty"><div class="empty-symbol">◉</div><h2>今晚想看什么？</h2><p>类型、片长和明确排除项，都能影响实际候选与排序。</p><button v-for="sample in samples" :key="sample" @click="text=sample">{{ sample }} ↗</button></div>
++        <div v-for="(turn,index) in turns" :key="index" class="turn">
++          <div class="user-message">{{ turn.text }}</div>
++          <div class="answer" :data-request-id="turn.response.request_id" :data-render-ms="turn.client_elapsed_ms"><div class="answer-meta">{{ turn.response.mode==='deepseek_tools'?'智能推荐':turn.response.mode==='clarification'?'需要澄清':'离线推荐' }} · {{ turn.response.elapsed_ms }} ms · 候选 {{ turn.response.eligible_count }}</div><p>{{ turn.response.message }}</p><p class="warning" v-for="warning in turn.response.warnings" :key="warning">{{ warning }}</p><p class="warning" v-if="turn.response.degradation.length">智能服务暂不可用，已为你切换到本地推荐。</p>
++            <div v-if="turn.response.relaxation_suggestions?.length" class="warning"><p>以下方案需要你确认，当前条件尚未改变：</p><button v-for="option in turn.response.relaxation_suggestions" :key="option.message" @click="text=option.message" :disabled="busy || turn!==turns[turns.length-1]">{{ option.label }} · {{ option.eligible_count }} 部候选（填入输入框）</button></div>
++            <div class="movie-grid"><article v-for="(movie,n) in turn.response.items" :key="movie.movie_id" class="movie"><a :href="'/movie/'+movie.movie_id"><div class="text-cover"><span>FILM</span><strong>{{ movie.movie_id }}</strong><small>{{ movie.year }}</small></div></a><div><span class="movie-number">{{ n+1 }} / #{{ movie.movie_id }}</span><a :href="'/movie/'+movie.movie_id"><h3>{{ movie.title }}</h3></a><p>{{ movie.reason }}</p><small>{{ movie.ranking_strategy }} · {{ movie.score.toFixed(3) }}</small><div class="feedback"><button @click="feedback(movie,turn.response,'seen')" :disabled="busy || turn!==turns[turns.length-1]">看过了</button><button @click="feedback(movie,turn.response,'dislike')" :disabled="busy || turn!==turns[turns.length-1]">不感兴趣</button></div></div></article></div>
++            <details><summary>查看约束、来源与工具轨迹</summary><pre>{{ JSON.stringify({constraints:turn.response.constraints,summary:turn.response.summary,evidence:turn.response.evidence_checks,versions:turn.response.versions},null,2) }}</pre></details>
++          </div>
++        </div>
++        <form class="composer" @submit.prevent="send"><label class="sr-only" for="movie-request">电影需求</label><textarea id="movie-request" v-model="text" maxlength="4000" rows="3" placeholder="例如：想看悬疑电影，不要恐怖片，两小时以内。" :disabled="busy"></textarea><div><span>{{ busy?'正在筛选和排序…':'支持：第一部看过了，换类似的，但不要同一个导演。' }}</span><button type="submit" :disabled="busy || !text.trim()">{{ busy?'处理中…':'发送需求 →' }}</button></div></form>
++        <p v-if="error" class="error" role="alert">{{ error }}</p><p v-if="feedbackMessage" role="status" class="feedback-message">{{ feedbackMessage }}</p>
++      </section>
++      <aside><section class="side-card"><h2>偏好记忆</h2><label class="toggle"><input type="checkbox" v-model="useMemory" /> 使用长期偏好</label><p>只有“记住 / 以后 / 长期”等明确表达才保存。当前需求仅限本次会话。</p><div v-if="!preferences.length" class="muted">还没有长期偏好。试试“以后记住我不喜欢恐怖片”。</div><article v-for="pref in preferences" :key="pref.id" class="preference"><strong>{{ pref.key==='exclude_genres'?'排除':'偏爱' }} {{ pref.value }}</strong><small>来源：第 {{ pref.source_turn }} 轮 · {{ new Date(pref.created_at).toLocaleString() }}</small><div><button @click="revoke(pref)">撤销</button><button @click="remove(pref)">删除</button></div></article></section>
++      <section class="side-card"><h2>对话设置</h2><label class="toggle"><input type="checkbox" v-model="compressHistory" /> 结构化摘要 + 最近四轮</label><p>摘要保留当前约束、排除项与原文位置；原始对话保留在本机会话表。</p></section></aside>
++    </div>
++  </main>
++</template>
++<script setup>
++import {ref,onMounted,nextTick} from 'vue'
++const text=ref(''),mode=ref('deepseek'),busy=ref(false),error=ref(''),feedbackMessage=ref(''),turns=ref([]),conversation=ref(null),preferences=ref([]),status=ref({}),useMemory=ref(true),compressHistory=ref(true)
++const samples=['想看悬疑电影，不要恐怖片，最好两小时以内。','想看科幻电影，不要恐怖片。','以后记住我不喜欢恐怖片。']
++let token='',pending=null
++async function request(path,body,method){const response=await fetch('/api/chat'+path,{method:method||(body?'POST':'GET'),headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:body?JSON.stringify(body):undefined});let result;try{result=await response.json()}catch{throw new Error('服务暂不可用，请稍后重试。')}if(!response.ok)throw new Error(typeof result.detail==='string'?result.detail:'请求验证失败');return result}
++async function refresh(){status.value=await request('/status');if(!status.value.provider_configured && mode.value==='deepseek')mode.value='offline';if(token)preferences.value=(await request('/preferences')).items}
++async function connect(){if(new URLSearchParams(location.search).get('evaluation')==='v4'){token=(await request('/evaluation-guest',{})).access_token;await refresh();return}token=localStorage.getItem('token')||localStorage.getItem('cineagent_guest_token')||'';if(!token){const guest=await request('/guest',{});token=guest.access_token;localStorage.setItem('cineagent_guest_token',token)}await refresh()}
++async function send(){if(busy.value||!text.value.trim())return;busy.value=true;error.value='';feedbackMessage.value='';const sent=text.value;const body=pending && pending.message===sent && pending.conversation_id===conversation.value && pending.mode===mode.value && pending.use_memory===useMemory.value && pending.compress_history===compressHistory.value ? pending : {request_id:crypto.randomUUID(),conversation_id:conversation.value,message:sent,mode:mode.value,use_memory:useMemory.value,compress_history:compressHistory.value};pending=body;const clientStarted=performance.now();try{const result=await request('/message',body);pending=null;conversation.value=result.conversation_id;turns.value.push({text:sent,response:result,client_elapsed_ms:null});text.value='';await nextTick();turns.value[turns.value.length-1].client_elapsed_ms=Math.round((performance.now()-clientStarted)*100)/100;await refresh()}catch(e){error.value=e.message}finally{busy.value=false}}
++function newConversation(){pending=null;conversation.value=null;turns.value=[];error.value='';feedbackMessage.value=''}
++async function feedback(movie,response,kind){try{await request('/feedback',{request_id:crypto.randomUUID(),conversation_id:response.conversation_id,movie_id:movie.movie_id,kind});feedbackMessage.value='已记录，下次推荐将排除：'+movie.title}catch(e){error.value=e.message}}
++async function remove(pref){try{await request('/preferences/'+pref.id,null,'DELETE');await refresh()}catch(e){error.value=e.message}}
++async function revoke(pref){try{await request('/preferences/'+pref.id+'/revoke',{});await refresh()}catch(e){error.value=e.message}}
++function imageError(e){e.target.style.visibility='hidden'}
++onMounted(async()=>{try{await connect()}catch(e){error.value=e.message}})
++</script>
++<style scoped>
++.chat-shell{max-width:1440px;margin:auto;padding:116px 44px 60px;color:#182936;background:#f6f8fa;min-height:100vh}.chat-intro{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}.eyebrow{font-size:12px;letter-spacing:2px;color:#387c82;font-weight:700}.chat-intro h1{font-size:34px;letter-spacing:-1px;margin:12px 0}.chat-intro p,.notice{color:#60717e}.home-link{color:#286d74;font-size:14px}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px}.conversation,.side-card{background:white;border:1px solid #dfe6eb;border-radius:16px}.conversation{padding:24px}.toolbar{display:flex;justify-content:space-between;gap:12px;font-size:13px}.toolbar select{padding:8px;border:1px solid #d9e2e8;border-radius:8px;margin-left:8px}button{cursor:pointer}.toolbar button,.preference button{color:#28747a}.notice{font-size:12px;line-height:1.8;background:#f0f6f7;padding:12px;border-radius:8px;margin-top:18px}.notice span{display:block}.empty{text-align:center;padding:40px 20px}.empty-symbol{color:#347e85;font-size:42px}.empty h2{font-size:24px;margin:12px}.empty p{color:#788792;margin:12px 0 24px}.empty button{display:block;text-align:left;border:1px solid #e0e7ec;border-radius:10px;margin:10px auto;padding:14px 18px;font-size:13px;max-width:500px;width:100%;color:#345768}.user-message{background:#e7f1f3;border-radius:14px 14px 0 14px;padding:14px 18px;margin:24px 0 18px 15%;white-space:pre-wrap}.answer-meta{font-size:12px;color:#56818a;margin-bottom:10px}.answer>p{font-size:14px;margin:8px 0}.warning{color:#9b671c;background:#fff8e8;padding:10px;border-radius:6px}.movie-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}.movie{display:flex;gap:12px;border:1px solid #e2e9ed;border-radius:10px;padding:12px;min-width:0}.movie>a{width:72px;flex-shrink:0;background:#edf1f4;border-radius:5px;overflow:hidden}.text-cover{width:72px;min-height:108px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(145deg,#244957,#6b8d94);color:white}.text-cover span{font-size:9px;letter-spacing:3px}.text-cover strong{font-size:18px}.text-cover small{color:#d5e3e8!important}.movie img{width:72px;height:108px;object-fit:cover}.movie-number{font-size:10px;color:#6c8794}.movie h3{font-size:14px;font-weight:700;line-height:1.4;margin:5px 0}.movie p{font-size:11px;color:#647884;line-height:1.6}.movie small{font-size:10px;color:#8a9aa4}.feedback{display:flex;gap:12px;margin-top:10px}.feedback button{font-size:11px;color:#24727a}.feedback button:disabled{opacity:.4;cursor:default}details{margin:15px 0;font-size:12px;color:#64808a}summary{cursor:pointer}pre{white-space:pre-wrap;max-height:320px;overflow:auto;background:#f3f6f8;padding:12px;font-size:11px}.composer{border:1px solid #b5cbd2;border-radius:12px;overflow:hidden;margin-top:24px}.composer textarea{display:block;width:100%;resize:vertical;padding:15px;border:0;outline:0;font-size:14px}.composer>div{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#f8fafb;gap:12px}.composer span{font-size:10px;color:#8395a0}.composer button{background:#256f76;color:white;padding:10px 16px;border-radius:8px;font-size:13px;white-space:nowrap}.composer button:disabled{opacity:.5}.side-card{padding:22px;margin-bottom:20px}.side-card h2{font-weight:700;font-size:16px;margin-bottom:16px}.toggle{display:flex;gap:9px;align-items:center;font-size:13px}.side-card p,.muted{font-size:12px;color:#7d8f9c;line-height:1.8;margin:14px 0}.preference{border-top:1px solid #e5ecf0;padding:14px 0}.preference strong{font-size:13px}.preference small{display:block;font-size:10px;color:#8b9ca7;margin:6px 0}.preference div{display:flex;gap:15px;font-size:11px}dl{display:grid;grid-template-columns:1fr 1fr;font-size:11px;gap:12px}dt{color:#7f939f}dd{text-align:right}.error{color:#a83e3e;background:#fff1f1;padding:12px;margin-top:10px}.feedback-message{font-size:12px;color:#28747a;margin-top:12px}@media(max-width:1050px){.workspace{grid-template-columns:1fr}.chat-shell{padding:105px 18px 35px}.chat-intro h1{font-size:26px}.home-link{display:none}aside{display:grid;grid-template-columns:1fr 1fr;gap:16px}}@media(max-width:650px){.movie-grid{grid-template-columns:1fr}aside{display:block}.toolbar{flex-wrap:wrap}.chat-intro h1{font-size:23px}.conversation{padding:16px}.composer span{display:none}}
++</style>
++
++
++
+diff --git a/web_project/frontend/src/views/Jobs.vue b/web_project/frontend/src/views/Jobs.vue
+new file mode 100644
+--- /dev/null
++++ b/web_project/frontend/src/views/Jobs.vue
+@@ -0,0 +1,11 @@
++<template><main class="pt-24 px-8 max-w-5xl mx-auto"><h1 class="text-3xl font-bold mb-4">索引维护任务</h1><p>更新指定电影的搜索索引，每次最多100部。重复提交同一请求不会创建重复任务。</p><form @submit.prevent="submit" class="my-4"><label>电影 ID（逗号分隔）<input v-model="ids" class="border rounded p-2 mx-2" placeholder="1, 318" /></label><button :disabled="busy">创建更新任务</button></form><p role="status">{{notice}}</p><p v-if="error" role="alert">{{error}}</p><button @click="load" :disabled="busy">刷新任务</button><table class="w-full my-4"><thead><tr><th>任务</th><th>状态</th><th>尝试</th><th>结果</th></tr></thead><tbody><tr v-for="j in jobs" :key="j.id"><td class="p-2">{{j.id.slice(0,8)}}</td><td>{{labels[j.state]||j.state}}</td><td>{{j.attempts}}</td><td>{{j.result?'已更新 '+j.result.indexed_count+' 部':j.error_class?'执行失败，可稍后重试':''}}</td></tr></tbody></table></main></template>
++<script setup>
++import {ref,onMounted,onUnmounted} from 'vue'
++import {useAuthStore} from '../stores/auth'
++const auth=useAuthStore(),ids=ref(''),jobs=ref([]),busy=ref(false),error=ref(''),notice=ref(''),labels={queued:'等待处理',dispatched:'已入队',running:'执行中',succeeded:'已完成',failed:'失败'}
++let pending=null,timer
++async function request(method,body){const r=await fetch('/api/admin/jobs',{method,headers:{'Content-Type':'application/json',Authorization:'Bearer '+auth.token},body:body?JSON.stringify(body):undefined});const d=await r.json();if(!r.ok)throw new Error(typeof d.detail==='string'?d.detail:'操作失败');return d}
++async function load(){try{jobs.value=(await request('GET')).items;error.value=''}catch(e){error.value=e.message}}
++async function submit(){if(busy.value)return;error.value='';const values=[...new Set(ids.value.split(',').map(x=>Number(x.trim())))].sort((a,b)=>a-b);if(!values.length || values.length>100 || values.some(x=>!Number.isInteger(x)||x<=0)){error.value='请输入1到100个有效电影ID';return}const signature=JSON.stringify(values);if(!pending || pending.signature!==signature)pending={signature,request_id:crypto.randomUUID()};busy.value=true;try{const j=await request('POST',{request_id:pending.request_id,movie_ids:values});notice.value='任务已接收：'+j.id.slice(0,8);pending=null;await load()}catch(e){error.value=e.message}finally{busy.value=false}}
++onMounted(()=>{load();timer=setInterval(load,3000)});onUnmounted(()=>clearInterval(timer))
++</script>diff --git a/web_project/frontend/src/views/Library.vue b/web_project/frontend/src/views/Library.vue
+new file mode 100644
+--- /dev/null
++++ b/web_project/frontend/src/views/Library.vue
+@@ -0,0 +1,9 @@
++<template><main class="pt-24 px-8 max-w-5xl mx-auto"><h1 class="text-3xl font-bold mb-4">我的片单</h1><label>查看 <select v-model="kind" @change="page=1;load()"><option value="favorite">收藏</option><option value="seen">看过</option><option value="rated">评分</option><option value="all">全部记录</option></select></label><p v-if="error" role="alert">{{error}}</p><p v-if="busy">加载中…</p><ul><li v-for="item in items" :key="item.movie_id" class="p-4 border-b"><router-link class="text-blue-700" :to="'/movie/'+item.movie_id">{{item.title || '电影 #'+item.movie_id}}</router-link><span> · {{item.favorite?'已收藏':''}} {{item.seen?'已看过':''}} {{item.rating?item.rating+' / 10':''}}</span></li></ul><p v-if="!busy && !items.length">暂无记录，可以去电影详情页添加。</p><div class="flex gap-4 my-6"><button :disabled="busy || page===1" @click="page--;load()">上一页</button><span>第 {{page}} 页 · {{total}} 条</span><button :disabled="busy || page*20>=total" @click="page++;load()">下一页</button></div></main></template>
++<script setup>
++import {ref,onMounted} from 'vue'
++import {useAuthStore} from '../stores/auth'
++const auth=useAuthStore(),items=ref([]),kind=ref('favorite'),page=ref(1),total=ref(0),busy=ref(false),error=ref('')
++let generation=0
++async function load(){const id=++generation;busy.value=true;error.value='';try{const r=await fetch('/api/me/behaviors?kind='+kind.value+'&page='+page.value,{headers:{Authorization:'Bearer '+auth.token}});if(!r.ok)throw new Error('无法加载片单，请重新登录后重试');const d=await r.json();if(id===generation){items.value=d.items;total.value=d.total}}catch(e){if(id===generation)error.value=e.message}finally{if(id===generation)busy.value=false}}
++onMounted(load)
++</script>

@@ -1,3 +1,5 @@
+> **后端业务版：** 新增运行、迁移、管理员和验收步骤见 [BACKEND_RUNBOOK.md](BACKEND_RUNBOOK.md)。app.ps1 up 会执行 Alembic；模型和数据准备仍按下文。
+
 > **公开仓库版：** 已包含运行源码；下方本机测量是来源说明。历史build_delivery/check_delivery用于作者维护的增量展示包，依赖原上游Git工作区；新克隆机器的运行按本文件数据/训练/服务流程，不需调用这两个维护脚本。
 
 # 复现与运行说明

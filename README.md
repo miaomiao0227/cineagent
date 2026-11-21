@@ -1,9 +1,11 @@
 # 🎬 CineAgent
 
-**融合个性化推荐与偏好记忆的对话式电影推荐系统**
+**电影推荐与用户行为服务平台 · Python 后端 / 对话式选片**
 
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](REPRODUCE.md)
 [![FastAPI](https://img.shields.io/badge/FastAPI-在线服务-009688?logo=fastapi&logoColor=white)](ARCHITECTURE.md)
+[![Celery](https://img.shields.io/badge/Celery-后台任务-37814A)](BACKEND_RUNBOOK.md)
+[![Tests](https://img.shields.io/badge/本机后端测试-32_passed-brightgreen)](reports/BACKEND_ACCEPTANCE.md)
 [![Vue](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)](#页面效果)
 [![License](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey)](LICENSE.md)
 
@@ -17,6 +19,29 @@
 
 
 > **本项目基于 [Datawhale FunRec](https://github.com/datawhalechina/fun-rec) 增量开发。** 固定上游 commit：`5f7bd84d4403b5f92b6bedbd31e3984ef00a4572`。复用推荐模型构建器、原召回/排序/冷启动及前后端骨架，在此基础上完成运行修复、数据协议、对话 Agent、偏好记忆、可靠性与评测。详见 [个人贡献](CONTRIBUTIONS.md)、[来源说明](UPSTREAM_NOTICE.md) 和 [许可](LICENSE.md)。
+
+## 🛠️ Python 后端业务
+
+以电影推荐为业务背景，增加在线用户行为、事务并发、版本缓存和异步索引任务；单 Agent 继续作为选片入口，普通首页不依赖 LLM。
+
+| 业务能力 | 实现 |
+|---|---|
+| 在线行为 | 收藏、评分、看过、片单分页；独立业务表，保留 MovieLens 训练数据 |
+| 事务与并发 | 用户版本行锁 + PostgreSQL upsert；重复状态不重复增加版本，回滚保持原子性 |
+| 缓存 | 用户/行为/模型/参数隔离；详情版本失效；Redis 回源锁、有限等待与故障回退 |
+| 后台任务 | Celery + PG 待派发记录、唯一请求键、最多3次执行、过期租约恢复及幂等索引 |
+| 工程交付 | Alembic、请求ID、结构化日志、pytest、隔离CI和固定负载/真实中断验收 |
+
+[运行与接口](BACKEND_RUNBOOK.md) · [后端架构](BACKEND_ARCHITECTURE.md) · [验收结果](reports/BACKEND_ACCEPTANCE.md) · [后端评测协议](BACKEND_EVAL_SPEC.md)
+
+<details>
+<summary>📚 我的片单与后台任务（合成账号，真实运行页面）</summary>
+
+![个人片单](docs/screenshots/backend-library.jpg)
+
+![索引维护任务](docs/screenshots/backend-jobs.jpg)
+
+</details>
 
 ## ✨ 功能
 
@@ -118,6 +143,10 @@ cineagent/
 ├── upstream/
 │   ├── web_project/
 │   │   ├── backend/                 # FastAPI 推荐与对话服务
+│   │   │   ├── app/behavior/      # 在线行为、版本缓存与个性化服务
+│   │   │   ├── app/jobs/          # 后台任务、Worker与待派发处理
+│   │   │   ├── migrations/        # Alembic增量迁移
+│   │   │   ├── tests/             # 后端集成测试
 │   │   │   └── app/cineagent/
 │   │   │       ├── api.py           # 对话、记忆与反馈接口
 │   │   │       ├── engine.py        # 对话编排与推荐工具循环
@@ -129,7 +158,7 @@ cineagent/
 │   │   └── frontend/               # Vue 首页、电影详情与对话页面
 │   └── src/funrec/                  # 复用的模型、特征与训练构建器
 ├── configs/                        # Compose、依赖锁与固定数据协议
-├── scripts/                        # 数据准备、训练、启动及评测脚本
+├── scripts/                        # 数据准备、训练、启动及后端验收脚本
 ├── eval/                           # 合成对话任务与评测输入
 ├── results/                        # 逐任务、逐用户实验结果
 ├── reports/                        # 指标报告、审计与验证记录

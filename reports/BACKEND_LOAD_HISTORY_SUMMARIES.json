@@ -1,0 +1,104 @@
+[
+  {
+    "file": "BACKEND_LOAD_BEFORE_PROFILE_REFRESH_FIX.json",
+    "sha256": "875861eeb0606233cca70de03a59ffa29bb64173aeaa908d649061d1680c2604",
+    "scope": "superseded successful load run; full original retained in author workspace",
+    "summary": [
+      {
+        "arm": "cold_c1",
+        "attempts": 2000,
+        "successes": 2000,
+        "p50_ms": 31.53,
+        "p95_ms": 34.63,
+        "throughput_rps": 31.06,
+        "wall_seconds": 64.4
+      },
+      {
+        "arm": "warm_c1",
+        "attempts": 2000,
+        "successes": 2000,
+        "p50_ms": 4.6,
+        "p95_ms": 6.13,
+        "throughput_rps": 212.02,
+        "wall_seconds": 9.43
+      },
+      {
+        "arm": "warm_c8",
+        "attempts": 16000,
+        "successes": 16000,
+        "p50_ms": 30.95,
+        "p95_ms": 38.86,
+        "throughput_rps": 252.86,
+        "wall_seconds": 63.28
+      }
+    ]
+  },
+  {
+    "file": "BACKEND_LOAD_SHARED_HOST_RUN.json",
+    "sha256": "63697db19695127bd4b695bea0e6042c4b002da683172a92c3465678a6461dd5",
+    "scope": "superseded successful load run; full original retained in author workspace",
+    "summary": [
+      {
+        "arm": "cold_c1",
+        "attempts": 2000,
+        "successes": 2000,
+        "p50_ms": 32.78,
+        "p95_ms": 38.92,
+        "throughput_rps": 29.4,
+        "wall_seconds": 68.04
+      },
+      {
+        "arm": "warm_c1",
+        "attempts": 2000,
+        "successes": 2000,
+        "p50_ms": 4.66,
+        "p95_ms": 6.13,
+        "throughput_rps": 209.58,
+        "wall_seconds": 9.54
+      },
+      {
+        "arm": "warm_c8",
+        "attempts": 16000,
+        "successes": 16000,
+        "p50_ms": 31.25,
+        "p95_ms": 39.24,
+        "throughput_rps": 246.48,
+        "wall_seconds": 64.91
+      }
+    ]
+  },
+  {
+    "file": "BACKEND_LOAD_V2.json",
+    "sha256": "cd7714254ec99097aa224ba918785aaa15b8cc0d793822b89f6f61f2ad29a208",
+    "scope": "superseded successful load run; full original retained in author workspace",
+    "summary": [
+      {
+        "arm": "cold_c1",
+        "attempts": 2000,
+        "successes": 2000,
+        "p50_ms": 30.42,
+        "p95_ms": 34.28,
+        "throughput_rps": 32.1,
+        "wall_seconds": 62.3
+      },
+      {
+        "arm": "warm_c1",
+        "attempts": 2000,
+        "successes": 2000,
+        "p50_ms": 4.78,
+        "p95_ms": 7.68,
+        "throughput_rps": 196.1,
+        "wall_seconds": 10.2
+      },
+      {
+        "arm": "warm_c8",
+        "attempts": 16000,
+        "successes": 16000,
+        "p50_ms": 30.47,
+        "p95_ms": 36.95,
+        "throughput_rps": 251.53,
+        "wall_seconds": 63.61
+      }
+    ]
+  }
+]

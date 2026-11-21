@@ -1,0 +1,60 @@
+name: Backend integration
+on:
+  push:
+    paths: ['upstream/web_project/backend/**', 'configs/**', 'scripts/prepare_backend_ci.py', '.github/workflows/backend.yml']
+  pull_request:
+    paths: ['upstream/web_project/backend/**', 'configs/**', 'scripts/prepare_backend_ci.py', '.github/workflows/backend.yml']
+  workflow_dispatch:
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: cineagent
+          POSTGRES_PASSWORD: ci_disposable_only
+          POSTGRES_DB: cineagent_ci
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U cineagent -d cineagent_ci"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+      redis:
+        image: redis:7-alpine
+        ports: ['6379:6379']
+      elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:9.2.0
+        env:
+          discovery.type: single-node
+          xpack.security.enabled: 'false'
+          ES_JAVA_OPTS: '-Xms512m -Xmx512m'
+        ports: ['9200:9200']
+    env:
+      DATABASE_URL: postgresql+psycopg2://cineagent:ci_disposable_only@127.0.0.1:5432/cineagent_ci
+      SECRET_KEY: ci_disposable_signing_key_not_a_production_secret
+      REDIS_URL: redis://127.0.0.1:6379/0
+      ELASTICSEARCH_URL: http://127.0.0.1:9200
+      PYTHONPATH: upstream/web_project/backend
+      CINEAGENT_CI: '1'
+      MOVIE_INDEX_NAME: cineagent_ci_movies
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r configs/backend-ci.lock.txt
+      - run: python scripts/prepare_backend_ci.py
+      - run: cd upstream/web_project/backend && alembic upgrade head
+      - name: Start API and background workers
+        run: |
+          uvicorn app.ci_app:app --host 127.0.0.1 --port 8000 > /tmp/api.log 2>&1 &
+          celery -A app.jobs.tasks:celery_app worker --pool=solo -Q cineagent-jobs > /tmp/worker.log 2>&1 &
+          python -m app.jobs.dispatcher > /tmp/dispatcher.log 2>&1 &
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:8000/openapi.json >/dev/null && curl -fsS http://127.0.0.1:9200 >/dev/null && break; sleep 2; done
+      - run: pytest -q upstream/web_project/backend/tests --junitxml=backend-ci.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-results
+          path: backend-ci.xml

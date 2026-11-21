@@ -12,7 +12,7 @@
           <router-link to="/" class="text-gray-700 hover:text-datawhale-blue transition-colors">
             Home
           </router-link>
-        <router-link to="/chat" class="text-gray-700 hover:text-datawhale-blue transition-colors">对话选片</router-link></nav>
+        <router-link to="/chat" class="text-gray-700 hover:text-datawhale-blue transition-colors">对话选片</router-link><router-link v-if="authStore.isAuthenticated" to="/library" class="text-gray-700">我的片单</router-link><router-link v-if="authStore.isAdmin" to="/admin/jobs" class="text-gray-700">任务管理</router-link></nav>
       </div>
 
       <!-- 右侧 - 统计信息、搜索、管理员、认证 -->

@@ -66,17 +66,10 @@ export const movieApi = {
   // 获取个性化推荐（完整流程：召回 → 排序）
   getRecommendations(userId, topK = 20) {
     const token = localStorage.getItem('token')
-    return api.post('/recommendations/recommend', 
-      { user_id: userId },
-      { 
-        headers: { 'Authorization': `Bearer ${token}` },
-        params: { top_k: topK }
-      }
-    ).then(response => {
-      // 从响应中提取 items 数组以保持向后兼容
-      // 响应格式: { items: [...], recall_count, ranking_strategy }
-      return { ...response, data: response.data.items }
-    })
+    return api.get('/me/recommendations', {
+      headers: {'Authorization': `Bearer ${token}`},
+      params: {limit: Math.min(20, topK)}
+    }).then(response => ({...response, data: response.data.items}))
   },
 
   // 管理员：创建电影（可选上传海报）

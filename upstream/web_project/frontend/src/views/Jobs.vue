@@ -1,0 +1,11 @@
+<template><main class="pt-24 px-8 max-w-5xl mx-auto"><h1 class="text-3xl font-bold mb-4">索引维护任务</h1><p>更新指定电影的搜索索引，每次最多100部。重复提交同一请求不会创建重复任务。</p><form @submit.prevent="submit" class="my-4"><label>电影 ID（逗号分隔）<input v-model="ids" class="border rounded p-2 mx-2" placeholder="1, 318" /></label><button :disabled="busy">创建更新任务</button></form><p role="status">{{notice}}</p><p v-if="error" role="alert">{{error}}</p><button @click="load" :disabled="busy">刷新任务</button><table class="w-full my-4"><thead><tr><th>任务</th><th>状态</th><th>尝试</th><th>结果</th></tr></thead><tbody><tr v-for="j in jobs" :key="j.id"><td class="p-2">{{j.id.slice(0,8)}}</td><td>{{labels[j.state]||j.state}}</td><td>{{j.attempts}}</td><td>{{j.result?'已更新 '+j.result.indexed_count+' 部':j.error_class?'执行失败，可稍后重试':''}}</td></tr></tbody></table></main></template>
+<script setup>
+import {ref,onMounted,onUnmounted} from 'vue'
+import {useAuthStore} from '../stores/auth'
+const auth=useAuthStore(),ids=ref(''),jobs=ref([]),busy=ref(false),error=ref(''),notice=ref(''),labels={queued:'等待处理',dispatched:'已入队',running:'执行中',succeeded:'已完成',failed:'失败'}
+let pending=null,timer
+async function request(method,body){const r=await fetch('/api/admin/jobs',{method,headers:{'Content-Type':'application/json',Authorization:'Bearer '+auth.token},body:body?JSON.stringify(body):undefined});const d=await r.json();if(!r.ok)throw new Error(typeof d.detail==='string'?d.detail:'操作失败');return d}
+async function load(){try{jobs.value=(await request('GET')).items;error.value=''}catch(e){error.value=e.message}}
+async function submit(){if(busy.value)return;error.value='';const values=[...new Set(ids.value.split(',').map(x=>Number(x.trim())))].sort((a,b)=>a-b);if(!values.length || values.length>100 || values.some(x=>!Number.isInteger(x)||x<=0)){error.value='请输入1到100个有效电影ID';return}const signature=JSON.stringify(values);if(!pending || pending.signature!==signature)pending={signature,request_id:crypto.randomUUID()};busy.value=true;try{const j=await request('POST',{request_id:pending.request_id,movie_ids:values});notice.value='任务已接收：'+j.id.slice(0,8);pending=null;await load()}catch(e){error.value=e.message}finally{busy.value=false}}
+onMounted(()=>{load();timer=setInterval(load,3000)});onUnmounted(()=>clearInterval(timer))
+</script>

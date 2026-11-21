@@ -1,0 +1,8 @@
+{
+  "enabled": false,
+  "max_requests_including_retries": 1000,
+  "max_input_tokens": 10000000,
+  "max_output_tokens": 1000000,
+  "budget_usd": 1.0,
+  "automatic_renewal": false
+}

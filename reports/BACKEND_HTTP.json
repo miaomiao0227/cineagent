@@ -1,0 +1,30 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "body": {
+      "message": "欢迎使用 FunRec 电影推荐系统",
+      "version": "0.1.0",
+      "docs": "/docs"
+    }
+  },
+  {
+    "path": "/health",
+    "status": 200,
+    "body": {
+      "status": "healthy",
+      "version": "0.1.0",
+      "database": "healthy",
+      "redis": "healthy",
+      "elasticsearch": "healthy"
+    }
+  },
+  {
+    "path": "/openapi.json",
+    "status": 200,
+    "body": {
+      "title": "FunRec Movie Recommender",
+      "paths": 19
+    }
+  }
+]

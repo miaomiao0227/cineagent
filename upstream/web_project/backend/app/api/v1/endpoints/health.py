@@ -1,47 +1,24 @@
-"""健康检查"""
-
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+"""Bounded dependency health checks without connection details in responses."""
+from fastapi import APIRouter,Depends
 from sqlalchemy import text
-from elasticsearch import Elasticsearch
-from redis import Redis
-
 from app.api.deps import get_db
 from app.schemas import HealthCheck
 from app.config import settings
-
-router = APIRouter()
-
-
-@router.get("/health", response_model=HealthCheck, tags=["health"])
-async def health_check(db: Session = Depends(get_db)):
-    """健康检查 - 用于监控服务状态"""
-    
+router=APIRouter()
+@router.get('/health',response_model=HealthCheck,tags=['health'])
+def health_check(db=Depends(get_db)):
+    status={}
+    try:db.execute(text('SELECT 1'));status['database']='healthy'
+    except Exception:status['database']='unhealthy'
+    from redis import Redis
+    from redis.retry import Retry
+    from redis.backoff import NoBackoff
     try:
-        db.execute(text("SELECT 1"))
-        db_status = "healthy"
-    except Exception as e:
-        db_status = f"unhealthy: {str(e)}"
-
-    
+        with Redis.from_url(settings.redis_url,socket_connect_timeout=.3,socket_timeout=.3,retry=Retry(NoBackoff(),0)) as r:r.ping()
+        status['redis']='healthy'
+    except Exception:status['redis']='unhealthy'
+    from elasticsearch import Elasticsearch
     try:
-        es_client = Elasticsearch(settings.elasticsearch_url)
-        es_status = "healthy" if es_client.ping() else "unhealthy: ping returned false"
-    except Exception as e:
-        es_status = f"unhealthy: {str(e)}"
-
-    try:
-        redis_client = Redis.from_url(settings.redis_url)
-        redis_client.ping()
-        redis_status = "healthy"
-    except Exception as e:
-        redis_status = f"unhealthy: {str(e)}"
-
-    return HealthCheck(
-        status="healthy" if all(s == "healthy" for s in (db_status, redis_status, es_status)) else "degraded",
-        version=settings.app_version,
-        database=db_status,
-        redis=redis_status,
-        elasticsearch=es_status,
-    )
-
+        with Elasticsearch(settings.elasticsearch_url,request_timeout=.5,max_retries=0) as es:status['elasticsearch']='healthy' if es.ping() else 'unhealthy'
+    except Exception:status['elasticsearch']='unhealthy'
+    return HealthCheck(status='healthy' if all(x=='healthy' for x in status.values()) else 'degraded',version=settings.app_version,**status)

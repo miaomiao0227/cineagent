@@ -1,0 +1,25 @@
+[
+  {
+    "scenario": "worker_killed_during_index",
+    "state": "succeeded",
+    "attempts": 2,
+    "indexed_count": 1,
+    "elapsed_s": 78.28
+  },
+  {
+    "scenario": "redis_broker_unavailable",
+    "state": "succeeded",
+    "attempts": 1,
+    "indexed_count": 1,
+    "elapsed_s": 7.54
+  },
+  {
+    "scenario": "redis_broker_and_recommendation_outage",
+    "state": "succeeded",
+    "attempts": 1,
+    "indexed_count": 1,
+    "elapsed_s": 14.19,
+    "recommendation_fallback": true,
+    "fallback_items": 3
+  }
+]

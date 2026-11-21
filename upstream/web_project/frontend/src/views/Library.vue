@@ -1,0 +1,9 @@
+<template><main class="pt-24 px-8 max-w-5xl mx-auto"><h1 class="text-3xl font-bold mb-4">我的片单</h1><label>查看 <select v-model="kind" @change="page=1;load()"><option value="favorite">收藏</option><option value="seen">看过</option><option value="rated">评分</option><option value="all">全部记录</option></select></label><p v-if="error" role="alert">{{error}}</p><p v-if="busy">加载中…</p><ul><li v-for="item in items" :key="item.movie_id" class="p-4 border-b"><router-link class="text-blue-700" :to="'/movie/'+item.movie_id">{{item.title || '电影 #'+item.movie_id}}</router-link><span> · {{item.favorite?'已收藏':''}} {{item.seen?'已看过':''}} {{item.rating?item.rating+' / 10':''}}</span></li></ul><p v-if="!busy && !items.length">暂无记录，可以去电影详情页添加。</p><div class="flex gap-4 my-6"><button :disabled="busy || page===1" @click="page--;load()">上一页</button><span>第 {{page}} 页 · {{total}} 条</span><button :disabled="busy || page*20>=total" @click="page++;load()">下一页</button></div></main></template>
+<script setup>
+import {ref,onMounted} from 'vue'
+import {useAuthStore} from '../stores/auth'
+const auth=useAuthStore(),items=ref([]),kind=ref('favorite'),page=ref(1),total=ref(0),busy=ref(false),error=ref('')
+let generation=0
+async function load(){const id=++generation;busy.value=true;error.value='';try{const r=await fetch('/api/me/behaviors?kind='+kind.value+'&page='+page.value,{headers:{Authorization:'Bearer '+auth.token}});if(!r.ok)throw new Error('无法加载片单，请重新登录后重试');const d=await r.json();if(id===generation){items.value=d.items;total.value=d.total}}catch(e){if(id===generation)error.value=e.message}finally{if(id===generation)busy.value=false}}
+onMounted(load)
+</script>

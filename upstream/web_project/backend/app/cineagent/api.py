@@ -77,12 +77,8 @@ def evaluation_guest():
 
 @router.get('/status')
 def status():
-    p=Path('/run/cineagent-secrets/deepseek.json');ledger=Path('/trial-ledger/DEEPSEEK_TRIAL_LEDGER.json')
-    attempts=[]
-    try:attempts=json.loads(ledger.read_text())['attempts'] if ledger.exists() else []
-    except Exception:pass
-    pi=sum(a.get('accounted_input_tokens',0) for a in attempts);po=sum(a.get('accounted_output_tokens',0) for a in attempts)
-    return {'versions':VERSION,'provider_configured':p.exists(),'requests_used':len(attempts),'request_limit':30,'conservative_cost_usd':round(pi*.3/1e6+po*1.2/1e6,7),'budget_usd':.10,'content_mode':'title_genre_text_only','ready':engine.ready}
+    return {'versions':VERSION,'provider_configured':Path('/run/cineagent-secrets/deepseek.json').exists(),'content_mode':'title_genre_text_only','ready':engine.ready}
+
 
 def prefs(db,who):
     now=datetime.now(timezone.utc)
@@ -179,7 +175,7 @@ def run_tools(uid,state,query,preferences,mode,history,faults=(),evaluation=Fals
         if evaluation:
             cfg=evaluation_config()
             client=DeepSeekTrial('/run/cineagent-secrets/deepseek.json','/trial-ledger/DEEPSEEK_NATURAL_V2_LEDGER.json',approved_campaign=True,budget_window=cfg,parent_request_id=request_id)
-        else:client=DeepSeekTrial('/run/cineagent-secrets/deepseek.json','/trial-ledger/DEEPSEEK_TRIAL_LEDGER.json')
+        else:client=DeepSeekTrial('/run/cineagent-secrets/deepseek.json','/trial-ledger/DEEPSEEK_DAILY_LEDGER.json')
         messages=[{'role':'system','content':'You are a movie tool agent. Call recommend_movies first or inspect movie_details if needed; call finish after receiving recommendations. At most 2 model turns and 6 tool calls. Never invent attributes or movie IDs. Preserve supplied hard constraints. Do not invent exclusions or relax runtime. last_results means displayed, never seen/disliked. The server owns exclude_ids; omit this argument or copy only state.exclude_ids exactly. Include exclude_director_of when supplied in state. Runtime is minutes. Unknown pace/emotion cannot be guaranteed. The server renders ranked items; do not produce recommendation prose. Context: '+json.dumps({'state':state,'preferences':preferences,'history':history},ensure_ascii=False)},{'role':'user','content':query}]
         used=0;previous=set()
         try:
@@ -277,7 +273,11 @@ def message(body:ChatInput,identity=Depends(owner)):
             if any(p.key==proposal['key'] and p.value==proposal['value'] for p in active):continue
             p=Preference(id=str(uuid.uuid4()),owner=who,key=proposal['key'],value=proposal['value'],source_conversation=cid,source_turn=turnno,scope='long_term');db.add(p)
         if parsed['feedback']:
-            f=parsed['feedback'];result['trace'].append({'tool':'record_feedback','arguments':f,'idempotency_key':request_id});db.add(Feedback(id=str(uuid.uuid4()),owner=who,request_id=request_id,movie_id=f['movie_id'],kind=f['kind'],source_conversation=cid,source_turn=turnno))
+            f=parsed['feedback']
+            if uid and f['kind']=='seen':
+                from app.behavior.service import update as update_behavior
+                update_behavior(db,uid,f['movie_id'],{'seen':True})
+            result['trace'].append({'tool':'record_feedback','arguments':f,'idempotency_key':request_id});db.add(Feedback(id=str(uuid.uuid4()),owner=who,request_id=request_id,movie_id=f['movie_id'],kind=f['kind'],source_conversation=cid,source_turn=turnno))
         effective_constraints={k:v for k,v in state.items() if k not in ('sources','last_results','turn_count')}
         borrowed={p.value for p in active if p.key=='exclude_genres' and p.value not in session_exclusions}
         state['exclude_genres']=[g for g in state.get('exclude_genres',[]) if g not in borrowed]
@@ -298,6 +298,9 @@ def feedback(body:FeedbackInput,identity=Depends(owner)):
         if body.movie_id not in (conv.state or {}).get('last_results',[]):raise HTTPException(422,'只能反馈当前推荐中的电影')
         old=db.scalar(select(Feedback).where(Feedback.owner==who,Feedback.request_id==rid,Feedback.movie_id==body.movie_id,Feedback.kind==body.kind))
         if not old:db.add(Feedback(id=str(uuid.uuid4()),owner=who,request_id=rid,movie_id=body.movie_id,kind=body.kind,source_conversation=cid,source_turn=conv.state.get('turn_count')))
+        if identity[1] and body.kind=='seen':
+            from app.behavior.service import update as update_behavior
+            update_behavior(db,identity[1],body.movie_id,{'seen':True})
     return {'saved':True,'replayed':old is not None}
 
 @router.delete('/conversations/{cid}')
