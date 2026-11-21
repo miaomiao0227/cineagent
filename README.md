@@ -5,6 +5,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](REPRODUCE.md)
 [![FastAPI](https://img.shields.io/badge/FastAPI-在线服务-009688?logo=fastapi&logoColor=white)](ARCHITECTURE.md)
 [![Celery](https://img.shields.io/badge/Celery-后台任务-37814A)](BACKEND_RUNBOOK.md)
+[![Backend CI](https://github.com/miaomiao0227/cineagent/actions/workflows/backend.yml/badge.svg)](https://github.com/miaomiao0227/cineagent/actions/workflows/backend.yml)
 [![Tests](https://img.shields.io/badge/本机后端测试-32_passed-brightgreen)](reports/BACKEND_ACCEPTANCE.md)
 [![Vue](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)](#页面效果)
 [![License](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey)](LICENSE.md)

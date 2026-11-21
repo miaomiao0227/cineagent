@@ -349,8 +349,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 10958,
-      "sha256": "0ecfd06262b6a360c2002ab18c387c290dfd95eda8681843718357dc04a6619e"
+      "bytes": 11131,
+      "sha256": "65806f5e1ac9634449d545b92f56b62ae8f5a37acce454160fea5d4ffd1f433b"
     },
     {
       "path": "reports/AGENT_CONTROLLED_EVAL.json",
@@ -464,8 +464,8 @@
     },
     {
       "path": "reports/BACKEND_ACCEPTANCE.md",
-      "bytes": 3798,
-      "sha256": "a389cf5fa363f4b3deef713bf480f99ca9df31bf8baa6ebe24af6c54b917917f"
+      "bytes": 4115,
+      "sha256": "d12532732b97c391c07483f7a39d1728376d4c0dde4789ac9b1e78447ea314e2"
     },
     {
       "path": "reports/BACKEND_AGENT_GUARD_REPLAY.json",
@@ -491,6 +491,11 @@
       "path": "reports/BACKEND_CI_LOCAL.xml",
       "bytes": 3530,
       "sha256": "1b25d91642bfa1f40193b0c1c52136523b2cc126b8f6a663bc24c64156912ea3"
+    },
+    {
+      "path": "reports/BACKEND_GITHUB_CI.json",
+      "bytes": 1784,
+      "sha256": "f62c76b2b566134c8f4c04cb04a3dd72f7c35ea68a3bb4beffebea30304e06af"
     },
     {
       "path": "reports/BACKEND_HTTP.json",

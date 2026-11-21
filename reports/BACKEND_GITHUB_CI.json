@@ -1,0 +1,67 @@
+{
+  "repository_id": 1424672427,
+  "commit": "90d8697fb8373bda2bb14e224647ab5ebf77afc1",
+  "run_id": 44919456004,
+  "url": "https://github.com/miaomiao0227/cineagent/actions/runs/44919456004",
+  "conclusion": "success",
+  "pytest_step_verified": true,
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success"
+    },
+    {
+      "name": "Initialize containers",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-python@v5",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run pip install -r configs/backend-ci.lock.txt",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run python scripts/prepare_backend_ci.py",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run cd upstream/web_project/backend && alembic upgrade head",
+      "conclusion": "success"
+    },
+    {
+      "name": "Start API and background workers",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run pytest -q upstream/web_project/backend/tests --junitxml=backend-ci.xml",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/upload-artifact@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/setup-python@v5",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Run actions/checkout@v4",
+      "conclusion": "success"
+    },
+    {
+      "name": "Stop containers",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "conclusion": "success"
+    }
+  ],
+  "scope": "Actual GitHub-hosted integration with disposable Postgres/Redis/Elasticsearch and synthetic movie fixtures; no LLM/data downloads"
+}

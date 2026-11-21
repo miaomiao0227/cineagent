@@ -45,3 +45,7 @@
 - 旧推荐/Agent论文式评测仍保留其原数据协议，本轮后端指标不能替代它们；没有新增推荐准确率或真实CTR提升声明。
 
 公开包保留最终完整逐请求结果；此前重复成功压测提供 BACKEND_LOAD_HISTORY_SUMMARIES.json（摘要与原文件哈希），完整原件在作者工作区保留。没有删除失败任务来提高分母。
+
+## GitHub 云端 CI
+
+实际云端流程已通过，包含真实PG/Redis/ES服务、Alembic和pytest执行步骤。[运行记录](https://github.com/miaomiao0227/cineagent/actions/runs/44919456004)。云端使用合成片库，不下载MovieLens/模型，不调用LLM；不替代本机完整推荐链路验收。
