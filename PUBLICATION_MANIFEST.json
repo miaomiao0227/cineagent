@@ -43,11 +43,6 @@
       "sha256": "d86859af73a852f8a99a8f6aea4e7d41cbc53965e9cd1b1e6efab9cadc029045"
     },
     {
-      "path": "BACKEND_RESUME.md",
-      "bytes": 1615,
-      "sha256": "32d856b318cd83a9d777367a8c6ecd254ba27346657d8ad600f89af0536a703a"
-    },
-    {
       "path": "BACKEND_RUNBOOK.md",
       "bytes": 5056,
       "sha256": "ba65785c9114168a3591360e65167b90bc42131eb58ddfa127a797e5f79c9e07"
@@ -836,11 +831,6 @@
       "path": "results/rec_v1/TRAINING.json",
       "bytes": 1963,
       "sha256": "82ade3b046ad78933a06c54fa930bdf0df8aec346b8a10e2e0129b16046d1e5f"
-    },
-    {
-      "path": "RESUME.md",
-      "bytes": 2344,
-      "sha256": "378c2f25289b5308abe23cccbfdb29f6c0ab52020104ec94f60b134bc93caad6"
     },
     {
       "path": "scripts/app.ps1",
